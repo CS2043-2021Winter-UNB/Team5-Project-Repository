@@ -1,7 +1,7 @@
 
-public class CreateAccountUI {
+public class CreateMemberAccountUI {
 
-	private CreateAccountControl leaveReviewControl;
+	private CreateMemberAccountControl leaveReviewControl;
 
 	public void displayCreateAccountForm() {
 		// begin-user-code
