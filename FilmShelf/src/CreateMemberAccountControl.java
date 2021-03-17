@@ -30,68 +30,63 @@ public class CreateMemberAccountControl {
 
 	// Jo: parameters based on MemberAccount table attributes
 	public boolean validateFormInput(String username, String password, String firstName, String lastName) {
-		boolean isInputValid = false;
-		
-		// only verify input if non-null values are provided
-		if((username != null) && (password != null) && (firstName != null) && (lastName != null)) {
-			// remove leading and trailing whitespace and store in new variable
-			String uName = username.strip();
-			String pWord = password.strip();
-			String fName = firstName.strip();
-			String lName = lastName.strip();
-		
-			// check validity of each parameter
-			// check username
-				// limit of 25 characters
-				// no special symbols
-			specialCharacterMatcher = specialCharacterPattern.matcher(uName);
-		
-			if(specialCharacterMatcher.find() || (uName.length() > 25) || (uName.length() < 6)) {
-				isInputValid = false;
-			} else {
-				isInputValid = true;	// only set true here. After, only set false to avoid false positives
-			}
-		
-			// check password
-				// at least 8 characters long
-				// contain uppercase letter, lowercase letter, number, special character
-			if(isInputValid) {
-				uppercaseMatcher = uppercasePattern.matcher(pWord);
-				lowercaseMatcher = lowercasePattern.matcher(pWord);
-				numberMatcher = numberPattern.matcher(pWord);
-				specialCharacterMatcher = specialCharacterPattern.matcher(pWord);
-			
-				if(!uppercaseMatcher.find() || !lowercaseMatcher.find() || !numberMatcher.find() || !specialCharacterMatcher.find()  || (pWord.length() < 8)) {
-					isInputValid = false;
-				}
-			}
-		
-			// check first name
-				// limit of 25 characters
-				// no numbers or special characters
-			if(isInputValid) {
-				numberMatcher = numberPattern.matcher(fName);
-				specialCharacterMatcher = specialCharacterPattern.matcher(fName);
-			
-				if(numberMatcher.find() || specialCharacterMatcher.find() || (fName.length() > 25) || (fName.length() < 1)) {
-					isInputValid = false;
-				}
-			}
-		
-			// check last name
-				// limit of 25 characters
-				// no numbers or special characters
-			if(isInputValid) {
-				numberMatcher = numberPattern.matcher(lName);
-				specialCharacterMatcher = specialCharacterPattern.matcher(lName);
-			
-				if(numberMatcher.find() || specialCharacterMatcher.find() || (lName.length() > 25) || (lName.length() < 1)) {
-					isInputValid = false;
-				}
-			}
+		// input is invalid if any null inputs are provided
+		if((username == null) || (password == null) || (firstName == null) || (lastName == null)) {
+			return false;
 		}
 		
-		return isInputValid;	// return validity of input
+		// remove leading and trailing whitespace and store in new variable
+		String uName = username.strip();
+		String pWord = password.strip();
+		String fName = firstName.strip();
+		String lName = lastName.strip();
+	
+		// check validity of each parameter
+		// check username
+			// minimum 6 characters
+			// maximum 25 characters
+			// no special symbols
+		specialCharacterMatcher = specialCharacterPattern.matcher(uName);
+	
+		if(specialCharacterMatcher.find() || (uName.length() > 25) || (uName.length() < 6)) {
+			return false;
+		}
+	
+		// check password
+			// minimum 8 characters
+			// contain uppercase letter, lowercase letter, number, special character
+		uppercaseMatcher = uppercasePattern.matcher(pWord);
+		lowercaseMatcher = lowercasePattern.matcher(pWord);
+		numberMatcher = numberPattern.matcher(pWord);
+		specialCharacterMatcher = specialCharacterPattern.matcher(pWord);
+	
+		if(!uppercaseMatcher.find() || !lowercaseMatcher.find() || !numberMatcher.find() || !specialCharacterMatcher.find()  || (pWord.length() < 8)) {
+			return false;
+		}
+	
+		// check first name
+			// minimum 1 character
+			// maximum 25 characters
+			// no numbers or special characters
+		numberMatcher = numberPattern.matcher(fName);
+		specialCharacterMatcher = specialCharacterPattern.matcher(fName);
+	
+		if(numberMatcher.find() || specialCharacterMatcher.find() || (fName.length() > 25) || (fName.length() < 1)) {
+			return false;
+		}
+	
+		// check last name
+			// minimum 1 character
+			// maximum 25 characters
+			// no numbers or special characters
+		numberMatcher = numberPattern.matcher(lName);
+		specialCharacterMatcher = specialCharacterPattern.matcher(lName);
+	
+		if(numberMatcher.find() || specialCharacterMatcher.find() || (lName.length() > 25) || (lName.length() < 1)) {
+			return false;
+		}
+		
+		return true;	// if this line is reached, input is valid
 	}
 	
 	// Jo: 	returns boolean to indicate success/failure
