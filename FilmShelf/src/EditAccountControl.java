@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 /******************************************************************************************************************************
  * EditAccountControl
  * @author Jo
- * Description: 
+ * Description: Validates received input for editing account and initiates account edit process.
  ******************************************************************************************************************************/
 public class EditAccountControl {
 
@@ -30,8 +30,6 @@ public class EditAccountControl {
 		this.specialCharacterPattern = Pattern.compile("[^A-Za-z0-9]");		// matches special characters
 	}
 
-	// may need two validation methods with different signatures
-	// one to check member details, one to check admin details
 	public boolean validateFormInput(MemberAccountObject member, String username, String password, String firstName, String lastName, String description) {
 		String uName = "";
 		String pWord = "";
@@ -131,8 +129,6 @@ public class EditAccountControl {
 	}
 
 	// Jo:	how to tell UI why edit failed?
-	//		TODO: if username can be changed, will have to check database to ensure new username doesn't already exist
-	// 		TODO: will need special case for changing password, as encrypted passwords can't be decrypted easily
 	//		UI could check if user is logged in before displaying edit account form and even pass member to Control
 	public boolean updateAccount(String username, String password, String firstName, String lastName, String description) {
 		boolean currentUserIsMember = false;
@@ -154,10 +150,6 @@ public class EditAccountControl {
 		if(!inputIsValid) {
 			accountUpdated = false;
 		} else if(inputIsValid) {		// if input valid, call editAccount from DataManager
-			// DataManager will have to check which inputs are null
-			// Could also use current value for fields that are not updated
-			// Ex. Member only wants to update lastName, autofill other fields with current values
-			
 			// default values to pass to DataManager in case of null/empty inputs
 			String uName = member.getUsername();
 			String pWord = null;
@@ -165,23 +157,28 @@ public class EditAccountControl {
 			String lName = member.getLastName();
 			String desc = member.getDescription();
 			
-			if(username != null) {
+			// prepare to pass inputs that aren't null/empty
+			if(username != null && !username.strip().isEmpty()) {
 				uName = username.strip();
+				
+				if(dataManager.doesUsernameAlreadyExist(uName)) {	// check MemberAccount table for matching username
+					return false;
+				}
 			}
-			if(password != null) {
+			if(password != null && !password.strip().isEmpty()) {
 				pWord = password.strip();
 			}
-			if(firstName != null) {
+			if(firstName != null && !firstName.strip().isEmpty()) {
 				fName = firstName.strip();
 			}
-			if(lastName != null) {
+			if(lastName != null && !lastName.strip().isEmpty()) {
 				lName = lastName.strip();
 			}
 			if(description != null) {
 				desc = description.strip();
 			}
 			
-			accountUpdated = dataManager.editAccount(uName, pWord, fName, lName, desc);
+			accountUpdated = dataManager.editAccount(uName, pWord, fName, lName, desc);		// DataManager will have to check for null password
 		}
 	
 		return accountUpdated;	
