@@ -102,7 +102,13 @@ public class CreateMemberAccountControl {
 		if(!isInputValid) {
 			memberAdded = false;
 		} else if(isInputValid) {		// if input not invalid, call addMemberAccount from DataManager to add new member account
-			memberAdded = dataManager.addMemberAccount(username, password, firstName, lastName);		// Jo: addMemberAccount should return boolean to signal success/failure
+			// remove leading and trailing whitespace and store in new variables
+			String uName = username.strip();
+			String pWord = password.strip();
+			String fName = firstName.strip();
+			String lName = lastName.strip();
+			String description = "Welcome to my page!";
+			memberAdded = dataManager.addMemberAccount(uName, pWord, fName, lName, description);		// Jo: addMemberAccount should return boolean to signal success/failure
 		}
 		
 		return memberAdded;

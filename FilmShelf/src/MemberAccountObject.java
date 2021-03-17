@@ -11,12 +11,14 @@ public class MemberAccountObject {
 	private String username;
 	private String firstName;
 	private String lastName;
+	private String description;
 	private ArrayList<MovieObject> topMovies;	// ArrayList or array? ArrayList easy to work with, array can limit number of movies to prevent overflow
 	
-	public MemberAccountObject(String username, String firstName, String lastName) {
+	public MemberAccountObject(String username, String firstName, String lastName, String description) {
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.description = description;
 		topMovies = new ArrayList<MovieObject>();
 	}
 	
@@ -30,6 +32,14 @@ public class MemberAccountObject {
 	
 	public String getLastName() {
 		return lastName;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	public ArrayList<MovieObject> getTopMovies() {
