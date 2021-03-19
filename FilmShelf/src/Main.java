@@ -5,9 +5,12 @@ public class Main {
 		DataManager dm = new DataManager();
 		
 		LoginControl loginControl = new LoginControl(dm);
-		LoginUI loginUI = new LoginUI();
+		LoginUI loginUI = new LoginUI(loginControl);
 		
-		MainUI mainUI = new MainUI(loginUI);
+		CreateMemberAccountControl createMemberAccountControl = new CreateMemberAccountControl(dm);
+		CreateMemberAccountUI createMemberAccountUI = new CreateMemberAccountUI(createMemberAccountControl);
+		
+		MainUI mainUI = new MainUI(loginUI, createMemberAccountUI);
 		mainUI.setVisible(true);
 	}
 }

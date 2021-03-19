@@ -25,13 +25,15 @@ public class MainUI extends JFrame {
 	
 	private JPanel mainPane;
 	private LoginUI loginUI;
+	private CreateMemberAccountUI createMemberAccountUI;
 	
 	
 	/**
 	 * Create the frame.
 	 */
-	public MainUI(LoginUI ui) {
+	public MainUI(LoginUI ui, CreateMemberAccountUI uiCreate) {
 		loginUI = ui;
+		createMemberAccountUI = uiCreate;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    setSize(screenSize.width, screenSize.height);
@@ -57,7 +59,7 @@ public class MainUI extends JFrame {
 		JButton buttonLogin = new JButton("Login");
 		buttonLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				makeLoginVisible();
+				loginUI.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
@@ -69,7 +71,7 @@ public class MainUI extends JFrame {
 		JButton buttonCreateAccount = new JButton("Create Account");
 		buttonCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				removeLoginPanel();
+				createMemberAccountUI.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_buttonCreateAccount = new GridBagConstraints();
@@ -88,15 +90,15 @@ public class MainUI extends JFrame {
         gbc_panel.gridy = 1;
         mainPane.add(loginUI, gbc_panel);
         loginUI.setVisible(false);
+        
+        // adding createAccount panel to the main window
+        mainPane.add(createMemberAccountUI, gbc_panel);
+        createMemberAccountUI.setVisible(false);
 
         pack();
       
 	}
 	
-	public void makeLoginVisible()
-	{
-		loginUI.setVisible(true);
-	}
 	
 	public void removeLoginPanel() {
 		mainPane.remove(loginUI);
