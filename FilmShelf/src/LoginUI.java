@@ -160,8 +160,7 @@ public class LoginUI extends JPanel {
 		// end-user-code
 	}
 	
-	private void extractLoginCredentials()
-	{
+	private void extractLoginCredentials() {
 		String username = textFieldUsername.getText();
 		String password = new String(passwordField.getPassword());
 		boolean loginStatus;

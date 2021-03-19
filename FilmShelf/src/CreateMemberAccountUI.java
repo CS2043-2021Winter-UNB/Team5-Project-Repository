@@ -149,13 +149,10 @@ public class CreateMemberAccountUI extends JPanel {
 		String password = new String(passwordField.getPassword());
 		String firstName = textFieldFirstName.getText();
 		String lastName = textFieldLastName.getText();
-		if (createMemberAccountControl.createMemberAccount(username,password,firstName,lastName);)
-		{
+		if (createMemberAccountControl.createMemberAccount(username,password,firstName,lastName)) {
 			displayAccountCreationConfirmation();
-			
 		}
-		else
-		{
+		else {
 			displayAccountCreationError();
 		}
 	}
@@ -164,8 +161,7 @@ public class CreateMemberAccountUI extends JPanel {
 
 	}
 	
-	private void displayAccountCreationError()
-	{
+	private void displayAccountCreationError() {
 		labelCreateAccountStatus.setText("Account creation was unsuccessful. Account information was invalid.");
 	}
 	
@@ -173,8 +169,7 @@ public class CreateMemberAccountUI extends JPanel {
 		if (checkboxPasswordVisibility.isSelected()) {
 			passwordField.setEchoChar((char)0);
 		}
-		else
-		{
+		else {
 			passwordField.setEchoChar('*');
 		}
 	}
