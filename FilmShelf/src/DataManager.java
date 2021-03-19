@@ -3,10 +3,27 @@ import java.util.ArrayList;
 
 public class DataManager {
 
-	private AdminAccountObject adminAccount;
-	private MovieObject movie;
-	private ReviewObject review;
+	public AdminAccountObject adminAccount;
+	public MovieObject movie;
+	public ReviewObject review;
 
+	public DataManager() {
+		 try {
+	         Class.forName("com.mysql.jdbc.Driver").newInstance();
+	     } catch (Exception e) {
+	      System.err.println(e.toString());
+	     }
+		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/cs2043team5";
+		try {
+		connection = DriverManager.getConnection(url, "cs2043team5", "E8mP1JDK");
+		} catch (SQLException e) {
+		System.err.println("Database connection error: " + e);
+		}
+	}
+	
+	
+
+	
 	public MemberAccountObject getMember(String username, String password) {
 		// begin-user-code
 		// TODO Auto-generated method stub
