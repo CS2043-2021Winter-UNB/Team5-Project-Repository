@@ -34,7 +34,8 @@ public class LoginUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public LoginUI() {
+	public LoginUI(LoginControl control) {
+		loginControl = control;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{50, 96, 91, 7, 65, 57, 59, 1, 0};
 		gridBagLayout.rowHeights = new int[]{23, 0, 0, 0, 0, 0, 0, 28, 0};
@@ -159,14 +160,14 @@ public class LoginUI extends JPanel {
 		// end-user-code
 	}
 	
-	public void extractLoginCredentials()
+	private void extractLoginCredentials()
 	{
 		String username = textFieldUsername.getText();
 		String password = new String(passwordField.getPassword());
 		boolean loginStatus;
 		if (member)
 		{
-			displayFailedLoginMessage();
+			displayLoginErrorMessage();
 			//loginStatus = loginControl.processMemberLogin(username, password);
 		}
 		else
@@ -179,7 +180,7 @@ public class LoginUI extends JPanel {
         
 	}
 	
-	public void displayFailedLoginMessage() {
+	private void displayLoginErrorMessage() {
 		labelLoginStatus.setText("Login was unsuccessful. Login credentials did not match any existing accounts");
 		passwordField.setText("");
 		if (checkboxPasswordVisibility.isSelected())
@@ -188,7 +189,7 @@ public class LoginUI extends JPanel {
 		}
 	}
 	
-	public void changePasswordVisibility() {
+	private void changePasswordVisibility() {
 		if (checkboxPasswordVisibility.isSelected()) {
 			passwordField.setEchoChar((char)0);
 		}
