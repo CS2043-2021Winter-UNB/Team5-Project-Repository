@@ -1,4 +1,5 @@
 
+import java.sql.*;
 import java.util.ArrayList;
 
 public class DataManager {
@@ -6,6 +7,7 @@ public class DataManager {
 	public AdminAccountObject adminAccount;
 	public MovieObject movie;
 	public ReviewObject review;
+	public Connection connection = null;
 
 	public DataManager() {
 		 try {
