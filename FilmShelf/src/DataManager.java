@@ -3,13 +3,15 @@ import java.util.ArrayList;
 
 public class DataManager {
 
-	private AdminAccountObject adminAccount;
-	private MovieObject movie;
-	private ReviewObject review;
+	//private AdminAccountObject adminAccount;
+	//private MovieObject movie;
+	//private ReviewObject review;
+	//private MemberAccountObject member;
 
 	public MemberAccountObject getMember(String username, String password) {
 		// begin-user-code
 		// TODO Auto-generated method stub
+		String testString = "this is a test";
 		return null;
 		// end-user-code
 	}
