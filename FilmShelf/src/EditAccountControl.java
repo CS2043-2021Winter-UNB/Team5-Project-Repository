@@ -152,6 +152,11 @@ public class EditAccountControl {
 			}
 			
 			accountUpdated = dataManager.editAccount(pWord, fName, lName, desc);		// DataManager will have to check for null password
+			
+			// update logged in member's info in LoginControl
+			if(accountUpdated) {
+				loginControl.updateCurrentMemberInfo(fName, lName, desc);
+			}
 		}
 	
 		return accountUpdated;	
