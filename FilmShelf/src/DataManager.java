@@ -9,10 +9,26 @@ public class DataManager {
 	//private MemberAccountObject member;
 
 	public MemberAccountObject getMember(String username, String password) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		String testString = "this is a test";
-		return null;
+
+		//create statement 
+		Statment stmt = conn.createStatement();
+
+		//SQL query String 
+		String sqlQuery = "select * from MemberAccount where username = '" + username +
+						  "' and password = sha1(" + password ");";
+
+		//ResultSet 
+		ResultSet rs = stmt.executeQuery(sqlQuery);
+
+		//Create MemberAccountObject 
+		MemberAccountObject member = new MemberAccountObject();
+		member.username = rs.getString(1);
+		memeber.password = rs.getString(2);
+		member.simething = rs.getString(3);
+		memeber. something = rs.getString(4);
+		member. somethingelse = rs.getString(5);
+
+		return member;
 		// end-user-code
 	}
 
