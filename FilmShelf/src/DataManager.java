@@ -1,13 +1,38 @@
 
+import java.sql.*;
 import java.util.ArrayList;
 
 public class DataManager {
 
+<<<<<<< HEAD
 	//private AdminAccountObject adminAccount;
 	//private MovieObject movie;
 	//private ReviewObject review;
 	//private MemberAccountObject member;
+=======
+	public AdminAccountObject adminAccount;
+	public MovieObject movie;
+	public ReviewObject review;
+	public Connection connection = null;
 
+	public DataManager() {
+		 try {
+	         Class.forName("com.mysql.jdbc.Driver").newInstance();
+	     } catch (Exception e) {
+	      System.err.println(e.toString());
+	     }
+		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/cs2043team5";
+		try {
+		connection = DriverManager.getConnection(url, "cs2043team5", "E8mP1JDK");
+		} catch (SQLException e) {
+		System.err.println("Database connection error: " + e);
+		}
+	}
+	
+	
+>>>>>>> 1f17b7175fc8a9f52405f1e67f05e17ae12fc47f
+
+	
 	public MemberAccountObject getMember(String username, String password) {
 
 		//create statement 
