@@ -60,9 +60,10 @@ public class DataManager {
 			//assigning values to memberAccountObject	
 			member.username = rs.getString(1);
 			memeber.password = rs.getString(2);
-			member.simething = rs.getString(3);
-			memeber. something = rs.getString(4);
-			member. somethingelse = rs.getString(5);
+			member.firstName = rs.getString(3);
+			memeber.lastName = rs.getString(4);
+			member.topMovies = rs.getString(5);
+			member.description = rs.getString();
 		}
 		catch(SQLException e){
 			System.out.println(e.getMessage());
@@ -97,7 +98,7 @@ public class DataManager {
 		// end-user-code
 	}
 
-	public boolean addMemberAccount(String username, String password, String email, String firstName,
+	public boolean addMemberAccount(String username, String password, String firstName,
 								 String lastName) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -105,7 +106,8 @@ public class DataManager {
 		Statment stmt = conn.createStatement();
 
 		//SQL query String 
-		String sqlQuery = "insert into MemberAccount values('" + username + "', '" + 
+		String sqlQuery = "insert into MemberAccount values('" + username + "', sha1('" + password + "'), '" 
+						   + firstName + "', '" + lastName + "');";
 
 		//ResultSet 
 		ResultSet rs = stmt.executeQuery(sqlQuery);
