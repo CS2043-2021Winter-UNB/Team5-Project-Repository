@@ -7,7 +7,9 @@ import java.util.ArrayList;
  * Description: Represents a Member account in the database.
  ******************************************************************************************************************************/
 public class MemberAccountObject {
+
 	// no point in storing password, db will encrypt passwords which will be difficult to decrypt
+
 	private String username;
 	private String firstName;
 	private String lastName;
