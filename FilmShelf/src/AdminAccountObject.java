@@ -4,4 +4,5 @@ public class AdminAccountObject {
 	private String username;
 	private String password;
 	private String description;
+	private String[] topFiveMovies;
 }

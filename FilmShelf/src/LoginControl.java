@@ -11,18 +11,16 @@ public class LoginControl {
 			this.dataManager = dm;
 			}
 	
-	public void processMemberLogin(String username, int password) {
-		//CHECK: METHOD: --- IS IT "GETMEMBER?"
-		//Q: WHY IS PASSWORD TYPE INT?
+	public MemberAccountObject processMemberLogin(String username, String password) {
+
 		//NB: DIFFERENT processLogin METHOD for Member vs. Admin
 		 currentMember = dataManager.getMember(username, password);
 		 return currentMember;
 
 	}
 
-	public void processAdminLogin(String username, int password) {
-		//CHECK: METHOD: --- IS IT "GETMEMBER?"
-		//Q: WHY IS PASSWORD TYPE INT?
+	public AdminAccountObject processAdminLogin(String username, String password) {
+	
 		//NB: DIFFERENT processLogin METHOD for Member vs. Admin
 		 currentAdmin = dataManager.getAdmin(username, password);
 		 return currentAdmin;
@@ -33,7 +31,7 @@ public class LoginControl {
 		return currentMember;
 	}
 
-	public AdminAccuntObject getCurrentAdmin() {
+	public AdminAccountObject getCurrentAdmin() {
 		return currentAdmin;
 	}
 }
