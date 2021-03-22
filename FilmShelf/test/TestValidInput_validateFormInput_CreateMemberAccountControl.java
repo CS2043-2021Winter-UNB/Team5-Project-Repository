@@ -37,4 +37,6 @@ public class TestValidInput_validateFormInput_CreateMemberAccountControl {
 	public void test() {
 		assertTrue(createMemberAccountControl.validateFormInput(username, password, firstName, lastName));
 	}
+
 }
+
