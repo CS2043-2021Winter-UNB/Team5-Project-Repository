@@ -1,21 +1,25 @@
 
 import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DataManager {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 58bf5a74cad30e919378ac10dc87e06b577df9e1
+
+
 	//private AdminAccountObject adminAccount;
 	//private MovieObject movie;
 	//private ReviewObject review;
 	//private MemberAccountObject member;
 
-=======
 	public AdminAccountObject adminAccount;
 	public MovieObject movie;
 	public ReviewObject review;
+	private int numTopMovies = 5;
+	private Connection connection;
 
 	public DataManager() {
 		try {
@@ -32,9 +36,6 @@ public class DataManager {
 		} 
 		catch(SQLException e) {
 			System.err.println("Database connection error: " + e);
->>>>>>> parent of 6000dd6... Added the MySQL-JDBC driver to the java build path.
-=======
->>>>>>> 58bf5a74cad30e919378ac10dc87e06b577df9e1
 		}
 
 		// end-user-code
@@ -45,25 +46,38 @@ public class DataManager {
 		//Create MemberAccountObject 
 		MemberAccountObject member = new MemberAccountObject();
 
-		//create statement 
-		Statment stmt = connection.createStatement();
+		
 
 		//SQL query String 
 		String sqlQuery = "select * from MemberAccount where username = '" + username +
-						  "' and password = sha1(" + password ");";
+						  "' and password = sha1('" + password + "');";
 
 		try{
+
+			//create statement 
+			Statement stmt = connection.createStatement();
 
 			//ResultSet 
 			ResultSet rs = stmt.executeQuery(sqlQuery);
 
 			//assigning values to memberAccountObject	
 			member.username = rs.getString(1);
-			memeber.password = rs.getString(2);
+			member.password = rs.getString(2);
 			member.firstName = rs.getString(3);
-			memeber.lastName = rs.getString(4);
-			member.topMovies = rs.getString(5);
-			member.description = rs.getString();
+			member.lastName = rs.getString(4);
+
+			int movieId;
+			Statement stmt2 = connection.createStatement();
+			ResultSet movies;
+			
+			for(int i = 5; i < i + numTopMovies; i++){
+
+				movieId = rs.getInt(i);
+				sqlQuery = "select title from Movie where movieID = " + movieId + ";";
+				movies = stmt2.executeQuery(sqlQuery);
+				member.topMovies.add(rs.getString(1));
+			}
+
 		}
 		catch(SQLException e){
 			System.out.println(e.getMessage());
@@ -71,27 +85,35 @@ public class DataManager {
 
 			return member;
 	}
-<<<<<<< HEAD
+
 
 	public AdminAccountObject getAdmin(String username, String password){
 		// begin-user-code
 		// TODO Auto-generated method stub
-		//create statement 
-		Statment stmt = conn.createStatement();
+		
 
 		//Create MemberAccountObject 
-		AdminAccountObject member = new MemberAccountObject();
+		AdminAccountObject admin = new AdminAccountObject();
 
 		//SQL query String 
-		String sqlQuery = "select * from MemberAccount where username = '" + username +
-						  "' and password = sha1(" + password ");";
+		String sqlQuery = "select * from AdminAccount where username = '" + username +
+						  "' and password = sha1('" + password + "');";
 
-		//ResultSet 
-		ResultSet rs = stmt.executeQuery(sqlQuery);
 
-		//Assigning values to adminAccountObject
-		admin.username = rs.getString(1);
-		admin.password = rs.getString(2);
+		try{
+
+			//create statement 
+			Statement stmt = connection.createStatement();
+			//ResultSet 
+			ResultSet rs = stmt.executeQuery(sqlQuery);
+
+			//Assigning values to adminAccountObject
+			admin.username = rs.getString(1);
+			admin.password = rs.getString(2);
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
 
 		//return adminAccountObject
 		return admin;
@@ -102,28 +124,72 @@ public class DataManager {
 								 String lastName) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		//create statement 
-		Statment stmt = conn.createStatement();
+
+		
 
 		//SQL query String 
 		String sqlQuery = "insert into MemberAccount values('" + username + "', sha1('" + password + "'), '" 
 						   + firstName + "', '" + lastName + "');";
 
-		//ResultSet 
-		ResultSet rs = stmt.executeQuery(sqlQuery);
+		//ResultSet
+		try{
 
-		//Create MemberAccountObject 
-		MemberAccountObject member = new MemberAccountObject();
-	
-		return 
+			//Create statement 
+			Statement stmt = connection.createStatement();
+
+			//ResultSet
+			ResultSet rs = stmt.executeQuery(sqlQuery);
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+
+		return true;
 		// end-user-code
 	}
 
-	public int editMemberAccount(String username, String[] values){
+	public boolean editMemberAccount(String username, String[] values){
+
+	
+
 		//String query 
-		if(values[1] != null){
-			stmt.executeQuery()
+		String sqlQuery;
+
+		try{
+
+			//Create Statement 
+			Statement stmt = connection.createStatement();
+
+			if(values[1] != null){
+				sqlQuery = "update MemberAccount set firstName = '" + values[1] + "' where username = '"
+						  	+ username + "';";
+						
+				stmt.executeQuery(sqlQuery);
+			}
+
+			if(values[2] != null){
+				sqlQuery = "update MemberAccount set lastName = '" + values[2] + "' where username = '"
+						  	+ username + "';";
+				stmt.executeQuery(sqlQuery);
+			}
+
+			if(values[3] != null){
+
+				sqlQuery = "update MemberAccount set description = '" + values[3] + "' where username = '"
+						  	+ username + "';";
+				stmt.executeQuery(sqlQuery);
+
+			}
 		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+
+			
+		return true;
+		
 		
 	}
 
