@@ -1,8 +1,14 @@
 
+/******************************************************************************************************************************
+ * LoginControl
+ * @author Rachel
+ * Description:	Handles validation of input to LoginUI class.
+ ******************************************************************************************************************************/
+
 public class LoginControl {
 	//LoginControl needs to have a private reference variable of 
 	//currentMember --or-- currentAdmin
-	//class to hold the logined customer object
+	//class to hold the login.ed customer object
 	private MemberAccountObject currentMember;
 	private AdminAccountObject currentAdmin;
 	private DataManager dataManager;
@@ -13,8 +19,11 @@ public class LoginControl {
 	
 	public MemberAccountObject processMemberLogin(String username, String password) {
 
-		//NB: DIFFERENT processLogin METHOD for Member vs. Admin
+		//NB: different processLogin method for Member vs. Admin
 		 currentMember = dataManager.getMember(username, password);
+		 
+		 if (currentMember == null); //Q: What kind of error to pass?
+		 
 		 return currentMember;
 
 	}
@@ -23,6 +32,8 @@ public class LoginControl {
 	
 		//NB: DIFFERENT processLogin METHOD for Member vs. Admin
 		 currentAdmin = dataManager.getAdmin(username, password);
+		 
+		 if (currentAdmin == null); //Q: What kind of error to pass?
 		 return currentAdmin;
 
 	}
