@@ -23,6 +23,8 @@ public class MainUI extends JFrame {
 	private JPanel mainPane;
 	private LoginUI loginUI;
 	private CreateMemberAccountUI createMemberAccountUI;
+	//private EditAccountUI editAccountUI;
+	private ViewAccountUI viewAccountUI;
 	private JButton buttonLogin;
 	private JButton buttonCreateAccount;
 	
@@ -30,10 +32,11 @@ public class MainUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainUI(LoginUI ui, CreateMemberAccountUI uiCreate) {
-		loginUI = ui;
+	public MainUI(LoginUI uiLog, CreateMemberAccountUI uiCreate, ViewAccountUI uiViewAccount) {
+		loginUI = uiLog;
 		createMemberAccountUI = uiCreate;
-		
+		//editAccountUI = uiEditAccount;
+		viewAccountUI = uiViewAccount;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -78,6 +81,10 @@ public class MainUI extends JFrame {
         // adding createAccount panel to the main window
         mainPane.add(createMemberAccountUI, gbc_panel);
         createMemberAccountUI.setVisible(false);
+        
+       /* // adding editAccount panel to the main window
+        mainPane.add(editAccountUI, gbc_panel);
+        editAccountUI.setVisible(false);*/
         
         //Panel that holds the "Login" and "CreateAccount" buttons
         JPanel panelCreateAndLogin = new JPanel();
@@ -139,7 +146,8 @@ public class MainUI extends JFrame {
 	private void changeCreateAndLoginButtons()
 	{
 		//change login button to view account (shows username of user)
-		buttonLogin.setText("Username here");
+		//need to add in check to see if user is a member. if they are an admin, cannot view their account
+		buttonLogin.setText("Username here"); //temporary display, will show actual username of currently logged in member
 		buttonLogin.removeActionListener(null);
         buttonLogin.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -157,9 +165,10 @@ public class MainUI extends JFrame {
         });
 	}
 	
+	/*going to add better method to loginUI itself
 	public void removeLoginPanel() {
 		loginUI.setVisible(false);
 		mainPane.repaint();
-	}
+	}*/
 
 }
