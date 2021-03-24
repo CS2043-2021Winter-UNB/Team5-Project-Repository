@@ -4,7 +4,7 @@
  * Description: Represents an AdminAccountObject in the database.
  ******************************************************************************************************************************/
 public class AdminAccountObject {
-	public String username;
+	private String username;
 
 	public AdminAccountObject(String username) {
 		this.username = username;
