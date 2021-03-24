@@ -14,40 +14,32 @@ public class LoginControl {
 	private DataManager dataManager;
 
 	public LoginControl(DataManager dm) {
-			this.dataManager = dm;
-			}
+		this.dataManager = dm;
+	}
 	
-	//Should this return a boolean value? Somehow boolean needs to be returned
-	//to LoginUI.
+	//NB: different processLogin method for Member vs. Admin
 	public boolean processMemberLogin(String username, String password) {
-
-		//NB: different processLogin method for Member vs. Admin
-		 currentMember = dataManager.getMember(username, password);
+		currentMember = dataManager.getMember(username, password);
 		 
-		 if (currentMember == null)
-			{return false;} 
-		 
-		else 
-			{return true;}
-
+		if (currentMember == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
-	//Should this return a boolean value? Somehow boolean needs to be returned
-	//to LoginUI.
+	//NB: DIFFERENT processLogin METHOD for Member vs. Admin
 	public boolean processAdminLogin(String username, String password) {
-	
-		//NB: DIFFERENT processLogin METHOD for Member vs. Admin
-		 currentAdmin = dataManager.getAdmin(username, password);
+		currentAdmin = dataManager.getAdmin(username, password);
 		 
-		 if (currentAdmin == null)
-		 	{return false;}
-		 	
-		 else {return true;}
-
+		if (currentAdmin == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	public MemberAccountObject getCurrentMember() {
-	
 		return currentMember;
 	}
 
