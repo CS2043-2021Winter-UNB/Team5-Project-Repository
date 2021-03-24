@@ -141,6 +141,8 @@ public class CreateMemberAccountUI extends JPanel {
 
 	
 	public void displayCreateAccountForm() {
+		//TO DO: clear login fields/radio button here before redisplaying
+		setVisible(true);
 	}
 	
 	private void extractAccountInfo()
