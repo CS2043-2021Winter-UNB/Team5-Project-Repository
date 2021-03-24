@@ -166,15 +166,15 @@ public class EditAccountUI extends JPanel {
 		String description = textFieldDescription.getText();
 		
 		if (editAccountControl.updateAccount(password,firstName,lastName,description)) {
-			displayAccountEditConfirmation();
+			displayEditAccountConfirmation();
 		}
 		else {
 			displayAccountEditError();
 		}
 	}
 
-	public void displayAccountEditConfirmation() {
-
+	public void displayEditAccountConfirmation() {
+		labelEditAccountStatus.setText("Account updated successfully.");
 	}
 	
 	private void displayAccountEditError() {
