@@ -54,7 +54,7 @@ public class DataManager {
 
 		try{
 
-			//create statement 
+			//Create statement 
 			Statement stmt = connection.createStatement();
 
 			//ResultSet 
@@ -66,28 +66,34 @@ public class DataManager {
 			member.firstName = rs.getString(3);
 			member.lastName = rs.getString(4);
 
+			//Array to store members top movie IDs
 			ArrayList<Integer> movieId = [numTopMovies];
-			Statement stmt2 = connection.createStatement();
-			ResultSet movies;
-			
+
+	
+			//Adding movie IDs to array 
 			for(int i = 5; i < i + numTopMovies; i++){
 				movieId.add(rs.getInt(i));
 			}
 
+			//Create new statement for new call
+			Statement stmt2 = connection.createStatement();
+
+			//Initialize ResultSet 
+			ResultSet movies;
+
+			//Loop to add movie titles to member object
 			for(int i = 0; i < numTopMovies; i++){
 
+				//SQL String Query for movie at index i 
 				sqlQuery = "select title from Movie where movieID = " + movieId[i] + ";";
 
-
+				//Execute Query to retrieve movie title
 				movies = stmt2.executeQuery(sqlQuery);
-				member.topMovies.add(rs.getString(1));
+
+				//Add movie title to member object
+				member.topMovies.add(movies.getString(1));
 				
 			}
-				sqlQuery = "select title from Movie where movieID = " + movieId[i] + ";";
-
-
-				movies = stmt2.executeQuery(sqlQuery);
-				member.topMovies.add(rs.getString(1));
 
 		}
 		catch(SQLException e){
@@ -95,6 +101,7 @@ public class DataManager {
 			return null;
 		}
 
+			//return member object
 			return member;
 	}
 
@@ -173,6 +180,7 @@ public class DataManager {
 			//Create Statement 
 			Statement stmt = connection.createStatement();
 
+			//If new value is passed in update firstName
 			if(values[1] != null){
 				sqlQuery = "update MemberAccount set firstName = '" + values[1] + "' where username = '"
 						  	+ username + "';";
@@ -180,12 +188,14 @@ public class DataManager {
 				stmt.executeQuery(sqlQuery);
 			}
 
+			//If new value is passed in update lastName 
 			if(values[2] != null){
 				sqlQuery = "update MemberAccount set lastName = '" + values[2] + "' where username = '"
 						  	+ username + "';";
 				stmt.executeQuery(sqlQuery);
 			}
 
+			//if new value is passed in update description
 			if(values[3] != null){
 
 				sqlQuery = "update MemberAccount set description = '" + values[3] + "' where username = '"
@@ -203,6 +213,29 @@ public class DataManager {
 		return true;
 		
 		
+	}
+
+	public boolean removeMemberAccount(String username) {
+		// begin-user-code
+
+		//String query 
+		String sqlQuery = "delete from MemberAccount where username = '" + username + "';";
+
+		try{
+
+			//create statement 
+			Statement stmt = connection.createStatement();
+
+			//Execute query
+			stmt.executeQuery(sqlQuery);
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+
+		return true;
+		// end-user-code
 	}
 
 	public int getMovieRatingByMember(String username, int movieID) {
@@ -241,12 +274,7 @@ public class DataManager {
 		// end-user-code
 	}
 
-	public void removeMemberAccount(String username) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 
-		// end-user-code
-	}
 
 	public void removeMovieRequest(int requestID) {
 		// begin-user-code
