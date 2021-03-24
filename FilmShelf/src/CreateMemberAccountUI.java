@@ -136,7 +136,6 @@ public class CreateMemberAccountUI extends JPanel {
 		gbc_labelCreateAccountStatus.gridx = 1;
 		gbc_labelCreateAccountStatus.gridy = 7;
 		add(labelCreateAccountStatus, gbc_labelCreateAccountStatus);
-
 	}
 
 	
@@ -160,7 +159,6 @@ public class CreateMemberAccountUI extends JPanel {
 	}
 
 	public void displayAccountCreationConfirmation() {
-
 	}
 	
 	private void displayAccountCreationError() {
