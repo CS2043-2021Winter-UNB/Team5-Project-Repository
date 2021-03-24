@@ -87,16 +87,45 @@ public class ViewAccountUI extends JPanel {
 		add(layeredPane, gbc_layeredPane);
 		GridBagLayout gbl_layeredPane = new GridBagLayout();
 		gbl_layeredPane.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_layeredPane.rowHeights = new int[]{0, 0};
+		gbl_layeredPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_layeredPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_layeredPane.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_layeredPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		layeredPane.setLayout(gbl_layeredPane);
 		
 		JLabel lblNewLabel = new JLabel("Favorite Movies");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.gridx = 3;
+		gbc_lblNewLabel.gridwidth = 2;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 2;
 		gbc_lblNewLabel.gridy = 0;
 		layeredPane.add(lblNewLabel, gbc_lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_1.gridx = 3;
+		gbc_lblNewLabel_1.gridy = 1;
+		layeredPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_2.gridx = 3;
+		gbc_lblNewLabel_2.gridy = 2;
+		layeredPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_3.gridx = 3;
+		gbc_lblNewLabel_3.gridy = 3;
+		layeredPane.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("New label");
+		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
+		gbc_lblNewLabel_4.gridx = 3;
+		gbc_lblNewLabel_4.gridy = 4;
+		layeredPane.add(lblNewLabel_4, gbc_lblNewLabel_4);
 	}
 
 	
