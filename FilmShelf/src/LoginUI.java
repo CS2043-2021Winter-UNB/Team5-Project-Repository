@@ -1,3 +1,4 @@
+
 import javax.swing.JPanel;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -154,10 +155,8 @@ public class LoginUI extends JPanel {
 	}
 	
 	public void displayLoginForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		//TO DO: clear login fields/radio button here before redisplaying
+		setVisible(true);
 	}
 	
 	private void extractLoginCredentials() {
