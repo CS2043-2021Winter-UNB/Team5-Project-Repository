@@ -14,6 +14,7 @@ import java.awt.EventQueue;
 	import java.awt.event.ActionListener;
 	import java.awt.event.ActionEvent;
 	import javax.swing.SwingConstants;
+	//import windowBuilder.EditAccountControl;
 	import javax.swing.JFrame;
 	import java.awt.Color;
 	import javax.swing.JLayeredPane;
@@ -24,16 +25,17 @@ public class EditAccountUI extends JPanel {
 	private JPasswordField passwordField;
 	private JTextField textFieldFirstName;
 	private JTextField textFieldLastName;
+	private JTextField textFieldDescription;
 	private JCheckBox checkboxPasswordVisibility;
-	private JLabel labelCreateAccountStatus;
+	private JLabel labelEditAccountStatus;
 
 	public EditAccountUI(EditAccountControl control) {
-		setBackground(new Color(153, 102, 102));
+		setBackground(Color.LIGHT_GRAY);
 		editAccountControl = control;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{71, 0, 100, 0, 0, 0, 48, 0};
+		gridBagLayout.columnWidths = new int[]{71, 0, 100, 0, 0, 0, 0, 48, 0};
 		gridBagLayout.rowHeights = new int[]{74, 0, 0, 0, 0, 0, 42, 35, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -56,7 +58,7 @@ public class EditAccountUI extends JPanel {
 		
 		passwordField = new JPasswordField();
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
-		gbc_passwordField.gridwidth = 3;
+		gbc_passwordField.gridwidth = 4;
 		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_passwordField.gridx = 2;
@@ -71,7 +73,7 @@ public class EditAccountUI extends JPanel {
 		});
 		GridBagConstraints gbc_checkboxPasswordVisibility = new GridBagConstraints();
 		gbc_checkboxPasswordVisibility.insets = new Insets(0, 0, 5, 5);
-		gbc_checkboxPasswordVisibility.gridx = 5;
+		gbc_checkboxPasswordVisibility.gridx = 6;
 		gbc_checkboxPasswordVisibility.gridy = 2;
 		add(checkboxPasswordVisibility, gbc_checkboxPasswordVisibility);
 		
@@ -86,7 +88,7 @@ public class EditAccountUI extends JPanel {
 		
 		textFieldFirstName = new JTextField();
 		GridBagConstraints gbc_textFieldFirstName = new GridBagConstraints();
-		gbc_textFieldFirstName.gridwidth = 3;
+		gbc_textFieldFirstName.gridwidth = 4;
 		gbc_textFieldFirstName.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldFirstName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldFirstName.gridx = 2;
@@ -102,41 +104,58 @@ public class EditAccountUI extends JPanel {
 		gbc_labelLastName.gridy = 4;
 		add(labelLastName, gbc_labelLastName);
 		
-		textFieldLastName = new JTextField();
-		GridBagConstraints gbc_textFieldLastName = new GridBagConstraints();
-		gbc_textFieldLastName.gridwidth = 3;
-		gbc_textFieldLastName.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldLastName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldLastName.gridx = 2;
-		gbc_textFieldLastName.gridy = 4;
-		add(textFieldLastName, gbc_textFieldLastName);
-		textFieldLastName.setColumns(10);
-		
 		JButton buttonEditAccount = new JButton("Edit Account");
 		buttonEditAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				extractAccountInfo();
 			}
 		});
+		
+		textFieldDescription = new JTextField();
+		GridBagConstraints gbc_textFieldDescription = new GridBagConstraints();
+		gbc_textFieldDescription.gridwidth = 3;
+		gbc_textFieldDescription.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldDescription.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldDescription.gridx = 3;
+		gbc_textFieldDescription.gridy = 4;
+		add(textFieldDescription, gbc_textFieldDescription);
+		
+		JLabel labelDescription = new JLabel("Description");
+		GridBagConstraints gbc_labelDescription= new GridBagConstraints();
+		gbc_labelDescription.anchor = GridBagConstraints.EAST;
+		gbc_labelDescription.insets = new Insets(0, 0, 5, 5);
+		gbc_labelDescription.gridx = 1;
+		gbc_labelDescription.gridy = 5;
+		add(labelDescription, gbc_labelDescription);
+		
+		textFieldLastName = new JTextField();
+		GridBagConstraints gbc_textFieldLastName = new GridBagConstraints();
+		gbc_textFieldLastName.gridwidth = 3;
+		gbc_textFieldLastName.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldLastName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldLastName.gridx = 3;
+		gbc_textFieldLastName.gridy = 5;
+		add(textFieldLastName, gbc_textFieldLastName);
+		textFieldLastName.setColumns(10);
+		textFieldLastName.setColumns(10);
 		GridBagConstraints gbc_buttonEditAccount = new GridBagConstraints();
-		gbc_buttonEditAccount.gridwidth = 5;
+		gbc_buttonEditAccount.gridwidth = 6;
 		gbc_buttonEditAccount.insets = new Insets(0, 0, 5, 5);
 		gbc_buttonEditAccount.gridx = 1;
 		gbc_buttonEditAccount.gridy = 6;
 		add(buttonEditAccount, gbc_buttonEditAccount);
 		
-		labelCreateAccountStatus = new JLabel("");
-		labelCreateAccountStatus.setHorizontalAlignment(SwingConstants.CENTER);
+		labelEditAccountStatus = new JLabel("");
+		labelEditAccountStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelEditAccountStatus = new GridBagConstraints();
-		gbc_labelEditAccountStatus.gridwidth = 5;
+		gbc_labelEditAccountStatus.gridwidth = 6;
 		gbc_labelEditAccountStatus.insets = new Insets(0, 0, 5, 5);
 		gbc_labelEditAccountStatus.gridx = 1;
 		gbc_labelEditAccountStatus.gridy = 7;
-		add(labelCreateAccountStatus, gbc_labelEditAccountStatus);
+		add(labelEditAccountStatus, gbc_labelEditAccountStatus);
 
 	}
 
-	
 	public void displayEditAccountForm() {
 	}
 	
@@ -144,7 +163,7 @@ public class EditAccountUI extends JPanel {
 		String password = new String(passwordField.getPassword());
 		String firstName = textFieldFirstName.getText();
 		String lastName = textFieldLastName.getText();
-		String description = textFieldLastName.getText();
+		String description = textFieldDescription.getText();
 		
 		if (editAccountControl.updateAccount(password,firstName,lastName,description)) {
 			displayAccountEditConfirmation();
@@ -159,7 +178,7 @@ public class EditAccountUI extends JPanel {
 	}
 	
 	private void displayAccountEditError() {
-		labelCreateAccountStatus.setText("Account edit was unsuccessful. Account information was invalid.");
+		labelEditAccountStatus.setText("Account edit was unsuccessful. Account information was invalid.");
 	}
 	
 	private void changePasswordVisibility() {
