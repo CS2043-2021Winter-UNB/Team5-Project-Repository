@@ -1,4 +1,3 @@
-
 public class Main {
 	public static void main(String[] args)
 	{	
@@ -10,12 +9,11 @@ public class Main {
 		CreateMemberAccountControl createMemberAccountControl = new CreateMemberAccountControl(dm);
 		CreateMemberAccountUI createMemberAccountUI = new CreateMemberAccountUI(createMemberAccountControl);
 		
-
 		/*EditAccountControl editAccountControl = new EditAccountControl(dm);
 		EditAccountUI editAccountUI = new EditAccountUI(editAccountControl);*/
 		
 		viewAccountControl viewAccControl = new viewAccountControl(dm);
-		ViewAccountUI viewAccountUI = new ViewAccountUI(viewAccControl);
+		ViewAccountUI viewAccountUI = new ViewAccountUI(viewAccControl, loginControl);
 		
 		MainUI mainUI = new MainUI(loginUI, createMemberAccountUI, viewAccountUI);
 		mainUI.setVisible(true);
