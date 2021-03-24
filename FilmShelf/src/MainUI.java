@@ -59,7 +59,7 @@ public class MainUI extends JFrame {
 		JButton buttonLogin = new JButton("Login");
 		buttonLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loginUI.setVisible(true);
+				loginUI.displayLoginForm();
 			}
 		});
 		GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
@@ -101,7 +101,7 @@ public class MainUI extends JFrame {
 	
 	
 	public void removeLoginPanel() {
-		mainPane.remove(loginUI);
+		loginUI.setVisible(false);
 		mainPane.repaint();
 	}
 

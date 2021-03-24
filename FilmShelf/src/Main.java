@@ -10,7 +10,11 @@ public class Main {
 		CreateMemberAccountControl createMemberAccountControl = new CreateMemberAccountControl(dm);
 		CreateMemberAccountUI createMemberAccountUI = new CreateMemberAccountUI(createMemberAccountControl);
 		
+		viewAccountControl viewAccControl = new viewAccountControl(dm);
+		ViewAccountUI viewAccountUI = new ViewAccountUI(viewAccControl);
+		
 		MainUI mainUI = new MainUI(loginUI, createMemberAccountUI);
 		mainUI.setVisible(true);
 	}
 }
+
