@@ -161,16 +161,21 @@ public class LoginUI extends JPanel {
 		if (member)
 		{
 			displayLoginErrorMessage();
-			//loginStatus = loginControl.processMemberLogin(username, password);
+			loginStatus = loginControl.processMemberLogin(username, password);
 		}
 		else
 		{
-			//loginStatus = loginControl.processAdminLogin(username, password);
+			loginStatus = loginControl.processAdminLogin(username, password);
+		}
+		if(loginStatus) {
+			displayLoginConfirmation();
+		} else {
+			displayLoginErrorMessage();
 		}
 	}
 	
 	public void displayLoginConfirmation() {
-        
+		labelLoginStatus.setText("Login was successful!!");
 	}
 	
 	private void displayLoginErrorMessage() {
@@ -194,6 +199,6 @@ public class LoginUI extends JPanel {
 	
 	public void hide()
 	{
-		setVisible(false);
+		//setVisible(false);
 	}
 }

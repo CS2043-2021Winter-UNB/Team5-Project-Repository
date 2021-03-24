@@ -75,8 +75,9 @@ public class MainUI extends JFrame {
         gbc_panel.insets = new Insets(0, 0, 5, 5);
         gbc_panel.gridx = 0;
         gbc_panel.gridy = 1;
-        mainPane.add(loginUI, gbc_panel);
         loginUI.setVisible(false);
+        mainPane.add(loginUI, gbc_panel);
+        
         
         // adding createAccount panel to the main window
         mainPane.add(createMemberAccountUI, gbc_panel);

@@ -59,6 +59,7 @@ public class DataManager {
 			ResultSet rs = stmt.executeQuery(sqlQuery);
 
 			//assigning values to memberAccountObject	
+			rs.next();		// need to call to point cursor to first record
 			uName = rs.getString(1);
 			firstName = rs.getString(3);
 			lastName = rs.getString(4);
@@ -93,6 +94,7 @@ public class DataManager {
 					movies = stmt2.executeQuery(sqlQuery);
 
 					//Add movie title to member object
+					movies.next();		// need to call to point cursor to first record
 					topMovies.add(new MovieObject(movies.getString(1), movies.getInt(2), movies.getString(3), movies.getString(4), movies.getInt(5), movies.getDouble(6), movies.getInt(7)));
 				}
 			}
@@ -121,9 +123,11 @@ public class DataManager {
 			ResultSet rs = stmt.executeQuery(sqlQuery);
 
 			//Assigning values to adminAccountObject
+			rs.next();		// need to call to point cursor to first record
 			uName = rs.getString(1);
 		}
 		catch(SQLException e){
+			System.out.println("Error querying from AdminAccount table");
 			System.out.println(e.getMessage());
 		}
 
@@ -142,7 +146,7 @@ public class DataManager {
 			Statement stmt = connection.createStatement();
 
 			//ResultSet
-			ResultSet rs = stmt.executeQuery(sqlQuery);
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
 		}
 		catch(SQLException e){
 			System.out.println(e.getMessage());
@@ -163,25 +167,25 @@ public class DataManager {
 			//If new value is passed in update password
 			if(password != null){
 				sqlQuery = "update MemberAccount set password = sha1('" + password + "') where username = '" + username + "';";
-				stmt.executeQuery(sqlQuery);
+				stmt.executeUpdate(sqlQuery);
 			}
 			
 			//If new value is passed in update firstName
 			if(firstName != null){
 				sqlQuery = "update MemberAccount set firstName = '" + firstName + "' where username = '" + username + "';";
-				stmt.executeQuery(sqlQuery);
+				stmt.executeUpdate(sqlQuery);
 			}
 
 			//If new value is passed in update lastName 
 			if(lastName != null){
 				sqlQuery = "update MemberAccount set lastName = '" + lastName + "' where username = '" + username + "';";
-				stmt.executeQuery(sqlQuery);
+				stmt.executeUpdate(sqlQuery);
 			}
 
 			//if new value is passed in update description
 			if(description != null){
 				sqlQuery = "update MemberAccount set description = '" + description + "' where username = '" + username + "';";
-				stmt.executeQuery(sqlQuery);
+				stmt.executeUpdate(sqlQuery);
 			}
 		}
 		catch(SQLException e){
@@ -201,7 +205,7 @@ public class DataManager {
 			Statement stmt = connection.createStatement();
 
 			//Execute query
-			stmt.executeQuery(sqlQuery);
+			stmt.executeUpdate(sqlQuery);
 		}
 		catch(SQLException e){
 			System.out.println(e.getMessage());

@@ -178,6 +178,6 @@ public class CreateMemberAccountUI extends JPanel {
 	
 	public void hide()
 	{
-		setVisible(false);
+		//setVisible(false);
 	}
 }
