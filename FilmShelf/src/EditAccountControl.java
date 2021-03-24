@@ -151,11 +151,11 @@ public class EditAccountControl {
 				desc = description.strip();
 			}
 			
-			accountUpdated = dataManager.editAccount(pWord, fName, lName, desc);		// DataManager will have to check for null password
+			//accountUpdated = dataManager.editAccount(pWord, fName, lName, desc);		// DataManager will have to check for null password
 			
 			// update logged in member's info in LoginControl
 			if(accountUpdated) {
-				loginControl.updateCurrentMemberInfo(fName, lName, desc);
+			//	loginControl.updateCurrentMemberInfo(fName, lName, desc);
 			}
 		}
 	
