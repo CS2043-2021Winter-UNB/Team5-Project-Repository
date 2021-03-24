@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.JToggleButton;
 import javax.swing.JCheckBox;
 
 public class LoginUI extends JPanel {
@@ -150,13 +149,12 @@ public class LoginUI extends JPanel {
 
 	}
 	
-	public void displayLoginForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 
-		// end-user-code
+	public void displayLoginForm() {
+		//TO DO: clear login fields/radio button here before redisplaying
+		setVisible(true);
 	}
-	
+
 	private void extractLoginCredentials() {
 		String username = textFieldUsername.getText();
 		String password = new String(passwordField.getPassword());

@@ -1,4 +1,3 @@
-
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -137,11 +136,12 @@ public class CreateMemberAccountUI extends JPanel {
 		gbc_labelCreateAccountStatus.gridx = 1;
 		gbc_labelCreateAccountStatus.gridy = 7;
 		add(labelCreateAccountStatus, gbc_labelCreateAccountStatus);
-
 	}
 
 	
 	public void displayCreateAccountForm() {
+		//TO DO: clear login fields/radio button here before redisplaying
+		setVisible(true);
 	}
 	
 	private void extractAccountInfo()
@@ -159,7 +159,6 @@ public class CreateMemberAccountUI extends JPanel {
 	}
 
 	public void displayAccountCreationConfirmation() {
-
 	}
 	
 	private void displayAccountCreationError() {
