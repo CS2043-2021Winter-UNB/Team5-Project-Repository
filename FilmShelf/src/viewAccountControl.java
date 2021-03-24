@@ -1,13 +1,30 @@
 
+/******************************************************************************************************************************
+ * ViewAccountControl
+ * @author Rachel
+ * Description:	Handles validation of input to ViewAccountUI class and initiates searching of the movie table.
+ ******************************************************************************************************************************/
+
 public class viewAccountControl {
 
-	private Class accounts;
+	
 	private DataManager dataManager;
-
-	public void retrieveAccount() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	//private MemberAccountObject vacMemberAccount;
+	
+	//What is passed in from UI? MemberName? Id?
+	public viewAccountControl(DataManager dm) {
+		this.dataManager = dm;
+	}
+	
+	//NB: Data Manager needs getViewAccount() method
+	//Do we need a different kind of MemberAccount object to be returned? 
+	//vMemberAccount object?
+	public MemberAccountObject retrieveAccount(String accountID) {
+		
+		//Q: Do we need a new method in data manager called getMemberView()? getMember() requires password...
+		MemberAccountObject vMemberAccount = dataManager.getMemberView(accountID);
+		
+		return vMemberAccount;
+		
 	}
 }
