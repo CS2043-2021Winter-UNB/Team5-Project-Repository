@@ -149,12 +149,11 @@ public class LoginUI extends JPanel {
 
 	}
 	
-
 	public void displayLoginForm() {
 		//TO DO: clear login fields/radio button here before redisplaying
 		setVisible(true);
 	}
-
+	
 	private void extractLoginCredentials() {
 		String username = textFieldUsername.getText();
 		String password = new String(passwordField.getPassword());
@@ -191,5 +190,10 @@ public class LoginUI extends JPanel {
 		{
 			passwordField.setEchoChar('*');
 		}
+	}
+	
+	public void hide()
+	{
+		setVisible(false);
 	}
 }
