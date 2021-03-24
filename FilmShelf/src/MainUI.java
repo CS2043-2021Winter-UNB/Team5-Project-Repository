@@ -87,33 +87,33 @@ public class MainUI extends JFrame {
         editAccountUI.setVisible(false);*/
         
         //Panel that holds the "Login" and "CreateAccount" buttons
-        JPanel panelCreateAndLogin = new JPanel();
+        JPanel panelAccountButtons = new JPanel();
         GridBagConstraints gbc_panel2 = new GridBagConstraints();
         gbc_panel2.gridwidth = 2;
         gbc_panel2.insets = new Insets(0, 0, 5, 5);
         gbc_panel2.fill = GridBagConstraints.BOTH;
         gbc_panel2.gridx = 5;
         gbc_panel2.gridy = 0;
-        mainPane.add(panelCreateAndLogin, gbc_panel2);
+        mainPane.add(panelAccountButtons, gbc_panel2);
         GridBagLayout gbl_panel = new GridBagLayout();
         gbl_panel.columnWidths = new int[]{0, 0, 0, 0};
         gbl_panel.rowHeights = new int[]{0, 0};
         gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
         gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-        panelCreateAndLogin.setLayout(gbl_panel);
+        panelAccountButtons.setLayout(gbl_panel);
         
         buttonLogin = new JButton("Login");
         GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
         gbc_buttonLogin.insets = new Insets(0, 0, 0, 5);
         gbc_buttonLogin.gridx = 0;
         gbc_buttonLogin.gridy = 0;
-        panelCreateAndLogin.add(buttonLogin, gbc_buttonLogin);
+        panelAccountButtons.add(buttonLogin, gbc_buttonLogin);
         
         buttonCreateAccount = new JButton("Create Account");
         GridBagConstraints gbc_buttonCreateAccount = new GridBagConstraints();
         gbc_buttonCreateAccount.gridx = 2;
         gbc_buttonCreateAccount.gridy = 0;
-        panelCreateAndLogin.add(buttonCreateAccount, gbc_buttonCreateAccount);
+        panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
         
         JButton btnNewButton_1 = new JButton("make buttons switch");
         btnNewButton_1.addActionListener(new ActionListener() {
