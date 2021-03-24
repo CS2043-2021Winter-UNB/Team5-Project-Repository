@@ -8,14 +8,16 @@ import java.util.ArrayList;
  ******************************************************************************************************************************/
 public class MemberAccountObject {
 
+	public String username;
+	public String firstName;
+	public String lastName;
+	public String email;
+	public String description;
+	public ArrayList<String> topMovies; // ArrayList or array? ArrayList easy to work with, array can limit number of movies to prevent overflow
+
+
 	// no point in storing password, db will encrypt passwords which will be difficult to decrypt
 
-	private String username;
-	private String firstName;
-	private String lastName;
-	private String description;
-	private ArrayList<MovieObject> topMovies;	// ArrayList or array? ArrayList easy to work with, array can limit number of movies to prevent overflow
-	
 	public MemberAccountObject(String username, String firstName, String lastName, String description) {
 		this.username = username;
 		this.firstName = firstName;
@@ -44,7 +46,7 @@ public class MemberAccountObject {
 		this.description = description;
 	}
 	
-	public ArrayList<MovieObject> getTopMovies() {
+	public ArrayList<String> getTopMovies() {
 		return topMovies;
 	}
 	
@@ -53,4 +55,5 @@ public class MemberAccountObject {
 	public void setTopMovies(ArrayList<MovieObject> movies) {
 		topMovies = movies;
 	}
+
 }
