@@ -66,21 +66,33 @@ public class DataManager {
 			member.firstName = rs.getString(3);
 			member.lastName = rs.getString(4);
 
-			int movieId;
+			ArrayList<Integer> movieId = [numTopMovies];
 			Statement stmt2 = connection.createStatement();
 			ResultSet movies;
 			
 			for(int i = 5; i < i + numTopMovies; i++){
+				movieId.add(rs.getInt(i));
+			}
 
-				movieId = rs.getInt(i);
-				sqlQuery = "select title from Movie where movieID = " + movieId + ";";
+			for(int i = 0; i < numTopMovies; i++){
+
+				sqlQuery = "select title from Movie where movieID = " + movieId[i] + ";";
+
+
 				movies = stmt2.executeQuery(sqlQuery);
 				member.topMovies.add(rs.getString(1));
+				
 			}
+				sqlQuery = "select title from Movie where movieID = " + movieId[i] + ";";
+
+
+				movies = stmt2.executeQuery(sqlQuery);
+				member.topMovies.add(rs.getString(1));
 
 		}
 		catch(SQLException e){
 			System.out.println(e.getMessage());
+			return null;
 		}
 
 			return member;
