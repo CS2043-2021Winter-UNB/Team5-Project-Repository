@@ -1,8 +1,14 @@
 
+/******************************************************************************************************************************
+ * LoginControl
+ * @author Rachel
+ * Description:	Handles validation of input to LoginUI class.
+ ******************************************************************************************************************************/
+
 public class LoginControl {
 	//LoginControl needs to have a private reference variable of 
 	//currentMember --or-- currentAdmin
-	//class to hold the logined customer object
+	//class to hold the login.ed customer object
 	private MemberAccountObject currentMember;
 	private AdminAccountObject currentAdmin;
 	private DataManager dataManager;
@@ -11,20 +17,23 @@ public class LoginControl {
 			this.dataManager = dm;
 			}
 	
-	public void processMemberLogin(String username, int password) {
-		//CHECK: METHOD: --- IS IT "GETMEMBER?"
-		//Q: WHY IS PASSWORD TYPE INT?
-		//NB: DIFFERENT processLogin METHOD for Member vs. Admin
+	public MemberAccountObject processMemberLogin(String username, String password) {
+
+		//NB: different processLogin method for Member vs. Admin
 		 currentMember = dataManager.getMember(username, password);
+		 
+		 if (currentMember == null); //Q: What kind of error to pass?
+		 
 		 return currentMember;
 
 	}
 
-	public void processAdminLogin(String username, int password) {
-		//CHECK: METHOD: --- IS IT "GETMEMBER?"
-		//Q: WHY IS PASSWORD TYPE INT?
+	public AdminAccountObject processAdminLogin(String username, String password) {
+	
 		//NB: DIFFERENT processLogin METHOD for Member vs. Admin
 		 currentAdmin = dataManager.getAdmin(username, password);
+		 
+		 if (currentAdmin == null); //Q: What kind of error to pass?
 		 return currentAdmin;
 
 	}
@@ -33,7 +42,7 @@ public class LoginControl {
 		return currentMember;
 	}
 
-	public AdminAccuntObject getCurrentAdmin() {
+	public AdminAccountObject getCurrentAdmin() {
 		return currentAdmin;
 	}
 }
