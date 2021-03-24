@@ -1,24 +1,196 @@
 
 import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DataManager {
 
-	private AdminAccountObject adminAccount;
-	private MovieObject movie;
-	private ReviewObject review;
 
-	public MemberAccountObject getMember(String username, String password) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
+
+	//private AdminAccountObject adminAccount;
+	//private MovieObject movie;
+	//private ReviewObject review;
+	//private MemberAccountObject member;
+
+	public AdminAccountObject adminAccount;
+	public MovieObject movie;
+	public ReviewObject review;
+	private int numTopMovies = 5;
+	private Connection connection;
+
+	public DataManager() {
+		try {
+	        Class.forName("com.mysql.jdbc.Driver").newInstance();
+	    } 
+		catch(Exception e) {
+	    	System.err.println(e.toString());
+	    }
+
+		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/cs2043team5";
+
+		try {
+			connection = DriverManager.getConnection(url, "cs2043team5", "E8mP1JDK");
+		} 
+		catch(SQLException e) {
+			System.err.println("Database connection error: " + e);
+		}
+
 		// end-user-code
 	}
 
-	public AdminAccountObject getAdmin(String username, String password) {
+	public MemberAccountObject getMember(String username, String password) {
+
+		//Create MemberAccountObject 
+		MemberAccountObject member = new MemberAccountObject();
+
+		
+
+		//SQL query String 
+		String sqlQuery = "select * from MemberAccount where username = '" + username +
+						  "' and password = sha1('" + password + "');";
+
+		try{
+
+			//create statement 
+			Statement stmt = connection.createStatement();
+
+			//ResultSet 
+			ResultSet rs = stmt.executeQuery(sqlQuery);
+
+			//assigning values to memberAccountObject	
+			member.username = rs.getString(1);
+			member.password = rs.getString(2);
+			member.firstName = rs.getString(3);
+			member.lastName = rs.getString(4);
+
+			int movieId;
+			Statement stmt2 = connection.createStatement();
+			ResultSet movies;
+			
+			for(int i = 5; i < i + numTopMovies; i++){
+
+				movieId = rs.getInt(i);
+				sqlQuery = "select title from Movie where movieID = " + movieId + ";";
+				movies = stmt2.executeQuery(sqlQuery);
+				member.topMovies.add(rs.getString(1));
+			}
+
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+
+			return member;
+	}
+
+
+	public AdminAccountObject getAdmin(String username, String password){
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		
+
+		//Create MemberAccountObject 
+		AdminAccountObject admin = new AdminAccountObject();
+
+		//SQL query String 
+		String sqlQuery = "select * from AdminAccount where username = '" + username +
+						  "' and password = sha1('" + password + "');";
+
+
+		try{
+
+			//create statement 
+			Statement stmt = connection.createStatement();
+			//ResultSet 
+			ResultSet rs = stmt.executeQuery(sqlQuery);
+
+			//Assigning values to adminAccountObject
+			admin.username = rs.getString(1);
+			admin.password = rs.getString(2);
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+
+		//return adminAccountObject
+		return admin;
 		// end-user-code
+	}
+
+	public boolean addMemberAccount(String username, String password, String firstName,
+								 String lastName) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		
+
+		//SQL query String 
+		String sqlQuery = "insert into MemberAccount values('" + username + "', sha1('" + password + "'), '" 
+						   + firstName + "', '" + lastName + "');";
+
+		//ResultSet
+		try{
+
+			//Create statement 
+			Statement stmt = connection.createStatement();
+
+			//ResultSet
+			ResultSet rs = stmt.executeQuery(sqlQuery);
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+
+		return true;
+		// end-user-code
+	}
+
+	public boolean editMemberAccount(String username, String[] values){
+
+	
+
+		//String query 
+		String sqlQuery;
+
+		try{
+
+			//Create Statement 
+			Statement stmt = connection.createStatement();
+
+			if(values[1] != null){
+				sqlQuery = "update MemberAccount set firstName = '" + values[1] + "' where username = '"
+						  	+ username + "';";
+						
+				stmt.executeQuery(sqlQuery);
+			}
+
+			if(values[2] != null){
+				sqlQuery = "update MemberAccount set lastName = '" + values[2] + "' where username = '"
+						  	+ username + "';";
+				stmt.executeQuery(sqlQuery);
+			}
+
+			if(values[3] != null){
+
+				sqlQuery = "update MemberAccount set description = '" + values[3] + "' where username = '"
+						  	+ username + "';";
+				stmt.executeQuery(sqlQuery);
+
+			}
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+
+			
+		return true;
+		
+		
 	}
 
 	public int getMovieRatingByMember(String username, int movieID) {
@@ -40,20 +212,6 @@ public class DataManager {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		return null;
-		// end-user-code
-	}
-
-	public void addMemberAccount(String username, String password, String email) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	public void addMovieRequest(Object movieRequest) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
 		// end-user-code
 	}
 
