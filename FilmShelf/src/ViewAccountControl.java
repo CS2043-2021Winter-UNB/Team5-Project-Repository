@@ -5,14 +5,14 @@
  * Description:	Handles validation of input to ViewAccountUI class and initiates searching of the movie table.
  ******************************************************************************************************************************/
 
-public class viewAccountControl {
+public class ViewAccountControl {
 
 	
 	private DataManager dataManager;
 	//private MemberAccountObject vacMemberAccount;
 	
 	//What is passed in from UI? MemberName? Id?
-	public viewAccountControl(DataManager dm) {
+	public ViewAccountControl(DataManager dm) {
 		this.dataManager = dm;
 	}
 	

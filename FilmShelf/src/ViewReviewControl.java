@@ -1,11 +1,11 @@
 
 import java.util.ArrayList;
 
-public class viewReviewControl {
+public class ViewReviewControl {
 
 	private Class review;
 	private ArrayList<ReviewObject> reviews;
-	private viewReviewControl viewReviewControl;
+	private ViewReviewControl viewReviewControl;
 	private DataManager dataManager;
 
 	public void retrieveReview() {

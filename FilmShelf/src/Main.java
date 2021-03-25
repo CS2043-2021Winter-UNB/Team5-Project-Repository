@@ -12,7 +12,7 @@ public class Main {
 		/*EditAccountControl editAccountControl = new EditAccountControl(dm);
 		EditAccountUI editAccountUI = new EditAccountUI(editAccountControl);*/
 		
-		viewAccountControl viewAccControl = new viewAccountControl(dm);
+		ViewAccountControl viewAccControl = new ViewAccountControl(dm);
 		ViewAccountUI viewAccountUI = new ViewAccountUI(viewAccControl, loginControl);
 		
 		MainUI mainUI = new MainUI(loginUI, createMemberAccountUI, viewAccountUI);

@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 
 public class ViewAccountUI extends JPanel {
 
-	private viewAccountControl viewAccControl;
+	private ViewAccountControl viewAccControl;
 	private LoginControl loginControl;
 	private JLabel labelShowUsername;
 	private JLabel labelShowFirstName;
@@ -35,7 +35,7 @@ public class ViewAccountUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ViewAccountUI(viewAccountControl controlViewAcc, LoginControl controlLogin) {
+	public ViewAccountUI(ViewAccountControl controlViewAcc, LoginControl controlLogin) {
 		viewAccControl = controlViewAcc;
 		loginControl = controlLogin;
 		
