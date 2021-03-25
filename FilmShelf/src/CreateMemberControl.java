@@ -108,7 +108,7 @@ public class CreateMemberControl {
 			String fName = firstName.strip();
 			String lName = lastName.strip();
 			String description = "Welcome to my page!";
-			memberAdded = dataManager.addMemberAccount(uName, pWord, fName, lName, description);		// Jo: addMemberAccount should return boolean to signal success/failure
+			memberAdded = dataManager.addMember(uName, pWord, fName, lName, description);		// Jo: addMemberAccount should return boolean to signal success/failure
 		}
 		
 		return memberAdded;

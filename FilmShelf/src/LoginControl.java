@@ -46,4 +46,9 @@ public class LoginControl {
 	public AdminObject getCurrentAdmin() {
 		return currentAdmin;
 	}
+	
+	// updates the current member's info after a member edits their account details (EditMember)
+	public void updateCurrentMemberInfo(String fName, String lName, String desc) {
+		currentMember = new MemberObject(currentMember.getUsername(), fName, lName, desc, currentMember.getTopMovies());
+	}
 }

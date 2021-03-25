@@ -66,9 +66,9 @@ public class DataManager {
 				movieIds.add(rs.getInt(i));
 			}
 		}
-		catch(SQLException e){
-			System.out.println("Error querying MemberAccount table");
-			System.out.println(e.getMessage());
+		catch(SQLException e) {
+			System.out.println();
+			System.out.println("Member login error: " + e.getMessage());
 			return null;
 		}
 		
@@ -95,9 +95,8 @@ public class DataManager {
 				}
 			}
 		}
-		catch(SQLException e){
-			System.out.println("Error querying Movie table");
-			System.out.println(e.getMessage());
+		catch(SQLException e) {
+			System.out.println("Top movies retrieval error: " + e.getMessage());
 			return null;
 		}
 			// Create MemberAccountObject to return
@@ -122,16 +121,15 @@ public class DataManager {
 			rs.next();		// need to call to point cursor to first record
 			uName = rs.getString(1);
 		}
-		catch(SQLException e){
-			System.out.println("Error querying from AdminAccount table");
-			System.out.println(e.getMessage());
+		catch(SQLException e) {
+			System.out.println("Admin login error: " + e.getMessage());
 		}
 
 		//return adminObject
 		return new AdminObject(uName);
 	}
 
-	public boolean addMemberAccount(String username, String password, String firstName, String lastName, String description) {
+	public boolean addMember(String username, String password, String firstName, String lastName, String description) {
 		//SQL query String 
 		String sqlQuery = "insert into MemberAccount(username, password, firstName, lastName, description) values('" + 
 							username + "', sha1('" + password + "'), '" + firstName + "', '" + lastName + "', '" + description + "');";
@@ -144,15 +142,15 @@ public class DataManager {
 			//ResultSet
 			int rowsUpdated = stmt.executeUpdate(sqlQuery);
 		}
-		catch(SQLException e){
-			System.out.println(e.getMessage());
+		catch(SQLException e) {
+			System.out.println("New member creation error: " + e.getMessage());
 			return false;
 		}
 
 		return true;
 	}
 
-	public boolean editMemberAccount(String username, String password, String firstName, String lastName, String description){
+	public boolean editMember(String username, String password, String firstName, String lastName, String description){
 		//String query 
 		String sqlQuery;
 
@@ -184,15 +182,15 @@ public class DataManager {
 				stmt.executeUpdate(sqlQuery);
 			}
 		}
-		catch(SQLException e){
-			System.out.println(e.getMessage());
+		catch(SQLException e) {
+			System.out.println("Editing member details error: " + e.getMessage());
 			return false;
 		}
 
 		return true;
 	}
 
-	public boolean removeMemberAccount(String username) {
+	public boolean removeMember(String username) {
 		//String query 
 		String sqlQuery = "delete from MemberAccount where username = '" + username + "';";
 
@@ -203,8 +201,8 @@ public class DataManager {
 			//Execute query
 			stmt.executeUpdate(sqlQuery);
 		}
-		catch(SQLException e){
-			System.out.println(e.getMessage());
+		catch(SQLException e) {
+			System.out.println("Member removal error: " + e.getMessage());
 			return false;
 		}
 

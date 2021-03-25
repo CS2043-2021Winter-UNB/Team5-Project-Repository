@@ -23,7 +23,7 @@ public class RemoveMemberControl {
 		}
 		
 		// call removeMemberAccount from DataManager
-		return dataManager.removeMemberAccount(username);		// return boolean from DataManager indicating success/failure
+		return dataManager.removeMember(username);		// return boolean from DataManager indicating success/failure
 	}
 	
 	// checks who is requesting the removal and returns a boolean representing if the removal is valid or invalid
