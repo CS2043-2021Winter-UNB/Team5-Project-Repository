@@ -4,13 +4,13 @@
  * @author Jo
  * Description:	Handles removal of Member accounts by Admin or removal of a Member's account by that Member.
  ******************************************************************************************************************************/
-public class RemoveAccountControl {
+public class RemoveMemberControl {
 
 	private DataManager dataManager;
 	private LoginControl loginControl;
 
 	// class constructor
-	public RemoveAccountControl(DataManager dataManager, LoginControl loginControl) {
+	public RemoveMemberControl(DataManager dataManager, LoginControl loginControl) {
 		this.dataManager = dataManager;
 		this.loginControl = loginControl;
 	}
@@ -29,8 +29,8 @@ public class RemoveAccountControl {
 	// checks who is requesting the removal and returns a boolean representing if the removal is valid or invalid
 	private boolean verifyRemovePermission(String username) {
 		boolean hasRemovePermission = false;
-		MemberAccountObject member = loginControl.getCurrentMember();		// if app needs to be rerun for new user to login, one of these will always be null
-		AdminAccountObject admin = loginControl.getCurrentAdmin();			// if a user can logout and another can login, LoginControl can set the logged out Account object to null
+		MemberObject member = loginControl.getCurrentMember();		// if app needs to be rerun for new user to login, one of these will always be null
+		AdminObject admin = loginControl.getCurrentAdmin();			// if a user can logout and another can login, LoginControl can set the logged out Account object to null
 		
 		// if a member is removing an account, check if that member is attempting to remove their own account
 		if((member != null) && !username.equals(member.getUsername())) {

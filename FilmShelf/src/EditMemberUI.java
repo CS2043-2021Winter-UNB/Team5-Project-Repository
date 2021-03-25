@@ -20,8 +20,8 @@ import java.awt.EventQueue;
 	import javax.swing.JLayeredPane;
 	
 
-public class EditAccountUI extends JPanel {
-	private EditAccountControl editAccountControl;
+public class EditMemberUI extends JPanel {
+	private EditMemberControl editMemberControl;
 	private JPasswordField passwordField;
 	private JTextField textFieldFirstName;
 	private JTextField textFieldLastName;
@@ -29,9 +29,9 @@ public class EditAccountUI extends JPanel {
 	private JCheckBox checkboxPasswordVisibility;
 	private JLabel labelEditAccountStatus;
 
-	public EditAccountUI(EditAccountControl control) {
+	public EditMemberUI(EditMemberControl control) {
 		setBackground(Color.LIGHT_GRAY);
-		editAccountControl = control;
+		editMemberControl = control;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{71, 0, 100, 0, 0, 0, 0, 48, 0};
 		gridBagLayout.rowHeights = new int[]{74, 0, 0, 0, 0, 0, 42, 35, 0, 0};
@@ -165,7 +165,7 @@ public class EditAccountUI extends JPanel {
 		String lastName = textFieldLastName.getText();
 		String description = textFieldDescription.getText();
 		
-		if (editAccountControl.updateAccount(password,firstName,lastName,description)) {
+		if (editMemberControl.updateAccount(password,firstName,lastName,description)) {
 			displayEditAccountConfirmation();
 		}
 		else {

@@ -22,9 +22,9 @@ public class MainUI extends JFrame {
 	
 	private JPanel mainPane;
 	private LoginUI loginUI;
-	private CreateMemberAccountUI createMemberAccountUI;
+	private CreateMemberUI createMemberUI;
 	//private EditAccountUI editAccountUI;
-	private ViewAccountUI viewAccountUI;
+	private ViewMemberUI viewMemberUI;
 	private JButton buttonLogin;
 	private JButton buttonCreateAccount;
 	
@@ -32,11 +32,11 @@ public class MainUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainUI(LoginUI uiLog, CreateMemberAccountUI uiCreate, ViewAccountUI uiViewAccount) {
+	public MainUI(LoginUI uiLog, CreateMemberUI uiCreate, ViewMemberUI uiViewAccount) {
 		loginUI = uiLog;
-		createMemberAccountUI = uiCreate;
+		createMemberUI = uiCreate;
 		//editAccountUI = uiEditAccount;
-		viewAccountUI = uiViewAccount;
+		viewMemberUI = uiViewAccount;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -80,8 +80,8 @@ public class MainUI extends JFrame {
         
         
         // adding createAccount panel to the main window
-        mainPane.add(createMemberAccountUI, gbc_panel);
-        createMemberAccountUI.setVisible(false);
+        mainPane.add(createMemberUI, gbc_panel);
+        createMemberUI.setVisible(false);
         
        /* // adding editAccount panel to the main window
         mainPane.add(editAccountUI, gbc_panel);
@@ -129,7 +129,7 @@ public class MainUI extends JFrame {
         mainPane.add(btnNewButton_1, gbc_btnNewButton_1);
         buttonCreateAccount.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		createMemberAccountUI.displayCreateAccountForm();
+        		createMemberUI.displayCreateAccountForm();
         	}
         });
         buttonLogin.addActionListener(new ActionListener() {

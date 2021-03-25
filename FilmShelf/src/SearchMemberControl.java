@@ -8,15 +8,15 @@ import java.util.ArrayList;
  * @author Jo
  * Description:	Handles validation of search input to SearchAccountUI class and initiates searching the MemberAccount table.
  ******************************************************************************************************************************/
-public class SearchAccountControl {
+public class SearchMemberControl {
 
 	private DataManager dataManager;
-	private MemberAccountObject member;
+	private MemberObject member;
 	//private ArrayList<MemberAccountObject> members;
 	private Pattern specialCharacterPattern;
 	private Matcher specialCharacterMatcher;
 	
-	public SearchAccountControl(DataManager dataManager) {
+	public SearchMemberControl(DataManager dataManager) {
 		this.dataManager = dataManager;
 		this.member = null;
 		//members = new ArrayList<MemberAccountObject>();
@@ -24,7 +24,7 @@ public class SearchAccountControl {
 	}
 
 	// Jo: could return ArrayList if we want to allow for generalized searches (not just exact matches)
-	public MemberAccountObject processSearchAccount(String username) {
+	public MemberObject processSearchAccount(String username) {
 		// check validity of input
 		if((username != null) && validateSearchInput(username.strip())) {
 			// search for member if input valid

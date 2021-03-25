@@ -8,14 +8,10 @@ import java.sql.Statement;
 
 public class DataManager {
 
-	//private AdminAccountObject adminAccount;
-	//private MovieObject movie;
-	//private ReviewObject review;
-	//private MemberAccountObject member;
-
-	public AdminAccountObject adminAccount;
-	public MovieObject movie;
-	public ReviewObject review;
+	private MemberObject member;
+	private AdminObject admin;
+	private MovieObject movie;
+	private ReviewObject review;
 	private int numTopMovies = 5;
 	private int lastTopMovieIndex = 9;
 	private Connection connection;
@@ -38,7 +34,7 @@ public class DataManager {
 		}
 	}
 
-	public MemberAccountObject getMember(String username, String password) {
+	public MemberObject getMember(String username, String password) {
 		// Declaring variables
 		String uName = "";
 		String firstName = "";
@@ -105,11 +101,11 @@ public class DataManager {
 			return null;
 		}
 			// Create MemberAccountObject to return
-			return new MemberAccountObject(uName, firstName, lastName, description, topMovies);
+			return new MemberObject(uName, firstName, lastName, description, topMovies);
 	}
 
 
-	public AdminAccountObject getAdmin(String username, String password){
+	public AdminObject getAdmin(String username, String password){
 		String uName = "";
 
 		//SQL query String 
@@ -122,7 +118,7 @@ public class DataManager {
 			//ResultSet 
 			ResultSet rs = stmt.executeQuery(sqlQuery);
 
-			//Assigning values to adminAccountObject
+			//Assigning values to adminObject
 			rs.next();		// need to call to point cursor to first record
 			uName = rs.getString(1);
 		}
@@ -131,8 +127,8 @@ public class DataManager {
 			System.out.println(e.getMessage());
 		}
 
-		//return adminAccountObject
-		return new AdminAccountObject(uName);
+		//return adminObject
+		return new AdminObject(uName);
 	}
 
 	public boolean addMemberAccount(String username, String password, String firstName, String lastName, String description) {

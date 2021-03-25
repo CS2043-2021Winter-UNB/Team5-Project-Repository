@@ -9,8 +9,8 @@ public class LoginControl {
 	//LoginControl needs to have a private reference variable of 
 	//currentMember --or-- currentAdmin
 	//class to hold the login.ed customer object
-	private MemberAccountObject currentMember;
-	private AdminAccountObject currentAdmin;
+	private MemberObject currentMember;
+	private AdminObject currentAdmin;
 	private DataManager dataManager;
 
 	public LoginControl(DataManager dm) {
@@ -39,11 +39,11 @@ public class LoginControl {
 		}
 	}
 	
-	public MemberAccountObject getCurrentMember() {
+	public MemberObject getCurrentMember() {
 		return currentMember;
 	}
 
-	public AdminAccountObject getCurrentAdmin() {
+	public AdminObject getCurrentAdmin() {
 		return currentAdmin;
 	}
 }

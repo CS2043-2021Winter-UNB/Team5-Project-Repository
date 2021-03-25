@@ -1,7 +1,7 @@
 
-public class SearchAccountUI {
+public class SearchMemberUI {
 
-	private SearchAccountControl searchAccountControl;
+	private SearchMemberControl searchMemberControl;
 
 	public void displaySearchForm() {
 		// begin-user-code
@@ -10,7 +10,7 @@ public class SearchAccountUI {
 		// end-user-code
 	}
 
-	public void displaySearchResult(MemberAccountObject memberAccount) {
+	public void displaySearchResult(MemberObject member) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		

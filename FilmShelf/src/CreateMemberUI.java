@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
-public class CreateMemberAccountUI extends JPanel {
+public class CreateMemberUI extends JPanel {
 
-	private CreateMemberAccountControl createMemberAccountControl;
+	private CreateMemberControl createMemberControl;
 	private JTextField textFieldUsername;
 	private JPasswordField passwordField;
 	private JTextField textFieldFirstName;
@@ -22,8 +22,8 @@ public class CreateMemberAccountUI extends JPanel {
 	private JCheckBox checkboxPasswordVisibility;
 	private JLabel labelCreateAccountStatus;
 
-	public CreateMemberAccountUI(CreateMemberAccountControl control) {
-		createMemberAccountControl = control;
+	public CreateMemberUI(CreateMemberControl control) {
+		createMemberControl = control;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{71, 0, 100, 0, 0, 0, 48, 0};
 		gridBagLayout.rowHeights = new int[]{74, 0, 0, 0, 0, 0, 42, 35, 0, 0};
@@ -151,7 +151,7 @@ public class CreateMemberAccountUI extends JPanel {
 		String password = new String(passwordField.getPassword());
 		String firstName = textFieldFirstName.getText();
 		String lastName = textFieldLastName.getText();
-		if (createMemberAccountControl.createMemberAccount(username,password,firstName,lastName)) {
+		if (createMemberControl.createMemberAccount(username,password,firstName,lastName)) {
 			displayAccountCreationConfirmation();
 		}
 		else {

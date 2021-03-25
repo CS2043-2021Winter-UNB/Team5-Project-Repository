@@ -6,16 +6,16 @@ public class Main {
 		LoginControl loginControl = new LoginControl(dm);
 		LoginUI loginUI = new LoginUI(loginControl);
 		
-		CreateMemberAccountControl createMemberAccountControl = new CreateMemberAccountControl(dm);
-		CreateMemberAccountUI createMemberAccountUI = new CreateMemberAccountUI(createMemberAccountControl);
+		CreateMemberControl createMemberControl = new CreateMemberControl(dm);
+		CreateMemberUI createMemberUI = new CreateMemberUI(createMemberControl);
 		
 		/*EditAccountControl editAccountControl = new EditAccountControl(dm);
 		EditAccountUI editAccountUI = new EditAccountUI(editAccountControl);*/
 		
-		ViewAccountControl viewAccControl = new ViewAccountControl(dm);
-		ViewAccountUI viewAccountUI = new ViewAccountUI(viewAccControl, loginControl);
+		ViewMemberControl viewMemberControl = new ViewMemberControl(dm);
+		ViewMemberUI viewMemberUI = new ViewMemberUI(viewMemberControl, loginControl);
 		
-		MainUI mainUI = new MainUI(loginUI, createMemberAccountUI, viewAccountUI);
+		MainUI mainUI = new MainUI(loginUI, createMemberUI, viewMemberUI);
 		mainUI.setVisible(true);
 	}
 }

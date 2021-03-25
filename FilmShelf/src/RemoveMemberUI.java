@@ -1,7 +1,7 @@
 
-public class RemoveAccountUI {
+public class RemoveMemberUI {
 
-	private RemoveAccountControl removeAccountControl;
+	private RemoveMemberControl removeMemberControl;
 
 	public void displayRemovalMemberWarning() {
 		// begin-user-code
