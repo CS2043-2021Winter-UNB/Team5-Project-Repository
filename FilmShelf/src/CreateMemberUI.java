@@ -1,3 +1,11 @@
+
+/******************************************************************************************************************************
+ * CreateMemberUI
+ * @author Sharon
+ * Description:	Displays create member form, extracts user input, and displays account creation confirmation or error
+ ******************************************************************************************************************************/
+
+
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -6,7 +14,6 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
-import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -31,6 +38,7 @@ public class CreateMemberUI extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
+		//Username label
 		JLabel labelUsername = new JLabel("Username");
 		GridBagConstraints gbc_labelUsername = new GridBagConstraints();
 		gbc_labelUsername.anchor = GridBagConstraints.EAST;
@@ -39,6 +47,7 @@ public class CreateMemberUI extends JPanel {
 		gbc_labelUsername.gridy = 1;
 		add(labelUsername, gbc_labelUsername);
 		
+		//Username textfield
 		textFieldUsername = new JTextField();
 		GridBagConstraints gbc_textFieldUsername = new GridBagConstraints();
 		gbc_textFieldUsername.gridwidth = 3;
@@ -49,6 +58,7 @@ public class CreateMemberUI extends JPanel {
 		add(textFieldUsername, gbc_textFieldUsername);
 		textFieldUsername.setColumns(10);
 		
+		//Password label
 		JLabel labelPassword = new JLabel("Password");
 		GridBagConstraints gbc_labelPassword = new GridBagConstraints();
 		gbc_labelPassword.anchor = GridBagConstraints.EAST;
@@ -57,6 +67,7 @@ public class CreateMemberUI extends JPanel {
 		gbc_labelPassword.gridy = 2;
 		add(labelPassword, gbc_labelPassword);
 		
+		//Password field
 		passwordField = new JPasswordField();
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.gridwidth = 3;
@@ -66,6 +77,8 @@ public class CreateMemberUI extends JPanel {
 		gbc_passwordField.gridy = 2;
 		add(passwordField, gbc_passwordField);
 		
+		
+		//Password visibility checkbox
 		checkboxPasswordVisibility = new JCheckBox("Show password");
 		checkboxPasswordVisibility.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -78,6 +91,8 @@ public class CreateMemberUI extends JPanel {
 		gbc_checkboxPasswordVisibility.gridy = 2;
 		add(checkboxPasswordVisibility, gbc_checkboxPasswordVisibility);
 		
+		
+		//First name Label
 		JLabel labelFirstName = new JLabel("First Name");
 		GridBagConstraints gbc_labelFirstName = new GridBagConstraints();
 		gbc_labelFirstName.anchor = GridBagConstraints.EAST;
@@ -87,6 +102,7 @@ public class CreateMemberUI extends JPanel {
 		gbc_labelFirstName.gridy = 3;
 		add(labelFirstName, gbc_labelFirstName);
 		
+		//First name textfield
 		textFieldFirstName = new JTextField();
 		GridBagConstraints gbc_textFieldFirstName = new GridBagConstraints();
 		gbc_textFieldFirstName.gridwidth = 3;
@@ -97,6 +113,7 @@ public class CreateMemberUI extends JPanel {
 		add(textFieldFirstName, gbc_textFieldFirstName);
 		textFieldFirstName.setColumns(10);
 		
+		//Last name label
 		JLabel labelLastName = new JLabel("Last Name");
 		GridBagConstraints gbc_labelLastName = new GridBagConstraints();
 		gbc_labelLastName.anchor = GridBagConstraints.EAST;
@@ -105,6 +122,7 @@ public class CreateMemberUI extends JPanel {
 		gbc_labelLastName.gridy = 4;
 		add(labelLastName, gbc_labelLastName);
 		
+		//Last name textfield
 		textFieldLastName = new JTextField();
 		GridBagConstraints gbc_textFieldLastName = new GridBagConstraints();
 		gbc_textFieldLastName.gridwidth = 3;
@@ -115,6 +133,7 @@ public class CreateMemberUI extends JPanel {
 		add(textFieldLastName, gbc_textFieldLastName);
 		textFieldLastName.setColumns(10);
 		
+		//Create account button
 		JButton buttonCreateAccount = new JButton("Create Account");
 		buttonCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -128,6 +147,7 @@ public class CreateMemberUI extends JPanel {
 		gbc_buttonCreateAccount.gridy = 6;
 		add(buttonCreateAccount, gbc_buttonCreateAccount);
 		
+		//Account creation success/error label
 		labelCreateAccountStatus = new JLabel("");
 		labelCreateAccountStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelCreateAccountStatus = new GridBagConstraints();
@@ -141,7 +161,15 @@ public class CreateMemberUI extends JPanel {
 
 	
 	public void displayCreateAccountForm() {
-		//TO DO: clear login fields/radio button here before redisplaying
+		//clear text fields before displaying
+		textFieldUsername.setText("");
+		passwordField.setText("");
+		checkboxPasswordVisibility.setSelected(false);
+		textFieldFirstName.setText("");
+		textFieldLastName.setText("");
+		labelCreateAccountStatus.setText("");
+		
+		//display the create account panel
 		setVisible(true);
 	}
 	

@@ -1,3 +1,10 @@
+
+/******************************************************************************************************************************
+ * MainUI
+ * @author Sharon
+ * Description:	This class is the main JFrame that hosts the use case JPanels. 
+ ******************************************************************************************************************************/
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -22,6 +29,7 @@ public class MainUI extends JFrame {
 	
 	private JPanel mainPane;
 	private LoginUI loginUI;
+	private LoginControl loginControl;
 	private CreateMemberUI createMemberUI;
 	//private EditAccountUI editAccountUI;
 	private ViewMemberUI viewMemberUI;
@@ -32,8 +40,9 @@ public class MainUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainUI(LoginUI uiLog, CreateMemberUI uiCreate, ViewMemberUI uiViewAccount) {
+	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, ViewMemberUI uiViewAccount) {
 		loginUI = uiLog;
+		loginControl = controlLog;
 		createMemberUI = uiCreate;
 		//editAccountUI = uiEditAccount;
 		viewMemberUI = uiViewAccount;
@@ -104,6 +113,11 @@ public class MainUI extends JFrame {
         panelAccountButtons.setLayout(gbl_panel);
         
         buttonLogin = new JButton("Login");
+        buttonLogin.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		loginUI.displayLoginForm();
+        	}
+        });
         GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
         gbc_buttonLogin.insets = new Insets(0, 0, 0, 5);
         gbc_buttonLogin.gridx = 0;
@@ -111,6 +125,11 @@ public class MainUI extends JFrame {
         panelAccountButtons.add(buttonLogin, gbc_buttonLogin);
         
         buttonCreateAccount = new JButton("Create Account");
+        buttonCreateAccount.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		createMemberUI.displayCreateAccountForm();
+        	}
+        });
         GridBagConstraints gbc_buttonCreateAccount = new GridBagConstraints();
         gbc_buttonCreateAccount.gridx = 2;
         gbc_buttonCreateAccount.gridy = 0;
@@ -126,18 +145,7 @@ public class MainUI extends JFrame {
         gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
         gbc_btnNewButton_1.gridx = 1;
         gbc_btnNewButton_1.gridy = 1;
-        mainPane.add(btnNewButton_1, gbc_btnNewButton_1);
-        buttonCreateAccount.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		createMemberUI.displayCreateAccountForm();
-        	}
-        });
-        buttonLogin.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		loginUI.displayLoginForm();
-        	}
-        });
-        
+        mainPane.add(btnNewButton_1, gbc_btnNewButton_1);      
 
         pack();
       
@@ -146,24 +154,37 @@ public class MainUI extends JFrame {
 	
 	private void changeCreateAndLoginButtons()
 	{
-		//change login button to view account (shows username of user)
-		//need to add in check to see if user is a member. if they are an admin, cannot view their account
-		buttonLogin.setText("Username here"); //temporary display, will show actual username of currently logged in member
-		buttonLogin.removeActionListener(null);
-        buttonLogin.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		//viewAccountUI.displayViewMemberAccount(username);
-        	}
-        });
-        
-        //change create account button to edit account here
-		buttonCreateAccount.setText("Edit Account");
-		buttonCreateAccount.removeActionListener(null);
-        buttonCreateAccount.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		//editAccountUI call here
-        	}
-        });
+		if (loginControl.getCurrentMember() != null) { 
+			
+			//change login button to view member (shows username of member)
+			String username = loginControl.getCurrentMember().getUsername();
+			buttonLogin.setText(username); 
+			buttonLogin.removeActionListener(null);
+	        buttonLogin.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		viewMemberUI.displayViewMemberAccount(username);
+	        	}
+	        });
+	        
+	        //change create account button to edit account 
+			buttonCreateAccount.setText("Edit Account");
+			buttonCreateAccount.removeActionListener(null);
+	        buttonCreateAccount.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		//editAccountUI call here
+	        	}
+	        });
+		}
+		else if (loginControl.getCurrentAdmin() != null) {
+			buttonLogin.setVisible(false);
+			buttonCreateAccount.setText("Add Movie");
+			buttonCreateAccount.removeActionListener(null);
+	        buttonCreateAccount.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		// addMovieUI.displayAddMovieForm();
+	        	}
+	        });
+		}
 	}
 	
 	/*going to add better method to loginUI itself
