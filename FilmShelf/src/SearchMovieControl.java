@@ -28,6 +28,17 @@ public class SearchMovieControl {
 	// helper method, should be private but set to public for now for testing
 	// SQL query with all null values or all empty values should return nothing as expected, no need to prevent empty/null search 
 	public boolean validateSearchInput(String title, int releaseYear, String genre, int lengthLowerLimit, int lengthUpperLimit) {
+		// check that title isn't longer than 25 characters (length of title in Movie table)
+		if((title != null) && (title.strip().length() > 25)) {
+			return false;
+		}
+		
+		// check that releaseYear is positive
+		// the earliest surviving video footage is the Roundhay Garden scene from 1888
+		if(releaseYear <= 0) {
+			return false;
+		}
+		
 		// create list of possible genres (based on genres used by Letterboxd)
 		ArrayList<String> genreList = new ArrayList<String>();
 		genreList.add("Action");
@@ -45,19 +56,8 @@ public class SearchMovieControl {
 		genreList.add("War");
 		genreList.add("Western");
 		
-		// check that title isn't longer than 25 characters (length of title in Movie table)
-		if(title.length() > 25) {
-			return false;
-		}
-		
-		// check that releaseYear is positive
-		// the earliest surviving video footage is the Roundhay Garden scene from 1888
-		if(releaseYear <= 0) {
-			return false;
-		}
-		
 		// check if genre is in genreList
-		if(!genreList.stream().anyMatch(genre::equalsIgnoreCase)) {		// will match regardless of case
+		if((genre != null) && !genreList.stream().anyMatch(genre.strip()::equalsIgnoreCase)) {		// will match regardless of case
 			return false;
 		}
 		
