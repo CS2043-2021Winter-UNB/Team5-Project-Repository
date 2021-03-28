@@ -20,6 +20,10 @@ import java.awt.Insets;
 import javax.swing.JCheckBox;
 
 public class LoginUI extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private LoginControl loginControl;
 	private JRadioButton radioButtonAdmin;
 	private JRadioButton radioButtonMember;
