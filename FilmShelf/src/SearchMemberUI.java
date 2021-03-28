@@ -81,6 +81,7 @@ public class SearchMemberUI extends JPanel {
 	public void displaySearchResult(MemberObject member) {
 		// begin-user-code
 		// TODO Auto-generated method stub
+		labelSearchAccountStatus.setText(member.getUsername());
 		//one member to display return member A
 		// end-user-code
 	}

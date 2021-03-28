@@ -41,11 +41,11 @@ public class MainUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiEditMember, ViewMemberUI uiViewAccount) {
+	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount) {
 		loginUI = uiLog;
 		loginControl = controlLog;
 		createMemberUI = uiCreate;
-		editMemberUI = uiEditMember;
+		editMemberUI =uiMember;
 		viewMemberUI = uiViewAccount;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,8 +73,7 @@ public class MainUI extends JFrame {
         gbc_btnNewButton_2.gridx = 0;
         gbc_btnNewButton_2.gridy = 0;
         mainPane.add(btnNewButton_2, gbc_btnNewButton_2);  
-       
-        	     
+       	     
 	     
         //TITLE
         JLabel labelFilmShelf = new JLabel("FilmShelf");
@@ -95,12 +94,10 @@ public class MainUI extends JFrame {
         gbc_panel.gridx = 0;
         gbc_panel.gridy = 1;
        
-        
         mainPane.add(loginUI, gbc_panel);
         mainPane.add(createMemberUI, gbc_panel);
-	    mainPane.add(editMemberUI, gbc_panel);
+        mainPane.add(editMemberUI,gbc_panel);
        
-        
         //NEW PANEL
         JPanel panelAccountButtons = new JPanel();
         
@@ -125,8 +122,8 @@ public class MainUI extends JFrame {
 	     	public void actionPerformed(ActionEvent e) {
 	     		createMemberUI.displayCreateAccountForm();
 	     		loginUI.setVisible(false);
-	    	    editMemberUI.setVisible(false);
-	     	}
+	     		editMemberUI.setVisible(false);
+	     		}
 	     });
 	    
 	     GridBagConstraints gbc_buttonCreateAccount = new GridBagConstraints();
@@ -143,12 +140,8 @@ public class MainUI extends JFrame {
 	     buttonLogin.addActionListener(new ActionListener() {
 	    	 public void actionPerformed(ActionEvent e) {
 	    		loginUI.displayLoginForm();
-	      		//if(){
-	      			buttonEditMember.setVisible(true);
-	      		//}
-	      		
-	      		editMemberUI.setVisible(false);
 	      		createMemberUI.setVisible(false);
+	      		editMemberUI.setVisible(false);
 	      	}
 	     });
         
@@ -159,23 +152,6 @@ public class MainUI extends JFrame {
 	     gbc_buttonLogin.gridy = 1;
 	     panelAccountButtons.add(buttonLogin, gbc_buttonLogin);
 	     
-	     //edit member
-	     buttonEditMember = new JButton("Edit Account");
-	     buttonEditMember.addActionListener(new ActionListener() {
-		     	public void actionPerformed(ActionEvent e) {
-		     		editMemberUI.displayEditAccountForm();
-		     		loginUI.setVisible(false);
-		    	    createMemberUI.setVisible(false);
-		     	}
-		     });
-	     
-	     GridBagConstraints gbc_buttonEditMember = new GridBagConstraints();
-	     gbc_buttonEditMember.anchor = GridBagConstraints.EAST;
-	     gbc_buttonEditMember.insets = new Insets(0, 0, 5, 5);
-	     gbc_buttonEditMember.gridx = 2;
-	     gbc_buttonEditMember.gridy = 2;
-	     panelAccountButtons.add(buttonEditMember, gbc_buttonEditMember);
-	     buttonEditMember.setVisible(false);
 	    
         pack();
       

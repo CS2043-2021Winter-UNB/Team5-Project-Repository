@@ -99,27 +99,20 @@ public class EditMemberUI extends JPanel {
 		JLabel labelLastName = new JLabel("Update Last Name");
 		GridBagConstraints gbc_labelLastName = new GridBagConstraints();
 		gbc_labelLastName.anchor = GridBagConstraints.EAST;
-		//gbc_labelLastName.fill = GridBagConstraints.VERTICAL;
 		gbc_labelLastName.insets = new Insets(0, 0, 5, 5);
 		gbc_labelLastName.gridx = 1;
 		gbc_labelLastName.gridy = 4;
 		add(labelLastName, gbc_labelLastName);
 		
-		JButton buttonEditAccount = new JButton("Edit Account");
-		buttonEditAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				extractAccountInfo();
-			}
-		});
-		
-		textFieldDescription = new JTextField();
-		GridBagConstraints gbc_textFieldDescription = new GridBagConstraints();
-		gbc_textFieldDescription.gridwidth = 4;
-		gbc_textFieldDescription.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldDescription.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldDescription.gridx = 2;
-		gbc_textFieldDescription.gridy = 4;
-		add(textFieldDescription, gbc_textFieldDescription);
+		textFieldLastName = new JTextField();
+		GridBagConstraints gbc_textFieldLastName = new GridBagConstraints();
+		gbc_textFieldLastName.gridwidth = 4;
+		gbc_textFieldLastName.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldLastName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldLastName.gridx = 2;
+		gbc_textFieldLastName.gridy = 4;
+		add(textFieldLastName, gbc_textFieldLastName);
+		textFieldLastName.setColumns(10);
 		
 		JLabel labelDescription = new JLabel("Description");
 		GridBagConstraints gbc_labelDescription= new GridBagConstraints();
@@ -129,15 +122,21 @@ public class EditMemberUI extends JPanel {
 		gbc_labelDescription.gridy = 5;
 		add(labelDescription, gbc_labelDescription);
 		
-		textFieldLastName = new JTextField();
-		GridBagConstraints gbc_textFieldLastName = new GridBagConstraints();
-		gbc_textFieldLastName.gridwidth = 4;
-		gbc_textFieldLastName.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldLastName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldLastName.gridx = 2;
-		gbc_textFieldLastName.gridy = 5;
-		add(textFieldLastName, gbc_textFieldLastName);
-		textFieldLastName.setColumns(10);
+		textFieldDescription = new JTextField();
+		GridBagConstraints gbc_textFieldDescription = new GridBagConstraints();
+		gbc_textFieldDescription.gridwidth = 4;
+		gbc_textFieldDescription.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldDescription.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldDescription.gridx = 2;
+		gbc_textFieldDescription.gridy = 5;
+		add(textFieldDescription, gbc_textFieldDescription);
+			
+		JButton buttonEditAccount = new JButton("Edit Account");
+		buttonEditAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				extractAccountInfo();
+			}
+		});
 		
 		GridBagConstraints gbc_buttonEditAccount = new GridBagConstraints();
 		gbc_buttonEditAccount.gridwidth = 6;
@@ -167,7 +166,7 @@ public class EditMemberUI extends JPanel {
 		String firstName = textFieldFirstName.getText();
 		String lastName = textFieldLastName.getText();
 		String description = textFieldDescription.getText();
-		
+		System.out.println(password+"  "+firstName+"  "+lastName+"  "+description);
 		if (editMemberControl.updateAccount(password,firstName,lastName,description)) {
 			displayEditAccountConfirmation();
 		}
