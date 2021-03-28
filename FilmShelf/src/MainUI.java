@@ -1,3 +1,10 @@
+
+/******************************************************************************************************************************
+ * MainUI
+ * @author Sharon
+ * Description:	This class is the main JFrame that hosts the use case JPanels. 
+ ******************************************************************************************************************************/
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -22,20 +29,23 @@ public class MainUI extends JFrame {
 	
 	private JPanel mainPane;
 	private LoginUI loginUI;
+	private LoginControl loginControl;
 	private CreateMemberUI createMemberUI;
-	//private EditAccountUI editAccountUI;
+	private EditMemberUI editMemberUI;
 	private ViewMemberUI viewMemberUI;
 	private JButton buttonLogin;
+	private JButton buttonEditMember;
 	private JButton buttonCreateAccount;
 	
 	
 	/**
 	 * Create the frame.
 	 */
-	public MainUI(LoginUI uiLog, CreateMemberUI uiCreate, ViewMemberUI uiViewAccount) {
+	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiEditMember, ViewMemberUI uiViewAccount) {
 		loginUI = uiLog;
+		loginControl = controlLog;
 		createMemberUI = uiCreate;
-		//editAccountUI = uiEditAccount;
+		editMemberUI = uiEditMember;
 		viewMemberUI = uiViewAccount;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,7 +70,7 @@ public class MainUI extends JFrame {
 		mainPane.add(btnNewButton, gbc_btnNewButton);
 		
 		JLabel labelFilmShelf = new JLabel("FilmShelf");
-		labelFilmShelf.setFont(new Font("Tahoma", Font.BOLD, 14));
+		labelFilmShelf.setFont(new Font("Tahoma", Font.BOLD, 50));
 		GridBagConstraints gbc_labelFilmShelf = new GridBagConstraints();
 		gbc_labelFilmShelf.insets = new Insets(0, 0, 5, 5);
 		gbc_labelFilmShelf.gridx = 3;
@@ -83,9 +93,9 @@ public class MainUI extends JFrame {
         mainPane.add(createMemberUI, gbc_panel);
         createMemberUI.setVisible(false);
         
-       /* // adding editAccount panel to the main window
-        mainPane.add(editAccountUI, gbc_panel);
-        editAccountUI.setVisible(false);*/
+        // adding editAccount panel to the main window
+        mainPane.add(editMemberUI, gbc_panel);
+        editMemberUI.setVisible(false);
         
         //Panel that holds the "Login" and "CreateAccount" buttons
         JPanel panelAccountButtons = new JPanel();
@@ -103,14 +113,26 @@ public class MainUI extends JFrame {
         gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
         panelAccountButtons.setLayout(gbl_panel);
         
+        //login 
         buttonLogin = new JButton("Login");
+        buttonLogin.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		loginUI.displayLoginForm();
+        	}
+        });
         GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
         gbc_buttonLogin.insets = new Insets(0, 0, 0, 5);
         gbc_buttonLogin.gridx = 0;
         gbc_buttonLogin.gridy = 0;
         panelAccountButtons.add(buttonLogin, gbc_buttonLogin);
         
+        //create account
         buttonCreateAccount = new JButton("Create Account");
+        buttonCreateAccount.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		createMemberUI.displayCreateAccountForm();
+        	}
+        });
         GridBagConstraints gbc_buttonCreateAccount = new GridBagConstraints();
         gbc_buttonCreateAccount.gridx = 2;
         gbc_buttonCreateAccount.gridy = 0;
@@ -126,18 +148,7 @@ public class MainUI extends JFrame {
         gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
         gbc_btnNewButton_1.gridx = 1;
         gbc_btnNewButton_1.gridy = 1;
-        mainPane.add(btnNewButton_1, gbc_btnNewButton_1);
-        buttonCreateAccount.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		createMemberUI.displayCreateAccountForm();
-        	}
-        });
-        buttonLogin.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		loginUI.displayLoginForm();
-        	}
-        });
-        
+        mainPane.add(btnNewButton_1, gbc_btnNewButton_1);      
 
         pack();
       
@@ -146,30 +157,30 @@ public class MainUI extends JFrame {
 	
 	private void changeCreateAndLoginButtons()
 	{
-		//change login button to view account (shows username of user)
-		//need to add in check to see if user is a member. if they are an admin, cannot view their account
-		buttonLogin.setText("Username here"); //temporary display, will show actual username of currently logged in member
-		buttonLogin.removeActionListener(null);
-        buttonLogin.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		//viewAccountUI.displayViewMemberAccount(username);
-        	}
-        });
-        
-        //change create account button to edit account here
-		buttonCreateAccount.setText("Edit Account");
-		buttonCreateAccount.removeActionListener(null);
-        buttonCreateAccount.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		//editAccountUI call here
-        	}
-        });
+		if (loginControl.getCurrentMember() != null) { 
+			
+			//change login button to view member (shows username of member)
+			String username = loginControl.getCurrentMember().getUsername();
+			buttonLogin.setText(username); 
+			buttonLogin.removeActionListener(null);
+	        buttonLogin.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		editMemberUI.displayEditAccountForm();
+	        		viewMemberUI.displayViewMemberAccount(username);
+	        	}
+	        });
+	        
+		}
+		else if (loginControl.getCurrentAdmin() != null) {
+			buttonLogin.setVisible(false);
+			buttonCreateAccount.setText("Add Movie");
+			buttonCreateAccount.removeActionListener(null);
+	        buttonCreateAccount.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		//addMovieUI.displayAddMovieForm();
+	        	}
+	        });
+		}
 	}
-	
-	/*going to add better method to loginUI itself
-	public void removeLoginPanel() {
-		loginUI.setVisible(false);
-		mainPane.repaint();
-	}*/
 
 }
