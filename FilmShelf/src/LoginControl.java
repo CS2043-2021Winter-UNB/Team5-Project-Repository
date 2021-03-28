@@ -51,4 +51,10 @@ public class LoginControl {
 	public void updateCurrentMemberInfo(String fName, String lName, String desc) {
 		currentMember = new MemberObject(currentMember.getUsername(), fName, lName, desc, currentMember.getTopMovies());
 	}
+	
+	// clears currentMember
+	// called when member removes their own account
+	public void clearCurrentMember() {
+		currentMember = null;
+	}
 }

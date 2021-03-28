@@ -23,7 +23,12 @@ public class RemoveMemberControl {
 		}
 		
 		// call removeMemberAccount from DataManager
-		return dataManager.removeMember(username);		// return boolean from DataManager indicating success/failure
+		if(!dataManager.removeMember(username)) {
+			return false;
+		}
+		
+		loginControl.clearCurrentMember();		// clear currentMember on success
+		return true;
 	}
 	
 	// checks who is requesting the removal and returns a boolean representing if the removal is valid or invalid
