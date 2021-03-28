@@ -26,17 +26,20 @@ public class LoginUI extends JPanel {
 	private JButton loginButton;
 	private JLabel labelUsername;
 	private JLabel labelPassword;
+	private JButton buttonEditMember;
 	private boolean member = true;
 	private JTextField textFieldUsername;
 	private JPasswordField passwordField;
 	private JLabel labelLoginStatus;
+	private EditMemberUI editMemberUI;
 	private JCheckBox checkboxPasswordVisibility;
 
 	/**
 	 * Create the panel.
 	 */
-	public LoginUI(LoginControl control) {
+	public LoginUI(LoginControl control, EditMemberUI uiEditMember) {
 		loginControl = control;
+		editMemberUI = uiEditMember;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{50, 96, 91, 7, 65, 57, 59, 1, 0};
 		gridBagLayout.rowHeights = new int[]{23, 0, 0, 0, 0, 0, 0, 28, 0};
@@ -141,6 +144,9 @@ public class LoginUI extends JPanel {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				extractLoginCredentials();
+				if(loginControl.getCurrentMember()!=null){
+		   			buttonEditMember.setVisible(true);
+		   		 }
 			}
 		});
 		GridBagConstraints gbc_loginButton = new GridBagConstraints();
@@ -161,6 +167,23 @@ public class LoginUI extends JPanel {
 		add(labelLoginStatus, gbc_labelLoginStatus);
 		
 		setVisible(false);
+		
+		 //edit member
+	     buttonEditMember = new JButton("Edit Account");
+	     buttonEditMember.addActionListener(new ActionListener() {
+		     	public void actionPerformed(ActionEvent e) {
+		     		editMemberUI.displayEditAccountForm();
+		     		setVisible(false);
+		     	}
+		     });
+	     
+	     GridBagConstraints gbc_buttonEditMember = new GridBagConstraints();
+	     gbc_buttonEditMember.anchor = GridBagConstraints.EAST;
+	     gbc_buttonEditMember.insets = new Insets(0, 0, 5, 5);
+	     gbc_buttonEditMember.gridx = 4;
+	     gbc_buttonEditMember.gridy = 1;
+	     add(buttonEditMember, gbc_buttonEditMember);
+	     buttonEditMember.setVisible(false);
 
 	}
 	
@@ -176,24 +199,25 @@ public class LoginUI extends JPanel {
 		setVisible(true);
 	}
 	
-	private void extractLoginCredentials() {
+	public boolean extractLoginCredentials() {
 		String username = textFieldUsername.getText();
 		String password = new String(passwordField.getPassword());
 		boolean loginStatus;
-		if (member)
-		{
+		if (member){
 			displayLoginErrorMessage();
 			loginStatus = loginControl.processMemberLogin(username, password);
 		}
-		else
-		{
+		else{
 			loginStatus = loginControl.processAdminLogin(username, password);
 		}
 		if(loginStatus) {
 			displayLoginConfirmation();
-			
+			return true;
+		
 		} else {
 			displayLoginErrorMessage();
+			return false;
+		
 		}
 	}
 	

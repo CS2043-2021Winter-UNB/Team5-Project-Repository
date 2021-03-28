@@ -3,11 +3,10 @@ public class Main {
 	{	
 		DataManager dm = new DataManager();
 		
-		LoginControl loginControl = new LoginControl(dm);
-		LoginUI loginUI = new LoginUI(loginControl);
-		
 		CreateMemberControl createMemberControl = new CreateMemberControl(dm);
 		CreateMemberUI createMemberUI = new CreateMemberUI(createMemberControl);
+		
+		LoginControl loginControl = new LoginControl(dm);
 		
 		EditMemberControl editMemberControl = new EditMemberControl(dm,loginControl);
 		EditMemberUI editMemberUI = new EditMemberUI(editMemberControl);
@@ -17,6 +16,12 @@ public class Main {
 		
 		SearchMemberControl searchMemberControl = new SearchMemberControl(dm);
 		SearchMemberUI searchMemberUI = new SearchMemberUI(searchMemberControl);
+	
+		LoginUI loginUI = new LoginUI(loginControl,editMemberUI);
+		
+		
+		//SearchMovieControl searchMovieControl = new SearchMovieControl();
+		//SearchMovierUI searchMovieUI = new SearchMovieUI(searchMovieControl);
 		
 		
 		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI);

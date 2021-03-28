@@ -119,7 +119,7 @@ public class EditMemberControl {
 		// get current user logged in
 		MemberObject member = loginControl.getCurrentMember();
 		
-		// if member not logged in, return false
+		//if member not logged in, return false
 		if(member == null) {
 			return false;
 		}
@@ -130,7 +130,9 @@ public class EditMemberControl {
 		// if input invalid, return false
 		if(!inputIsValid) {
 			accountUpdated = false;
-		} else if(inputIsValid) {		// if input valid, call editAccount from DataManager
+			System.out.print("Hello!");
+		} 
+		else if(inputIsValid) {		// if input valid, call editAccount from DataManager
 			// default values to pass to DataManager in case of null/empty inputs
 			String pWord = null;
 			String fName = member.getFirstName();
