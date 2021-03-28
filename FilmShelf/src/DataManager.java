@@ -20,6 +20,8 @@ public class DataManager {
 	private int lastTopMovieIndex = 9;
 	private Connection connection;
 
+
+	//Jessie-Anne
 	public DataManager() {
 		try {
 	        Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -38,7 +40,98 @@ public class DataManager {
 		}
 	}
 
+
+	//Courtney and Jo
+	public boolean addMemberAccount(String username, String password, String firstName, String lastName, String description) {
+		//SQL query String 
+		String sqlQuery = "insert into MemberAccount(username, password, firstName, lastName, description) values('" + 
+							username + "', sha1('" + password + "'), '" + firstName + "', '" + lastName + "', '" + description + "');";
+
+		//ResultSet
+		try {
+			//Create statement 
+			Statement stmt = connection.createStatement();
+
+			//ResultSet
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+
+		return true;
+	}
+
+
+	//Courtney and Jo
+	public boolean editMemberAccount(String username, String password, String firstName, String lastName, String description){
+		//String query 
+		String sqlQuery;
+
+		try {
+			//Create Statement 
+			Statement stmt = connection.createStatement();
+
+			//If new value is passed in update password
+			if(password != null){
+				sqlQuery = "update MemberAccount set password = sha1('" + password + "') where username = '" + username + "';";
+				stmt.executeUpdate(sqlQuery);
+			}
+			
+			//If new value is passed in update firstName
+			if(firstName != null){
+				sqlQuery = "update MemberAccount set firstName = '" + firstName + "' where username = '" + username + "';";
+				stmt.executeUpdate(sqlQuery);
+			}
+
+			//If new value is passed in update lastName 
+			if(lastName != null){
+				sqlQuery = "update MemberAccount set lastName = '" + lastName + "' where username = '" + username + "';";
+				stmt.executeUpdate(sqlQuery);
+			}
+
+			//if new value is passed in update description
+			if(description != null){
+				sqlQuery = "update MemberAccount set description = '" + description + "' where username = '" + username + "';";
+				stmt.executeUpdate(sqlQuery);
+			}
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+
+		return true;
+	}
+
+
+
+	//Courtney and Jo 
+	public boolean removeMemberAccount(String username) {
+		//String query 
+		String sqlQuery = "delete from MemberAccount where username = '" + username + "';";
+
+		try {
+			//create statement 
+			Statement stmt = connection.createStatement();
+
+			//Execute query
+			stmt.executeUpdate(sqlQuery);
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+
+		return true;
+	}
+
+
+	//Courtney and Jo (make changes based on top movies)
 	public MemberAccountObject getMember(String username, String password) {
+
+		//Get Members top movies!!! (Needs to be added). 
 		// Declaring variables
 		String uName = "";
 		String firstName = "";
@@ -109,6 +202,7 @@ public class DataManager {
 	}
 
 
+	//Courtney and Jo
 	public AdminAccountObject getAdmin(String username, String password){
 		String uName = "";
 
@@ -135,100 +229,30 @@ public class DataManager {
 		return new AdminAccountObject(uName);
 	}
 
-	public boolean addMemberAccount(String username, String password, String firstName, String lastName, String description) {
-		//SQL query String 
-		String sqlQuery = "insert into MemberAccount(username, password, firstName, lastName, description) values('" + 
-							username + "', sha1('" + password + "'), '" + firstName + "', '" + lastName + "', '" + description + "');";
 
-		//ResultSet
-		try {
-			//Create statement 
-			Statement stmt = connection.createStatement();
 
-			//ResultSet
-			int rowsUpdated = stmt.executeUpdate(sqlQuery);
-		}
-		catch(SQLException e){
-			System.out.println(e.getMessage());
-			return false;
-		}
 
-		return true;
+	//Jessie-Anne 
+	public boolean addMovie(){
+		//begin-user-code
+		//end-user-code
 	}
 
-	public boolean editMemberAccount(String username, String password, String firstName, String lastName, String description){
-		//String query 
-		String sqlQuery;
 
-		try {
-			//Create Statement 
-			Statement stmt = connection.createStatement();
 
-			//If new value is passed in update password
-			if(password != null){
-				sqlQuery = "update MemberAccount set password = sha1('" + password + "') where username = '" + username + "';";
-				stmt.executeUpdate(sqlQuery);
-			}
-			
-			//If new value is passed in update firstName
-			if(firstName != null){
-				sqlQuery = "update MemberAccount set firstName = '" + firstName + "' where username = '" + username + "';";
-				stmt.executeUpdate(sqlQuery);
-			}
 
-			//If new value is passed in update lastName 
-			if(lastName != null){
-				sqlQuery = "update MemberAccount set lastName = '" + lastName + "' where username = '" + username + "';";
-				stmt.executeUpdate(sqlQuery);
-			}
-
-			//if new value is passed in update description
-			if(description != null){
-				sqlQuery = "update MemberAccount set description = '" + description + "' where username = '" + username + "';";
-				stmt.executeUpdate(sqlQuery);
-			}
-		}
-		catch(SQLException e){
-			System.out.println(e.getMessage());
-			return false;
-		}
-
-		return true;
-	}
-
-	public boolean removeMemberAccount(String username) {
-		//String query 
-		String sqlQuery = "delete from MemberAccount where username = '" + username + "';";
-
-		try {
-			//create statement 
-			Statement stmt = connection.createStatement();
-
-			//Execute query
-			stmt.executeUpdate(sqlQuery);
-		}
-		catch(SQLException e){
-			System.out.println(e.getMessage());
-			return false;
-		}
-
-		return true;
-	}
-
-	public int getMovieRatingByMember(String username, int movieID) {
+	//Jessie-Anne
+	public void removeMovie(int movieID) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return 0;
+
 		// end-user-code
 	}
 
-	public ArrayList<ReviewObject> getMovieReviews(int movieID) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
-	}
 
+
+
+	//Courtney 
 	public ArrayList<MovieObject> getMoviesbyKeywords(String title, String releaseYear, String genre, int length,
 			String language) {
 		// begin-user-code
@@ -237,13 +261,9 @@ public class DataManager {
 		// end-user-code
 	}
 
-	public void addMovieReview(ReviewObject review) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 
-		// end-user-code
-	}
 
+	//Jessie-Anne
 	public void addMovieRating(RatingObject rating) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -253,38 +273,61 @@ public class DataManager {
 
 
 
-	public void removeMovieRequest(int requestID) {
+
+
+	//Jessie-Anne
+	public void editMovieRating(){
+
+	}
+
+
+
+	//Jessie-Anne
+	public void removeMovieRating() {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
 		// end-user-code
 	}
 
-	public void removeRating() {
+
+
+
+	//Courtney 
+	public int getMovieRatingByMember(String username, int movieID) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+		return 0;
+		// end-user-code
+	}
+
+
+	//Jessie-Anne
+	public void addMovieReview(ReviewObject review) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
 		// end-user-code
 	}
 
-	public void removeMovie(int movieID) {
+
+	//Jessie-Anne
+	public void removeMovieReview() {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
 		// end-user-code
 	}
 
-	public void removeReview() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 
-		// end-user-code
-	}
 
-	public AverageRatingObject getAverageMovieRating(int movieID) {
+	//Courtney 
+	public ArrayList<ReviewObject> getMovieReviews(int movieID) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		return null;
 		// end-user-code
 	}
+
+
 }
