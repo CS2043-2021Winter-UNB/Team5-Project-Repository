@@ -14,7 +14,6 @@ import java.awt.EventQueue;
 	import java.awt.event.ActionListener;
 	import java.awt.event.ActionEvent;
 	import javax.swing.SwingConstants;
-	//import windowBuilder.EditAccountControl;
 	import javax.swing.JFrame;
 	import java.awt.Color;
 	import javax.swing.JLayeredPane;
@@ -30,6 +29,7 @@ public class EditMemberUI extends JPanel {
 	private JLabel labelEditAccountStatus;
 
 	public EditMemberUI(EditMemberControl control) {
+		setVisible(false);
 		setBackground(Color.LIGHT_GRAY);
 		editMemberControl = control;
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -157,6 +157,7 @@ public class EditMemberUI extends JPanel {
 	}
 
 	public void displayEditAccountForm() {
+		setVisible(true);
 	}
 	
 	private void extractAccountInfo(){

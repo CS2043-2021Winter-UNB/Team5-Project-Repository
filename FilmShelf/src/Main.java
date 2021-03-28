@@ -9,13 +9,17 @@ public class Main {
 		CreateMemberControl createMemberControl = new CreateMemberControl(dm);
 		CreateMemberUI createMemberUI = new CreateMemberUI(createMemberControl);
 		
-		/*EditAccountControl editAccountControl = new EditAccountControl(dm);
-		EditAccountUI editAccountUI = new EditAccountUI(editAccountControl);*/
+		EditMemberControl editMemberControl = new EditMemberControl(dm,loginControl);
+		EditMemberUI editMemberUI = new EditMemberUI(editMemberControl);
 		
 		ViewMemberControl viewMemberControl = new ViewMemberControl(dm);
 		ViewMemberUI viewMemberUI = new ViewMemberUI(viewMemberControl, loginControl);
 		
-		MainUI mainUI = new MainUI(loginUI, createMemberUI, viewMemberUI);
+		SearchMemberControl searchMemberControl = new SearchMemberControl(dm);
+		SearchMemberUI searchMemberUI = new SearchMemberUI(searchMemberControl);
+		
+		
+		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI);
 		mainUI.setVisible(true);
 	}
 }
