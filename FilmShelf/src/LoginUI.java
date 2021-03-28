@@ -180,20 +180,22 @@ public class LoginUI extends JPanel {
 		String username = textFieldUsername.getText();
 		String password = new String(passwordField.getPassword());
 		boolean loginStatus;
-		if (member)
-		{
+		if (member){
 			displayLoginErrorMessage();
 			loginStatus = loginControl.processMemberLogin(username, password);
 		}
-		else
-		{
+		else{
 			loginStatus = loginControl.processAdminLogin(username, password);
 		}
 		if(loginStatus) {
 			displayLoginConfirmation();
 			
+		
+			
 		} else {
 			displayLoginErrorMessage();
+			
+		
 		}
 	}
 	

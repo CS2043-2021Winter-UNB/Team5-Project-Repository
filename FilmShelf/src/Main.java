@@ -18,6 +18,9 @@ public class Main {
 		SearchMemberControl searchMemberControl = new SearchMemberControl(dm);
 		SearchMemberUI searchMemberUI = new SearchMemberUI(searchMemberControl);
 		
+		//SearchMovieControl searchMovieControl = new SearchMovieControl();
+		//SearchMovierUI searchMovieUI = new SearchMovieUI(searchMovieControl);
+		
 		
 		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI);
 		mainUI.setVisible(true);

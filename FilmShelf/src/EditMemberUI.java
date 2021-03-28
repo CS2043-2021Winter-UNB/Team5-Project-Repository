@@ -30,7 +30,7 @@ public class EditMemberUI extends JPanel {
 
 	public EditMemberUI(EditMemberControl control) {
 		setVisible(false);
-		setBackground(Color.LIGHT_GRAY);
+		//setBackground(Color.LIGHT_GRAY);
 		editMemberControl = control;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{71, 0, 100, 0, 0, 0, 0, 48, 0};
@@ -99,6 +99,7 @@ public class EditMemberUI extends JPanel {
 		JLabel labelLastName = new JLabel("Update Last Name");
 		GridBagConstraints gbc_labelLastName = new GridBagConstraints();
 		gbc_labelLastName.anchor = GridBagConstraints.EAST;
+		//gbc_labelLastName.fill = GridBagConstraints.VERTICAL;
 		gbc_labelLastName.insets = new Insets(0, 0, 5, 5);
 		gbc_labelLastName.gridx = 1;
 		gbc_labelLastName.gridy = 4;
@@ -113,10 +114,10 @@ public class EditMemberUI extends JPanel {
 		
 		textFieldDescription = new JTextField();
 		GridBagConstraints gbc_textFieldDescription = new GridBagConstraints();
-		gbc_textFieldDescription.gridwidth = 3;
+		gbc_textFieldDescription.gridwidth = 4;
 		gbc_textFieldDescription.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldDescription.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldDescription.gridx = 3;
+		gbc_textFieldDescription.gridx = 2;
 		gbc_textFieldDescription.gridy = 4;
 		add(textFieldDescription, gbc_textFieldDescription);
 		
@@ -130,20 +131,21 @@ public class EditMemberUI extends JPanel {
 		
 		textFieldLastName = new JTextField();
 		GridBagConstraints gbc_textFieldLastName = new GridBagConstraints();
-		gbc_textFieldLastName.gridwidth = 3;
+		gbc_textFieldLastName.gridwidth = 4;
 		gbc_textFieldLastName.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldLastName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldLastName.gridx = 3;
+		gbc_textFieldLastName.gridx = 2;
 		gbc_textFieldLastName.gridy = 5;
 		add(textFieldLastName, gbc_textFieldLastName);
 		textFieldLastName.setColumns(10);
-		textFieldLastName.setColumns(10);
+		
 		GridBagConstraints gbc_buttonEditAccount = new GridBagConstraints();
 		gbc_buttonEditAccount.gridwidth = 6;
 		gbc_buttonEditAccount.insets = new Insets(0, 0, 5, 5);
 		gbc_buttonEditAccount.gridx = 1;
 		gbc_buttonEditAccount.gridy = 6;
 		add(buttonEditAccount, gbc_buttonEditAccount);
+		textFieldLastName.setColumns(10);
 		
 		labelEditAccountStatus = new JLabel("");
 		labelEditAccountStatus.setHorizontalAlignment(SwingConstants.CENTER);
