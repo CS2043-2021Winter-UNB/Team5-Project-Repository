@@ -1,3 +1,8 @@
+/******************************************************************************************************************************
+ * LoginUI
+ * @author Sharon
+ * Description:	Displays login form, extracts user input, and displays login confirmation or error.
+ ******************************************************************************************************************************/
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -21,17 +26,20 @@ public class LoginUI extends JPanel {
 	private JButton loginButton;
 	private JLabel labelUsername;
 	private JLabel labelPassword;
+	private JButton buttonEditMember;
 	private boolean member = true;
 	private JTextField textFieldUsername;
 	private JPasswordField passwordField;
 	private JLabel labelLoginStatus;
+	private EditMemberUI editMemberUI;
 	private JCheckBox checkboxPasswordVisibility;
 
 	/**
 	 * Create the panel.
 	 */
-	public LoginUI(LoginControl control) {
+	public LoginUI(LoginControl control, EditMemberUI uiEditMember) {
 		loginControl = control;
+		editMemberUI = uiEditMember;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{50, 96, 91, 7, 65, 57, 59, 1, 0};
 		gridBagLayout.rowHeights = new int[]{23, 0, 0, 0, 0, 0, 0, 28, 0};
@@ -40,6 +48,7 @@ public class LoginUI extends JPanel {
 		setLayout(gridBagLayout);
 		
 		
+		//Username label
 		labelUsername = new JLabel("Username");
 		labelUsername.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelUsername = new GridBagConstraints();
@@ -49,6 +58,7 @@ public class LoginUI extends JPanel {
 		gbc_labelUsername.gridy = 3;
 		add(labelUsername, gbc_labelUsername);
 		
+		//Username text field
 		textFieldUsername = new JTextField();
 		GridBagConstraints gbc_textFieldUsername = new GridBagConstraints();
 		gbc_textFieldUsername.gridwidth = 3;
@@ -59,6 +69,7 @@ public class LoginUI extends JPanel {
 		add(textFieldUsername, gbc_textFieldUsername);
 		textFieldUsername.setColumns(10);
 		
+		//Password label
 		labelPassword = new JLabel("Password");
 		labelPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelPassword = new GridBagConstraints();
@@ -68,6 +79,7 @@ public class LoginUI extends JPanel {
 		gbc_labelPassword.gridy = 4;
 		add(labelPassword, gbc_labelPassword);
 		
+		//Password field
 		passwordField = new JPasswordField();
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.gridwidth = 3;
@@ -77,13 +89,7 @@ public class LoginUI extends JPanel {
 		gbc_passwordField.gridy = 4;
 		add(passwordField, gbc_passwordField);
 		
-		radioButtonMember = new JRadioButton("Member");
-		radioButtonMember.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				member = true;
-			}
-		});
-		
+		//Password visibility checkbox
 		checkboxPasswordVisibility = new JCheckBox("Show Password");
 		checkboxPasswordVisibility.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,6 +102,13 @@ public class LoginUI extends JPanel {
 		gbc_checkboxPasswordVisibility.gridy = 4;
 		add(checkboxPasswordVisibility, gbc_checkboxPasswordVisibility);
 		
+		//Member radio button
+		radioButtonMember = new JRadioButton("Member");
+		radioButtonMember.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				member = true;
+			}
+		});
 		radioButtonMember.setHorizontalAlignment(SwingConstants.CENTER);
 		radioButtonMember.setSelected(true);
 		GridBagConstraints gbc_radioButtonMember = new GridBagConstraints();
@@ -106,6 +119,7 @@ public class LoginUI extends JPanel {
 		gbc_radioButtonMember.gridy = 5;
 		add(radioButtonMember, gbc_radioButtonMember);
 		
+		//Admin radio button
 		radioButtonAdmin = new JRadioButton("Admin");
 		radioButtonAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,15 +134,19 @@ public class LoginUI extends JPanel {
 		gbc_radioButtonAdmin.gridy = 5;
 		add(radioButtonAdmin, gbc_radioButtonAdmin);
 		
-		//make so only one radio button can be selected at a time.
+		//Add member and admin radio button to group so only one radio button can be selected at a time.
 		ButtonGroup buttonGroup = new ButtonGroup();
 		buttonGroup.add(radioButtonMember);
 		buttonGroup.add(radioButtonAdmin);
 		
+		//Login button
 		loginButton = new JButton("Login");
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				extractLoginCredentials();
+				if(loginControl.getCurrentMember()!=null){
+		   			buttonEditMember.setVisible(true);
+		   		 }
 			}
 		});
 		GridBagConstraints gbc_loginButton = new GridBagConstraints();
@@ -138,6 +156,7 @@ public class LoginUI extends JPanel {
 		gbc_loginButton.gridy = 6;
 		add(loginButton, gbc_loginButton);
 		
+		//Login success/error label
 		labelLoginStatus = new JLabel("");
 		labelLoginStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelLoginStatus = new GridBagConstraints();
@@ -146,36 +165,65 @@ public class LoginUI extends JPanel {
 		gbc_labelLoginStatus.gridx = 1;
 		gbc_labelLoginStatus.gridy = 7;
 		add(labelLoginStatus, gbc_labelLoginStatus);
+		
+		setVisible(false);
+		
+		 //edit member
+	     buttonEditMember = new JButton("Edit Account");
+	     buttonEditMember.addActionListener(new ActionListener() {
+		     	public void actionPerformed(ActionEvent e) {
+		     		editMemberUI.displayEditAccountForm();
+		     		setVisible(false);
+		     	}
+		     });
+	     
+	     GridBagConstraints gbc_buttonEditMember = new GridBagConstraints();
+	     gbc_buttonEditMember.anchor = GridBagConstraints.EAST;
+	     gbc_buttonEditMember.insets = new Insets(0, 0, 5, 5);
+	     gbc_buttonEditMember.gridx = 4;
+	     gbc_buttonEditMember.gridy = 1;
+	     add(buttonEditMember, gbc_buttonEditMember);
+	     buttonEditMember.setVisible(false);
 
 	}
 	
 	public void displayLoginForm() {
-		//TO DO: clear login fields/radio button here before redisplaying
+		//clear login fields/radio button before redisplaying
+		labelUsername.setText("User Name: ");
+		labelPassword.setText("Password: ");
+		checkboxPasswordVisibility.setSelected(false);
+		radioButtonMember.setSelected(true);
+		labelLoginStatus.setText("");
+		
+		//display the login UI JPanel
 		setVisible(true);
 	}
 	
-	private void extractLoginCredentials() {
+	public boolean extractLoginCredentials() {
 		String username = textFieldUsername.getText();
 		String password = new String(passwordField.getPassword());
 		boolean loginStatus;
-		if (member)
-		{
+		if (member){
 			displayLoginErrorMessage();
 			loginStatus = loginControl.processMemberLogin(username, password);
 		}
-		else
-		{
+		else{
 			loginStatus = loginControl.processAdminLogin(username, password);
 		}
 		if(loginStatus) {
 			displayLoginConfirmation();
+			return true;
+		
 		} else {
 			displayLoginErrorMessage();
+			return false;
+		
 		}
 	}
 	
 	public void displayLoginConfirmation() {
 		labelLoginStatus.setText("Login was successful!!");
+		
 	}
 	
 	private void displayLoginErrorMessage() {
@@ -195,10 +243,5 @@ public class LoginUI extends JPanel {
 		{
 			passwordField.setEchoChar('*');
 		}
-	}
-	
-	public void hide()
-	{
-		//setVisible(false);
 	}
 }

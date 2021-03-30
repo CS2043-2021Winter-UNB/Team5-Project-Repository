@@ -1,7 +1,7 @@
 
-public class viewMovieUI {
+public class ViewMovieUI {
 
-	private viewMovieControl viewMovieControl;
+	private ViewMovieControl viewMovieControl;
 
 	public void displayMovie(MovieObject movie) {
 		// begin-user-code

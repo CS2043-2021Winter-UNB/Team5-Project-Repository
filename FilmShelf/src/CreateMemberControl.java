@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  * @author Jo
  * Description:	Handles validation of input to CreateMemberAccountUI class and initiates adding new Member to MemberAccount table.
  ******************************************************************************************************************************/
-public class CreateMemberAccountControl {
+public class CreateMemberControl {
 
 	private DataManager dataManager;
 	private Pattern uppercasePattern;
@@ -20,7 +20,7 @@ public class CreateMemberAccountControl {
 	private Matcher specialCharacterMatcher;
 	
 	// class constructor
-	public CreateMemberAccountControl(DataManager dataManager) {
+	public CreateMemberControl(DataManager dataManager) {
 		this.dataManager = dataManager;
 		this.uppercasePattern = Pattern.compile("[A-Z]");					// matches uppercase letters
 		this.lowercasePattern = Pattern.compile("[a-z]");					// matches lowercase letters
@@ -108,7 +108,7 @@ public class CreateMemberAccountControl {
 			String fName = firstName.strip();
 			String lName = lastName.strip();
 			String description = "Welcome to my page!";
-			memberAdded = dataManager.addMemberAccount(uName, pWord, fName, lName, description);		// Jo: addMemberAccount should return boolean to signal success/failure
+			memberAdded = dataManager.addMember(uName, pWord, fName, lName, description);		// Jo: addMemberAccount should return boolean to signal success/failure
 		}
 		
 		return memberAdded;

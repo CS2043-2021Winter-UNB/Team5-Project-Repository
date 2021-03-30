@@ -18,13 +18,13 @@ public class TestInvalidInput_validateSearchInput_SearchAccountControl {
 	}
 	
 	private DataManager dataManager;
-	private SearchAccountControl searchAccountControl;
+	private SearchMemberControl searchAccountControl;
 	private String username;
 	
 	public TestInvalidInput_validateSearchInput_SearchAccountControl(String username) {
 		this.username = username;
 		dataManager = new DataManager();
-		searchAccountControl = new SearchAccountControl(dataManager);
+		searchAccountControl = new SearchMemberControl(dataManager);
 	}
 	
 	@Test

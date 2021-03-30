@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author Jo
  * Description: Represents a Member account in the database.
  ******************************************************************************************************************************/
-public class MemberAccountObject {
+public class MemberObject {
 
 	private String username;
 	private String firstName;
@@ -15,7 +15,7 @@ public class MemberAccountObject {
 	private ArrayList<MovieObject> topMovies; // ArrayList or array? ArrayList easy to work with, array can limit number of movies to prevent overflow
 
 	// no point in storing password, db will encrypt passwords which will be difficult to decrypt
-	public MemberAccountObject(String username, String firstName, String lastName, String description, ArrayList<MovieObject> topMovies) {
+	public MemberObject(String username, String firstName, String lastName, String description, ArrayList<MovieObject> topMovies) {
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;

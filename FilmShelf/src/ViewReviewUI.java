@@ -1,7 +1,7 @@
 
-public class viewReviewUI {
+public class ViewReviewUI {
 
-	private viewReviewControl viewReviewControl;
+	private ViewReviewControl viewReviewControl;
 
 	public void displayReview() {
 		// begin-user-code

@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
-public class CreateMemberAccountUI extends JPanel {
+public class CreateMemberUI extends JPanel {
 
-	private CreateMemberAccountControl createMemberAccountControl;
+	private CreateMemberControl createMemberControl;
 	private JTextField textFieldUsername;
 	private JPasswordField passwordField;
 	private JTextField textFieldFirstName;
@@ -22,8 +22,9 @@ public class CreateMemberAccountUI extends JPanel {
 	private JCheckBox checkboxPasswordVisibility;
 	private JLabel labelCreateAccountStatus;
 
-	public CreateMemberAccountUI(CreateMemberAccountControl control) {
-		createMemberAccountControl = control;
+	public CreateMemberUI(CreateMemberControl control) {
+		setVisible(false);
+		createMemberControl = control;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{71, 0, 100, 0, 0, 0, 48, 0};
 		gridBagLayout.rowHeights = new int[]{74, 0, 0, 0, 0, 0, 42, 35, 0, 0};
@@ -31,7 +32,7 @@ public class CreateMemberAccountUI extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel labelUsername = new JLabel("Username");
+		JLabel labelUsername = new JLabel("Username: ");
 		GridBagConstraints gbc_labelUsername = new GridBagConstraints();
 		gbc_labelUsername.anchor = GridBagConstraints.EAST;
 		gbc_labelUsername.insets = new Insets(0, 0, 5, 5);
@@ -49,7 +50,7 @@ public class CreateMemberAccountUI extends JPanel {
 		add(textFieldUsername, gbc_textFieldUsername);
 		textFieldUsername.setColumns(10);
 		
-		JLabel labelPassword = new JLabel("Password");
+		JLabel labelPassword = new JLabel("Password: ");
 		GridBagConstraints gbc_labelPassword = new GridBagConstraints();
 		gbc_labelPassword.anchor = GridBagConstraints.EAST;
 		gbc_labelPassword.insets = new Insets(0, 0, 5, 5);
@@ -78,7 +79,7 @@ public class CreateMemberAccountUI extends JPanel {
 		gbc_checkboxPasswordVisibility.gridy = 2;
 		add(checkboxPasswordVisibility, gbc_checkboxPasswordVisibility);
 		
-		JLabel labelFirstName = new JLabel("First Name");
+		JLabel labelFirstName = new JLabel("First Name: ");
 		GridBagConstraints gbc_labelFirstName = new GridBagConstraints();
 		gbc_labelFirstName.anchor = GridBagConstraints.EAST;
 		gbc_labelFirstName.fill = GridBagConstraints.VERTICAL;
@@ -97,7 +98,7 @@ public class CreateMemberAccountUI extends JPanel {
 		add(textFieldFirstName, gbc_textFieldFirstName);
 		textFieldFirstName.setColumns(10);
 		
-		JLabel labelLastName = new JLabel("Last Name");
+		JLabel labelLastName = new JLabel("Last Name: ");
 		GridBagConstraints gbc_labelLastName = new GridBagConstraints();
 		gbc_labelLastName.anchor = GridBagConstraints.EAST;
 		gbc_labelLastName.insets = new Insets(0, 0, 5, 5);
@@ -151,7 +152,7 @@ public class CreateMemberAccountUI extends JPanel {
 		String password = new String(passwordField.getPassword());
 		String firstName = textFieldFirstName.getText();
 		String lastName = textFieldLastName.getText();
-		if (createMemberAccountControl.createMemberAccount(username,password,firstName,lastName)) {
+		if (createMemberControl.createMemberAccount(username,password,firstName,lastName)) {
 			displayAccountCreationConfirmation();
 		}
 		else {
@@ -176,8 +177,4 @@ public class CreateMemberAccountUI extends JPanel {
 		}
 	}
 	
-	public void hide()
-	{
-		//setVisible(false);
-	}
 }

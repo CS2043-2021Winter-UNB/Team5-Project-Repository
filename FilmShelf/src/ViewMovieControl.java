@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
 
-public class viewMovieControl {
+public class ViewMovieControl {
 
 	private ArrayList<MovieObject> movies;
 	private DataManager dataManager;

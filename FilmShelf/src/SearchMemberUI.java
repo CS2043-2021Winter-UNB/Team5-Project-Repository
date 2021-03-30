@@ -1,4 +1,5 @@
-	import java.awt.EventQueue;
+
+import java.awt.EventQueue;
 
 	import javax.swing.JPanel;
 	import java.awt.GridBagLayout;
@@ -17,16 +18,16 @@
 	import java.awt.Color;
 	import javax.swing.JLayeredPane;
 
-public class SearchMovieUI extends JPanel {
+public class SearchMemberUI extends JPanel {
 
-	private SearchMovieControl searchMovieControl;
+	private SearchMemberControl searchMemberControl;
 	private JFrame frame;
 	private JTextField textFieldSearch;
-	private JLabel labelSearchMovieStatus;
+	private JLabel labelSearchAccountStatus;
 	
-	public SearchMovieUI(SearchMovieControl control) {
+	public SearchMemberUI(SearchMemberControl control) {
 		frame = new JFrame();
-		searchMovieControl = control;
+		searchMemberControl = control;
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -36,7 +37,7 @@ public class SearchMovieUI extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
 		
-		JLabel lblNewLabel = new JLabel("Search Movie:");
+		JLabel lblNewLabel = new JLabel("Search Account:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -47,8 +48,8 @@ public class SearchMovieUI extends JPanel {
 		textFieldSearch = new JTextField();
 		textFieldSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				enterMovieSearchCriteria();
-				displaySearchResult();
+				enterMemberAccountName();
+				//displaySearchResult();
 			}
 		});
 		GridBagConstraints gbc_textFieldSearch = new GridBagConstraints();
@@ -60,16 +61,16 @@ public class SearchMovieUI extends JPanel {
 		frame.getContentPane().add(textFieldSearch, gbc_textFieldSearch);
 		textFieldSearch.setColumns(10);
 		
-		labelSearchMovieStatus = new JLabel("");
-		labelSearchMovieStatus.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_labelSearchMovieStatus = new GridBagConstraints();
-		gbc_labelSearchMovieStatus.gridwidth = 6;
-		gbc_labelSearchMovieStatus.insets = new Insets(0, 0, 5, 5);
-		gbc_labelSearchMovieStatus.gridx = 1;
-		gbc_labelSearchMovieStatus.gridy = 7;
-		add(labelSearchMovieStatus, gbc_labelSearchMovieStatus);
+		labelSearchAccountStatus = new JLabel("");
+		labelSearchAccountStatus.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_labelSearchAccountStatus = new GridBagConstraints();
+		gbc_labelSearchAccountStatus.gridwidth = 6;
+		gbc_labelSearchAccountStatus.insets = new Insets(0, 0, 5, 5);
+		gbc_labelSearchAccountStatus.gridx = 1;
+		gbc_labelSearchAccountStatus.gridy = 7;
+		add(labelSearchAccountStatus, gbc_labelSearchAccountStatus);
 	}
-	
+
 	public void displaySearchForm() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -77,24 +78,44 @@ public class SearchMovieUI extends JPanel {
 		// end-user-code
 	}
 
-	public void displaySearchResult() {
+	public void displaySearchResult(MemberObject member) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		labelSearchAccountStatus.setText(member.getUsername());
+		//one member to display return member A
 		// end-user-code
 	}
 
 	public void displayFailedSearchMessage() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		labelSearchMovieStatus.setText("Movie search was unsuccessful. Information was invalid.");
+		labelSearchAccountStatus.setText("Account search was unsuccessful. Information was invalid.");
 		// end-user-code
 	}
 
-	public void enterMovieSearchCriteria() {
+	public void enterMemberAccountName() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
 		// end-user-code
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

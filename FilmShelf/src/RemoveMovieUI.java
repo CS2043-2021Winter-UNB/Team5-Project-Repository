@@ -13,6 +13,7 @@ public class RemoveMovieUI {
 	public Object displayMovieRemovedConfimation() {
 		// begin-user-code
 		// TODO Auto-generated method stub
+		//labelEditAccountStatus.setText("Account updated successfully.");
 		return null;
 		// end-user-code
 	}

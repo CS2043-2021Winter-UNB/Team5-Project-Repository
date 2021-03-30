@@ -21,9 +21,9 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ViewAccountUI extends JPanel {
+public class ViewMemberUI extends JPanel {
 
-	private viewAccountControl viewAccControl;
+	private ViewMemberControl viewMemberControl;
 	private LoginControl loginControl;
 	private JLabel labelShowUsername;
 	private JLabel labelShowFirstName;
@@ -35,8 +35,8 @@ public class ViewAccountUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ViewAccountUI(viewAccountControl controlViewAcc, LoginControl controlLogin) {
-		viewAccControl = controlViewAcc;
+	public ViewMemberUI(ViewMemberControl controlViewAcc, LoginControl controlLogin) {
+		viewMemberControl = controlViewAcc;
 		loginControl = controlLogin;
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -182,7 +182,7 @@ public class ViewAccountUI extends JPanel {
 	
 	public void displayViewMemberAccount(String username)
 	{
-		MemberAccountObject member = viewAccControl.retrieveAccount(username);
+		MemberObject member = viewMemberControl.retrieveAccount(username);
 		labelShowUsername.setText(username);
 		labelShowFirstName.setText(member.getFirstName());
 		labelShowLastName.setText(member.getLastName());

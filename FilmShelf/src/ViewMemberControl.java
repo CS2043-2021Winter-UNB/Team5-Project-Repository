@@ -5,26 +5,26 @@
  * Description:	Handles validation of input to ViewAccountUI class and initiates searching of the movie table.
  ******************************************************************************************************************************/
 
-public class viewAccountControl {
+public class ViewMemberControl {
 
 	
 	private DataManager dataManager;
 	//private MemberAccountObject vacMemberAccount;
 	
 	//What is passed in from UI? MemberName? Id?
-	public viewAccountControl(DataManager dm) {
+	public ViewMemberControl(DataManager dm) {
 		this.dataManager = dm;
 	}
 	
 	//NB: Data Manager needs getViewAccount() method
 	//Do we need a different kind of MemberAccount object to be returned? 
 	//vMemberAccount object?
-	public MemberAccountObject retrieveAccount(String accountID) {
+	public MemberObject retrieveAccount(String accountID) {
 		
 		//Q: Do we need a new method in data manager called getMemberView()? getMember() requires password...
-		MemberAccountObject vMemberAccount = dataManager.getMemberView(accountID);
+		MemberObject vMember = dataManager.getMemberView(accountID);
 		
-		return vMemberAccount;
+		return vMember;
 		
 	}
 }

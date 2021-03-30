@@ -3,19 +3,28 @@ public class Main {
 	{	
 		DataManager dm = new DataManager();
 		
+		CreateMemberControl createMemberControl = new CreateMemberControl(dm);
+		CreateMemberUI createMemberUI = new CreateMemberUI(createMemberControl);
+		
 		LoginControl loginControl = new LoginControl(dm);
-		LoginUI loginUI = new LoginUI(loginControl);
 		
-		CreateMemberAccountControl createMemberAccountControl = new CreateMemberAccountControl(dm);
-		CreateMemberAccountUI createMemberAccountUI = new CreateMemberAccountUI(createMemberAccountControl);
+		EditMemberControl editMemberControl = new EditMemberControl(dm,loginControl);
+		EditMemberUI editMemberUI = new EditMemberUI(editMemberControl);
 		
-		/*EditAccountControl editAccountControl = new EditAccountControl(dm);
-		EditAccountUI editAccountUI = new EditAccountUI(editAccountControl);*/
+		ViewMemberControl viewMemberControl = new ViewMemberControl(dm);
+		ViewMemberUI viewMemberUI = new ViewMemberUI(viewMemberControl, loginControl);
 		
-		viewAccountControl viewAccControl = new viewAccountControl(dm);
-		ViewAccountUI viewAccountUI = new ViewAccountUI(viewAccControl, loginControl);
+		SearchMemberControl searchMemberControl = new SearchMemberControl(dm);
+		SearchMemberUI searchMemberUI = new SearchMemberUI(searchMemberControl);
+	
+		LoginUI loginUI = new LoginUI(loginControl,editMemberUI);
 		
-		MainUI mainUI = new MainUI(loginUI, createMemberAccountUI, viewAccountUI);
+		
+		//SearchMovieControl searchMovieControl = new SearchMovieControl();
+		//SearchMovierUI searchMovieUI = new SearchMovieUI(searchMovieControl);
+		
+		
+		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI);
 		mainUI.setVisible(true);
 	}
 }

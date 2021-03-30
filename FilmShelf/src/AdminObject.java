@@ -1,12 +1,12 @@
 /******************************************************************************************************************************
- * AdminAccountObject
+ * AdminObject
  * @author Rachel
- * Description: Represents an AdminAccountObject in the database.
+ * Description: Represents an AdminObject in the database.
  ******************************************************************************************************************************/
-public class AdminAccountObject {
+public class AdminObject {
 	private String username;
 
-	public AdminAccountObject(String username) {
+	public AdminObject(String username) {
 		this.username = username;
 	}
 

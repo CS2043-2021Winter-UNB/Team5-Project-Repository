@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  * @author Jo
  * Description: Validates received input for editing account and initiates account edit process.
  ******************************************************************************************************************************/
-public class EditAccountControl {
+public class EditMemberControl {
 
 	private DataManager dataManager;
 	private LoginControl loginControl;
@@ -21,7 +21,7 @@ public class EditAccountControl {
 	private Matcher specialCharacterMatcher;
 	
 	// class constructor
-	public EditAccountControl(DataManager dataManager, LoginControl loginControl) {
+	public EditMemberControl(DataManager dataManager, LoginControl loginControl) {
 		this.dataManager = dataManager;
 		this.loginControl = loginControl;
 		this.uppercasePattern = Pattern.compile("[A-Z]");					// matches uppercase letters
@@ -30,7 +30,7 @@ public class EditAccountControl {
 		this.specialCharacterPattern = Pattern.compile("[^A-Za-z0-9]");		// matches special characters
 	}
 
-	public boolean validateFormInput(MemberAccountObject member, String password, String firstName, String lastName, String description) {
+	public boolean validateFormInput(MemberObject member, String password, String firstName, String lastName, String description) {
 		String pWord = "";
 		String fName = "";
 		String lName = "";
@@ -117,9 +117,9 @@ public class EditAccountControl {
 		boolean accountUpdated = false;
 		
 		// get current user logged in
-		MemberAccountObject member = loginControl.getCurrentMember();
+		MemberObject member = loginControl.getCurrentMember();
 		
-		// if member not logged in, return false
+		//if member not logged in, return false
 		if(member == null) {
 			return false;
 		}
@@ -130,7 +130,9 @@ public class EditAccountControl {
 		// if input invalid, return false
 		if(!inputIsValid) {
 			accountUpdated = false;
-		} else if(inputIsValid) {		// if input valid, call editAccount from DataManager
+			System.out.print("Hello!");
+		} 
+		else if(inputIsValid) {		// if input valid, call editAccount from DataManager
 			// default values to pass to DataManager in case of null/empty inputs
 			String pWord = null;
 			String fName = member.getFirstName();
@@ -151,13 +153,11 @@ public class EditAccountControl {
 				desc = description.strip();
 			}
 			
+			accountUpdated = dataManager.editMember(member.getUsername(), pWord, fName, lName, desc);		// DataManager will have to check for null password
 
-			accountUpdated = dataManager.editMemberAccount(member.getUsername(), pWord, fName, lName, desc);		// DataManager will have to check for null password
-
-			
 			// update logged in member's info in LoginControl
 			if(accountUpdated) {
-			//	loginControl.updateCurrentMemberInfo(fName, lName, desc);
+				loginControl.updateCurrentMemberInfo(fName, lName, desc);
 			}
 		}
 	
