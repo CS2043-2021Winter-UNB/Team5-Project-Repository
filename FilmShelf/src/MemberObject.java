@@ -55,7 +55,7 @@ public class MemberObject {
 	
 	// provides a string representation of a MemberObject
 	public String toString() {
-		String result = "Username: "+username+"\n"+
+		String result = "Member Username: "+username+"\n"+
 						"First name: "+firstName+"\n"+
 						"Last name: "+lastName+"\n"+
 						"Description: "+description+"\n"+
