@@ -52,5 +52,20 @@ public class MemberObject {
 	public void setTopMovies(ArrayList<MovieObject> movies) {
 		topMovies = movies;
 	}
+	
+	// provides a string representation of a MemberObject
+	public String toString() {
+		String result = "Username: "+username+"\n"+
+						"First name: "+firstName+"\n"+
+						"Last name: "+lastName+"\n"+
+						"Description: "+description+"\n"+
+						"TOP MOVIES:\n";
+		
+		for(MovieObject movie : topMovies) {
+			result = result + movie.toString() + "\n";
+		}
+		
+		return result;
+	}
 
 }
