@@ -101,9 +101,11 @@ public class EditMemberControl {
 		
 		// check description
 			// maximum 280 characters
-			// minimum 0 characters
-		if(desc.length() > 280) {
-			return false;
+			// minimum 1 character
+		if(!desc.strip().isEmpty() && !desc.equals(member.getDescription())) {
+			if((desc.length() > 280) || (desc.length() < 1)) {
+				return false;
+			}
 		}
 		
 		return true;	// if this line is reached, input is valid
@@ -130,9 +132,7 @@ public class EditMemberControl {
 		// if input invalid, return false
 		if(!inputIsValid) {
 			accountUpdated = false;
-			System.out.print("Hello!");
-		} 
-		else if(inputIsValid) {		// if input valid, call editAccount from DataManager
+		} else {		// if input valid, call editAccount from DataManager
 			// default values to pass to DataManager in case of null/empty inputs
 			String pWord = null;
 			String fName = member.getFirstName();
@@ -149,7 +149,7 @@ public class EditMemberControl {
 			if(lastName != null && !lastName.strip().isEmpty()) {
 				lName = lastName.strip();
 			}
-			if(description != null) {
+			if(description != null && !description.strip().isEmpty()) {
 				desc = description.strip();
 			}
 			
