@@ -38,7 +38,7 @@ public class DataManager {
 
 
 	//Courtney and Jo
-	public boolean addMemberAccount(String username, String password, String firstName, String lastName, String description) {
+	public boolean addMember(String username, String password, String firstName, String lastName, String description) {
 		//SQL query String 
 		String sqlQuery = "insert into MemberAccount(username, password, firstName, lastName, description) values('" + 
 							username + "', sha1('" + password + "'), '" + firstName + "', '" + lastName + "', '" + description + "');";
@@ -51,7 +51,7 @@ public class DataManager {
 			//ResultSet
 			int rowsUpdated = stmt.executeUpdate(sqlQuery);
 		}
-		catch(SQLException e){
+		catch(SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -61,7 +61,7 @@ public class DataManager {
 
 
 	//Courtney and Jo
-	public boolean editMemberAccount(String username, String password, String firstName, String lastName, String description){
+	public boolean editMember(String username, String password, String firstName, String lastName, String description){
 		//String query 
 		String sqlQuery;
 
@@ -93,7 +93,7 @@ public class DataManager {
 				stmt.executeUpdate(sqlQuery);
 			}
 		}
-		catch(SQLException e){
+		catch(SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -104,7 +104,7 @@ public class DataManager {
 
 
 	//Courtney and Jo 
-	public boolean removeMemberAccount(String username) {
+	public boolean removeMember(String username) {
 		//String query 
 		String sqlQuery = "delete from MemberAccount where username = '" + username + "';";
 
@@ -115,7 +115,7 @@ public class DataManager {
 			//Execute query
 			stmt.executeUpdate(sqlQuery);
 		}
-		catch(SQLException e){
+		catch(SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -125,10 +125,7 @@ public class DataManager {
 
 
 	//Courtney and Jo (make changes based on top movies)
-	public MemberAccountObject getMember(String username, String password) {
-
-		//Get Members top movies!!! (Needs to be added). 
-
+	public MemberObject getMember(String username, String password) {
 		// Declaring variables
 		String uName = "";
 		String firstName = "";
@@ -138,8 +135,7 @@ public class DataManager {
 		ArrayList<Integer> movieIds = new ArrayList<Integer>();		//Array to store members top movie IDs
 
 		//SQL query String 
-		String sqlQuery = "select * from MemberAccount where username = '" + username +
-						  "' and password = sha1('" + password + "');";
+		String sqlQuery = "select * from MemberAccount where username = '" + username + "' and password = sha1('" + password + "');";
 
 		try {
 			//Create statement 
@@ -148,7 +144,7 @@ public class DataManager {
 			//ResultSet 
 			ResultSet rs = stmt.executeQuery(sqlQuery);
 
-			//assigning values to memberAccountObject	
+			//assigning values to MemberObject	
 			rs.next();		// need to call to point cursor to first record
 			uName = rs.getString(1);
 			firstName = rs.getString(3);
@@ -178,14 +174,14 @@ public class DataManager {
 				// ResultSet.getInt(i) returns 0 for null values, only query db for non-null values
 				if(movieIds.get(i) != 0) {
 					//SQL String Query for movie at index i 
-					sqlQuery = "select title from Movie where movieID = " + movieIds.get(i).intValue() + ";";
+					sqlQuery = "select * from Movie where movieID = " + movieIds.get(i).intValue() + ";";
 
 					//Execute Query to retrieve movie title
 					movies = stmt2.executeQuery(sqlQuery);
 
 					//Add movie title to member object
 					movies.next();		// need to call to point cursor to first record
-					topMovies.add(new MovieObject(movies.getString(1), movies.getInt(2), movies.getString(3), movies.getString(4), movies.getInt(5), movies.getDouble(6), movies.getInt(7)));
+					topMovies.add(new MovieObject(movies.getString(1), movies.getInt(2), movies.getString(3), movies.getInt(5), movies.getDouble(6), movies.getInt(7)));	// will need to change when language attribute is removed from Movie table
 				}
 			}
 		}
@@ -193,20 +189,19 @@ public class DataManager {
 			System.out.println("Top movies retrieval error: " + e.getMessage());
 			return null;
 		}
-			// Create MemberAccountObject to return
+			// Create MemberObject to return
 			return new MemberObject(uName, firstName, lastName, description, topMovies);
 	}
 
 
 
 	//Courtney and Jo
-	public AdminAccountObject getAdmin(String username, String password){
+	public AdminObject getAdmin(String username, String password){
 
 		String uName = "";
 
 		//SQL query String 
-		String sqlQuery = "select * from AdminAccount where username = '" + username +
-						  "' and password = sha1('" + password + "');";
+		String sqlQuery = "select * from AdminAccount where username = '" + username + "' and password = sha1('" + password + "');";
 
 		try {
 			//create statement 
