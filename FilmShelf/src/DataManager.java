@@ -36,7 +36,6 @@ public class DataManager {
 		}
 	}
 
-<<<<<<< HEAD
 
 	//Courtney and Jo
 	public boolean addMemberAccount(String username, String password, String firstName, String lastName, String description) {
@@ -129,9 +128,7 @@ public class DataManager {
 	public MemberAccountObject getMember(String username, String password) {
 
 		//Get Members top movies!!! (Needs to be added). 
-=======
-	public MemberObject getMember(String username, String password) {
->>>>>>> edebabd87eea0631a97b1c265efa72198b11adde
+
 		// Declaring variables
 		String uName = "";
 		String firstName = "";
@@ -201,12 +198,10 @@ public class DataManager {
 	}
 
 
-<<<<<<< HEAD
+
 	//Courtney and Jo
 	public AdminAccountObject getAdmin(String username, String password){
-=======
-	public AdminObject getAdmin(String username, String password){
->>>>>>> edebabd87eea0631a97b1c265efa72198b11adde
+
 		String uName = "";
 
 		//SQL query String 
@@ -231,64 +226,8 @@ public class DataManager {
 		return new AdminObject(uName);
 	}
 
-<<<<<<< HEAD
-=======
-	public boolean addMember(String username, String password, String firstName, String lastName, String description) {
-		//SQL query String 
-		String sqlQuery = "insert into MemberAccount(username, password, firstName, lastName, description) values('" + 
-							username + "', sha1('" + password + "'), '" + firstName + "', '" + lastName + "', '" + description + "');";
+	
 
-		//ResultSet
-		try {
-			//Create statement 
-			Statement stmt = connection.createStatement();
-
-			//ResultSet
-			int rowsUpdated = stmt.executeUpdate(sqlQuery);
-		}
-		catch(SQLException e) {
-			System.out.println("New member creation error: " + e.getMessage());
-			return false;
-		}
-
-		return true;
-	}
-
-	public boolean editMember(String username, String password, String firstName, String lastName, String description){
-		//String query 
-		String sqlQuery;
-
-		try {
-			//Create Statement 
-			Statement stmt = connection.createStatement();
-
-			//If new value is passed in update password
-			if(password != null){
-				sqlQuery = "update MemberAccount set password = sha1('" + password + "') where username = '" + username + "';";
-				stmt.executeUpdate(sqlQuery);
-			}
-			
-			//If new value is passed in update firstName
-			if(firstName != null){
-				sqlQuery = "update MemberAccount set firstName = '" + firstName + "' where username = '" + username + "';";
-				stmt.executeUpdate(sqlQuery);
-			}
->>>>>>> edebabd87eea0631a97b1c265efa72198b11adde
-
-
-<<<<<<< HEAD
-=======
-			//if new value is passed in update description
-			if(description != null){
-				sqlQuery = "update MemberAccount set description = '" + description + "' where username = '" + username + "';";
-				stmt.executeUpdate(sqlQuery);
-			}
-		}
-		catch(SQLException e) {
-			System.out.println("Editing member details error: " + e.getMessage());
-			return false;
-		}
->>>>>>> edebabd87eea0631a97b1c265efa72198b11adde
 
 	//Jessie-Anne 
 	public boolean addMovie(){
@@ -296,24 +235,6 @@ public class DataManager {
 		//end-user-code
 	}
 
-<<<<<<< HEAD
-=======
-	public boolean removeMember(String username) {
-		//String query 
-		String sqlQuery = "delete from MemberAccount where username = '" + username + "';";
->>>>>>> edebabd87eea0631a97b1c265efa72198b11adde
-
-
-<<<<<<< HEAD
-=======
-			//Execute query
-			stmt.executeUpdate(sqlQuery);
-		}
-		catch(SQLException e) {
-			System.out.println("Member removal error: " + e.getMessage());
-			return false;
-		}
->>>>>>> edebabd87eea0631a97b1c265efa72198b11adde
 
 	//Jessie-Anne
 	public void removeMovie(int movieID) {
