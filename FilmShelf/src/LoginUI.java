@@ -208,11 +208,6 @@ public class LoginUI extends JPanel {
 		}
 	}
 	
-	public void displayLoginConfirmation() {
-		labelLoginStatus.setText("Login was successful!!");
-		
-	}
-	
 	private void displayLoginErrorMessage() {
 		labelLoginStatus.setText("Login was unsuccessful. Login credentials did not match any existing accounts");
 		passwordField.setText("");

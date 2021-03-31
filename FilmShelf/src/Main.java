@@ -32,8 +32,11 @@ public class Main {
 		
 		//SearchMovieControl searchMovieControl = new SearchMovieControl();
 		//SearchMovierUI searchMovieUI = new SearchMovieUI(searchMovieControl);
+		
+		AddMovieControl addMovieControl = new AddMovieControl(dm, loginControl);
+		AddMovieUI addMovieUI = new AddMovieUI(addMovieControl);
     
-		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI);
+		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, addMovieUI);
 		mainUI.setVisible(true);
 		
 		loginUI.setMain(mainUI);
