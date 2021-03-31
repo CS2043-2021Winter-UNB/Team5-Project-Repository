@@ -1,5 +1,5 @@
 
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 
 	import javax.swing.JPanel;
 	import java.awt.GridBagLayout;
@@ -7,35 +7,35 @@ import java.awt.EventQueue;
 	import java.awt.GridBagConstraints;
 	import java.awt.Insets;
 	import javax.swing.JTextField;
-	import javax.swing.JPasswordField;
-	import javax.swing.JButton;
-	import javax.swing.JRadioButton;
-	import javax.swing.JCheckBox;
+	//import javax.swing.JPasswordField;
+	//import javax.swing.JButton;
+	//import javax.swing.JRadioButton;
+	//import javax.swing.JCheckBox;
 	import java.awt.event.ActionListener;
 	import java.awt.event.ActionEvent;
 	import javax.swing.SwingConstants;
-	import javax.swing.JFrame;
-	import java.awt.Color;
-	import javax.swing.JLayeredPane;
-
+	//import javax.swing.JFrame;
+	//import java.awt.Color;
+	//import javax.swing.JLayeredPane;
 public class SearchMemberUI extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private SearchMemberControl searchMemberControl;
-	private JFrame frame;
 	private JTextField textFieldSearch;
 	private JLabel labelSearchAccountStatus;
 	
 	public SearchMemberUI(SearchMemberControl control) {
-		frame = new JFrame();
+		setVisible(false);
 		searchMemberControl = control;
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		frame.getContentPane().setLayout(gridBagLayout);
+		setLayout(gridBagLayout);
 		
 		JLabel lblNewLabel = new JLabel("Search Account:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -43,22 +43,22 @@ public class SearchMemberUI extends JPanel {
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 1;
 		gbc_lblNewLabel.gridy = 1;
-		frame.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+		add(lblNewLabel, gbc_lblNewLabel);
 		
 		textFieldSearch = new JTextField();
 		textFieldSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				enterMemberAccountName();
-				//displaySearchResult();
 			}
 		});
+		
 		GridBagConstraints gbc_textFieldSearch = new GridBagConstraints();
 		gbc_textFieldSearch.gridwidth = 3;
 		gbc_textFieldSearch.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldSearch.gridx = 2;
 		gbc_textFieldSearch.gridy = 1;
-		frame.getContentPane().add(textFieldSearch, gbc_textFieldSearch);
+		add(textFieldSearch, gbc_textFieldSearch);
 		textFieldSearch.setColumns(10);
 		
 		labelSearchAccountStatus = new JLabel("");
@@ -72,31 +72,25 @@ public class SearchMemberUI extends JPanel {
 	}
 
 	public void displaySearchForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		setVisible(true);
-		// end-user-code
 	}
 
 	public void displaySearchResult(MemberObject member) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		labelSearchAccountStatus.setText(member.getUsername());
-		//one member to display return member A
-		// end-user-code
+		labelSearchAccountStatus.setText(member.getUsername()+" - "+member.getFirstName()+" "+member.getLastName());
 	}
 
 	public void displayFailedSearchMessage() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		labelSearchAccountStatus.setText("Account search was unsuccessful. Information was invalid.");
-		// end-user-code
 	}
 
 	public void enterMemberAccountName() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		// end-user-code
+		MemberObject member=searchMemberControl.processSearchAccount(textFieldSearch.getText());
+		if (member==null) {
+			displayFailedSearchMessage();
+		}
+		else {
+			displaySearchResult(member);
+		}	
 	}
 }
 

@@ -14,8 +14,8 @@ public class Main {
 		ViewMemberControl viewMemberControl = new ViewMemberControl(dm);
 		ViewMemberUI viewMemberUI = new ViewMemberUI(viewMemberControl, loginControl);
 		
-		//SearchMemberControl searchMemberControl = new SearchMemberControl(dm);
-		//SearchMemberUI searchMemberUI = new SearchMemberUI(searchMemberControl);
+		SearchMemberControl searchMemberControl = new SearchMemberControl(dm);
+		SearchMemberUI searchMemberUI = new SearchMemberUI(searchMemberControl);
 	
 		LoginUI loginUI = new LoginUI(loginControl,editMemberUI);
 		
@@ -24,7 +24,7 @@ public class Main {
 		//SearchMovierUI searchMovieUI = new SearchMovieUI(searchMovieControl);
 		
 		
-		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI);
+		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI);
 		mainUI.setVisible(true);
 	}
 }

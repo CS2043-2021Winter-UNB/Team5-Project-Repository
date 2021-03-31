@@ -17,6 +17,8 @@ import javax.swing.JLayeredPane;
 
 
 public class RemoveMemberUI extends JPanel {
+	public RemoveMemberUI() {
+	}
 	private RemoveMemberControl removeMemberControl;
 
 	
