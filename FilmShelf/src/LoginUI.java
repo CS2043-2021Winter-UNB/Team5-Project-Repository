@@ -37,7 +37,6 @@ public class LoginUI extends JPanel {
 	private JButton loginButton;
 	private JLabel labelUsername;
 	private JLabel labelPassword;
-	private JButton buttonEditMember;
 	private boolean member = true;
 	private JTextField textFieldUsername;
 	private JPasswordField passwordField;
@@ -153,9 +152,6 @@ public class LoginUI extends JPanel {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				extractLoginCredentials();
-				if(loginControl.getCurrentMember()!=null){
-		   			buttonEditMember.setVisible(true);
-		   		 }
 			}
 		});
 		GridBagConstraints gbc_loginButton = new GridBagConstraints();
@@ -176,24 +172,6 @@ public class LoginUI extends JPanel {
 		add(labelLoginStatus, gbc_labelLoginStatus);
 		
 		setVisible(false);
-		
-		 //edit member
-	     buttonEditMember = new JButton("Edit Account");
-	     buttonEditMember.addActionListener(new ActionListener() {
-		     	public void actionPerformed(ActionEvent e) {
-		     		editMemberUI.displayEditAccountForm();
-		     		setVisible(false);
-		     	}
-		     });
-	     
-	     GridBagConstraints gbc_buttonEditMember = new GridBagConstraints();
-	     gbc_buttonEditMember.anchor = GridBagConstraints.EAST;
-	     gbc_buttonEditMember.insets = new Insets(0, 0, 5, 5);
-	     gbc_buttonEditMember.gridx = 4;
-	     gbc_buttonEditMember.gridy = 1;
-	     add(buttonEditMember, gbc_buttonEditMember);
-	     buttonEditMember.setVisible(false);
-	     
 	}
 	
 	public void setMain(MainUI mainUI) {
@@ -210,7 +188,7 @@ public class LoginUI extends JPanel {
 		setVisible(true);
 	}
 	
-	public boolean extractLoginCredentials() {
+	public void extractLoginCredentials() {
 		String username = textFieldUsername.getText();
 		String password = new String(passwordField.getPassword());
 		boolean loginStatus;
@@ -224,12 +202,9 @@ public class LoginUI extends JPanel {
 		if(loginStatus) {
 			mainUI.changeCreateAndLoginButtons();
 			setVisible(false);
-			return true;
 		
 		} else {
 			displayLoginErrorMessage();
-			return false;
-		
 		}
 	}
 	
