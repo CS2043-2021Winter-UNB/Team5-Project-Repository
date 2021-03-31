@@ -8,14 +8,9 @@ import java.sql.Statement;
 
 public class DataManager {
 
-	private MemberObject member;
-	private AdminObject admin;
-	private MovieObject movie;
-	private ReviewObject review;
-	private int numTopMovies = 5;
-	private int lastTopMovieIndex = 9;
+	private final int NUM_TOP_MOVIES = 5;
+	private final int LAST_TOP_MOVIE_INDEX = 9;
 	private Connection connection;
-
 
 	//Jessie-Anne - set up DataManager and connects to the team5 DB
 	public DataManager() {
@@ -152,7 +147,7 @@ public class DataManager {
 			description = rs.getString(10);
 
 			//Adding movie IDs to array 
-			for(int i = 5; i <= lastTopMovieIndex; i++){
+			for(int i = 5; i <= LAST_TOP_MOVIE_INDEX; i++){
 				movieIds.add(rs.getInt(i));
 			}
 		}
@@ -170,7 +165,7 @@ public class DataManager {
 			ResultSet movies;
 			
 			//Loop to add movie titles to member object
-			for(int i = 0; i < numTopMovies; i++) {
+			for(int i = 0; i < NUM_TOP_MOVIES; i++) {
 				// ResultSet.getInt(i) returns 0 for null values, only query db for non-null values
 				if(movieIds.get(i) != 0) {
 					//SQL String Query for movie at index i 
