@@ -4,10 +4,6 @@
  * @author Sharon
  * Description:	This class is the main JFrame that hosts the use case JPanels. 
  ******************************************************************************************************************************/
-//import java.awt.BorderLayout;
-//import java.awt.Dimension;
-//import java.awt.EventQueue;
-//import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -45,6 +41,7 @@ public class MainUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
 	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount) {
 		loginUI = uiLog;
 		//loginControl = controlLog;
@@ -149,12 +146,87 @@ public class MainUI extends JFrame {
 	      	}
 	     });
         
-	     GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
-	     gbc_buttonLogin.anchor = GridBagConstraints.EAST;
-	     gbc_buttonLogin.insets = new Insets(0, 0, 5, 5);
-	     gbc_buttonLogin.gridx = 2;
-	     gbc_buttonLogin.gridy = 1;
-	     panelAccountButtons.add(buttonLogin, gbc_buttonLogin);
+
+        buttonLogin = new JButton("Login");
+        buttonLogin.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		loginUI.displayLoginForm();
+        	}
+        });
+        GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
+        gbc_buttonLogin.insets = new Insets(0, 0, 0, 5);
+        gbc_buttonLogin.gridx = 0;
+        gbc_buttonLogin.gridy = 0;
+        panelAccountButtons.add(buttonLogin, gbc_buttonLogin);
+        
+        buttonCreateAccount = new JButton("Create Account");
+        buttonCreateAccount.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		createMemberUI.displayCreateAccountForm();
+        	}
+        });
+        GridBagConstraints gbc_buttonCreateAccount = new GridBagConstraints();
+        gbc_buttonCreateAccount.gridx = 2;
+        gbc_buttonCreateAccount.gridy = 0;
+        panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
+        
+        JButton btnNewButton_1 = new JButton("make buttons switch");
+        btnNewButton_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		changeCreateAndLoginButtons();
+        	}
+        });
+        GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+        gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
+        gbc_btnNewButton_1.gridx = 1;
+        gbc_btnNewButton_1.gridy = 1;
+        mainPane.add(btnNewButton_1, gbc_btnNewButton_1);      
+
+        pack();
+      
+	}
+	
+	
+	private void changeCreateAndLoginButtons()
+	{
+		if (loginControl.getCurrentMember() != null) { 
+			
+			//change login button to view member (shows username of member)
+			String username = loginControl.getCurrentMember().getUsername();
+			buttonLogin.setText(username); 
+			buttonLogin.removeActionListener(null);
+	        buttonLogin.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		viewMemberUI.displayViewMemberAccount(username);
+	        	}
+	        });
+	        
+	        //change create account button to edit account 
+			buttonCreateAccount.setText("Edit Account");
+			buttonCreateAccount.removeActionListener(null);
+	        buttonCreateAccount.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		//editAccountUI call here
+	        	}
+	        });
+		}
+		else if (loginControl.getCurrentAdmin() != null) {
+			buttonLogin.setVisible(false);
+			buttonCreateAccount.setText("Add Movie");
+			buttonCreateAccount.removeActionListener(null);
+	        buttonCreateAccount.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		// addMovieUI.displayAddMovieForm();
+	        	}
+	        });
+		}
+	}
+	
+	/*going to add better method to loginUI itself
+	public void removeLoginPanel() {
+		loginUI.setVisible(false);
+		mainPane.repaint();
+	}*/
 	     
 	    
         pack();

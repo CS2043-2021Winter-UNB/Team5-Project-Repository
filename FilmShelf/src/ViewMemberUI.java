@@ -46,6 +46,7 @@ public class ViewMemberUI extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
+		//Remove account button
 		buttonRemoveAccount = new JButton("Remove Account");
 		buttonRemoveAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -59,6 +60,7 @@ public class ViewMemberUI extends JPanel {
 		gbc_buttonRemoveAccount.gridy = 1;
 		add(buttonRemoveAccount, gbc_buttonRemoveAccount);
 		
+		//Username label
 		JLabel labelUsername = new JLabel("Username:");
 		GridBagConstraints gbc_labelUsername = new GridBagConstraints();
 		gbc_labelUsername.insets = new Insets(0, 0, 5, 5);
@@ -66,6 +68,7 @@ public class ViewMemberUI extends JPanel {
 		gbc_labelUsername.gridy = 2;
 		add(labelUsername, gbc_labelUsername);
 		
+		//Label that displays the username of the member
 		labelShowUsername = new JLabel("");
 		GridBagConstraints gbc_labelShowUsername = new GridBagConstraints();
 		gbc_labelShowUsername.insets = new Insets(0, 0, 5, 5);
@@ -73,6 +76,7 @@ public class ViewMemberUI extends JPanel {
 		gbc_labelShowUsername.gridy = 2;
 		add(labelShowUsername, gbc_labelShowUsername);
 		
+		//First name label
 		JLabel labelFirstName = new JLabel("First Name:");
 		GridBagConstraints gbc_labelFirstName = new GridBagConstraints();
 		gbc_labelFirstName.insets = new Insets(0, 0, 5, 5);
@@ -80,6 +84,7 @@ public class ViewMemberUI extends JPanel {
 		gbc_labelFirstName.gridy = 3;
 		add(labelFirstName, gbc_labelFirstName);
 		
+		//Label that displays the first name of the member
 		labelShowFirstName = new JLabel("");
 		GridBagConstraints gbc_labelShowFirstName = new GridBagConstraints();
 		gbc_labelShowFirstName.insets = new Insets(0, 0, 5, 5);
@@ -87,6 +92,7 @@ public class ViewMemberUI extends JPanel {
 		gbc_labelShowFirstName.gridy = 3;
 		add(labelShowFirstName, gbc_labelShowFirstName);
 		
+		//Last name label
 		JLabel labelLastName = new JLabel("Last Name:");
 		GridBagConstraints gbc_labelLastName = new GridBagConstraints();
 		gbc_labelLastName.insets = new Insets(0, 0, 5, 5);
@@ -94,6 +100,7 @@ public class ViewMemberUI extends JPanel {
 		gbc_labelLastName.gridy = 4;
 		add(labelLastName, gbc_labelLastName);
 		
+		//Label that displays the last name of the member
 		labelShowLastName = new JLabel("");
 		GridBagConstraints gbc_labelShowLastName = new GridBagConstraints();
 		gbc_labelShowLastName.insets = new Insets(0, 0, 5, 5);
@@ -101,6 +108,7 @@ public class ViewMemberUI extends JPanel {
 		gbc_labelShowLastName.gridy = 4;
 		add(labelShowLastName, gbc_labelShowLastName);
 		
+		//Description label
 		JLabel LabelDescription = new JLabel("Description:");
 		GridBagConstraints gbc_LabelDescription = new GridBagConstraints();
 		gbc_LabelDescription.insets = new Insets(0, 0, 5, 5);
@@ -108,6 +116,7 @@ public class ViewMemberUI extends JPanel {
 		gbc_LabelDescription.gridy = 5;
 		add(LabelDescription, gbc_LabelDescription);
 		
+		//Label that displays the description of the member
 		labelShowDescription = new JLabel("");
 		GridBagConstraints gbc_labelShowDescription = new GridBagConstraints();
 		gbc_labelShowDescription.insets = new Insets(0, 0, 5, 5);
@@ -130,14 +139,16 @@ public class ViewMemberUI extends JPanel {
 		gbl_layeredPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		layeredPane.setLayout(gbl_layeredPane);
 		
-		JLabel labelFavoriteMovies = new JLabel("Favorite Movies");
+		//Top movies label
+		JLabel labelTopMovies = new JLabel("Top Movies");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.gridwidth = 2;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel.gridx = 2;
 		gbc_lblNewLabel.gridy = 0;
-		layeredPane.add(labelFavoriteMovies, gbc_lblNewLabel);
+		layeredPane.add(labelTopMovies, gbc_lblNewLabel);
 		
+		//Label that displays the member's first top movie
 		JLabel labelMovie1 = new JLabel("");
 		GridBagConstraints gbc_labelMovie1 = new GridBagConstraints();
 		gbc_labelMovie1.insets = new Insets(0, 0, 5, 0);
@@ -145,6 +156,7 @@ public class ViewMemberUI extends JPanel {
 		gbc_labelMovie1.gridy = 1;
 		layeredPane.add(labelMovie1, gbc_labelMovie1);
 		
+		//Label that displays the member's second top movie
 		JLabel labelMovie2 = new JLabel("");
 		GridBagConstraints gbc_labelMovie2 = new GridBagConstraints();
 		gbc_labelMovie2.insets = new Insets(0, 0, 5, 0);
@@ -152,6 +164,7 @@ public class ViewMemberUI extends JPanel {
 		gbc_labelMovie2.gridy = 2;
 		layeredPane.add(labelMovie2, gbc_labelMovie2);
 		
+		//Label that displays the member's third top movie
 		JLabel labelMovie3 = new JLabel("");
 		GridBagConstraints gbc_labelMovie3 = new GridBagConstraints();
 		gbc_labelMovie3.insets = new Insets(0, 0, 5, 0);
@@ -159,6 +172,7 @@ public class ViewMemberUI extends JPanel {
 		gbc_labelMovie3.gridy = 3;
 		layeredPane.add(labelMovie3, gbc_labelMovie3);
 		
+		//Label that displays the member's fourth top movie
 		JLabel labelMovie4 = new JLabel("");
 		GridBagConstraints gbc_labelMovie4 = new GridBagConstraints();
 		gbc_labelMovie4.insets = new Insets(0, 0, 5, 0);
@@ -166,12 +180,14 @@ public class ViewMemberUI extends JPanel {
 		gbc_labelMovie4.gridy = 4;
 		layeredPane.add(labelMovie4, gbc_labelMovie4);
 		
+		//Label that displays the member's fifth top movie
 		JLabel labelMovie5 = new JLabel("");
 		GridBagConstraints gbc_labelMovie5 = new GridBagConstraints();
 		gbc_labelMovie5.gridx = 3;
 		gbc_labelMovie5.gridy = 5;
 		layeredPane.add(labelMovie5, gbc_labelMovie5);
 		
+		//adding top movie labels to the top movie label array
 		labelMovies[0] = labelMovie1;
 		labelMovies[1] = labelMovie2;
 		labelMovies[2] = labelMovie3;
@@ -188,11 +204,11 @@ public class ViewMemberUI extends JPanel {
 		labelShowLastName.setText(member.getLastName());
 		labelShowDescription.setText(member.getDescription());
 		
-		ArrayList<String> topMovies = member.getTopMovies();
+		ArrayList<MovieObject> topMovies = member.getTopMovies();
 		int i;
 		for (i = 0; i < 5; i++) {
 			if (i < topMovies.size()) {
-				labelMovies[i].setText(topMovies.get(i)); // add movie name			
+				labelMovies[i].setText(topMovies.get(i).getTitle()); // add movie name			
 			}
 			else {                          
 				labelMovies[i].setText(""); //clear any unused movie labels to make sure previous results are gone

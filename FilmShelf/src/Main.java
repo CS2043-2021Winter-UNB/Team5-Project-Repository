@@ -1,3 +1,10 @@
+
+/******************************************************************************************************************************
+ * Main
+ * @author Sharon
+ * Description:	Creates the initial control/UI objects and makes the main window (MainUI) visible
+ ******************************************************************************************************************************/
+
 public class Main {
 	public static void main(String[] args)
 	{	
@@ -22,8 +29,7 @@ public class Main {
 		
 		//SearchMovieControl searchMovieControl = new SearchMovieControl();
 		//SearchMovierUI searchMovieUI = new SearchMovieUI(searchMovieControl);
-		
-		
+    
 		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI);
 		mainUI.setVisible(true);
 	}

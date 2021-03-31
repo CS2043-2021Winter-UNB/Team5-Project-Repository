@@ -4,6 +4,12 @@
  * Description:	Displays login form, extracts user input, and displays login confirmation or error.
  ******************************************************************************************************************************/
 
+/******************************************************************************************************************************
+ * LoginUI
+ * @author Sharon
+ * Description:	Displays login form, extracts user input, and displays login confirmation or error.
+ ******************************************************************************************************************************/
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -53,7 +59,7 @@ public class LoginUI extends JPanel {
 		
 		
 		//Username label
-		labelUsername = new JLabel("Username");
+		labelUsername = new JLabel("Username: ");
 		labelUsername.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelUsername = new GridBagConstraints();
 		gbc_labelUsername.anchor = GridBagConstraints.EAST;
@@ -74,7 +80,7 @@ public class LoginUI extends JPanel {
 		textFieldUsername.setColumns(10);
 		
 		//Password label
-		labelPassword = new JLabel("Password");
+		labelPassword = new JLabel("Password: ");
 		labelPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelPassword = new GridBagConstraints();
 		gbc_labelPassword.anchor = GridBagConstraints.EAST;
@@ -193,8 +199,6 @@ public class LoginUI extends JPanel {
 	
 	public void displayLoginForm() {
 		//clear login fields/radio button before redisplaying
-		labelUsername.setText("User Name: ");
-		labelPassword.setText("Password: ");
 		checkboxPasswordVisibility.setSelected(false);
 		radioButtonMember.setSelected(true);
 		labelLoginStatus.setText("");
@@ -248,4 +252,10 @@ public class LoginUI extends JPanel {
 			passwordField.setEchoChar('*');
 		}
 	}
+
+	public void hide()
+	{
+		//this.setVisible(false);
+	}
+
 }
