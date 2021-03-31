@@ -165,7 +165,8 @@ public class MainUI extends JFrame {
 			//change login button to view member (shows username of member)
 			String username = loginControl.getCurrentMember().getUsername();
 			buttonLogin.setText(username); 
-			buttonLogin.removeActionListener(null);
+			ActionListener[] al1 = buttonLogin.getActionListeners();
+			buttonLogin.removeActionListener(al1[0]);
 	        buttonLogin.addActionListener(new ActionListener() {
 	        	public void actionPerformed(ActionEvent e) {
 	        		viewMemberUI.displayViewMemberAccount(username);
@@ -174,7 +175,8 @@ public class MainUI extends JFrame {
 	        
 	        //get rid of create account button
 			buttonCreateAccount.setVisible(false);
-			buttonCreateAccount.removeActionListener(null);
+			ActionListener[] al2 = buttonCreateAccount.getActionListeners();
+			buttonCreateAccount.removeActionListener(al2[0]);
 		}
 		else if (loginControl.getCurrentAdmin() != null) {
 			
@@ -183,7 +185,8 @@ public class MainUI extends JFrame {
 			
 			//change the create account button to the add movie button
 			buttonCreateAccount.setText("Add Movie");
-			buttonCreateAccount.removeActionListener(null);
+			ActionListener[] al = buttonCreateAccount.getActionListeners();
+			buttonCreateAccount.removeActionListener(al[0]);
 	        buttonCreateAccount.addActionListener(new ActionListener() {
 	        	public void actionPerformed(ActionEvent e) {
 	        		addMovieUI.displayAddMovieForm();
