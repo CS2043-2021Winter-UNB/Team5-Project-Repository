@@ -228,7 +228,7 @@ public class DataManager {
 	public boolean addMovie(String title, int releaseYear, String genre, int length){
 			//SQL query String 
 			String sqlQuery = "insert into Movie(title, releaseYear, genre, length) values('" + 
-								title + "'," + releaseYear ", '" + genre + "', " + length + ");";
+								title + "'," + releaseYear + ", '" + genre + "', " + length + ");";
 
 			//ResultSet
 			try {
