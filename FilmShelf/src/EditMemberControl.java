@@ -114,7 +114,7 @@ public class EditMemberControl {
 	// Jo:	how to tell UI why edit failed?
 	//		UI could check if user is logged in before displaying edit account form and even pass member to Control
 	public boolean updateAccount(String password, String firstName, String lastName, String description) {
-		boolean currentUserIsMember = false;
+		//boolean currentUserIsMember = false;
 		boolean inputIsValid = false;
 		boolean accountUpdated = false;
 		

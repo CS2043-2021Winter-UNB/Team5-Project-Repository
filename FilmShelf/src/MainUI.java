@@ -4,10 +4,10 @@
  * @author Sharon
  * Description:	This class is the main JFrame that hosts the use case JPanels. 
  ******************************************************************************************************************************/
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Frame;
+//import java.awt.BorderLayout;
+//import java.awt.Dimension;
+//import java.awt.EventQueue;
+//import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,25 +16,29 @@ import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Toolkit;
+//import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.BoxLayout;
+//import javax.swing.BoxLayout;
 
 public class MainUI extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel mainPane;
 	private LoginUI loginUI;
-	private LoginControl loginControl;
+	//private LoginControl loginControl;
 	private CreateMemberUI createMemberUI;
 	private EditMemberUI editMemberUI;
-	private ViewMemberUI viewMemberUI;
+	//private ViewMemberUI viewMemberUI;
 	private JButton buttonLogin;
-	private JButton buttonEditMember;
+	//private JButton buttonEditMember;
 	private JButton buttonCreateAccount;
 	
 	
@@ -43,13 +47,13 @@ public class MainUI extends JFrame {
 	 */
 	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount) {
 		loginUI = uiLog;
-		loginControl = controlLog;
+		//loginControl = controlLog;
 		createMemberUI = uiCreate;
 		editMemberUI =uiMember;
-		viewMemberUI = uiViewAccount;
+		//viewMemberUI = uiViewAccount;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    setSize(751, 521);
 		
 	    //MAIN PAIN
@@ -57,7 +61,7 @@ public class MainUI extends JFrame {
 	
 		mainPane.setBorder(new EmptyBorder(5, 5, 5, 5 ));
 		setContentPane(mainPane);
-		int width = 60;
+		//int width = 60;
         GridBagLayout gbl_mainPane = new GridBagLayout();
         gbl_mainPane.columnWidths = new int[]{63, 86, 254, 117, 144, 0};
         gbl_mainPane.rowHeights = new int[]{79, 405, 0};

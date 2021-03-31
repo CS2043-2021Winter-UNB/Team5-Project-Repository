@@ -14,8 +14,8 @@ public class Main {
 		ViewMemberControl viewMemberControl = new ViewMemberControl(dm);
 		ViewMemberUI viewMemberUI = new ViewMemberUI(viewMemberControl, loginControl);
 		
-		SearchMemberControl searchMemberControl = new SearchMemberControl(dm);
-		SearchMemberUI searchMemberUI = new SearchMemberUI(searchMemberControl);
+		//SearchMemberControl searchMemberControl = new SearchMemberControl(dm);
+		//SearchMemberUI searchMemberUI = new SearchMemberUI(searchMemberControl);
 	
 		LoginUI loginUI = new LoginUI(loginControl,editMemberUI);
 		
