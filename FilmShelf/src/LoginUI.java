@@ -31,6 +31,7 @@ public class LoginUI extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private LoginControl loginControl;
+	private MainUI mainUI;
 	private JRadioButton radioButtonAdmin;
 	private JRadioButton radioButtonMember;
 	private JButton loginButton;
@@ -194,7 +195,11 @@ public class LoginUI extends JPanel {
 	     gbc_buttonEditMember.gridy = 1;
 	     add(buttonEditMember, gbc_buttonEditMember);
 	     buttonEditMember.setVisible(false);
-
+	     
+	}
+	
+	public void setMain(MainUI mainUI) {
+		this.mainUI = mainUI;
 	}
 	
 	public void displayLoginForm() {
@@ -219,7 +224,7 @@ public class LoginUI extends JPanel {
 			loginStatus = loginControl.processAdminLogin(username, password);
 		}
 		if(loginStatus) {
-			displayLoginConfirmation();
+			mainUI.changeCreateAndLoginButtons();
 			return true;
 		
 		} else {

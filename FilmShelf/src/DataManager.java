@@ -144,12 +144,12 @@ public class DataManager {
 			uName = rs.getString(1);
 			firstName = rs.getString(3);
 			lastName = rs.getString(4);
-			description = rs.getString(10);
+			description = rs.getString(5);
 
-			//Adding movie IDs to array 
+			/*//Adding movie IDs to array 
 			for(int i = 5; i <= LAST_TOP_MOVIE_INDEX; i++){
 				movieIds.add(rs.getInt(i));
-			}
+			}*/
 		}
 		catch(SQLException e) {
 			System.out.println();
@@ -157,7 +157,7 @@ public class DataManager {
 			return null;
 		}
 		
-		try {
+		/*try {
 			//Create new statement for new call
 			Statement stmt2 = connection.createStatement();
 
@@ -183,7 +183,7 @@ public class DataManager {
 		catch(SQLException e) {
 			System.out.println("Top movies retrieval error: " + e.getMessage());
 			return null;
-		}
+		}*/
 			// Create MemberObject to return
 			return new MemberObject(uName, firstName, lastName, description, topMovies);
 	}

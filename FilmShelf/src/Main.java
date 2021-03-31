@@ -32,5 +32,7 @@ public class Main {
     
 		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI);
 		mainUI.setVisible(true);
+		
+		loginUI.setMain(mainUI);
 	}
 }
