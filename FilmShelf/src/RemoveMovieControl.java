@@ -7,16 +7,13 @@ public class RemoveMovieControl {
 
 	private DataManager dataManager;
 	private LoginControl loginControl;
-	private MovieObject movie;
-	
 
-	public RemoveMovieControl(DataManager dm, LoginControl loginControl, MovieObject movie) {
+	public RemoveMovieControl(DataManager dm, LoginControl loginControl) {
 		this.dataManager = dm;
 		this.loginControl = loginControl;
-		this.movie = movie;
 	}
 	
-	public boolean processRemoveMovie() {
+	public boolean processRemoveMovie(int movieId) {
 		
 		//check method name
 		AdminObject admin = loginControl.getCurrentAdmin();
@@ -27,7 +24,6 @@ public class RemoveMovieControl {
 		}
 		
 		//Call data manager to remove movie
-		return dataManager.removeMovie(movie.getMovieId());
-				
+		return dataManager.removeMovie(movieId);	
 	}
 }
