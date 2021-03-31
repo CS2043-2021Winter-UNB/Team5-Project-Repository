@@ -18,13 +18,16 @@ public class Main {
 		EditMemberControl editMemberControl = new EditMemberControl(dm,loginControl);
 		EditMemberUI editMemberUI = new EditMemberUI(editMemberControl);
 		
+		RemoveMemberControl removeMemberControl = new RemoveMemberControl(dm, loginControl);
+		RemoveMemberUI removeMemberUI = new RemoveMemberUI();
+		
 		ViewMemberControl viewMemberControl = new ViewMemberControl(dm);
-		ViewMemberUI viewMemberUI = new ViewMemberUI(viewMemberControl, loginControl);
+		ViewMemberUI viewMemberUI = new ViewMemberUI(viewMemberControl, loginControl,editMemberUI, removeMemberUI);
 		
 		//SearchMemberControl searchMemberControl = new SearchMemberControl(dm);
 		//SearchMemberUI searchMemberUI = new SearchMemberUI(searchMemberControl);
 	
-		LoginUI loginUI = new LoginUI(loginControl,editMemberUI);
+		LoginUI loginUI = new LoginUI(loginControl);
 		
 		
 		//SearchMovieControl searchMovieControl = new SearchMovieControl();

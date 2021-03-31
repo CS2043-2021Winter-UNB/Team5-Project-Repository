@@ -42,15 +42,13 @@ public class LoginUI extends JPanel {
 	private JTextField textFieldUsername;
 	private JPasswordField passwordField;
 	private JLabel labelLoginStatus;
-	private EditMemberUI editMemberUI;
 	private JCheckBox checkboxPasswordVisibility;
 
 	/**
 	 * Create the panel.
 	 */
-	public LoginUI(LoginControl control, EditMemberUI uiEditMember) {
+	public LoginUI(LoginControl control) {
 		loginControl = control;
-		editMemberUI = uiEditMember;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{50, 96, 91, 7, 65, 57, 59, 1, 0};
 		gridBagLayout.rowHeights = new int[]{23, 0, 0, 0, 0, 0, 0, 28, 0};
@@ -225,6 +223,7 @@ public class LoginUI extends JPanel {
 		}
 		if(loginStatus) {
 			mainUI.changeCreateAndLoginButtons();
+			setVisible(false);
 			return true;
 		
 		} else {
@@ -256,11 +255,6 @@ public class LoginUI extends JPanel {
 		{
 			passwordField.setEchoChar('*');
 		}
-	}
-
-	public void hide()
-	{
-		//this.setVisible(false);
 	}
 
 }

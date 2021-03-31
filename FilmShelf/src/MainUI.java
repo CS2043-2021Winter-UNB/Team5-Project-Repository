@@ -111,9 +111,9 @@ public class MainUI extends JFrame {
         mainPane.add(panelAccountButtons, gbc_panel2);
         
         GridBagLayout gbl_panel = new GridBagLayout();
-        gbl_panel.columnWidths = new int[]{0, 0, 0, 0};
+        gbl_panel.columnWidths = new int[]{0, 7};
         gbl_panel.rowHeights = new int[]{0, 0, 0, 0};
-        gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gbl_panel.columnWeights = new double[]{0.0, 0.0};
         gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
         panelAccountButtons.setLayout(gbl_panel);
 	     
@@ -126,13 +126,6 @@ public class MainUI extends JFrame {
 	     		editMemberUI.setVisible(false);
 	     		}
 	     });
-	    
-	     GridBagConstraints gbc_buttonCreateAccount = new GridBagConstraints();
-	     gbc_buttonCreateAccount.insets = new Insets(0, 0, 5, 0);
-	     gbc_buttonCreateAccount.anchor = GridBagConstraints.WEST;
-	     gbc_buttonCreateAccount.gridx = 4;
-	     gbc_buttonCreateAccount.gridy = 1;
-	     panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
 	     
         //login 
 	     buttonLogin = new JButton("Login");
@@ -145,13 +138,20 @@ public class MainUI extends JFrame {
 	      		editMemberUI.setVisible(false);
 	      	}
 	     });
-        
+	     
 
-        GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
-        gbc_buttonLogin.insets = new Insets(0, 0, 0, 5);
-        gbc_buttonLogin.gridx = 0;
-        gbc_buttonLogin.gridy = 0;
-        panelAccountButtons.add(buttonLogin, gbc_buttonLogin);    
+	     GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
+	     gbc_buttonLogin.insets = new Insets(0, 0, 5, 5);
+	     gbc_buttonLogin.gridx = 0;
+	     gbc_buttonLogin.gridy = 1;
+	     panelAccountButtons.add(buttonLogin, gbc_buttonLogin);    
+	    
+	     GridBagConstraints gbc_buttonCreateAccount = new GridBagConstraints();
+	     gbc_buttonCreateAccount.insets = new Insets(0, 0, 5, 0);
+	     gbc_buttonCreateAccount.anchor = GridBagConstraints.WEST;
+	     gbc_buttonCreateAccount.gridx = 2;
+	     gbc_buttonCreateAccount.gridy = 1;
+	     panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
 
         pack();
       
