@@ -1,7 +1,7 @@
 
 /******************************************************************************************************************************
  * MainUI
- * @author Sharon
+ * @author Sharon, Alejandra
  * Description:	This class is the main JFrame that hosts the use case JPanels. 
  ******************************************************************************************************************************/
 
@@ -23,9 +23,6 @@ import javax.swing.SwingConstants;
 
 public class MainUI extends JFrame {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel mainPane;
 	private LoginUI loginUI;
@@ -33,8 +30,8 @@ public class MainUI extends JFrame {
 	private CreateMemberUI createMemberUI;
 	private EditMemberUI editMemberUI;
 	private ViewMemberUI viewMemberUI;
+	private AddMovieUI addMovieUI;
 	private JButton buttonLogin;
-	//private JButton buttonEditMember;
 	private JButton buttonCreateAccount;
 	
 	
@@ -42,20 +39,21 @@ public class MainUI extends JFrame {
 	 * Create the frame.
 	 */
 
-	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount) {
+	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount, AddMovieUI uiAddMovie) {
 		loginUI = uiLog;
 		loginControl = controlLog;
 		createMemberUI = uiCreate;
 		editMemberUI =uiMember;
 		viewMemberUI = uiViewAccount;
+		addMovieUI = uiAddMovie;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    setSize(751, 521);
 		
-	    //MAIN PAIN
+	    //MAIN PANE
 	    mainPane = new JPanel();
-	
+	    
 		mainPane.setBorder(new EmptyBorder(5, 5, 5, 5 ));
 		setContentPane(mainPane);
 		//int width = 60;
@@ -95,10 +93,12 @@ public class MainUI extends JFrame {
         gbc_panel.gridx = 0;
         gbc_panel.gridy = 1;
        
+        //add UI classes to mainPane
         mainPane.add(loginUI, gbc_panel);
         mainPane.add(createMemberUI, gbc_panel);
         mainPane.add(editMemberUI,gbc_panel);
-       
+        mainPane.add(addMovieUI,gbc_panel);
+        
         //NEW PANEL
         JPanel panelAccountButtons = new JPanel();
         
@@ -165,33 +165,34 @@ public class MainUI extends JFrame {
 			//change login button to view member (shows username of member)
 			String username = loginControl.getCurrentMember().getUsername();
 			buttonLogin.setText(username); 
-			buttonLogin.removeActionListener(null);
+			ActionListener[] al1 = buttonLogin.getActionListeners();
+			buttonLogin.removeActionListener(al1[0]);
 	        buttonLogin.addActionListener(new ActionListener() {
 	        	public void actionPerformed(ActionEvent e) {
 	        		viewMemberUI.displayViewMemberAccount(username);
 	        	}
 	        });
 	        
-	        //change create account button to edit account 
+	        //get rid of create account button
 			buttonCreateAccount.setVisible(false);
-			buttonCreateAccount.removeActionListener(null);
+			ActionListener[] al2 = buttonCreateAccount.getActionListeners();
+			buttonCreateAccount.removeActionListener(al2[0]);
 		}
 		else if (loginControl.getCurrentAdmin() != null) {
+			
+			//hide the login button
 			buttonLogin.setVisible(false);
+			
+			//change the create account button to the add movie button
 			buttonCreateAccount.setText("Add Movie");
-			buttonCreateAccount.removeActionListener(null);
+			ActionListener[] al = buttonCreateAccount.getActionListeners();
+			buttonCreateAccount.removeActionListener(al[0]);
 	        buttonCreateAccount.addActionListener(new ActionListener() {
 	        	public void actionPerformed(ActionEvent e) {
-	        		// addMovieUI.displayAddMovieForm();
+	        		addMovieUI.displayAddMovieForm();
 	        	}
 	        });
 		}
 	}
 	
-	/*going to add better method to loginUI itself
-	public void removeLoginPanel() {
-		loginUI.setVisible(false);
-		mainPane.repaint();
-	}*/
-	     
 }
