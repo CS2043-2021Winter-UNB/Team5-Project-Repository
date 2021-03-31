@@ -17,7 +17,7 @@ public class DataManager {
 	private Connection connection;
 
 
-	//Jessie-Anne
+	//Jessie-Anne - set up DataManager and connects to the team5 DB
 	public DataManager() {
 		try {
 	        Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -225,18 +225,47 @@ public class DataManager {
 
 
 	//Jessie-Anne 
-	public boolean addMovie(){
-		//begin-user-code
-		//end-user-code
+	public boolean addMovie(String title, int releaseYear, String genre, int length){
+			//SQL query String 
+			String sqlQuery = "insert into Movie(title, releaseYear, genre, length) values('" + 
+								title + "'," + releaseYear ", '" + genre + "', " + length + ");";
+
+			//ResultSet
+			try {
+				//Create statement 
+				Statement stmt = connection.createStatement();
+
+				//ResultSet
+				int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			}
+			catch(SQLException e) {
+				System.out.println(e.getMessage());
+				return false;
+			}
+
+			return true;
 	}
 
 
 	//Jessie-Anne
 	public void removeMovie(int movieID) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+		//String query 
+				String sqlQuery = "delete from Movie where movieID = " + movieID + ";";
 
-		// end-user-code
+				try {
+					//create statement 
+					Statement stmt = connection.createStatement();
+
+					//Execute query
+					stmt.executeUpdate(sqlQuery);
+				}
+				catch(SQLException e) {
+					System.out.println(e.getMessage());
+					return false;
+				}
+
+				return true;
+			}
 	}
 
 
