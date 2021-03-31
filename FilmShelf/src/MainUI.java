@@ -29,10 +29,10 @@ public class MainUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel mainPane;
 	private LoginUI loginUI;
-	//private LoginControl loginControl;
+	private LoginControl loginControl;
 	private CreateMemberUI createMemberUI;
 	private EditMemberUI editMemberUI;
-	//private ViewMemberUI viewMemberUI;
+	private ViewMemberUI viewMemberUI;
 	private JButton buttonLogin;
 	//private JButton buttonEditMember;
 	private JButton buttonCreateAccount;
@@ -44,10 +44,10 @@ public class MainUI extends JFrame {
 
 	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount) {
 		loginUI = uiLog;
-		//loginControl = controlLog;
+		loginControl = controlLog;
 		createMemberUI = uiCreate;
 		editMemberUI =uiMember;
-		//viewMemberUI = uiViewAccount;
+		viewMemberUI = uiViewAccount;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -111,9 +111,9 @@ public class MainUI extends JFrame {
         mainPane.add(panelAccountButtons, gbc_panel2);
         
         GridBagLayout gbl_panel = new GridBagLayout();
-        gbl_panel.columnWidths = new int[]{0, 0, 0, 0};
+        gbl_panel.columnWidths = new int[]{0, 7};
         gbl_panel.rowHeights = new int[]{0, 0, 0, 0};
-        gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gbl_panel.columnWeights = new double[]{0.0, 0.0};
         gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
         panelAccountButtons.setLayout(gbl_panel);
 	     
@@ -126,13 +126,6 @@ public class MainUI extends JFrame {
 	     		editMemberUI.setVisible(false);
 	     		}
 	     });
-	    
-	     GridBagConstraints gbc_buttonCreateAccount = new GridBagConstraints();
-	     gbc_buttonCreateAccount.insets = new Insets(0, 0, 5, 0);
-	     gbc_buttonCreateAccount.anchor = GridBagConstraints.WEST;
-	     gbc_buttonCreateAccount.gridx = 4;
-	     gbc_buttonCreateAccount.gridy = 1;
-	     panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
 	     
         //login 
 	     buttonLogin = new JButton("Login");
@@ -145,49 +138,27 @@ public class MainUI extends JFrame {
 	      		editMemberUI.setVisible(false);
 	      	}
 	     });
-        
+	     
 
-        buttonLogin = new JButton("Login");
-        buttonLogin.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		loginUI.displayLoginForm();
-        	}
-        });
-        GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
-        gbc_buttonLogin.insets = new Insets(0, 0, 0, 5);
-        gbc_buttonLogin.gridx = 0;
-        gbc_buttonLogin.gridy = 0;
-        panelAccountButtons.add(buttonLogin, gbc_buttonLogin);
-        
-        buttonCreateAccount = new JButton("Create Account");
-        buttonCreateAccount.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		createMemberUI.displayCreateAccountForm();
-        	}
-        });
-        GridBagConstraints gbc_buttonCreateAccount = new GridBagConstraints();
-        gbc_buttonCreateAccount.gridx = 2;
-        gbc_buttonCreateAccount.gridy = 0;
-        panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
-        
-        JButton btnNewButton_1 = new JButton("make buttons switch");
-        btnNewButton_1.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		changeCreateAndLoginButtons();
-        	}
-        });
-        GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-        gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
-        gbc_btnNewButton_1.gridx = 1;
-        gbc_btnNewButton_1.gridy = 1;
-        mainPane.add(btnNewButton_1, gbc_btnNewButton_1);      
+	     GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
+	     gbc_buttonLogin.insets = new Insets(0, 0, 5, 5);
+	     gbc_buttonLogin.gridx = 0;
+	     gbc_buttonLogin.gridy = 1;
+	     panelAccountButtons.add(buttonLogin, gbc_buttonLogin);    
+	    
+	     GridBagConstraints gbc_buttonCreateAccount = new GridBagConstraints();
+	     gbc_buttonCreateAccount.insets = new Insets(0, 0, 5, 0);
+	     gbc_buttonCreateAccount.anchor = GridBagConstraints.WEST;
+	     gbc_buttonCreateAccount.gridx = 2;
+	     gbc_buttonCreateAccount.gridy = 1;
+	     panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
 
         pack();
       
 	}
 	
 	
-	private void changeCreateAndLoginButtons()
+	public void changeCreateAndLoginButtons()
 	{
 		if (loginControl.getCurrentMember() != null) { 
 			
@@ -202,13 +173,8 @@ public class MainUI extends JFrame {
 	        });
 	        
 	        //change create account button to edit account 
-			buttonCreateAccount.setText("Edit Account");
+			buttonCreateAccount.setVisible(false);
 			buttonCreateAccount.removeActionListener(null);
-	        buttonCreateAccount.addActionListener(new ActionListener() {
-	        	public void actionPerformed(ActionEvent e) {
-	        		//editAccountUI call here
-	        	}
-	        });
 		}
 		else if (loginControl.getCurrentAdmin() != null) {
 			buttonLogin.setVisible(false);
@@ -228,8 +194,4 @@ public class MainUI extends JFrame {
 		mainPane.repaint();
 	}*/
 	     
-	    
-        pack();
-      
-	}
 }

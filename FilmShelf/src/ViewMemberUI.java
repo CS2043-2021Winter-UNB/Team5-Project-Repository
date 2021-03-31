@@ -25,19 +25,24 @@ public class ViewMemberUI extends JPanel {
 
 	private ViewMemberControl viewMemberControl;
 	private LoginControl loginControl;
+	private EditMemberUI editMemberUI;
+	private RemoveMemberUI removeMemberUI;
 	private JLabel labelShowUsername;
 	private JLabel labelShowFirstName;
 	private JLabel labelShowLastName;
 	private JLabel labelShowDescription;
 	private JLabel[] labelMovies = new JLabel[5];
 	private JButton buttonRemoveAccount;
+	private JButton buttonEditMember;
 	
 	/**
 	 * Create the panel.
 	 */
-	public ViewMemberUI(ViewMemberControl controlViewAcc, LoginControl controlLogin) {
+	public ViewMemberUI(ViewMemberControl controlViewAcc, LoginControl controlLogin, EditMemberUI uiEditMember, RemoveMemberUI uiRemoveMember) {
 		viewMemberControl = controlViewAcc;
 		loginControl = controlLogin;
+		editMemberUI = uiEditMember;
+		removeMemberUI = uiRemoveMember;
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 141, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -50,9 +55,21 @@ public class ViewMemberUI extends JPanel {
 		buttonRemoveAccount = new JButton("Remove Account");
 		buttonRemoveAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//removeAccount.displayRemovalMemberWarning();
+				removeAccount.displayRemovalMemberWarning();
 			}
 		});
+		
+		buttonEditMember = new JButton("Edit Account");
+		buttonEditMember.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editMemberUI.displayEditAccountForm();
+			}
+		});
+		GridBagConstraints gbc_buttonEditMember = new GridBagConstraints();
+		gbc_buttonEditMember.insets = new Insets(0, 0, 5, 5);
+		gbc_buttonEditMember.gridx = 8;
+		gbc_buttonEditMember.gridy = 1;
+		add(buttonEditMember, gbc_buttonEditMember);
 		buttonRemoveAccount.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_buttonRemoveAccount = new GridBagConstraints();
 		gbc_buttonRemoveAccount.insets = new Insets(0, 0, 5, 5);
@@ -198,7 +215,7 @@ public class ViewMemberUI extends JPanel {
 	
 	public void displayViewMemberAccount(String username)
 	{
-		MemberObject member = viewMemberControl.retrieveAccount(username);
+		MemberObject member = viewMemberControl.getMemberAccount(username);
 		labelShowUsername.setText(username);
 		labelShowFirstName.setText(member.getFirstName());
 		labelShowLastName.setText(member.getLastName());
@@ -217,9 +234,15 @@ public class ViewMemberUI extends JPanel {
 		
 		//check if remove member button should be displayed.
 		//It should be displayed if the actor is an administrator or they are viewing their own member account.
-		if ((loginControl.getCurrentAdmin() != null) || (loginControl.getCurrentMember().getUsername() == username))
+		boolean isMember = (loginControl.getCurrentMember().getUsername() == username);
+		
+		if ((loginControl.getCurrentAdmin() != null) || isMember)
 		{
 			buttonRemoveAccount.setVisible(true);
+			if (isMember)
+			{
+				buttonEditMember.setVisible(true);
+			}
 		}
 		else
 		{
