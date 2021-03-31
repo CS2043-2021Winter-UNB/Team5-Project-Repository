@@ -52,7 +52,7 @@ public class DataManager {
 			int rowsUpdated = stmt.executeUpdate(sqlQuery);
 		}
 		catch(SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Add member error: " + e.getMessage());
 			return false;
 		}
 
@@ -94,7 +94,7 @@ public class DataManager {
 			}
 		}
 		catch(SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Edit member error: " + e.getMessage());
 			return false;
 		}
 
@@ -116,7 +116,7 @@ public class DataManager {
 			stmt.executeUpdate(sqlQuery);
 		}
 		catch(SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Remove member error: " + e.getMessage());
 			return false;
 		}
 
@@ -226,46 +226,44 @@ public class DataManager {
 
 	//Jessie-Anne 
 	public boolean addMovie(String title, int releaseYear, String genre, int length){
-			//SQL query String 
-			String sqlQuery = "insert into Movie(title, releaseYear, genre, length) values('" + 
-								title + "'," + releaseYear + ", '" + genre + "', " + length + ");";
+		//SQL query String 
+		String sqlQuery = "insert into Movie(title, releaseYear, genre, length) values('" +	title + "'," + releaseYear + ", '" + genre + "', " + length + ");";
+
+		//ResultSet
+		try {
+			//Create statement 
+			Statement stmt = connection.createStatement();
 
 			//ResultSet
-			try {
-				//Create statement 
-				Statement stmt = connection.createStatement();
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+		}
+		catch(SQLException e) {
+			System.out.println("Add movie error: " + e.getMessage());
+			return false;
+		}
 
-				//ResultSet
-				int rowsUpdated = stmt.executeUpdate(sqlQuery);
-			}
-			catch(SQLException e) {
-				System.out.println(e.getMessage());
-				return false;
-			}
-
-			return true;
+		return true;
 	}
 
 
 	//Jessie-Anne
-	public void removeMovie(int movieID) {
+	public boolean removeMovie(int movieID) {
 		//String query 
-				String sqlQuery = "delete from Movie where movieID = " + movieID + ";";
+		String sqlQuery = "delete from Movie where movieID = " + movieID + ";";
 
-				try {
-					//create statement 
-					Statement stmt = connection.createStatement();
+		try {
+			//create statement 
+			Statement stmt = connection.createStatement();
 
-					//Execute query
-					stmt.executeUpdate(sqlQuery);
-				}
-				catch(SQLException e) {
-					System.out.println(e.getMessage());
-					return false;
-				}
+			//Execute query
+			stmt.executeUpdate(sqlQuery);
+		}
+		catch(SQLException e) {
+			System.out.println("Remove movie error: " + e.getMessage());
+			return false;
+		}
 
-				return true;
-			}
+		return true;
 	}
 
 
