@@ -18,7 +18,7 @@ public class TestValidInput_validateFormInput_CreateMemberAccountControl {
 	}
 	
 	private DataManager dataManager;
-	private CreateMemberAccountControl createMemberAccountControl;
+	private CreateMemberControl createMemberAccountControl;
 	private String username;
 	private String password;
 	private String firstName;
@@ -30,7 +30,7 @@ public class TestValidInput_validateFormInput_CreateMemberAccountControl {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		dataManager = new DataManager();
-		createMemberAccountControl = new CreateMemberAccountControl(dataManager);
+		createMemberAccountControl = new CreateMemberControl(dataManager);
 	}
 	
 	@Test

@@ -19,18 +19,18 @@ public class TestValidInput_validateSearchInput_SearchAccountControl {
 			{""},											// test empty input
 			{"1234567890"},									// test number-only input
 			{"alllowercase"},								// test lowercase-only input
-			{"ALLUPPERCASE"},								// test uppercase-only input
+			{"ALLUPPERCASE"}								// test uppercase-only input
 		});
 	}
 	
 	private DataManager dataManager;
-	private SearchAccountControl searchAccountControl;
+	private SearchMemberControl searchAccountControl;
 	private String username;
 	
 	public TestValidInput_validateSearchInput_SearchAccountControl(String username) {
 		this.username = username;
 		dataManager = new DataManager();
-		searchAccountControl = new SearchAccountControl(dataManager);
+		searchAccountControl = new SearchMemberControl(dataManager);
 	}
 	
 	@Test

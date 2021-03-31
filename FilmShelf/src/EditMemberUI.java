@@ -1,5 +1,5 @@
 
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 
 	import javax.swing.JPanel;
 	import java.awt.GridBagLayout;
@@ -9,18 +9,21 @@ import java.awt.EventQueue;
 	import javax.swing.JTextField;
 	import javax.swing.JPasswordField;
 	import javax.swing.JButton;
-	import javax.swing.JRadioButton;
+	//import javax.swing.JRadioButton;
 	import javax.swing.JCheckBox;
 	import java.awt.event.ActionListener;
 	import java.awt.event.ActionEvent;
 	import javax.swing.SwingConstants;
-	//import windowBuilder.EditAccountControl;
-	import javax.swing.JFrame;
-	import java.awt.Color;
-	import javax.swing.JLayeredPane;
+	//import javax.swing.JFrame;
+	//import java.awt.Color;
+	//import javax.swing.JLayeredPane;
 	
 
 public class EditMemberUI extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private EditMemberControl editMemberControl;
 	private JPasswordField passwordField;
 	private JTextField textFieldFirstName;
@@ -30,7 +33,8 @@ public class EditMemberUI extends JPanel {
 	private JLabel labelEditAccountStatus;
 
 	public EditMemberUI(EditMemberControl control) {
-		setBackground(Color.LIGHT_GRAY);
+		setVisible(false);
+		//setBackground(Color.LIGHT_GRAY);
 		editMemberControl = control;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{71, 0, 100, 0, 0, 0, 0, 48, 0};
@@ -104,21 +108,15 @@ public class EditMemberUI extends JPanel {
 		gbc_labelLastName.gridy = 4;
 		add(labelLastName, gbc_labelLastName);
 		
-		JButton buttonEditAccount = new JButton("Edit Account");
-		buttonEditAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				extractAccountInfo();
-			}
-		});
-		
-		textFieldDescription = new JTextField();
-		GridBagConstraints gbc_textFieldDescription = new GridBagConstraints();
-		gbc_textFieldDescription.gridwidth = 3;
-		gbc_textFieldDescription.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldDescription.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldDescription.gridx = 3;
-		gbc_textFieldDescription.gridy = 4;
-		add(textFieldDescription, gbc_textFieldDescription);
+		textFieldLastName = new JTextField();
+		GridBagConstraints gbc_textFieldLastName = new GridBagConstraints();
+		gbc_textFieldLastName.gridwidth = 4;
+		gbc_textFieldLastName.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldLastName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldLastName.gridx = 2;
+		gbc_textFieldLastName.gridy = 4;
+		add(textFieldLastName, gbc_textFieldLastName);
+		textFieldLastName.setColumns(10);
 		
 		JLabel labelDescription = new JLabel("Description");
 		GridBagConstraints gbc_labelDescription= new GridBagConstraints();
@@ -128,22 +126,29 @@ public class EditMemberUI extends JPanel {
 		gbc_labelDescription.gridy = 5;
 		add(labelDescription, gbc_labelDescription);
 		
-		textFieldLastName = new JTextField();
-		GridBagConstraints gbc_textFieldLastName = new GridBagConstraints();
-		gbc_textFieldLastName.gridwidth = 3;
-		gbc_textFieldLastName.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldLastName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldLastName.gridx = 3;
-		gbc_textFieldLastName.gridy = 5;
-		add(textFieldLastName, gbc_textFieldLastName);
-		textFieldLastName.setColumns(10);
-		textFieldLastName.setColumns(10);
+		textFieldDescription = new JTextField();
+		GridBagConstraints gbc_textFieldDescription = new GridBagConstraints();
+		gbc_textFieldDescription.gridwidth = 4;
+		gbc_textFieldDescription.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldDescription.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldDescription.gridx = 2;
+		gbc_textFieldDescription.gridy = 5;
+		add(textFieldDescription, gbc_textFieldDescription);
+			
+		JButton buttonEditAccount = new JButton("Edit Account");
+		buttonEditAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				extractAccountInfo();
+			}
+		});
+		
 		GridBagConstraints gbc_buttonEditAccount = new GridBagConstraints();
 		gbc_buttonEditAccount.gridwidth = 6;
 		gbc_buttonEditAccount.insets = new Insets(0, 0, 5, 5);
 		gbc_buttonEditAccount.gridx = 1;
 		gbc_buttonEditAccount.gridy = 6;
 		add(buttonEditAccount, gbc_buttonEditAccount);
+		textFieldLastName.setColumns(10);
 		
 		labelEditAccountStatus = new JLabel("");
 		labelEditAccountStatus.setHorizontalAlignment(SwingConstants.CENTER);
@@ -157,6 +162,7 @@ public class EditMemberUI extends JPanel {
 	}
 
 	public void displayEditAccountForm() {
+		setVisible(true);
 	}
 	
 	private void extractAccountInfo(){
@@ -164,7 +170,7 @@ public class EditMemberUI extends JPanel {
 		String firstName = textFieldFirstName.getText();
 		String lastName = textFieldLastName.getText();
 		String description = textFieldDescription.getText();
-		
+		System.out.println(password+"  "+firstName+"  "+lastName+"  "+description);
 		if (editMemberControl.updateAccount(password,firstName,lastName,description)) {
 			displayEditAccountConfirmation();
 		}
