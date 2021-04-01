@@ -122,6 +122,7 @@ public class DataManager {
 	//Courtney and Jo (make changes based on top movies)
 	public MemberObject getMember(String username, String password) {
 		// Declaring variables
+		MemberObject member = null;
 		String uName = "";
 		String firstName = "";
 		String lastName = "";
@@ -145,6 +146,11 @@ public class DataManager {
 			firstName = rs.getString(3);
 			lastName = rs.getString(4);
 			description = rs.getString(5);
+			
+			// TEMPORARY: added line here to allow logging in to work for testing purposes
+			// Please REMOVE after getMember is updated
+			// Currently creates a MemberObject with an empty top movies list, will need actual top movies by end of dev
+			member = new MemberObject(uName, firstName, lastName, description, topMovies);
 
 			/*//Adding movie IDs to array 
 			for(int i = 5; i <= LAST_TOP_MOVIE_INDEX; i++){
@@ -179,21 +185,22 @@ public class DataManager {
 					topMovies.add(new MovieObject(movies.getString(1), movies.getInt(2), movies.getString(3), movies.getInt(5), movies.getDouble(6), movies.getInt(7)));	// will need to change when language attribute is removed from Movie table
 				}
 			}
+			
+			member = new MemberObject(uName, firstName, lastName, description, topMovies);
 		}
 		catch(SQLException e) {
 			System.out.println("Top movies retrieval error: " + e.getMessage());
 			return null;
 		}*/
 			// Create MemberObject to return
-			return new MemberObject(uName, firstName, lastName, description, topMovies);
+			return member;
 	}
 
 
 
 	//Courtney and Jo
 	public AdminObject getAdmin(String username, String password){
-
-		String uName = "";
+		AdminObject admin = null;
 
 		//SQL query String 
 		String sqlQuery = "select * from AdminAccount where username = '" + username + "' and password = sha1('" + password + "');";
@@ -206,14 +213,16 @@ public class DataManager {
 
 			//Assigning values to adminObject
 			rs.next();		// need to call to point cursor to first record
-			uName = rs.getString(1);
+			String uName = rs.getString(1);
+			admin = new AdminObject(uName);
 		}
 		catch(SQLException e) {
 			System.out.println("Admin login error: " + e.getMessage());
+			return null;
 		}
 
 		//return adminObject
-		return new AdminObject(uName);
+		return admin;
 	}
 
 	
