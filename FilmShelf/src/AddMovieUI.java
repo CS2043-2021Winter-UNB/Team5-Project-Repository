@@ -144,14 +144,13 @@ public class AddMovieUI extends JPanel {
 		gbc_labelAddMovieStatus.gridx = 0;
 		gbc_labelAddMovieStatus.gridy = 1;
 		panel.add(labelAddMovieStatus, gbc_labelAddMovieStatus);
+		
+		setVisible(false);
 	}
 	
 	
 	public void displayAddMovieForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		setVisible(true);
 	}
 	
 	public void extractMovieDetails() {

@@ -24,18 +24,20 @@ public class Main {
 		ViewMemberControl viewMemberControl = new ViewMemberControl(dm);
 		ViewMemberUI viewMemberUI = new ViewMemberUI(viewMemberControl, loginControl,editMemberUI, removeMemberUI);
 		
-		//SearchMemberControl searchMemberControl = new SearchMemberControl(dm);
-		//SearchMemberUI searchMemberUI = new SearchMemberUI(searchMemberControl);
+		SearchMemberControl searchMemberControl = new SearchMemberControl(dm);
+		SearchMemberUI searchMemberUI = new SearchMemberUI(searchMemberControl);
 	
 		LoginUI loginUI = new LoginUI(loginControl);
 		
 		
 		//SearchMovieControl searchMovieControl = new SearchMovieControl();
 		//SearchMovierUI searchMovieUI = new SearchMovieUI(searchMovieControl);
-    
-		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI);
-		mainUI.setVisible(true);
 		
+		AddMovieControl addMovieControl = new AddMovieControl(dm, loginControl);
+		AddMovieUI addMovieUI = new AddMovieUI(addMovieControl);
+    
+		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI,addMovieUI);
+		mainUI.setVisible(true);
 		loginUI.setMain(mainUI);
 	}
 }
