@@ -10,20 +10,28 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.text.NumberFormatter;
+
 import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JSpinner;
 
 public class AddMovieUI extends JPanel {
 	private AddMovieControl addMovieControl;
 	private JTextField textFieldTitle;
 	private JComboBox<Integer> comboBoxYear;
 	private JComboBox<String> comboBoxGenre;
+	private JSpinner spinnerLength; 
+	private JLabel labelAddMovieStatus;
 	
 	/**
 	 * Create the panel.
@@ -39,7 +47,7 @@ public class AddMovieUI extends JPanel {
 		setLayout(gridBagLayout);
 		
 		//Title label
-		JLabel labelTitle = new JLabel("Title:");
+		JLabel labelTitle = new JLabel("Title: ");
 		GridBagConstraints gbc_labelTitle = new GridBagConstraints();
 		gbc_labelTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_labelTitle.gridx = 3;
@@ -57,7 +65,7 @@ public class AddMovieUI extends JPanel {
 		textFieldTitle.setColumns(10);
 		
 		//Year label
-		JLabel labelYear = new JLabel("Year");
+		JLabel labelYear = new JLabel("Release Year: ");
 		GridBagConstraints gbc_labelYear = new GridBagConstraints();
 		gbc_labelYear.insets = new Insets(0, 0, 5, 5);
 		gbc_labelYear.gridx = 3;
@@ -66,7 +74,7 @@ public class AddMovieUI extends JPanel {
 		
 		//Initialize valid years (1910 to the current year)
 		ArrayList<Integer> years = new ArrayList<Integer>();
-		for (int year = 1910; year <= Calendar.getInstance().get(Calendar.YEAR); year++)
+		for (int year = Calendar.getInstance().get(Calendar.YEAR); year >= 1910; year--)
 		{
 			years.add(Integer.valueOf(year));
 		}
@@ -81,7 +89,7 @@ public class AddMovieUI extends JPanel {
 		add(comboBoxYear, gbc_comboBoxYear);
 		
 		//Genre label
-		JLabel labelGenre = new JLabel("Genre:");
+		JLabel labelGenre = new JLabel("Genre: ");
 		GridBagConstraints gbc_labelGenre = new GridBagConstraints();
 		gbc_labelGenre.insets = new Insets(0, 0, 5, 5);
 		gbc_labelGenre.gridx = 3;
@@ -102,12 +110,26 @@ public class AddMovieUI extends JPanel {
 		
 		
 		//Length label
-		JLabel labelLength = new JLabel("Length");
+		JLabel labelLength = new JLabel("Length: ");
 		GridBagConstraints gbc_labelLength = new GridBagConstraints();
 		gbc_labelLength.insets = new Insets(0, 0, 5, 5);
 		gbc_labelLength.gridx = 3;
 		gbc_labelLength.gridy = 5;
 		add(labelLength, gbc_labelLength);
+		
+		//SpinnerNumberModel format: initial value, min, max, step
+		SpinnerModel model = new SpinnerNumberModel(60, 1, 500,1); 
+		spinnerLength = new JSpinner(model);
+		//make it so only numbers can be entered into the spinner textfield
+		spinnerLength.setEditor(new JSpinner.NumberEditor(spinnerLength,"###"));
+		JFormattedTextField txt = ((JSpinner.NumberEditor) spinnerLength.getEditor()).getTextField();
+		((NumberFormatter) txt.getFormatter()).setAllowsInvalid(false);
+		
+		GridBagConstraints gbc_spinnerLength = new GridBagConstraints();
+		gbc_spinnerLength.insets = new Insets(0, 0, 5, 5);
+		gbc_spinnerLength.gridx = 5;
+		gbc_spinnerLength.gridy = 5;
+		add(spinnerLength, gbc_spinnerLength);
 		
 		//Another panel for the add movie button and success/error label so they will be centered properly
 		JPanel panel = new JPanel();
@@ -139,7 +161,7 @@ public class AddMovieUI extends JPanel {
 		panel.add(buttonAddMovie, gbc_buttonAddMovie);
 		
 		//Movie addition success/error label
-		JLabel labelAddMovieStatus = new JLabel("");
+		labelAddMovieStatus = new JLabel("");
 		GridBagConstraints gbc_labelAddMovieStatus = new GridBagConstraints();
 		gbc_labelAddMovieStatus.gridx = 0;
 		gbc_labelAddMovieStatus.gridy = 1;
@@ -150,19 +172,39 @@ public class AddMovieUI extends JPanel {
 	
 	
 	public void displayAddMovieForm() {
+		//clear fields before redisplaying
+		textFieldTitle.setText("");
+		
+		//display the form
 		setVisible(true);
 	}
 	
 	public void extractMovieDetails() {
-		//get input out of textfields/comboboxes
-		//processAddMovie(title, year, genre, yearOfRelease);
+		String title = textFieldTitle.getText();
+		//check if title is blank
+		if (title.trim().isEmpty())
+		{
+			labelAddMovieStatus.setText("The title must non-blank to add a movie");
+		}
+		
+		int releaseYear = Integer.parseInt(comboBoxYear.getSelectedItem().toString());
+		String genre = comboBoxGenre.getSelectedItem().toString();
+		int length = (int) spinnerLength.getValue();
+		
+		boolean addResult = addMovieControl.processAddMovie(title, releaseYear, genre, length);
+		if (addResult){
+			displayAddMovieConfirmation();
+		}
+		else {
+			displayAddMovieFailure();
+		}
 	}
 
 	public void displayAddMovieConfirmation() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		labelAddMovieStatus.setText("Movie successfully added!");
 	}
-
+	
+	public void displayAddMovieFailure() {
+		labelAddMovieStatus.setText("Movie was not successfully added");
+	}
 }
