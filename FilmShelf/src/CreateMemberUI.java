@@ -50,6 +50,8 @@ public class CreateMemberUI extends JPanel {
 		
 		//Username textfield
 		textFieldUsername = new JTextField();
+		//tooltip to show username requirements
+		textFieldUsername.setToolTipText("6-25 characters, no special symbols");
 		GridBagConstraints gbc_textFieldUsername = new GridBagConstraints();
 		gbc_textFieldUsername.gridwidth = 3;
 		gbc_textFieldUsername.insets = new Insets(0, 0, 5, 5);
@@ -70,6 +72,7 @@ public class CreateMemberUI extends JPanel {
 		
 		//Password field
 		passwordField = new JPasswordField();
+		passwordField.setToolTipText("8 characters minimum, contain uppercase letter, lowercase letter, number, special character");
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.gridwidth = 3;
 		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
@@ -177,11 +180,19 @@ public class CreateMemberUI extends JPanel {
 		String password = new String(passwordField.getPassword());
 		String firstName = textFieldFirstName.getText();
 		String lastName = textFieldLastName.getText();
-		if (createMemberControl.createMemberAccount(username,password,firstName,lastName)) {
-			displayAccountCreationConfirmation();
+		
+		//check if fields are empty
+		if (username.trim().isEmpty() || password.trim().isEmpty() || firstName.trim().isEmpty() || lastName.trim().isEmpty())
+		{
+			labelCreateAccountStatus.setText("Fields must non-blank to create an account");
 		}
 		else {
-			displayAccountCreationError();
+			if (createMemberControl.createMemberAccount(username,password,firstName,lastName)) {
+				displayAccountCreationConfirmation();
+			}
+			else {
+				displayAccountCreationError();
+			}
 		}
 	}
 

@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
+import javax.swing.SwingConstants;
 
 public class AddMovieUI extends JPanel {
 	private AddMovieControl addMovieControl;
@@ -40,9 +41,9 @@ public class AddMovieUI extends JPanel {
 		addMovieControl = controlAdd;
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{27, 0, 2, 0, 26, 0};
+		gridBagLayout.columnWidths = new int[]{27, 0, 2, 25, 50, 40, 0, 26, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 15, 32, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -57,6 +58,7 @@ public class AddMovieUI extends JPanel {
 		//Title textfield
 		textFieldTitle = new JTextField();
 		GridBagConstraints gbc_textFieldTitle = new GridBagConstraints();
+		gbc_textFieldTitle.gridwidth = 4;
 		gbc_textFieldTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldTitle.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldTitle.gridx = 3;
@@ -83,6 +85,7 @@ public class AddMovieUI extends JPanel {
 		//Year drop down menu
 		comboBoxYear = new JComboBox(years.toArray());
 		GridBagConstraints gbc_comboBoxYear = new GridBagConstraints();
+		gbc_comboBoxYear.gridwidth = 4;
 		gbc_comboBoxYear.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxYear.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxYear.gridx = 3;
@@ -103,6 +106,7 @@ public class AddMovieUI extends JPanel {
 		//Genre drop down menu
 		comboBoxGenre = new JComboBox(genreList);
 		GridBagConstraints gbc_comboBoxGenre = new GridBagConstraints();
+		gbc_comboBoxGenre.gridwidth = 4;
 		gbc_comboBoxGenre.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxGenre.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxGenre.gridx = 3;
@@ -118,8 +122,8 @@ public class AddMovieUI extends JPanel {
 		gbc_labelLength.gridy = 5;
 		add(labelLength, gbc_labelLength);
 		
-		//SpinnerNumberModel format: initial value, min, max, step
-		SpinnerModel model = new SpinnerNumberModel(60, 1, 500,1); 
+		//Movie Length JSpinner
+		SpinnerModel model = new SpinnerNumberModel(60, 1, 500,1); 		//SpinnerNumberModel format: initial value, min, max, step
 		spinnerLength = new JSpinner(model);
 		//make it so only numbers can be entered into the spinner textfield
 		spinnerLength.setEditor(new JSpinner.NumberEditor(spinnerLength,"###"));
@@ -128,14 +132,22 @@ public class AddMovieUI extends JPanel {
 		
 		GridBagConstraints gbc_spinnerLength = new GridBagConstraints();
 		gbc_spinnerLength.insets = new Insets(0, 0, 5, 5);
-		gbc_spinnerLength.gridx = 3;
+		gbc_spinnerLength.gridx = 4;
 		gbc_spinnerLength.gridy = 5;
 		add(spinnerLength, gbc_spinnerLength);
+		
+		JLabel lblNewLabel = new JLabel("mins");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 5;
+		gbc_lblNewLabel.gridy = 5;
+		add(lblNewLabel, gbc_lblNewLabel);
 		
 		//Another panel for the add movie button and success/error label so they will be centered properly
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.gridwidth = 3;
+		gbc_panel.gridwidth = 6;
 		gbc_panel.insets = new Insets(0, 0, 5, 5);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 1;

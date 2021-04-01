@@ -191,20 +191,27 @@ public class LoginUI extends JPanel {
 	public void extractLoginCredentials() {
 		String username = textFieldUsername.getText();
 		String password = new String(passwordField.getPassword());
-		boolean loginStatus;
-		if (member){
-			displayLoginErrorMessage();
-			loginStatus = loginControl.processMemberLogin(username, password);
-		}
-		else{
-			loginStatus = loginControl.processAdminLogin(username, password);
-		}
-		if(loginStatus) {
-			mainUI.changeCreateAndLoginButtons();
-			setVisible(false);
 		
-		} else {
-			displayLoginErrorMessage();
+		//check if fields are blank
+		if (username.trim().isEmpty() || password.trim().isEmpty()) {
+			labelLoginStatus.setText("Fields must non-blank to login");
+		}
+		else {
+			boolean loginStatus;
+			if (member){
+				displayLoginErrorMessage();
+				loginStatus = loginControl.processMemberLogin(username, password);
+			}
+			else{
+				loginStatus = loginControl.processAdminLogin(username, password);
+			}
+			if(loginStatus) {
+				mainUI.changeCreateAndLoginButtons();
+				setVisible(false);
+			
+			} else {
+				displayLoginErrorMessage();
+			}
 		}
 	}
 	
