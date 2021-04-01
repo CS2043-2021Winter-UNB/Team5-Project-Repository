@@ -14,15 +14,15 @@ public class RemoveRatingControl {
 		this.loginControl = loginControl;
 	}
 	
-	public boolean processRemoveRating(MovieObject movie) {
+	public boolean processRemoveRating(int movieId) {
 		MemberObject member = loginControl.getCurrentMember();
 	
-		// only permit addition of movie if member is logged in
+		// only permit removal of rating if member is logged in
 		if (member == null) {
 			return false;
 		}
 			
-		return dataManager.removeMovieRating(member, movie);
+		return dataManager.removeMovieRating(member.getUsername(), movieId);
 		//NOTE TO FRONT-END: UI needs to call processViewMovie() in Control to update ratings
 	}
 }
