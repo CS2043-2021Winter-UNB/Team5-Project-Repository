@@ -28,7 +28,7 @@ import javax.swing.JSpinner;
 public class AddMovieUI extends JPanel {
 	private AddMovieControl addMovieControl;
 	private JTextField textFieldTitle;
-	private JComboBox<Integer> comboBoxYear;
+	private JComboBox<String> comboBoxYear;
 	private JComboBox<String> comboBoxGenre;
 	private JSpinner spinnerLength; 
 	private JLabel labelAddMovieStatus;
@@ -40,17 +40,17 @@ public class AddMovieUI extends JPanel {
 		addMovieControl = controlAdd;
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 2, 0, 8, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 41, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{27, 0, 2, 0, 26, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 15, 32, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		//Title label
 		JLabel labelTitle = new JLabel("Title: ");
 		GridBagConstraints gbc_labelTitle = new GridBagConstraints();
 		gbc_labelTitle.insets = new Insets(0, 0, 5, 5);
-		gbc_labelTitle.gridx = 3;
+		gbc_labelTitle.gridx = 1;
 		gbc_labelTitle.gridy = 2;
 		add(labelTitle, gbc_labelTitle);
 		
@@ -59,7 +59,7 @@ public class AddMovieUI extends JPanel {
 		GridBagConstraints gbc_textFieldTitle = new GridBagConstraints();
 		gbc_textFieldTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldTitle.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldTitle.gridx = 5;
+		gbc_textFieldTitle.gridx = 3;
 		gbc_textFieldTitle.gridy = 2;
 		add(textFieldTitle, gbc_textFieldTitle);
 		textFieldTitle.setColumns(10);
@@ -68,15 +68,16 @@ public class AddMovieUI extends JPanel {
 		JLabel labelYear = new JLabel("Release Year: ");
 		GridBagConstraints gbc_labelYear = new GridBagConstraints();
 		gbc_labelYear.insets = new Insets(0, 0, 5, 5);
-		gbc_labelYear.gridx = 3;
+		gbc_labelYear.gridx = 1;
 		gbc_labelYear.gridy = 3;
 		add(labelYear, gbc_labelYear);
 		
 		//Initialize valid years (1910 to the current year)
-		ArrayList<Integer> years = new ArrayList<Integer>();
+		ArrayList<String> years = new ArrayList<String>();
+		years.add("Select a release year");
 		for (int year = Calendar.getInstance().get(Calendar.YEAR); year >= 1910; year--)
 		{
-			years.add(Integer.valueOf(year));
+			years.add(String.valueOf(year));
 		}
 		
 		//Year drop down menu
@@ -84,7 +85,7 @@ public class AddMovieUI extends JPanel {
 		GridBagConstraints gbc_comboBoxYear = new GridBagConstraints();
 		gbc_comboBoxYear.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxYear.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxYear.gridx = 5;
+		gbc_comboBoxYear.gridx = 3;
 		gbc_comboBoxYear.gridy = 3;
 		add(comboBoxYear, gbc_comboBoxYear);
 		
@@ -92,19 +93,19 @@ public class AddMovieUI extends JPanel {
 		JLabel labelGenre = new JLabel("Genre: ");
 		GridBagConstraints gbc_labelGenre = new GridBagConstraints();
 		gbc_labelGenre.insets = new Insets(0, 0, 5, 5);
-		gbc_labelGenre.gridx = 3;
+		gbc_labelGenre.gridx = 1;
 		gbc_labelGenre.gridy = 4;
 		add(labelGenre, gbc_labelGenre);
 		
 		//initializing available genres
-		String[] genreList = {"Action", "Adventure","Animation","Comedy","Crime","Documentary","Drama","Horror","Thriller","Romance","Science Fiction","Fantasy","War","Western"};
+		String[] genreList = {"Select a genre","Action", "Adventure","Animation","Comedy","Crime","Documentary","Drama","Horror","Thriller","Romance","Science Fiction","Fantasy","War","Western"};
 		
 		//Genre drop down menu
-		comboBoxGenre = new JComboBox(genreList); 
+		comboBoxGenre = new JComboBox(genreList);
 		GridBagConstraints gbc_comboBoxGenre = new GridBagConstraints();
 		gbc_comboBoxGenre.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxGenre.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxGenre.gridx = 5;
+		gbc_comboBoxGenre.gridx = 3;
 		gbc_comboBoxGenre.gridy = 4;
 		add(comboBoxGenre, gbc_comboBoxGenre);
 		
@@ -113,7 +114,7 @@ public class AddMovieUI extends JPanel {
 		JLabel labelLength = new JLabel("Length: ");
 		GridBagConstraints gbc_labelLength = new GridBagConstraints();
 		gbc_labelLength.insets = new Insets(0, 0, 5, 5);
-		gbc_labelLength.gridx = 3;
+		gbc_labelLength.gridx = 1;
 		gbc_labelLength.gridy = 5;
 		add(labelLength, gbc_labelLength);
 		
@@ -127,7 +128,7 @@ public class AddMovieUI extends JPanel {
 		
 		GridBagConstraints gbc_spinnerLength = new GridBagConstraints();
 		gbc_spinnerLength.insets = new Insets(0, 0, 5, 5);
-		gbc_spinnerLength.gridx = 5;
+		gbc_spinnerLength.gridx = 3;
 		gbc_spinnerLength.gridy = 5;
 		add(spinnerLength, gbc_spinnerLength);
 		
@@ -137,8 +138,8 @@ public class AddMovieUI extends JPanel {
 		gbc_panel.gridwidth = 3;
 		gbc_panel.insets = new Insets(0, 0, 5, 5);
 		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 3;
-		gbc_panel.gridy = 6;
+		gbc_panel.gridx = 1;
+		gbc_panel.gridy = 7;
 		add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0};
@@ -181,22 +182,25 @@ public class AddMovieUI extends JPanel {
 	
 	public void extractMovieDetails() {
 		String title = textFieldTitle.getText();
-		//check if title is blank
-		if (title.trim().isEmpty())
-		{
-			labelAddMovieStatus.setText("The title must non-blank to add a movie");
-		}
-		
-		int releaseYear = Integer.parseInt(comboBoxYear.getSelectedItem().toString());
+		String year = comboBoxYear.getSelectedItem().toString();
 		String genre = comboBoxGenre.getSelectedItem().toString();
-		int length = (int) spinnerLength.getValue();
 		
-		boolean addResult = addMovieControl.processAddMovie(title, releaseYear, genre, length);
-		if (addResult){
-			displayAddMovieConfirmation();
+		//check if fields are blank
+		if (title.trim().isEmpty() || year.equals("Select a release year") || genre.equals("Select a genre"))
+		{
+			labelAddMovieStatus.setText("Fields must non-blank to add a movie");
 		}
 		else {
-			displayAddMovieFailure();
+			int releaseYear = Integer.parseInt(year);
+			int length = (int) spinnerLength.getValue();
+			
+			boolean addResult = addMovieControl.processAddMovie(title, releaseYear, genre, length);
+			if (addResult){
+				displayAddMovieConfirmation();
+			}
+			else {
+				displayAddMovieFailure();
+			}
 		}
 	}
 
@@ -205,6 +209,6 @@ public class AddMovieUI extends JPanel {
 	}
 	
 	public void displayAddMovieFailure() {
-		labelAddMovieStatus.setText("Movie was not successfully added");
+		labelAddMovieStatus.setText("Movie was not added");
 	}
 }
