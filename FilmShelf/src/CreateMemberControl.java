@@ -14,10 +14,12 @@ public class CreateMemberControl {
 	private Pattern lowercasePattern;
 	private Pattern numberPattern;
 	private Pattern specialCharacterPattern;
+	private Pattern namePattern;
 	private Matcher uppercaseMatcher;
 	private Matcher lowercaseMatcher;
 	private Matcher numberMatcher;
 	private Matcher specialCharacterMatcher;
+	private Matcher nameMatcher;
 	
 	// class constructor
 	public CreateMemberControl(DataManager dataManager) {
@@ -26,6 +28,7 @@ public class CreateMemberControl {
 		this.lowercasePattern = Pattern.compile("[a-z]");					// matches lowercase letters
 		this.numberPattern = Pattern.compile("[0-9]");						// matches numbers
 		this.specialCharacterPattern = Pattern.compile("[^A-Za-z0-9]");		// matches special characters
+		this.namePattern = Pattern.compile("[^A-Za-z0-9\\-]");				// matches special characters except -
 	}
 
 	// Jo: parameters based on MemberAccount table attributes
@@ -69,9 +72,9 @@ public class CreateMemberControl {
 			// maximum 25 characters
 			// no numbers or special characters
 		numberMatcher = numberPattern.matcher(fName);
-		specialCharacterMatcher = specialCharacterPattern.matcher(fName);
+		nameMatcher = namePattern.matcher(fName);
 	
-		if(numberMatcher.find() || specialCharacterMatcher.find() || (fName.length() > 25) || (fName.length() < 1)) {
+		if(numberMatcher.find() || nameMatcher.find() || (fName.length() > 25) || (fName.length() < 1)) {
 			return false;
 		}
 	
@@ -80,9 +83,9 @@ public class CreateMemberControl {
 			// maximum 25 characters
 			// no numbers or special characters
 		numberMatcher = numberPattern.matcher(lName);
-		specialCharacterMatcher = specialCharacterPattern.matcher(lName);
+		nameMatcher = namePattern.matcher(lName);
 	
-		if(numberMatcher.find() || specialCharacterMatcher.find() || (lName.length() > 25) || (lName.length() < 1)) {
+		if(numberMatcher.find() || nameMatcher.find() || (lName.length() > 25) || (lName.length() < 1)) {
 			return false;
 		}
 		

@@ -15,10 +15,12 @@ public class EditMemberControl {
 	private Pattern lowercasePattern;
 	private Pattern numberPattern;
 	private Pattern specialCharacterPattern;
+	private Pattern namePattern;
 	private Matcher uppercaseMatcher;
 	private Matcher lowercaseMatcher;
 	private Matcher numberMatcher;
 	private Matcher specialCharacterMatcher;
+	private Matcher nameMatcher;
 	
 	// class constructor
 	public EditMemberControl(DataManager dataManager, LoginControl loginControl) {
@@ -28,6 +30,7 @@ public class EditMemberControl {
 		this.lowercasePattern = Pattern.compile("[a-z]");					// matches lowercase letters
 		this.numberPattern = Pattern.compile("[0-9]");						// matches numbers
 		this.specialCharacterPattern = Pattern.compile("[^A-Za-z0-9]");		// matches special characters
+		this.namePattern = Pattern.compile("[^A-Za-z0-9\\-]");				// matches special characters except -
 	}
 
 	public boolean validateFormInput(MemberObject member, String password, String firstName, String lastName, String description) {
@@ -79,9 +82,9 @@ public class EditMemberControl {
 			// no numbers or special characters
 		if(!fName.strip().isEmpty() && !fName.equals(member.getFirstName())) {
 			numberMatcher = numberPattern.matcher(fName);
-			specialCharacterMatcher = specialCharacterPattern.matcher(fName);
+			nameMatcher = namePattern.matcher(fName);
 		
-			if(numberMatcher.find() || specialCharacterMatcher.find() || (fName.length() > 25) || (fName.length() < 1)) {
+			if(numberMatcher.find() || nameMatcher.find() || (fName.length() > 25) || (fName.length() < 1)) {
 				return false;
 			}
 		}
@@ -92,18 +95,20 @@ public class EditMemberControl {
 			// no numbers or special characters
 		if(!lName.strip().isEmpty() && !lName.equals(member.getLastName())) {
 			numberMatcher = numberPattern.matcher(lName);
-			specialCharacterMatcher = specialCharacterPattern.matcher(lName);
+			nameMatcher = namePattern.matcher(lName);
 		
-			if(numberMatcher.find() || specialCharacterMatcher.find() || (lName.length() > 25) || (lName.length() < 1)) {
+			if(numberMatcher.find() || nameMatcher.find() || (lName.length() > 25) || (lName.length() < 1)) {
 				return false;
 			}
 		}
 		
 		// check description
 			// maximum 280 characters
-			// minimum 0 characters
-		if(desc.length() > 280) {
-			return false;
+			// minimum 1 character
+		if(!desc.strip().isEmpty() && !desc.equals(member.getDescription())) {
+			if((desc.length() > 280) || (desc.length() < 1)) {
+				return false;
+			}
 		}
 		
 		return true;	// if this line is reached, input is valid
@@ -130,9 +135,7 @@ public class EditMemberControl {
 		// if input invalid, return false
 		if(!inputIsValid) {
 			accountUpdated = false;
-			System.out.print("Hello!");
-		} 
-		else if(inputIsValid) {		// if input valid, call editAccount from DataManager
+		} else {		// if input valid, call editAccount from DataManager
 			// default values to pass to DataManager in case of null/empty inputs
 			String pWord = null;
 			String fName = member.getFirstName();
@@ -149,7 +152,7 @@ public class EditMemberControl {
 			if(lastName != null && !lastName.strip().isEmpty()) {
 				lName = lastName.strip();
 			}
-			if(description != null) {
+			if(description != null && !description.strip().isEmpty()) {
 				desc = description.strip();
 			}
 			

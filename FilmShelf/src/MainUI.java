@@ -1,13 +1,9 @@
 
 /******************************************************************************************************************************
  * MainUI
- * @author Sharon
+ * @author Sharon, Alejandra
  * Description:	This class is the main JFrame that hosts the use case JPanels. 
  ******************************************************************************************************************************/
-//import java.awt.BorderLayout;
-//import java.awt.Dimension;
-//import java.awt.EventQueue;
-//import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,40 +24,38 @@ import javax.swing.SwingConstants;
 
 public class MainUI extends JFrame {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel mainPane;
 	private LoginUI loginUI;
-	//private LoginControl loginControl;
+	private LoginControl loginControl;
 	private CreateMemberUI createMemberUI;
 	private EditMemberUI editMemberUI;
 	private SearchMemberUI searchMemberUI;
-	//private ViewMemberUI viewMemberUI;
+	private ViewMemberUI viewMemberUI;
+	private AddMovieUI addMovieUI;
 	private JButton buttonLogin;
-	//private JButton buttonEditMember;
 	private JButton buttonCreateAccount;
 	private JButton buttonSearchAccount;
 	
 	/**
 	 * Create the frame.
 	 */
-	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount, SearchMemberUI uiSearch) {
+	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount, SearchMemberUI uiSearch,AddMovieUI uiAddMovie) {
 		loginUI = uiLog;
-		//loginControl = controlLog;
+		loginControl = controlLog;
 		createMemberUI = uiCreate;
 		editMemberUI =uiMember;
 		searchMemberUI =uiSearch;
-		//viewMemberUI = uiViewAccount;
+		viewMemberUI = uiViewAccount;
+		addMovieUI = uiAddMovie;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    setSize(751, 521);
 		
-	    //MAIN PAIN
+	    //MAIN PANE
 	    mainPane = new JPanel();
-	
+	    
 		mainPane.setBorder(new EmptyBorder(5, 5, 5, 5 ));
 		setContentPane(mainPane);
 		//int width = 60;
@@ -85,6 +79,7 @@ public class MainUI extends JFrame {
         mainPane.add(createMemberUI, gbc_Panel);
         mainPane.add(searchMemberUI,gbc_Panel);
         mainPane.add(editMemberUI,gbc_Panel);
+        mainPane.add(addMovieUI,gbc_Panel);
     
         
 	     
@@ -97,7 +92,7 @@ public class MainUI extends JFrame {
         gbc_labelFilmShelf.gridx = 0;
         gbc_labelFilmShelf.gridy = 0;
         mainPane.add(labelFilmShelf, gbc_labelFilmShelf);
-       
+
         //NEW PANEL
         JPanel panelAccountButtons = new JPanel();
         
@@ -110,9 +105,9 @@ public class MainUI extends JFrame {
         mainPane.add(panelAccountButtons, gbc_panel2);
         
         GridBagLayout gbl_panel = new GridBagLayout();
-        gbl_panel.columnWidths = new int[]{0, 0, 0, 0};
+        gbl_panel.columnWidths = new int[]{0, 7};
         gbl_panel.rowHeights = new int[]{0, 0, 0, 0};
-        gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gbl_panel.columnWeights = new double[]{0.0, 0.0};
         gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
         panelAccountButtons.setLayout(gbl_panel);
 	     
@@ -133,6 +128,7 @@ public class MainUI extends JFrame {
 	     gbc_buttonCreateAccount.gridx = 4;
 	     gbc_buttonCreateAccount.gridy = 1;
 	     panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
+
 	     
 	     //Extra buttons
 	     JButton btnNewButton_2 = new JButton("back");
@@ -170,15 +166,54 @@ public class MainUI extends JFrame {
 	      		searchMemberUI.setVisible(false);
 	      	}
 	     });
-        
+	     
+
 	     GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
-	     gbc_buttonLogin.anchor = GridBagConstraints.EAST;
 	     gbc_buttonLogin.insets = new Insets(0, 0, 5, 5);
-	     gbc_buttonLogin.gridx = 2;
+	     gbc_buttonLogin.gridx = 0;
 	     gbc_buttonLogin.gridy = 1;
 	     panelAccountButtons.add(buttonLogin, gbc_buttonLogin);
 	     
         pack();
       
 	}
+	
+	
+	public void changeCreateAndLoginButtons()
+	{
+		if (loginControl.getCurrentMember() != null) { 
+			
+			//change login button to view member (shows username of member)
+			String username = loginControl.getCurrentMember().getUsername();
+			buttonLogin.setText(username); 
+			ActionListener[] al1 = buttonLogin.getActionListeners();
+			buttonLogin.removeActionListener(al1[0]);
+	        buttonLogin.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		viewMemberUI.displayViewMemberAccount(username);
+	        	}
+	        });
+	        
+	        //get rid of create account button
+			buttonCreateAccount.setVisible(false);
+			ActionListener[] al2 = buttonCreateAccount.getActionListeners();
+			buttonCreateAccount.removeActionListener(al2[0]);
+		}
+		else if (loginControl.getCurrentAdmin() != null) {
+			
+			//hide the login button
+			buttonLogin.setVisible(false);
+			
+			//change the create account button to the add movie button
+			buttonCreateAccount.setText("Add Movie");
+			ActionListener[] al = buttonCreateAccount.getActionListeners();
+			buttonCreateAccount.removeActionListener(al[0]);
+	        buttonCreateAccount.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		addMovieUI.displayAddMovieForm();
+	        	}
+	        });
+		}
+	}
+	
 }
