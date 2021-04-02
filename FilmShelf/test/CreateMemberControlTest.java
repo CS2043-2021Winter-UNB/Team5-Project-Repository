@@ -1,5 +1,4 @@
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.Assume;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-public class CreateMemberAccountControlTest_validateInputForm {
+public class CreateMemberControlTest {
 	// define input types for different tests
 	enum Type {VALID, INVALID};
 	
@@ -51,7 +50,7 @@ public class CreateMemberAccountControlTest_validateInputForm {
 	private String firstName;
 	private String lastName;
 	
-	public CreateMemberAccountControlTest_validateInputForm(Type type, String username, String password, String firstName, String lastName) {
+	public CreateMemberControlTest(Type type, String username, String password, String firstName, String lastName) {
 		this.type = type;
 		this.username = username;
 		this.password = password;
@@ -64,13 +63,14 @@ public class CreateMemberAccountControlTest_validateInputForm {
 	@Test
 	public void testValidInput() {
 		Assume.assumeTrue(type == Type.VALID);		// only run test for input of VALID type
-		assertTrue(createMemberAccountControl.validateFormInput(username, password, firstName, lastName));
+		assertTrue(createMemberAccountControl.createMemberAccount(username, password, firstName, lastName));
+		dataManager.removeMember(username.strip());			// remove test Member
 	}
 	
 	@Test
 	public void testInvalidInput() {
 		Assume.assumeTrue(type == Type.INVALID);	// only run test for input of INVALID type
-		assertFalse(createMemberAccountControl.validateFormInput(username, password, firstName, lastName));
+		assertFalse(createMemberAccountControl.createMemberAccount(username, password, firstName, lastName));
 	}
 
 }

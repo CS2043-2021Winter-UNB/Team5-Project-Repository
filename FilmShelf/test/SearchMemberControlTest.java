@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-public class SearchAccountControlTest_validateSearchInput {
+public class SearchMemberControlTest {
 	// define input types for different tests
 	enum Type {VALID, INVALID};
 	
@@ -36,7 +36,7 @@ public class SearchAccountControlTest_validateSearchInput {
 	private SearchMemberControl searchAccountControl;
 	private String username;
 	
-	public SearchAccountControlTest_validateSearchInput(Type type, String username) {
+	public SearchMemberControlTest(Type type, String username) {
 		this.type = type;
 		this.username = username;
 		dataManager = new DataManager();

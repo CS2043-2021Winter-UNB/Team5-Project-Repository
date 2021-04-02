@@ -139,6 +139,11 @@ public class DataManager {
 
 			//ResultSet 
 			ResultSet rs = stmt.executeQuery(sqlQuery);
+			
+			// return null if ResultSet is empty
+			if(!rs.isBeforeFirst() && (rs.getRow() == 0)) {
+				return null;
+			}
 
 			//assigning values to MemberObject	
 			rs.next();		// need to call to point cursor to first record
@@ -210,6 +215,11 @@ public class DataManager {
 			Statement stmt = connection.createStatement();
 			//ResultSet 
 			ResultSet rs = stmt.executeQuery(sqlQuery);
+			
+			// return null if ResultSet is empty
+			if(!rs.isBeforeFirst() && (rs.getRow() == 0)) {
+				return null;
+			}
 
 			//Assigning values to adminObject
 			rs.next();		// need to call to point cursor to first record
