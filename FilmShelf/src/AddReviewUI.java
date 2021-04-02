@@ -1,7 +1,7 @@
 
-public class LeaveReviewUI {
+public class AddReviewUI {
 
-	private LeaveReviewControl leaveReviewControl;
+	private AddReviewControl leaveReviewControl;
 
 	public void displayLeaveReviewForm() {
 		// begin-user-code
