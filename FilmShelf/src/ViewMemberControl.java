@@ -16,7 +16,7 @@ public class ViewMemberControl {
 	public MemberObject getMemberAccount(String username) {
 		
 		//NB: Data Manager needs getViewAccount() method
-		MemberObject memberAccount = dataManager.getViewAccount(username);
+		MemberObject memberAccount = dataManager.getMember(username);
 		
 		return memberAccount;	
 	}
