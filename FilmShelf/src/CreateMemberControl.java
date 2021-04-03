@@ -32,7 +32,7 @@ public class CreateMemberControl {
 	}
 
 	// Jo: parameters based on MemberAccount table attributes
-	public boolean validateFormInput(String username, String password, String firstName, String lastName) {
+	private boolean validateFormInput(String username, String password, String firstName, String lastName) {
 		// input is invalid if any null inputs are provided
 		if((username == null) || (password == null) || (firstName == null) || (lastName == null)) {
 			return false;

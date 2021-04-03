@@ -108,7 +108,12 @@ public class DataManager {
 			Statement stmt = connection.createStatement();
 
 			//Execute query
-			stmt.executeUpdate(sqlQuery);
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			
+			// return false if no member was removed
+			if(rowsUpdated == 0) {
+				return false;
+			}
 		}
 		catch(SQLException e) {
 			System.out.println("Remove member error: " + e.getMessage());
@@ -139,6 +144,11 @@ public class DataManager {
 
 			//ResultSet 
 			ResultSet rs = stmt.executeQuery(sqlQuery);
+			
+			// return null if ResultSet is empty
+			if(!rs.isBeforeFirst() && (rs.getRow() == 0)) {
+				return null;
+			}
 
 			//assigning values to MemberObject	
 			rs.next();		// need to call to point cursor to first record
@@ -210,6 +220,11 @@ public class DataManager {
 			Statement stmt = connection.createStatement();
 			//ResultSet 
 			ResultSet rs = stmt.executeQuery(sqlQuery);
+			
+			// return null if ResultSet is empty
+			if(!rs.isBeforeFirst() && (rs.getRow() == 0)) {
+				return null;
+			}
 
 			//Assigning values to adminObject
 			rs.next();		// need to call to point cursor to first record
