@@ -108,7 +108,12 @@ public class DataManager {
 			Statement stmt = connection.createStatement();
 
 			//Execute query
-			stmt.executeUpdate(sqlQuery);
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			
+			// return false if no member was removed
+			if(rowsUpdated == 0) {
+				return false;
+			}
 		}
 		catch(SQLException e) {
 			System.out.println("Remove member error: " + e.getMessage());

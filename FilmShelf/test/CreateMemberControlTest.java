@@ -7,6 +7,11 @@ import org.junit.runners.Parameterized.Parameters;
 import java.util.Arrays;
 import java.util.Collection;
 
+/******************************************************************************************************************************
+ * CreateMemberControlTest
+ * @author Jo
+ * Description: Tests valid and invalid input to CreateMemberControl
+ ******************************************************************************************************************************/
 @RunWith(Parameterized.class)
 public class CreateMemberControlTest {
 	// define input types for different tests

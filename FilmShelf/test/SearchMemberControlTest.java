@@ -8,6 +8,11 @@ import org.junit.runners.Parameterized.Parameters;
 import java.util.Arrays;
 import java.util.Collection;
 
+/******************************************************************************************************************************
+ * SearchMemberControlTest
+ * @author Jo
+ * Description: Tests valid and invalid input to SearchMemberControl
+ ******************************************************************************************************************************/
 @RunWith(Parameterized.class)
 public class SearchMemberControlTest {
 	// define input types for different tests
