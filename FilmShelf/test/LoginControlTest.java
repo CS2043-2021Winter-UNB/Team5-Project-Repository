@@ -10,10 +10,18 @@ import org.junit.runners.Parameterized.Parameters;
 import java.util.Arrays;
 import java.util.Collection;
 
+/******************************************************************************************************************************
+ * LoginControlTest
+ * @author Jo
+ * Description:
+ * 		Tests
+ * 			1. processMemberLogin()
+ * 			2. processAdminLogin()
+ ******************************************************************************************************************************/
 @RunWith(Enclosed.class)
 public class LoginControlTest {
 
-	// test processMemberLogin()
+	// test processMemberLogin() //////////////////////////////////////////////////////////////////////////////////////////////
 	@RunWith(Parameterized.class)
 	public static class MemberLoginTest {
 		// define input types for different tests
@@ -26,7 +34,7 @@ public class LoginControlTest {
 				{Type.VALID, "       mrbean35000vr", "       sp33dRun!"},		// expected valid input with leading whitespace
 				{Type.VALID, "mrbean35000vr       ", "sp33dRun!       "},		// expected valid input with trailing whitespace
 				{Type.VALID, "     mrbean35000vr     ", "     sp33dRun!     "},	// expected valid input with leading and trailing whitespace
-				{Type.INVALID, "bean", "sp33dRun!"},				// expected invalid input with nonexistent member
+				{Type.INVALID, "wrongUsername", "sp33dRun!"},		// expected invalid input with nonexistent member
 				{Type.INVALID, "mrbean35000vr", "wrongPassword"},	// expected invalid input with wrong password
 				{Type.INVALID, "", "sp33dRun!"},					// expected invalid input with empty member
 				{Type.INVALID, "mrbean35000vr", ""},				// expected invalid input with empty password
@@ -54,12 +62,12 @@ public class LoginControlTest {
 		}
 		
 		@Before
-		public void setUp() {
+		public void setUp() throws Exception {
 			createMemberControl.createMemberAccount("mrbean35000vr", "sp33dRun!", "Robert", "Chadwick");
 		}
 		
 		@After
-		public void tearDown() {
+		public void tearDown() throws Exception {
 			dataManager.removeMember("mrbean35000vr");
 		}
 		
@@ -77,8 +85,9 @@ public class LoginControlTest {
 			assertFalse(loginControl.processMemberLogin(username, password));
 		}
 	}
+	// END OF TEST ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// test processAdminLogin()
+	// test processAdminLogin() ///////////////////////////////////////////////////////////////////////////////////////////////
 	@RunWith(Parameterized.class)
 	public static class AdminLoginTest {
 		// define input types for different tests
@@ -91,19 +100,18 @@ public class LoginControlTest {
 				{Type.VALID, "       joboyAdmin", "       HeroPizza100"},		// expected valid input with leading whitespace
 				{Type.VALID, "joboyAdmin       ", "HeroPizza100       "},		// expected valid input with trailing whitespace
 				{Type.VALID, "     joboyAdmin     ", "     HeroPizza100     "},	// expected valid input with leading and trailing whitespace
-				{Type.INVALID, "joboy", "HeroPizza100"},				// expected invalid input with nonexistent member
-				{Type.INVALID, "joboyAdmin", "wrongPassword"},	// expected invalid input with wrong password
+				{Type.INVALID, "wrongUsername", "HeroPizza100"},	// expected invalid input with nonexistent member
+				{Type.INVALID, "joboyAdmin", "wrongPassword"},		// expected invalid input with wrong password
 				{Type.INVALID, "", "HeroPizza100"},					// expected invalid input with empty member
-				{Type.INVALID, "joboyAdmin", ""},				// expected invalid input with empty password
-				{Type.INVALID, null, "HeroPizza100"},					// expected invalid input with null member
-				{Type.INVALID, "joboyAdmin", null}				// expected invalid input with null password
+				{Type.INVALID, "joboyAdmin", ""},					// expected invalid input with empty password
+				{Type.INVALID, null, "HeroPizza100"},				// expected invalid input with null member
+				{Type.INVALID, "joboyAdmin", null}					// expected invalid input with null password
 			});
 		}
 		
 		// variable declaration
 		private Type type;
 		private DataManager dataManager;
-		private CreateMemberControl createMemberControl;
 		private LoginControl loginControl;
 		private String username;
 		private String password;
@@ -114,7 +122,6 @@ public class LoginControlTest {
 			this.username = username;
 			this.password = password;
 			dataManager = new DataManager();
-			createMemberControl = new CreateMemberControl(dataManager);
 			loginControl = new LoginControl(dataManager);
 		}
 		
@@ -132,4 +139,5 @@ public class LoginControlTest {
 			assertFalse(loginControl.processAdminLogin(username, password));
 		}
 	}
+	// END OF TEST ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
