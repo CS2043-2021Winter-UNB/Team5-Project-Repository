@@ -1,64 +1,203 @@
 	import java.awt.EventQueue;
 
-	import javax.swing.JPanel;
-	import java.awt.GridBagLayout;
-	import javax.swing.JLabel;
-	import java.awt.GridBagConstraints;
-	import java.awt.Insets;
-	import javax.swing.JTextField;
-	import javax.swing.JPasswordField;
-	import javax.swing.JButton;
-	import javax.swing.JRadioButton;
-	import javax.swing.JCheckBox;
-	import java.awt.event.ActionListener;
-	import java.awt.event.ActionEvent;
-	import javax.swing.SwingConstants;
-	import javax.swing.JFrame;
-	import java.awt.Color;
-	import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import java.awt.GridBagLayout;
+import javax.swing.JLabel;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.JFrame;
+import java.awt.Color;
+import javax.swing.JLayeredPane;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
+import javax.swing.SpinnerNumberModel;
+import java.awt.Font;
 
 public class SearchMovieUI extends JPanel {
 
 	private SearchMovieControl searchMovieControl;
-	private JFrame frame;
-	private JTextField textFieldSearch;
+	private JTextField titleSearchField;
 	private JLabel labelSearchMovieStatus;
+	private JLabel genreLabel;
+	private JLabel yearLabel;
+	private JLabel lengthLabel;
+	private JComboBox<String> comboBoxGenre;
+	private JComboBox<String> comboBoxLowerYear;
+	private JComboBox<String> comboBoxUpperYear;
+	private JSpinner spinnerLengthLowerLimit;
+	private JLabel lengthMinToLabel;
+	private JLabel yearToLabel;
+	private JSpinner spinnerLengthUpperLimit;
+	private JLabel lengthMinLabel;
+	private JLabel searchMovieLabel;
+	private JButton searchButton;
 	
-	public SearchMovieUI(SearchMovieControl control) {
-		frame = new JFrame();
-		searchMovieControl = control;
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public SearchMovieUI(SearchMovieControl controlSearch) {
+		searchMovieControl = controlSearch;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		frame.getContentPane().setLayout(gridBagLayout);
+		gridBagLayout.columnWidths = new int[]{0, 39, 60, 0, 60, 76, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 31, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
 		
-		JLabel lblNewLabel = new JLabel("Search Movie:");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 1;
-		gbc_lblNewLabel.gridy = 1;
-		frame.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+		searchMovieLabel = new JLabel("Search Movie");
+		searchMovieLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		GridBagConstraints gbc_searchMovieLabel = new GridBagConstraints();
+		gbc_searchMovieLabel.anchor = GridBagConstraints.NORTH;
+		gbc_searchMovieLabel.gridwidth = 3;
+		gbc_searchMovieLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_searchMovieLabel.gridx = 3;
+		gbc_searchMovieLabel.gridy = 1;
+		add(searchMovieLabel, gbc_searchMovieLabel);
 		
-		textFieldSearch = new JTextField();
-		textFieldSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				enterMovieSearchCriteria();
-				displaySearchResult();
-			}
-		});
+		JLabel titleLabel = new JLabel("Title:");
+		GridBagConstraints gbc_titleLabel = new GridBagConstraints();
+		gbc_titleLabel.anchor = GridBagConstraints.EAST;
+		gbc_titleLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_titleLabel.gridx = 1;
+		gbc_titleLabel.gridy = 2;
+		add(titleLabel, gbc_titleLabel);
+		
+		titleSearchField = new JTextField();
 		GridBagConstraints gbc_textFieldSearch = new GridBagConstraints();
-		gbc_textFieldSearch.gridwidth = 3;
+		gbc_textFieldSearch.gridwidth = 5;
 		gbc_textFieldSearch.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldSearch.gridx = 2;
-		gbc_textFieldSearch.gridy = 1;
-		frame.getContentPane().add(textFieldSearch, gbc_textFieldSearch);
-		textFieldSearch.setColumns(10);
+		gbc_textFieldSearch.gridy = 2;
+		add(titleSearchField, gbc_textFieldSearch);
+		titleSearchField.setColumns(10);
+		
+		genreLabel = new JLabel("Genre:");
+		GridBagConstraints gbc_genreLabel = new GridBagConstraints();
+		gbc_genreLabel.anchor = GridBagConstraints.EAST;
+		gbc_genreLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_genreLabel.gridx = 1;
+		gbc_genreLabel.gridy = 3;
+		add(genreLabel, gbc_genreLabel);
+		
+		comboBoxGenre = new JComboBox<String>();
+		comboBoxGenre.setModel(new DefaultComboBoxModel<String>(new String[] {"Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Fantasy", "Horror", "Romance", "Science Fiction", "Thriller", "War", "Western"}));
+		GridBagConstraints gbc_comboBoxGenre = new GridBagConstraints();
+		gbc_comboBoxGenre.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxGenre.gridwidth = 3;
+		gbc_comboBoxGenre.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxGenre.gridx = 2;
+		gbc_comboBoxGenre.gridy = 3;
+		add(comboBoxGenre, gbc_comboBoxGenre);
+		
+		yearLabel = new JLabel("Year:");
+		yearLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_yearLabel = new GridBagConstraints();
+		gbc_yearLabel.anchor = GridBagConstraints.EAST;
+		gbc_yearLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_yearLabel.gridx = 1;
+		gbc_yearLabel.gridy = 4;
+		add(yearLabel, gbc_yearLabel);
+		
+		//Initialize valid years (1910 to the current year)
+		ArrayList<String> years = new ArrayList<String>();
+		years.add("Year");
+		for (int year = Calendar.getInstance().get(Calendar.YEAR); year >= 1910; year--)
+		{
+			years.add(String.valueOf(year));
+		}
+		
+		// Lower year drop down menu
+		comboBoxLowerYear = new JComboBox(years.toArray());
+		GridBagConstraints gbc_comboBoxLowerYear = new GridBagConstraints();
+		gbc_comboBoxLowerYear.anchor = GridBagConstraints.WEST;
+		gbc_comboBoxLowerYear.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxLowerYear.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxLowerYear.gridx = 2;
+		gbc_comboBoxLowerYear.gridy = 4;
+		add(comboBoxLowerYear, gbc_comboBoxLowerYear);
+
+		yearToLabel = new JLabel("to");
+		GridBagConstraints gbc_yearToLabel = new GridBagConstraints();
+		gbc_yearToLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_yearToLabel.gridx = 3;
+		gbc_yearToLabel.gridy = 4;
+		add(yearToLabel, gbc_yearToLabel);
+		
+		// Lower year drop down menu
+		comboBoxUpperYear = new JComboBox(years.toArray());
+		GridBagConstraints gbc_comboBoxUpperYear = new GridBagConstraints();
+		gbc_comboBoxUpperYear.anchor = GridBagConstraints.WEST;
+		gbc_comboBoxUpperYear.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxUpperYear.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxUpperYear.gridx = 4;
+		gbc_comboBoxUpperYear.gridy = 4;
+		add(comboBoxUpperYear, gbc_comboBoxUpperYear);
+
+		lengthLabel = new JLabel("Length:");
+		GridBagConstraints gbc_lengthLabel = new GridBagConstraints();
+		gbc_lengthLabel.anchor = GridBagConstraints.EAST;
+		gbc_lengthLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lengthLabel.gridx = 1;
+		gbc_lengthLabel.gridy = 5;
+		add(lengthLabel, gbc_lengthLabel);
+		
+		spinnerLengthLowerLimit = new JSpinner();
+		spinnerLengthLowerLimit.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+		GridBagConstraints gbc_spinnerLengthLowerLimit = new GridBagConstraints();
+		gbc_spinnerLengthLowerLimit.fill = GridBagConstraints.HORIZONTAL;
+		gbc_spinnerLengthLowerLimit.insets = new Insets(0, 0, 5, 5);
+		gbc_spinnerLengthLowerLimit.gridx = 2;
+		gbc_spinnerLengthLowerLimit.gridy = 5;
+		add(spinnerLengthLowerLimit, gbc_spinnerLengthLowerLimit);
+		
+		lengthMinToLabel = new JLabel("min. to");
+		GridBagConstraints gbc_lengthMinToLabel = new GridBagConstraints();
+		gbc_lengthMinToLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lengthMinToLabel.gridx = 3;
+		gbc_lengthMinToLabel.gridy = 5;
+		add(lengthMinToLabel, gbc_lengthMinToLabel);
+		
+		spinnerLengthUpperLimit = new JSpinner();
+		spinnerLengthUpperLimit.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+		GridBagConstraints gbc_spinnerLengthUpperLimit = new GridBagConstraints();
+		gbc_spinnerLengthUpperLimit.fill = GridBagConstraints.HORIZONTAL;
+		gbc_spinnerLengthUpperLimit.insets = new Insets(0, 0, 5, 5);
+		gbc_spinnerLengthUpperLimit.gridx = 4;
+		gbc_spinnerLengthUpperLimit.gridy = 5;
+		add(spinnerLengthUpperLimit, gbc_spinnerLengthUpperLimit);
+		
+		lengthMinLabel = new JLabel("min.");
+		GridBagConstraints gbc_lengthMinLabel = new GridBagConstraints();
+		gbc_lengthMinLabel.anchor = GridBagConstraints.WEST;
+		gbc_lengthMinLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lengthMinLabel.gridx = 5;
+		gbc_lengthMinLabel.gridy = 5;
+		add(lengthMinLabel, gbc_lengthMinLabel);
+		
+		searchButton = new JButton("Search");
+		searchButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				extractSearchInput();
+			}
+		});
+		GridBagConstraints gbc_searchButton = new GridBagConstraints();
+		gbc_searchButton.anchor = GridBagConstraints.WEST;
+		gbc_searchButton.gridwidth = 2;
+		gbc_searchButton.insets = new Insets(0, 0, 0, 5);
+		gbc_searchButton.gridx = 2;
+		gbc_searchButton.gridy = 6;
+		add(searchButton, gbc_searchButton);
 		
 		labelSearchMovieStatus = new JLabel("");
 		labelSearchMovieStatus.setHorizontalAlignment(SwingConstants.CENTER);
@@ -68,33 +207,60 @@ public class SearchMovieUI extends JPanel {
 		gbc_labelSearchMovieStatus.gridx = 1;
 		gbc_labelSearchMovieStatus.gridy = 7;
 		add(labelSearchMovieStatus, gbc_labelSearchMovieStatus);
+		
+		setVisible(false);
 	}
 	
 	public void displaySearchForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+		// clear fields before displaying
+		titleSearchField.setText("");
+		
+		// display the form
 		setVisible(true);
-		// end-user-code
+	}
+	
+	private void extractSearchInput() {
+		String title = titleSearchField.getText();
+		String genre = comboBoxGenre.getSelectedItem().toString();
+		int lowerYear = Integer.parseInt(comboBoxLowerYear.getSelectedItem().toString());
+		int upperYear = Integer.parseInt(comboBoxUpperYear.getSelectedItem().toString());
+		try {
+			spinnerLengthLowerLimit.commitEdit();
+		} catch(java.text.ParseException e) {
+			System.err.println("Lower length spinner input error: " + e.getMessage());
+		}
+		int lowerLength = (Integer)spinnerLengthLowerLimit.getValue();
+		try {
+			spinnerLengthUpperLimit.commitEdit();
+		} catch(java.text.ParseException e) {
+			System.err.println("Upper length spinner input error: " + e.getMessage());
+		}
+		int upperLength = (Integer)spinnerLengthUpperLimit.getValue();
+		
+		System.out.println("Title: " + title);
+		System.out.println("Genre: " + genre);
+		System.out.println("Year range: " + lowerYear + " to " + upperYear);
+		System.out.println("Length range: " + lowerLength + "min. to " + upperLength + "min.");
+		
+		// retrive movies matching search parameters
+		//ArrayList<MovieObject> movies = searchMovieControl.processSearchMovie(title, lowerYear, upperYear, genre, lowerLength, upperLength);
+		
+		// TEMP: Delete when SearchMovie is implemented in DataManager, and uncomment above line
+		ArrayList<MovieObject> movies = new ArrayList<MovieObject>();
+		
+		if(movies == null) {
+			displayFailedSearchMessage();
+		} else {
+			displaySearchResult(movies);
+		}
 	}
 
-	public void displaySearchResult() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void displaySearchResult(ArrayList<MovieObject> movies) {
+		// TODO
+		System.out.println("Here's where we display search results");
 	}
 
 	public void displayFailedSearchMessage() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		labelSearchMovieStatus.setText("Movie search was unsuccessful. Information was invalid.");
-		// end-user-code
-	}
-
-	public void enterMovieSearchCriteria() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
 	}
 }

@@ -29,14 +29,13 @@ public class Main {
 	
 		LoginUI loginUI = new LoginUI(loginControl);
 		
-		
-		//SearchMovieControl searchMovieControl = new SearchMovieControl();
-		//SearchMovierUI searchMovieUI = new SearchMovieUI(searchMovieControl);
-		
 		AddMovieControl addMovieControl = new AddMovieControl(dm, loginControl);
 		AddMovieUI addMovieUI = new AddMovieUI(addMovieControl);
-    
-		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI,addMovieUI);
+		
+		SearchMovieControl searchMovieControl = new SearchMovieControl(dm);
+		SearchMovieUI searchMovieUI = new SearchMovieUI(searchMovieControl);
+		
+		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI,addMovieUI,searchMovieUI);
 		mainUI.setVisible(true);
 		loginUI.setMain(mainUI);
 	}
