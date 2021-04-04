@@ -55,6 +55,7 @@ public class DataManager {
 
 
 	//Courtney and Jo
+	//Make sure null fields aren't null in the database!!!!!
 	public boolean editMember(String username, String password, String firstName, String lastName, String description){
 		//String query 
 		String sqlQuery;
@@ -143,12 +144,10 @@ public class DataManager {
 			uName = rs.getString(1);
 			firstName = rs.getString(3);
 			lastName = rs.getString(4);
-			description = rs.getString(10);
+			description = rs.getString(5);
+			topMovies  = this.getTopMovies(username);
 
-			//Adding movie IDs to array 
-			for(int i = 5; i <= LAST_TOP_MOVIE_INDEX; i++){
-				movieIds.add(rs.getInt(i));
-			}
+	
 		}
 		catch(SQLException e) {
 			System.out.println();
@@ -156,33 +155,7 @@ public class DataManager {
 			return null;
 		}
 		
-		try {
-			//Create new statement for new call
-			Statement stmt2 = connection.createStatement();
-
-			//Initialize ResultSet 
-			ResultSet movies;
-			
-			//Loop to add movie titles to member object
-			for(int i = 0; i < NUM_TOP_MOVIES; i++) {
-				// ResultSet.getInt(i) returns 0 for null values, only query db for non-null values
-				if(movieIds.get(i) != 0) {
-					//SQL String Query for movie at index i 
-					sqlQuery = "select * from Movie where movieID = " + movieIds.get(i).intValue() + ";";
-
-					//Execute Query to retrieve movie title
-					movies = stmt2.executeQuery(sqlQuery);
-
-					//Add movie title to member object
-					movies.next();		// need to call to point cursor to first record
-					topMovies.add(new MovieObject(movies.getString(1), movies.getInt(2), movies.getString(3), movies.getInt(5), movies.getDouble(6), movies.getInt(7)));	// will need to change when language attribute is removed from Movie table
-				}
-			}
-		}
-		catch(SQLException e) {
-			System.out.println("Top movies retrieval error: " + e.getMessage());
-			return null;
-		}
+		
 			// Create MemberObject to return
 			return new MemberObject(uName, firstName, lastName, description, topMovies);
 	}
@@ -190,6 +163,7 @@ public class DataManager {
 
 	//NOT DONE!!!
 	//getMember for View Member Case
+	/** 
 	public MemberObject getMember(String username){
 		//SQL String Query
 		String sqlQuery = "select *  from MemberAccount where username = '" + username + "';";
@@ -203,6 +177,7 @@ public class DataManager {
 
 
 	}
+	*/
 
 
 	//Courtney and Jo
@@ -280,7 +255,7 @@ public class DataManager {
 
 	//NOT DONE!!!
 	//Courtney 
-	public ArrayList<MovieObject> getMoviesbyKeywords(ArrayList<String> title, String releaseYear, String genre, int length) {
+	public ArrayList<MovieObject> getMoviesbyKeywords(ArrayList<String> title, int  minReleaseYear, int maxReleaseYear, String genre, int minLength, int maxLength) {
 
 		//Creating MovieArrayList to return to user
 		ArrayList<MovieObject> movieList = new ArrayList<MovieObject>();
@@ -297,47 +272,33 @@ public class DataManager {
 
 		//Add Desired Genre to Query 
 		if(genre != null){
-			sqlQuery = sqlQuery + " and '" + genre + "'"; 
+			sqlQuery = sqlQuery + " and genre = '" + genre + "'"; 
 		}
 		
-		//Add Desired Release Year to Query 
-		switch(releasYear){
-			case "year range" :
-				sqlQuery = sqlQuery + " and realeaseYear between 1910 and 1940"
-				break;
-			case "year range" :
-				sqlQuery = sqlQuery + " and realeaseYear between 1940 and 1980"
-				break;
-			case "year range" :
-				sqlQuery = sqlQuery + " and realeaseYear between 1980 and 2020"
-				break;				
-			case "year range" :
-				sqlQuery = sqlQuery + " and realeaseYear between 30 and 60"
-				break;
-			default :
-				break;
-
-		}
+		//Add Desired Release Year to Query
+		if(minReleaseYear != null && maxReleaseYear != null){
+			if(minReleaseYear == maxReleaseYear){
+				sqlQuery = sqlQuery + " and releaseYear = '" + releaseYear + "'"; 
+ 			}
+			else{
+				sqlQuery = sqlQuery + " and releasYear between '" + minReleaseYear + "' and '" + maxReleaseYear = "'";
+			}
+		
+		} 
+		
 
 
 		//Add Desired Length to Query  
-		switch(length){
-			case "time range" :
-				sqlQuery = sqlQuery + " and length between 30 and 60"
-				break;
-			case "time range" :
-				sqlQuery = sqlQuery + " and realeaseYear between 30 and 60"
-				break;
-			case "time range" :
-				sqlQuery = sqlQuery + " and realeaseYear between 30 and 60"
-				break;
-			case "time range" :
-				sqlQuery = sqlQuery + " and realeaseYear between 30 and 60"
-				break;
-			default :
-				break;
-
-		}
+		if(minLength != null && maxLength != null){
+			if(minLength == maxLength){
+				sqlQuery = sqlQuery + " and releaseYear = '" + minLength + "'"; 
+ 			}
+			else{
+				sqlQuery = sqlQuery + " and releasYear between '" + minLength + "' and '" + maxLength = "'";
+			}
+		
+		} 
+		
 
 		//Add semi-colon to end statement (must be done at end since end may vary)
 		sqlQuery = sqlQuery + ";";
@@ -354,13 +315,12 @@ public class DataManager {
 			//Create Movie Objects and Add to Movie List
 			while (rs.next()) {
 
-				MemberObject movie = new MemberObject();
+				MovieObject movie = new MovieObject();
 				movie.title = rs.getString(1);
-				movie.year = rs.getString(2);
+				movie.releaseYear = rs.getInt(2);
 				movie.genre = rs.getString(3);
-				movie.length = rs.getString(4);
-				movie.averageRating = rs.getInt(5);
-				movie.movieId = rs.getInt(6);
+				movie.length = rs.getInt(4);
+				movie.averageRating = rs.getDouble(6);
 				movieList.add(movie);
 
 			}
@@ -374,7 +334,7 @@ public class DataManager {
 
 		return movieList;
 
-	}u7       7
+	}
 
 	//NOT DONE!!!
 	//For View Movie
@@ -418,6 +378,7 @@ public class DataManager {
 	public int getMovieRatingByMember(String username, int movieID) {
 		// begin-user-code
 		// TODO Auto-generated method stub
+		Rating
 		return 0;
 		// end-user-code
 	}
@@ -444,12 +405,115 @@ public class DataManager {
 
 	//Courtney 
 	public ArrayList<ReviewObject> getMovieReviews(int movieID) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+		// Create ArrayList of ReviewObjects
+		ArrayList<ReviewObject> reviewList = new ArrayList<ReviewObject>();
+
+
+		//SQL String Query 
+		String sqlQuery = "select * from Reviews where movieID = " + movieID + ";";
+
+		try{
+
+			//Create Statement 
+			Statement stmt = connection.createStatement();
+
+			//ResultSet 
+			ResultSet rs = stmt.executeQuery(sqlQuery);
+
+			//Add ReviewObjects to reviewList
+			while(rs.next()){
+
+				//Temp ReviewObject
+				ReviewObject review = new ReviewObject();
+				review.movieId = rs.get
+				review.username = 
+				review.reviewText = rs.
+				review.reviewId = rs.get
+
+				reviewList.add(review);
+			}
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+			return null;
+		}
+
+		return reviewlist;
+		
+
 		return null;
 		// end-user-code
 	}
 
+	//Courtney
+	//Helper method for getMember method. 
+	private ArrayList<MovieObject> getTopMovies(String username){
 
+		//Create ArrayList of MovieObjects
+		ArrayList<MovieObject> topMovies = new ArrayList<MovieObject>();
+
+		//SQL String Query
+		String sqlString = "select movieID from Rating where username = '" + username + "' order by"
+							+ " ratingScore;";
+
+		ArrayList<Integer> movieIdList = new ArrayList<Integer>(NUM_TOP_MOVIES);
+		
+		try{
+
+			//Create Statement 
+			Statement stmt = connection.createStatement();
+
+			//Result Set
+			ResultSet rsId = stmt.executeQuery(sqlQuery);
+
+			int i = 0;
+
+			//Add Top Movie List Ids to MovieIdList
+			while(rsID.next() && i < NUM_TOP_MOVIES){
+				movieIdList[i] = rsId.getInt();
+				i++;
+			}
+
+
+			//New Statement
+			Statement stmt2 = connection.createStatement();
+
+			for(int i = 0; i < movieIDS; i++){
+
+				int movieId = movieIdList.get(i);
+
+				sqlString = "select * from Movie where movieID = '" + movieId + "';";
+				ResultSet movieInfo = stmt2.executeQuery(sqlString);
+
+				movieInfo.next();
+
+				String title = movieInfo.getString(1);
+				int releaseYear = movieInfo.getInt(2);
+				String genre = movieInfo.getString(3);
+				int length = movieInfo.getInt(4);
+				double averageRating = movieInfo.getDouble(6);
+				
+				 
+
+				MovieObject movie = new Movie(title, releaseYear, genre, length, averageRating, movieId);
+
+				movieList.add(movie)
+			}		
+
+		}
+
+
+		}
+
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+			return null;
+		}
+
+		return movieList;
+
+
+
+	}
 }
 

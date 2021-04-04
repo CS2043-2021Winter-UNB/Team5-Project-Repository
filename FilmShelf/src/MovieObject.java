@@ -5,20 +5,18 @@
  * Description: Represents a movie in the database.
  ******************************************************************************************************************************/
 public class MovieObject {
-	private String title;
-	private int year;
-	private String genre;
-	private String language;
-	private int length;
-	private double averageRating;
-	private int movieId;
+	public String title;
+	public int year;
+	public String genre;
+	public String language;
+	public double averageRating;
+	public int movieId;
 	
-	public MovieObject(String title, int year, String genre, String language, int length, double averageRating, int movieId) {
+	public MovieObject(String title, int year, String genre, String language, double averageRating, int movieId) {
 		this.title = title;
 		this.year = year;
 		this.genre = genre;
 		this.language = language;
-		this.length = length;
 		this.averageRating = averageRating;
 		this.movieId = movieId;
 	}
@@ -35,9 +33,6 @@ public class MovieObject {
 		return genre;
 	}
 	
-	public String getLanguage() {
-		return language;
-	}
 	
 	public int getLength() {
 		return length;

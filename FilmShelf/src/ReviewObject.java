@@ -5,10 +5,10 @@
  * Description: Represents a review in the database.
  ******************************************************************************************************************************/
 public class ReviewObject {
-	private int movieId;
-	private String username;
-	private String reviewText;
-	private int reviewId;
+	public int movieId;
+	public String username;
+	public String reviewText;
+	public int reviewId;
 	
 	public ReviewObject(int movieId, String username, String reviewText, int reviewId) {
 		this.movieId = movieId;
