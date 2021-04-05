@@ -27,6 +27,9 @@ public class AddReviewControl {
 			return false;
 		}
 		
+		// double up single quotes for SQL query
+		reviewText = reviewText.replace("'", "''");
+		
 		return dataManager.addMovieReview(movieId, member.getUsername(), reviewText);
 	}
 }
