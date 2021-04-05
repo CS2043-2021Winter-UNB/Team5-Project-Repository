@@ -57,7 +57,7 @@ public class DataManager {
 	//Make sure null fields aren't null in the database!!!!!
 	public boolean editMember(String username, String password, String firstName, String lastName, String description){
 		//String query 
-		String sqlQuery = "updateMemberAccount set firstName = '" + firstName + "', lastName = '" + lastName 
+		String sqlQuery = "update MemberAccount set firstName = '" + firstName + "', lastName = '" + lastName 
 							+ "', description = '" + description + "'";;
 
 		try {
@@ -70,7 +70,7 @@ public class DataManager {
 				sqlQuery = sqlQuery ", password = sha1('" + password + "')";
 
 			}
-			
+
 
 			sqlQuery = sqlQuery + " where username = '" + username + "';";
 
