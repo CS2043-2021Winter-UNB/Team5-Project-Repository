@@ -5,6 +5,7 @@
  * Description: Represents a review in the database.
  ******************************************************************************************************************************/
 public class ReviewObject {
+	
 	private int movieId;
 	private String username;
 	private String reviewText;

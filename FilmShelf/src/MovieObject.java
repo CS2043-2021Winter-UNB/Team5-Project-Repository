@@ -5,6 +5,7 @@
  * Description: Represents a movie in the database.
  ******************************************************************************************************************************/
 public class MovieObject {
+	
 	private String title;
 	private int year;
 	private String genre;
@@ -45,13 +46,4 @@ public class MovieObject {
 		return movieId;
 	}
 	
-	// returns string representation of a MovieObject
-	public String toString() {
-		return "Title: " + title + "\n" +
-				"Year: " + year + "\n" +
-				"Genre: " + genre + "\n" +
-				"Length: " + length + "\n" +
-				"Average rating: " + averageRating + "\n" +
-				"movieId: " + movieId + "\n";
-	}
 }
