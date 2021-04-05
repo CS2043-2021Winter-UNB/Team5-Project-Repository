@@ -42,8 +42,8 @@ public class DataManager {
 			//Create statement 
 			Statement stmt = connection.createStatement();
 
-			//ResultSet
-			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			//Insert into Member table
+			stmt.executeUpdate(sqlQuery);
 		}
 		catch(SQLException e) {
 			System.out.println("Add member error: " + e.getMessage());
@@ -245,8 +245,8 @@ public class DataManager {
 			//Create statement 
 			Statement stmt = connection.createStatement();
 
-			//ResultSet
-			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			//Add movie to table
+			stmt.executeUpdate(sqlQuery);
 		}
 		catch(SQLException e) {
 			System.out.println("Add movie error: " + e.getMessage());
@@ -406,7 +406,7 @@ public class DataManager {
 
 
 
-	/** 
+ 
 	//Jessie-Anne
 	public boolean addMovieRating(String usernameIn, int movieIDIn, int ratingIn) {
 		//SQL query Strings 
@@ -428,7 +428,7 @@ public class DataManager {
 						return false;
 					}
 					else { 	// if the user has not rated the movie, the rating is added
-					int rowsUpdated = stmt.executeUpdate(sqlQuery2);
+					stmt.executeUpdate(sqlQuery2);
 					}
 				}
 				catch(SQLException e) {
@@ -438,14 +438,14 @@ public class DataManager {
 
 				return true;
 	}
-	*/
+	
 
 	
 
 
 
 
-	/** 
+	
 	//Jessie-Anne
 	public boolean editMovieRating(String usernameIn, int movieIDIn, int ratingIn){
 
@@ -454,7 +454,9 @@ public class DataManager {
 		try {
 			//Create statement 
 			Statement stmt = connection.createStatement();
-			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			
+			//Update row
+			stmt.executeUpdate(sqlQuery);
 		} 
 		catch (SQLException e) {
 			System.out.println("Error updating rating: " +e.getMessage());
@@ -462,27 +464,27 @@ public class DataManager {
 		}
 		return true;
 	}
-	*/
+	
 
 
-
-	/** 
 	//Jessie-Anne
 	public boolean removeMovieRating(String usernameIn, int movieIDIn) {
 		String sqlQuery = "DELETE from Rating where username = '" + usernameIn + "' AND movieID = " + movieIDIn + ";";
 		try {
 			//Create statement 
 			Statement stmt = connection.createStatement();
-			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			 
+			//Delete row
+			stmt.executeUpdate(sqlQuery);
 		} 
 		catch (SQLException e) {
-			System.out.println("Error updating rating: " +e.getMessage());
+			System.out.println("Error deleting rating: " +e.getMessage());
 			return false;
 		}
 		return true;
 		
 	}
-	*/
+	
 
 
 
@@ -525,28 +527,58 @@ public class DataManager {
 		return new RatingObject(ratingScore, uName, movieId);
 
 
-		// end-user-code
+		
 	}
 
 
 	//Jessie-Anne
-	public void addMovieReview(ReviewObject review) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+	public boolean addMovieReview(int movieID, String username, String reviewText) {
+		String sqlQuery = "insert into Review(username, movieID, reviewText) values('" + username + "', " + movieID + ", '" + reviewText + "');";
+		
+		try {
+			
+			//Create statement 
+			Statement stmt = connection.createStatement();
+			
+			
+			//Insert review
+			 stmt.executeUpdate(sqlQuery);
+			
+		
+		}
+		catch(SQLException e) {
+			System.out.println("Add review error: " + e.getMessage());
+			return false;
+		}
 
-		// end-user-code
+		return true;
+	
+	
+	
 	}
 
 
-	/** 
+	
 	//Jessie-Anne
-	public void removeMovieReview() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public boolean removeMovieReview(int reviewID) {
+		String sqlQuery = "DELETE from Review where reviewID = " + reviewID + ";";
+		
+		try {
+			//Create statement 
+			Statement stmt = connection.createStatement();
+			 
+			//Delete row
+			stmt.executeUpdate(sqlQuery);
+		} 
+		catch (SQLException e) {
+			System.out.println("Error deleting review: " +e.getMessage());
+			return false;
+		}
+		return true;
+		
+		
 	}
-	*/
+	
 
 
 

@@ -18,7 +18,7 @@ public class RemoveReviewControl {
 			return false;
 		}
 		
-		return dataManager.removeMovieReview(movieId, username, reviewId);
+		return dataManager.removeMovieReview(reviewId);
 	}
 	
 	// checks who is requesting the removal and returns a boolean representing if the removal is valid or invalid
