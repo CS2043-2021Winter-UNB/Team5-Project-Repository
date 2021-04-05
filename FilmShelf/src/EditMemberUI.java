@@ -1,5 +1,5 @@
 
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 
 	import javax.swing.JPanel;
 	import java.awt.GridBagLayout;
@@ -9,17 +9,21 @@ import java.awt.EventQueue;
 	import javax.swing.JTextField;
 	import javax.swing.JPasswordField;
 	import javax.swing.JButton;
-	import javax.swing.JRadioButton;
+	//import javax.swing.JRadioButton;
 	import javax.swing.JCheckBox;
 	import java.awt.event.ActionListener;
 	import java.awt.event.ActionEvent;
 	import javax.swing.SwingConstants;
-	import javax.swing.JFrame;
-	import java.awt.Color;
-	import javax.swing.JLayeredPane;
+	//import javax.swing.JFrame;
+	//import java.awt.Color;
+	//import javax.swing.JLayeredPane;
 	
 
 public class EditMemberUI extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private EditMemberControl editMemberControl;
 	private JPasswordField passwordField;
 	private JTextField textFieldFirstName;

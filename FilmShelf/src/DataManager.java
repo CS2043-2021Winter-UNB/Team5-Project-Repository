@@ -8,6 +8,7 @@ import java.sql.Statement;
 public class DataManager {
 
 	private final int NUM_TOP_MOVIES = 5;
+
 	private Connection connection;
 
 	//Jessie-Anne - set up DataManager and connects to the team5 DB
@@ -55,6 +56,7 @@ public class DataManager {
 
 	//Courtney and Jo
 	//Make sure null fields aren't null in the database!!!!!
+
 	public boolean editMember(String username, String password, String firstName, String lastName, String description){
 		//String query 
 		String sqlQuery = "update MemberAccount set firstName = '" + firstName + "', lastName = '" + lastName 
@@ -111,7 +113,9 @@ public class DataManager {
 	//Courtney and Jo (make changes based on top movies)
 	public MemberObject getMember(String username, String password) {
 
+
 		// Initialize Parameters for Constructor
+		
 		String uName = "";
 		String firstName = "";
 		String lastName = "";
@@ -128,27 +132,25 @@ public class DataManager {
 
 			//ResultSet 
 			ResultSet rs = stmt.executeQuery(sqlQuery);
-
-		
+			
 
 			//Move Cursor to First Row
 			rs.next();
 
 			//Assign Values to Parameters 
+			
 			uName = rs.getString(1);
 			firstName = rs.getString(3);
 			lastName = rs.getString(4);
 			description = rs.getString(5);
 			topMovies = this.getTopMovies(username);
-
-	
+      
 		}
 		catch(SQLException e) {
 			System.out.println();
 			System.out.println("Member login error: " + e.getMessage());
 			return null;
 		}
-		
 		
 		// Create MemberObject to return
 		return new MemberObject(uName, firstName, lastName, description, topMovies);
@@ -188,8 +190,10 @@ public class DataManager {
 			lastName = rs.getString(4);
 			description = rs.getString(5);
 			topMovies = this.getTopMovies(username);
+      
+      
+    }
 
-		}
 		catch(SQLException e){
 			System.out.println("View Member Error: " + e.getMessage());
 			return null;
@@ -218,7 +222,7 @@ public class DataManager {
 
 			//Assigning values to adminObject
 			rs.next();		// need to call to point cursor to first record
-			uName = rs.getString(1);
+      uName = rs.getString(1);
 		}
 		catch(SQLException e) {
 			System.out.println("Admin login error: " + e.getMessage());
@@ -226,7 +230,7 @@ public class DataManager {
 
 		//return adminObject
 		return new AdminObject(uName);
-	}
+  }
 
 	
 
@@ -255,7 +259,7 @@ public class DataManager {
 
 	//Jessie-Anne
 	public boolean removeMovie(int movieID) {
-		//SQL String query 
+		//String query 
 		String sqlQuery = "delete from Movie where movieID = " + movieID + ";";
 
 		try {
@@ -404,21 +408,59 @@ public class DataManager {
 
 	/** 
 	//Jessie-Anne
-	public void addMovieRating(RatingObject rating) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+	public boolean addMovieRating(String usernameIn, int movieIDIn, int ratingIn) {
+		//SQL query Strings 
+				String sqlQuery1 = "select * from Rating where username = '" + usernameIn +"' AND movieID = " + movieIDIn + ";";  
+				String sqlQuery2 = "insert into Rating(ratingScore, username, movieID) values(" + ratingIn + ", '" + usernameIn + "', " + 
+												movieIDIn + ");";
 
-		// end-user-code
+				
+				try {
+					
+					//Create statement 
+					Statement stmt = connection.createStatement();
+					
+					//ResultSet 
+					ResultSet rs = stmt.executeQuery(sqlQuery1);
+					
+					if(rs != null) { //if this happens the user has already rated that movie
+						//Question for the team: should it return some kind of message re rating already exists?
+						return false;
+					}
+					else { 	// if the user has not rated the movie, the rating is added
+					int rowsUpdated = stmt.executeUpdate(sqlQuery2);
+					}
+				}
+				catch(SQLException e) {
+					System.out.println("Add review error: " + e.getMessage());
+					return false;
+				}
+
+				return true;
 	}
 	*/
+
+	
 
 
 
 
 	/** 
 	//Jessie-Anne
-	public void editMovieRating(){
+	public boolean editMovieRating(String usernameIn, int movieIDIn, int ratingIn){
 
+		String sqlQuery = "update Rating set ratingScore = " + ratingIn + " where username = '" + usernameIn + "' AND movieID = " + movieIDIn + ";";
+		
+		try {
+			//Create statement 
+			Statement stmt = connection.createStatement();
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+		} 
+		catch (SQLException e) {
+			System.out.println("Error updating rating: " +e.getMessage());
+			return false;
+		}
+		return true;
 	}
 	*/
 
@@ -426,11 +468,19 @@ public class DataManager {
 
 	/** 
 	//Jessie-Anne
-	public void removeMovieRating() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public boolean removeMovieRating(String usernameIn, int movieIDIn) {
+		String sqlQuery = "DELETE from Rating where username = '" + usernameIn + "' AND movieID = " + movieIDIn + ";";
+		try {
+			//Create statement 
+			Statement stmt = connection.createStatement();
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+		} 
+		catch (SQLException e) {
+			System.out.println("Error updating rating: " +e.getMessage());
+			return false;
+		}
+		return true;
+		
 	}
 	*/
 

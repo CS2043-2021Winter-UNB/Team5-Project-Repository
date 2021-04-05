@@ -19,7 +19,15 @@ public class LoginControl {
 	
 	//NB: different processLogin method for Member vs. Admin
 	public boolean processMemberLogin(String username, String password) {
-		currentMember = dataManager.getMember(username, password);
+		// check if username or password is empty/null
+		if((username == null) || username.strip().isEmpty()) {
+			return false;
+		}
+		if((password == null) || (password.strip().isEmpty())) {
+			return false;
+		}
+		
+		currentMember = dataManager.getMember(username.strip(), password.strip());
 		 
 		if (currentMember == null) {
 			return false;
@@ -30,7 +38,15 @@ public class LoginControl {
 
 	//NB: DIFFERENT processLogin METHOD for Member vs. Admin
 	public boolean processAdminLogin(String username, String password) {
-		currentAdmin = dataManager.getAdmin(username, password);
+		// check if username or password is empty/null
+		if((username == null) || username.strip().isEmpty()) {
+			return false;
+		}
+		if((password == null) || (password.strip().isEmpty())) {
+			return false;
+		}
+		
+		currentAdmin = dataManager.getAdmin(username.strip(), password.strip());
 		 
 		if (currentAdmin == null) {
 			return false;

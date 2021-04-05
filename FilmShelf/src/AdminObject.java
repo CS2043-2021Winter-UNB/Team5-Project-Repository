@@ -13,4 +13,8 @@ public class AdminObject {
 	public String getUsername() {
 		return username;
 	}
+	
+	public String toString() {
+		return "Admin Username: " + username + "\n";
+	}
 }

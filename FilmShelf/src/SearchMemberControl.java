@@ -28,7 +28,7 @@ public class SearchMemberControl {
 		// check validity of input
 		if((username != null) && validateSearchInput(username.strip())) {
 			// search for member if input valid
-			member = dataManager.searchMemberByUsername(username.strip());		// Jo: went with this method name, could also go with getMember(username) since we have getMember(username, password)
+			member = dataManager.getMember(username.strip());		// Jo: went with this method name, could also go with getMember(username) since we have getMember(username, password)
 		} else {
 			// input not valid, set member to null
 			member = null;
