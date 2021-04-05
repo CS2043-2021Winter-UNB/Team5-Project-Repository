@@ -20,7 +20,7 @@ public class MemberObject {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.description = description;
-		this.topMovies = new ArrayList<>(topMovies);	// copy passed ArrayList
+		this.topMovies = topMovies;	// copy passed ArrayList
 	}
 	
 	public String getUsername() {
