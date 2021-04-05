@@ -67,7 +67,7 @@ public class DataManager {
 			//If new value is passed in update password
 			if(password != null){
 
-				sqlQuery = sqlQuery ", password = sha1('" + password + "')";
+				sqlQuery = sqlQuery + ", password = sha1('" + password + "')";
 
 			}
 
@@ -166,7 +166,7 @@ public class DataManager {
 		String firstName = " ";
 		String lastName = " ";
 		String description = " ";
-		ArrayList<MovieObjects> topMovies;
+		ArrayList<MovieObject> topMovies;
 
 		//SQL String Query
 		String sqlQuery = "select *  from MemberAccount where username = '" + username + "';";
@@ -300,7 +300,7 @@ public class DataManager {
 		}
 		
 		//Add Desired Release Year to Query
-		if(minReleaseYear != null && maxReleaseYear != null){
+		if(minReleaseYear != -1 && maxReleaseYear != -1){
 			if(minReleaseYear == maxReleaseYear){
 				sqlQuery = sqlQuery + " and releaseYear = " + releaseYear ; 
  			}
@@ -313,7 +313,7 @@ public class DataManager {
 
 
 		//Add Desired Length to Query  
-		if(minLength != null && maxLength != null){
+		if(minLength != -1 && maxLength != -1){
 			if(minLength == maxLength){
 				sqlQuery = sqlQuery + " and releaseYear = " + minLength + ""; 
  			}
@@ -384,27 +384,25 @@ public class DataManager {
 			rs.next();
 			title = rs.getString(1);
 			releaseYear = rs.getInt(2);
-			gernre = rs.getString(3);
+			genre = rs.getString(3);
 			length = rs.getInt(4);
 			movieId = rs.getInt(5);
 			averageRating = (this.getAverageRating(movieId));
 
-			//Create Movieobject 
-			MovieObject movie = new MovieObject(title, releaseYear, genre, length, averageRating, movieId);
-
+			
 		}
 		catch(SQLException e){
 			System.out.println("Get Movie Error: " + e.getMessage());
 			return null;
 		}
 
-		return movie; 
+		return new MovieObject(title, releaseYear, genre, length, averageRating, movieId);
 
 	}
 
 
 
-
+	/** 
 	//Jessie-Anne
 	public void addMovieRating(RatingObject rating) {
 		// begin-user-code
@@ -412,18 +410,21 @@ public class DataManager {
 
 		// end-user-code
 	}
+	*/
 
 
 
 
-
+	/** 
 	//Jessie-Anne
 	public void editMovieRating(){
 
 	}
+	*/
 
 
 
+	/** 
 	//Jessie-Anne
 	public void removeMovieRating() {
 		// begin-user-code
@@ -431,30 +432,29 @@ public class DataManager {
 
 		// end-user-code
 	}
+	*/
 
 
 
 
 	//Courtney 
-	public int getMovieRatingByMember(String username, int movieID) {
+	public RatingObject getMovieRatingByMember(String username, int movieID) {
 
 		//Initilaize Parameters for Constructor
 		int ratingScore;
-		Sring uName = " ";
+		String uName = " ";
 		int movieId;
 
-		//Create Rating Object
-		RatingObject rating = new RatingObject();
 
 		//SQL String query
-		String sqlQuery = "select * from Rating where username = '" + useranme "' and movieID = " + movieID + ";";
+		String sqlQuery = "select * from Rating where username = '" + username + "' and movieID = " + movieID + ";";
 
 		try{
 			//Create Statement
 			Statement stmt = connection.createStatement();
 
 			//ResultSet 
-			ResultSet rs = stmt.executeQuery(stmt);
+			ResultSet rs = stmt.executeQuery(sqlQuery);
 			
 			//Movie Cursor to first Row
 			rs.next();
@@ -488,6 +488,7 @@ public class DataManager {
 	}
 
 
+	/** 
 	//Jessie-Anne
 	public void removeMovieReview() {
 		// begin-user-code
@@ -495,6 +496,7 @@ public class DataManager {
 
 		// end-user-code
 	}
+	*/
 
 
 
@@ -504,7 +506,7 @@ public class DataManager {
 		//Initialize Parameters for Constructor 
 		String uName = " ";
 		int movID;
-		String revText " ";
+		String revText = " ";
 		int revID;
 
 		// Create ArrayList of ReviewObjects
@@ -525,7 +527,7 @@ public class DataManager {
 			while(rs.next()){
 
 				uName = rs.getString(1);
-				movID = rs.getInt(2)
+				movID = rs.getInt(2);
 				revText = rs.getString(3);
 				revID = rs.getInt(4);
 
@@ -538,7 +540,7 @@ public class DataManager {
 			return null;
 		}
 
-		return reviewlist;
+		return reviewList;
 
 	}
 
@@ -592,7 +594,7 @@ public class DataManager {
 	
 
 
-	private doulbe getAverageRating(int movieID){
+	private double getAverageRating(int movieID){
 
 		//Initilaze return Varaiable
 		double averageRating; 
@@ -616,7 +618,6 @@ public class DataManager {
 
 		catch(SQLException e){
 			System.out.println("Get Average Rating Error: " + e.getMessage());
-			return null;
 		}
 
 		return averageRating;
