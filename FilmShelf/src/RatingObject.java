@@ -5,9 +5,9 @@
  ******************************************************************************************************************************/
 
 public class RatingObject {
-	public int ratingScore;
-	public String username;
-	public int movieID;
+	private int ratingScore;
+	private String username;
+	private int movieID;
 
 	public RatingObject(int ratingScore, String username, int movieID) {
 		this.ratingScore = ratingScore;

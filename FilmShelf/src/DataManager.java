@@ -8,7 +8,6 @@ import java.sql.Statement;
 public class DataManager {
 
 	private final int NUM_TOP_MOVIES = 5;
-	private final int LAST_TOP_MOVIE_INDEX = 9;
 	private Connection connection;
 
 	//Jessie-Anne - set up DataManager and connects to the team5 DB
@@ -56,6 +55,7 @@ public class DataManager {
 
 	//Courtney and Jo
 	//Make sure null fields aren't null in the database!!!!!
+	/** 
 	public boolean editMember(String username, String password, String firstName, String lastName, String description){
 		//String query 
 		String sqlQuery;
@@ -95,7 +95,7 @@ public class DataManager {
 
 		return true;
 	}
-
+	*/
 
 
 	//Courtney and Jo 
@@ -121,13 +121,14 @@ public class DataManager {
 
 	//Courtney and Jo (make changes based on top movies)
 	public MemberObject getMember(String username, String password) {
-		// Declaring variables
+
+		// Initialize Parameters for Constructor
 		String uName = "";
 		String firstName = "";
 		String lastName = "";
 		String description = "";
-		ArrayList<MovieObject> topMovies = new ArrayList<MovieObject>();
-		ArrayList<Integer> movieIds = new ArrayList<Integer>();		//Array to store members top movie IDs
+		ArrayList<MovieObject> topMovies;
+		
 
 		//SQL query String 
 		String sqlQuery = "select * from MemberAccount where username = '" + username + "' and password = sha1('" + password + "');";
@@ -139,13 +140,17 @@ public class DataManager {
 			//ResultSet 
 			ResultSet rs = stmt.executeQuery(sqlQuery);
 
-			//assigning values to MemberObject	
-			rs.next();		// need to call to point cursor to first record
+		
+
+			//Move Cursor to First Row
+			rs.next();
+
+			//Assign Values to Parameters 
 			uName = rs.getString(1);
 			firstName = rs.getString(3);
 			lastName = rs.getString(4);
 			description = rs.getString(5);
-			topMovies  = this.getTopMovies(username);
+			topMovies = this.getTopMovies(username);
 
 	
 		}
@@ -156,28 +161,56 @@ public class DataManager {
 		}
 		
 		
-			// Create MemberObject to return
-			return new MemberObject(uName, firstName, lastName, description, topMovies);
+		// Create MemberObject to return
+		return new MemberObject(uName, firstName, lastName, description, topMovies);
+
+		
 	}
 
 
 	//NOT DONE!!!
 	//getMember for View Member Case
-	/** 
 	public MemberObject getMember(String username){
+
+		//Initilaize Parameters for Constructor 
+		String uName = " ";
+		String firstName = " ";
+		String lastName = " ";
+		String description = " ";
+		ArrayList<MovieObjects> topMovies;
+
 		//SQL String Query
 		String sqlQuery = "select *  from MemberAccount where username = '" + username + "';";
 
 		try{
+
 			//Create Statement 
 			Statement stmt = connection.createStatement();
 
 			//Initialize Result Set
+			ResultSet rs = stmt.executeQuery(sqlQuery);
 
+			//Move Cursor to First Row
+			rs.next();
+
+			//Assign Values to Parameters 
+			uName = rs.getString(1);
+			firstName = rs.getString(3);
+			lastName = rs.getString(4);
+			description = rs.getString(5);
+			topMovies = this.getTopMovies(username);
+
+		}
+		catch(SQLException e){
+			System.out.println("View Member Error: " + e.getMessage());
+			return null;
+		}
+
+		// Create MemberObject to return
+		return new MemberObject(uName, firstName, lastName, description, topMovies);
 
 
 	}
-	*/
 
 
 	//Courtney and Jo
@@ -255,6 +288,7 @@ public class DataManager {
 
 	//NOT DONE!!!
 	//Courtney 
+	/** 
 	public ArrayList<MovieObject> getMoviesbyKeywords(ArrayList<String> title, int  minReleaseYear, int maxReleaseYear, String genre, int minLength, int maxLength) {
 
 		//Creating MovieArrayList to return to user
@@ -335,12 +369,52 @@ public class DataManager {
 		return movieList;
 
 	}
+	*/
 
-	//NOT DONE!!!
-	//For View Movie
+	//Courtney 
+	//For View Movie (and getTopMovies)
 	public MovieObject getMovie(int movieID){
 
+		//Initialize Parameters for Constructor 
+		String title;
+		int releaseYear;
+		String genre;
+		int length;
+		double averageRating;
+		int movieId;
+
+		//SQL String Query
+		String sqlQuery = "select * from Movie where movieID = " + movieID + ";";
+
+		try{
+
+			//Create Statement 
+			Statement stmt = connection.createStatement();
+
+			//Initialize ResultSet
+			ResultSet rs = stmt. executeQuery(sqlQuery);
+
+			rs.next();
+			title = rs.getString(1);
+			releaseYear = rs.getInt(2);
+			gernre = rs.getString(3);
+			length = rs.getInt(4);
+			movieId = rs.getInt(5);
+			averageRating = (this.getAverageRating(movieId));
+
+			//Create Movieobject 
+			MovieObject movie = new MovieObject(title, releaseYear, genre, length, averageRating, movieId);
+
+		}
+		catch(SQLException e){
+			System.out.println("Get Movie Error: " + e.getMessage());
+			return null;
+		}
+
+		return movie; 
+
 	}
+
 
 
 
@@ -375,13 +449,36 @@ public class DataManager {
 
 
 	//Courtney 
+	/**
 	public int getMovieRatingByMember(String username, int movieID) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		Rating
-		return 0;
+
+		//Create Rating Object
+		RatingObject rating = new RatingObject();
+
+		//SQL String query
+		String sqlQuery = "select * from Rating where username = '" + useranme "' and movieID = " + movieID + ";";
+
+		try{
+			//Create Statement
+			Statement stmt = connection.createStatement();
+
+			//ResultSet 
+			ResultSet rs = stmt.executeQuery(stmt);
+			rating.ratingScore = rs.get
+			rating.username = rs.get
+			rating.mvoieID = rs.get
+
+		}
+
+		catch(SQLException e){
+			return null;
+		}
+
+
+		return rating;
 		// end-user-code
 	}
+	*/
 
 
 	//Jessie-Anne
@@ -403,11 +500,18 @@ public class DataManager {
 
 
 
-	//Courtney 
+	//Courtney
+	/**  
 	public ArrayList<ReviewObject> getMovieReviews(int movieID) {
+
+		//Initialize Cariables to be passed into Constructor 
+		int movID;
+		String uName;
+		String revText;
+		int revID;
+
 		// Create ArrayList of ReviewObjects
 		ArrayList<ReviewObject> reviewList = new ArrayList<ReviewObject>();
-
 
 		//SQL String Query 
 		String sqlQuery = "select * from Reviews where movieID = " + movieID + ";";
@@ -423,13 +527,12 @@ public class DataManager {
 			//Add ReviewObjects to reviewList
 			while(rs.next()){
 
-				//Temp ReviewObject
-				ReviewObject review = new ReviewObject();
-				review.movieId = rs.get
-				review.username = 
-				review.reviewText = rs.
-				review.reviewId = rs.get
+				movID = rs.
+				uName = rs.
+				revText = rs.
+				revID = rs.
 
+				ReviewObject review = new ReviewObject(movID, uName, revText, revID);
 				reviewList.add(review);
 			}
 		}
@@ -445,73 +548,85 @@ public class DataManager {
 		// end-user-code
 	}
 
+	*/
+
 	//Courtney
 	//Helper method for getMember method. 
 	private ArrayList<MovieObject> getTopMovies(String username){
 
-		//Create ArrayList of MovieObjects
-		ArrayList<MovieObject> topMovies = new ArrayList<MovieObject>();
+		
+		//List of MovieIDs 
+		ArrayList<Integer> movieIdList = new ArrayList<Integer>();
 
 		//SQL String Query
-		String sqlString = "select movieID from Rating where username = '" + username + "' order by"
-							+ " ratingScore;";
+		String sqlQuery = "select movieID from Rating where username = '" + username +
+						  "' order by ratingScore desc;";
 
-		ArrayList<Integer> movieIdList = new ArrayList<Integer>(NUM_TOP_MOVIES);
-		
+		try{
+
+			//Create Statement
+			Statement stmt = connection.createStatement();
+
+			//Initialize ResultSet
+			ResultSet rs = stmt.executeQuery(sqlQuery);
+
+			int numMovie = 0;
+			while(rs.next() && numMovie < NUM_TOP_MOVIES){
+				movieIdList.add(rs.getInt(1));
+				numMovie++;
+			}
+
+		}
+		catch(SQLException e){
+			System.out.println("Get Top Movies Error: " + e.getMessage());
+			return null;
+		}
+
+		//List of MovieObjects to return to calling method
+		ArrayList<MovieObject> movieList = new ArrayList<MovieObject>();
+
+
+		//Add Movie Objects to Movie List
+		for(int index = 0; index < NUM_TOP_MOVIES; index++){
+			movieList.add(this.getMovie(movieIdList.get(index)));
+		}
+
+
+		return movieList;
+
+	}
+
+	
+
+
+	private doulbe getAverageRating(int movieID){
+
+		//Initilaze return Varaiable
+		double averageRating; 
+
+		//SQL String Query 
+		String sqlQuery = "select avg(ratingScore) from Rating where movieID = " + movieID + ";";
+
 		try{
 
 			//Create Statement 
 			Statement stmt = connection.createStatement();
 
-			//Result Set
-			ResultSet rsId = stmt.executeQuery(sqlQuery);
+			//Initilize ResultSet 
+			ResultSet rs = stmt.executeQuery(sqlQuery);
 
-			int i = 0;
-
-			//Add Top Movie List Ids to MovieIdList
-			while(rsID.next() && i < NUM_TOP_MOVIES){
-				movieIdList[i] = rsId.getInt();
-				i++;
-			}
-
-
-			//New Statement
-			Statement stmt2 = connection.createStatement();
-
-			for(int i = 0; i < movieIDS; i++){
-
-				int movieId = movieIdList.get(i);
-
-				sqlString = "select * from Movie where movieID = '" + movieId + "';";
-				ResultSet movieInfo = stmt2.executeQuery(sqlString);
-
-				movieInfo.next();
-
-				String title = movieInfo.getString(1);
-				int releaseYear = movieInfo.getInt(2);
-				String genre = movieInfo.getString(3);
-				int length = movieInfo.getInt(4);
-				double averageRating = movieInfo.getDouble(6);
-				
-				 
-
-				MovieObject movie = new Movie(title, releaseYear, genre, length, averageRating, movieId);
-
-				movieList.add(movie)
-			}		
-
-		}
+			rs.next();
+			averageRating = rs.getDouble(1);
 
 
 		}
 
 		catch(SQLException e){
-			System.out.println(e.getMessage());
+			System.out.println("Get Average Rating Error: " + e.getMessage());
 			return null;
 		}
 
-		return movieList;
-
+		return averageRating;
 
 
 	}
