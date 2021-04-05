@@ -302,7 +302,7 @@ public class DataManager {
 		//Add Desired Release Year to Query
 		if(minReleaseYear != -1 && maxReleaseYear != -1){
 			if(minReleaseYear == maxReleaseYear){
-				sqlQuery = sqlQuery + " and releaseYear = " + releaseYear ; 
+				sqlQuery = sqlQuery + " and releaseYear = " + minReleaseYear ; 
  			}
 			else{
 				sqlQuery = sqlQuery + " and releaseYear between " + minReleaseYear + " and " + maxReleaseYear ;
@@ -597,7 +597,7 @@ public class DataManager {
 	private double getAverageRating(int movieID){
 
 		//Initilaze return Varaiable
-		double averageRating; 
+		double averageRating = -1; 
 
 		//SQL String Query 
 		String sqlQuery = "select avg(ratingScore) from Rating where movieID = " + movieID + ";";
