@@ -55,7 +55,7 @@ public class ViewMemberUI extends JPanel {
 		buttonRemoveAccount = new JButton("Remove Account");
 		buttonRemoveAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				removeAccount.displayRemovalMemberWarning();
+				removeMemberUI.displayRemovalMemberWarning(username);
 			}
 		});
 		
@@ -250,8 +250,8 @@ public class ViewMemberUI extends JPanel {
 		}
 	}
 	
-	public void hide()
-	{
-		setVisible(false);
-	}
+	//public void hide()
+	//{
+	//	setVisible(false);
+	//}
 }

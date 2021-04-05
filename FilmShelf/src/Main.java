@@ -27,11 +27,16 @@ public class Main {
 		SearchMemberControl searchMemberControl = new SearchMemberControl(dm);
 		SearchMemberUI searchMemberUI = new SearchMemberUI(searchMemberControl);
 	
+		RemoveMovieControl removeMovieControl = new RemoveMovieControl(dm, loginControl);
+		RemoveMovieUI removeMovieUI = new RemoveMovieUI();
+		
 		LoginUI loginUI = new LoginUI(loginControl);
 		
+		ViewMovieControl viewMovieControl = new ViewMovieControl(dm);
+		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI);
 		
-		//SearchMovieControl searchMovieControl = new SearchMovieControl();
-		//SearchMovierUI searchMovieUI = new SearchMovieUI(searchMovieControl);
+		SearchMovieControl searchMovieControl = new SearchMovieControl(dm);
+		SearchMovieUI searchMovieUI = new SearchMovieUI(searchMovieControl);
 		
 		AddMovieControl addMovieControl = new AddMovieControl(dm, loginControl);
 		AddMovieUI addMovieUI = new AddMovieUI(addMovieControl);

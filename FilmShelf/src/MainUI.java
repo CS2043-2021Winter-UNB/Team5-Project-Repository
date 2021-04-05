@@ -211,6 +211,7 @@ public class MainUI extends JFrame {
 	        buttonCreateAccount.addActionListener(new ActionListener() {
 	        	public void actionPerformed(ActionEvent e) {
 	        		addMovieUI.displayAddMovieForm();
+	        		searchMemberUI.setVisible(false);
 	        	}
 	        });
 		}
