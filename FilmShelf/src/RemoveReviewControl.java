@@ -13,12 +13,12 @@ public class RemoveReviewControl {
 		this.loginControl = loginControl;
 	}
 	
-	public boolean processRemoveReview(int movieId, String username, int reviewId) {
+	public boolean processRemoveReview(String username, int reviewId) {
 		if(!verifyRemovePermission(username)) {
 			return false;
 		}
 		
-		return dataManager.removeMovieReview(movieId, username, reviewId);
+		return dataManager.removeMovieReview(reviewId);
 	}
 	
 	// checks who is requesting the removal and returns a boolean representing if the removal is valid or invalid

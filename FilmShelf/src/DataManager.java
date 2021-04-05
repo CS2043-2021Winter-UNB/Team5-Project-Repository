@@ -503,28 +503,52 @@ public class DataManager {
 		return new RatingObject(ratingScore, uName, movieId);
 	}
 
-
 	//Jessie-Anne
-	public void addMovieReview(ReviewObject review) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+	public boolean addMovieReview(int movieID, String username, String reviewText) {
+		String sqlQuery = "insert into Review(username, movieID, reviewText) values('" + username + "', " + movieID + ", '" + reviewText + "');";
+		
+		try {
+			//Create statement 
+			Statement stmt = connection.createStatement();
+			
+			//Insert review
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			
+			// return false if no review was added
+			if(rowsUpdated == 0) {
+				return false;
+			}
+		} catch(SQLException e) {
+			System.out.println("Add Review error: " + e.getMessage());
+			return false;
+		}
 
-		// end-user-code
+		return true;
 	}
 
-
-	/** 
 	//Jessie-Anne
-	public void removeMovieReview() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public boolean removeMovieReview(int reviewID) {
+		String sqlQuery = "DELETE from Review where reviewID = " + reviewID + ";";
+		
+		try {
+			//Create statement 
+			Statement stmt = connection.createStatement();
+			 
+			//Delete row
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			
+			// return false if no review was removed
+			if(rowsUpdated == 0) {
+				return false;
+			}
+		} catch (SQLException e) {
+			System.out.println("Remove review error: " +e.getMessage());
+			return false;
+		}
+		
+		return true;
 	}
-	*/
-
-
-
+	
 	//Courtney 
 	public ArrayList<ReviewObject> getMovieReviews(int movieID) {
 		//Initialize Parameters for Constructor 
