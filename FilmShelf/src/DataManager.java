@@ -55,10 +55,10 @@ public class DataManager {
 
 	//Courtney and Jo
 	//Make sure null fields aren't null in the database!!!!!
-	/** 
 	public boolean editMember(String username, String password, String firstName, String lastName, String description){
 		//String query 
-		String sqlQuery;
+		String sqlQuery = "updateMemberAccount set firstName = '" + firstName + "', lastName = '" + lastName 
+							+ "', description = '" + description + "'";;
 
 		try {
 			//Create Statement 
@@ -66,27 +66,16 @@ public class DataManager {
 
 			//If new value is passed in update password
 			if(password != null){
-				sqlQuery = "update MemberAccount set password = sha1('" + password + "') where username = '" + username + "';";
-				stmt.executeUpdate(sqlQuery);
+
+				sqlQuery = sqlQuery ", password = sha1('" + password + "')";
+
 			}
 			
-			//If new value is passed in update firstName
-			if(firstName != null){
-				sqlQuery = "update MemberAccount set firstName = '" + firstName + "' where username = '" + username + "';";
-				stmt.executeUpdate(sqlQuery);
-			}
 
-			//If new value is passed in update lastName 
-			if(lastName != null){
-				sqlQuery = "update MemberAccount set lastName = '" + lastName + "' where username = '" + username + "';";
-				stmt.executeUpdate(sqlQuery);
-			}
+			sqlQuery = sqlQuery + " where username = '" + username + "';";
 
-			//if new value is passed in update description
-			if(description != null){
-				sqlQuery = "update MemberAccount set description = '" + description + "' where username = '" + username + "';";
-				stmt.executeUpdate(sqlQuery);
-			}
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+
 		}
 		catch(SQLException e) {
 			System.out.println("Edit member error: " + e.getMessage());
@@ -95,7 +84,7 @@ public class DataManager {
 
 		return true;
 	}
-	*/
+
 
 
 	//Courtney and Jo 
@@ -550,7 +539,7 @@ public class DataManager {
 		}
 
 		return reviewlist;
-		
+
 	}
 
 
