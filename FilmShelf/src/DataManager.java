@@ -300,30 +300,76 @@ public class DataManager {
 
 
 	//Jessie-Anne
-	public void addMovieRating(RatingObject rating) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+	public boolean addMovieRating(String usernameIn, int movieIDIn, int ratingIn) {
+		//SQL query Strings 
+				String sqlQuery1 = "select * from Rating where username = '" + usernameIn +"' AND movieID = " + movieIDIn + ";";  
+				String sqlQuery2 = "insert into Rating(ratingScore, username, movieID) values(" + ratingIn + ", '" + usernameIn + "', " + 
+												movieIDIn + ");";
 
-		// end-user-code
+				
+				try {
+					
+					//Create statement 
+					Statement stmt = connection.createStatement();
+					
+					//ResultSet 
+					ResultSet rs = stmt.executeQuery(sqlQuery1);
+					
+					if(rs != null) { //if this happens the user has already rated that movie
+						//Question for the team: should it return some kind of message re rating already exists?
+						return false;
+					}
+					else { 	// if the user has not rated the movie, the rating is added
+					int rowsUpdated = stmt.executeUpdate(sqlQuery2);
+					}
+				}
+				catch(SQLException e) {
+					System.out.println("Add review error: " + e.getMessage());
+					return false;
+				}
+
+				return true;
 	}
+
+	
 
 
 
 
 
 	//Jessie-Anne
-	public void editMovieRating(){
+	public boolean editMovieRating(String usernameIn, int movieIDIn, int ratingIn){
 
+		String sqlQuery = "update Rating set ratingScore = " + ratingIn + " where username = '" + usernameIn + "' AND movieID = " + movieIDIn + ";";
+		
+		try {
+			//Create statement 
+			Statement stmt = connection.createStatement();
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+		} 
+		catch (SQLException e) {
+			System.out.println("Error updating rating: " +e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 
 
 	//Jessie-Anne
-	public void removeMovieRating() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public boolean removeMovieRating(String usernameIn, int movieIDIn) {
+		String sqlQuery = "DELETE from Rating where username = '" + usernameIn + "' AND movieID = " + movieIDIn + ";";
+		try {
+			//Create statement 
+			Statement stmt = connection.createStatement();
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+		} 
+		catch (SQLException e) {
+			System.out.println("Error updating rating: " +e.getMessage());
+			return false;
+		}
+		return true;
+		
 	}
 
 
