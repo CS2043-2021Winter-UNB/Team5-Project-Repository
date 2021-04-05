@@ -536,25 +536,22 @@ public class DataManager {
 		String sqlQuery = "insert into Review(username, movieID, reviewText) values('" + username + "', " + movieID + ", '" + reviewText + "');";
 		
 		try {
-			
 			//Create statement 
 			Statement stmt = connection.createStatement();
 			
-			
 			//Insert review
-			 stmt.executeUpdate(sqlQuery);
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
 			
-		
-		}
-		catch(SQLException e) {
-			System.out.println("Add review error: " + e.getMessage());
+			// return false if no review was added
+			if(rowsUpdated == 0) {
+				return false;
+			}
+		} catch(SQLException e) {
+			System.out.println("Add Review error: " + e.getMessage());
 			return false;
 		}
 
 		return true;
-	
-	
-	
 	}
 
 
@@ -568,15 +565,18 @@ public class DataManager {
 			Statement stmt = connection.createStatement();
 			 
 			//Delete row
-			stmt.executeUpdate(sqlQuery);
-		} 
-		catch (SQLException e) {
-			System.out.println("Error deleting review: " +e.getMessage());
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			
+			// return false if no review was removed
+			if(rowsUpdated == 0) {
+				return false;
+			}
+		} catch (SQLException e) {
+			System.out.println("Remove review error: " +e.getMessage());
 			return false;
 		}
+		
 		return true;
-		
-		
 	}
 	
 
