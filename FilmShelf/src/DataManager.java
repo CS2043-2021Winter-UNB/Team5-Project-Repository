@@ -8,6 +8,7 @@ import java.sql.Statement;
 public class DataManager {
 
 	private final int NUM_TOP_MOVIES = 5;
+
 	private Connection connection;
 
 	//Jessie-Anne - set up DataManager and connects to the team5 DB
@@ -56,6 +57,7 @@ public class DataManager {
 
 	//Courtney and Jo
 	//Make sure null fields aren't null in the database!!!!!
+
 	public boolean editMember(String username, String password, String firstName, String lastName, String description){
 		//String query 
 		String sqlQuery = "update MemberAccount set firstName = '" + firstName + "', lastName = '" + lastName + "', description = '" + description + "'";
@@ -110,7 +112,6 @@ public class DataManager {
 
 	//Courtney and Jo (make changes based on top movies)
 	public MemberObject getMember(String username, String password) {
-
 		// Initialize Parameters for Constructor
 		String uName = "";
 		String firstName = "";
@@ -137,6 +138,7 @@ public class DataManager {
 			rs.next();
 
 			//Assign Values to Parameters 
+			
 			uName = rs.getString(1);
 			firstName = rs.getString(3);
 			lastName = rs.getString(4);
@@ -152,7 +154,7 @@ public class DataManager {
 	}
 
 	//getMember for View Member Case
-	public MemberObject getMember(String username){
+	public MemberObject getMember(String username) {
 
 		//Initilaize Parameters for Constructor 
 		String uName = " ";
@@ -195,7 +197,7 @@ public class DataManager {
 	}
 
 	//Courtney and Jo
-	public AdminObject getAdmin(String username, String password){
+	public AdminObject getAdmin(String username, String password) {
 
 		String uName = "";
 
@@ -215,6 +217,7 @@ public class DataManager {
 
 			//Assigning values to adminObject
 			rs.next();		// need to call to point cursor to first record
+			
 			uName = rs.getString(1);
 		} catch(SQLException e) {
 			System.out.println("Admin login error: " + e.getMessage());
@@ -225,7 +228,7 @@ public class DataManager {
 	}
 
 	//Jessie-Anne 
-	public boolean addMovie(String title, int releaseYear, String genre, int length){
+	public boolean addMovie(String title, int releaseYear, String genre, int length) {
 		//SQL query String 
 		String sqlQuery = "insert into Movie(title, releaseYear, genre, length) values('" +	title + "'," + releaseYear + ", '" + genre + "', " + length + ");";
 
@@ -241,8 +244,7 @@ public class DataManager {
 			if(rowsUpdated == 0) {
 				return false;
 			}
-		}
-		catch(SQLException e) {
+		} catch(SQLException e) {
 			System.out.println("Add movie error: " + e.getMessage());
 			return false;
 		}
@@ -252,7 +254,7 @@ public class DataManager {
 
 	//Jessie-Anne
 	public boolean removeMovie(int movieID) {
-		//SQL String query 
+		//String query 
 		String sqlQuery = "delete from Movie where movieID = " + movieID + ";";
 
 		try {
@@ -388,42 +390,83 @@ public class DataManager {
 		return new MovieObject(title, releaseYear, genre, length, averageRating, movieId);
 	}
 
-
-
-	/** 
 	//Jessie-Anne
-	public void addMovieRating(RatingObject rating) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+	public boolean addMovieRating(String usernameIn, int movieIDIn, int ratingIn) {
+		//SQL query Strings 
+		String sqlQuery1 = "select * from Rating where username = '" + usernameIn +"' AND movieID = " + movieIDIn + ";";  
+		String sqlQuery2 = "insert into Rating(ratingScore, username, movieID) values(" + ratingIn + ", '" + usernameIn + "', " + movieIDIn + ");";
 
-		// end-user-code
+		try {
+			//Create statement 
+			Statement stmt = connection.createStatement();
+			
+			//ResultSet 
+			ResultSet rs = stmt.executeQuery(sqlQuery1);
+			
+			//if this happens the user has already rated that movie
+			if(rs != null) {
+				//Question for the team: should it return some kind of message re rating already exists?
+				return false;
+			}
+			
+			// if the user has not rated the movie, the rating is added
+			int rowsUpdated = stmt.executeUpdate(sqlQuery2);
+			
+			// return false if no rating was added
+			if(rowsUpdated == 0) {
+				return false;
+			}
+		} catch(SQLException e) {
+			System.out.println("Add Rating error: " + e.getMessage());
+			return false;
+		}
+
+		return true;
 	}
-	*/
-
-
-
-
-	/** 
+	
 	//Jessie-Anne
-	public void editMovieRating(){
-
+	public boolean editMovieRating(String usernameIn, int movieIDIn, int ratingIn){
+		String sqlQuery = "update Rating set ratingScore = " + ratingIn + " where username = '" + usernameIn + "' AND movieID = " + movieIDIn + ";";
+		
+		try {
+			//Create statement 
+			Statement stmt = connection.createStatement();
+			
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			
+			// return false if no rating was edited
+			if(rowsUpdated == 0) {
+				return false;
+			}
+		} catch (SQLException e) {
+			System.out.println("Edit Rating error: " +e.getMessage());
+			return false;
+		}
+		
+		return true;
 	}
-	*/
 
-
-
-	/** 
 	//Jessie-Anne
-	public void removeMovieRating() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public boolean removeMovieRating(String usernameIn, int movieIDIn) {
+		String sqlQuery = "DELETE from Rating where username = '" + usernameIn + "' AND movieID = " + movieIDIn + ";";
+		
+		try {
+			//Create statement 
+			Statement stmt = connection.createStatement();
+			
+			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			
+			// return false if no rating was removed
+			if(rowsUpdated == 0) {
+				return false;
+			}
+		} catch (SQLException e) {
+			System.out.println("Remove rating error: " +e.getMessage());
+			return false;
+		}
+		
+		return true;
 	}
-	*/
-
-
-
 
 	//Courtney 
 	public RatingObject getMovieRatingByMember(String username, int movieID) {
@@ -447,7 +490,7 @@ public class DataManager {
 				return null;
 			}
 			
-			//Movie Cursor to first Row
+			//Move Cursor to first Row
 			rs.next();
 
 			ratingScore = rs.getInt(1);
@@ -523,7 +566,6 @@ public class DataManager {
 
 		return reviewList;
 	}
-
 
 	//Courtney
 	//Helper method for getMember method. 

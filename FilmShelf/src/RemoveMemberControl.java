@@ -18,12 +18,18 @@ public class RemoveMemberControl {
 	// assuming remove account option is only displayed to admin or a logged in member on their own account page
 	// username should be passed internally from system variable, so no input validation required
 	public boolean processRemoveAccount(String username) {
-		if(!verifyRemovePermission(username)) {
+		// return false for empty/null username
+		if((username == null) || username.isBlank()) {
+			return false;
+		}
+		
+		// verify that the user performing the removal has removal permission
+		if(!verifyRemovePermission(username.strip())) {
 			return false;
 		}
 		
 		// call removeMemberAccount from DataManager
-		if(!dataManager.removeMember(username)) {
+		if(!dataManager.removeMember(username.strip())) {
 			return false;
 		}
 		

@@ -26,4 +26,11 @@ public class RatingObject {
 	public int getMovieID() {
 		return movieID;
 	}
+	
+	// returns a String representation of a RatingObject
+	public String toString() {
+		return "movieId: " + movieID + "\n" +
+				"username: " + username + "\n" +
+				"rating: " + ratingScore + "\n";
+	}
 }

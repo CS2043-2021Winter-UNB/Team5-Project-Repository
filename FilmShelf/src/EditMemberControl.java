@@ -15,10 +15,12 @@ public class EditMemberControl {
 	private Pattern lowercasePattern;
 	private Pattern numberPattern;
 	private Pattern specialCharacterPattern;
+	private Pattern namePattern;
 	private Matcher uppercaseMatcher;
 	private Matcher lowercaseMatcher;
 	private Matcher numberMatcher;
 	private Matcher specialCharacterMatcher;
+	private Matcher nameMatcher;
 	
 	// class constructor
 	public EditMemberControl(DataManager dataManager, LoginControl loginControl) {
@@ -28,19 +30,20 @@ public class EditMemberControl {
 		this.lowercasePattern = Pattern.compile("[a-z]");					// matches lowercase letters
 		this.numberPattern = Pattern.compile("[0-9]");						// matches numbers
 		this.specialCharacterPattern = Pattern.compile("[^A-Za-z0-9]");		// matches special characters
+		this.namePattern = Pattern.compile("[^A-Za-z0-9\\-]");				// matches special characters except -
 	}
 
-	public boolean validateFormInput(MemberObject member, String password, String firstName, String lastName, String description) {
+	private boolean validateFormInput(MemberObject member, String password, String firstName, String lastName, String description) {
 		String pWord = "";
 		String fName = "";
 		String lName = "";
 		String desc = "";
 		
 		// input is invalid if no new details are provided
-		if(((password == null) || password.strip().isEmpty()) &&
-			((firstName == null) || firstName.strip().isEmpty() || firstName.equals(member.getFirstName())) &&
-			((lastName == null) || lastName.strip().isEmpty() || lastName.equals(member.getLastName())) &&
-			((description == null) || (description.equals(member.getDescription())))) {
+		if(((password == null) || password.isBlank()) &&
+			((firstName == null) || firstName.isBlank() || firstName.equals(member.getFirstName())) &&
+			((lastName == null) || lastName.isBlank() || lastName.equals(member.getLastName())) &&
+			((description == null) || description.isBlank() || (description.equals(member.getDescription())))) {
 			return false;
 		}
 		
@@ -77,11 +80,11 @@ public class EditMemberControl {
 			// minimum 1 character
 			// maximum 25 characters
 			// no numbers or special characters
-		if(!fName.strip().isEmpty() && !fName.equals(member.getFirstName())) {
+		if(!fName.isBlank() && !fName.equals(member.getFirstName())) {
 			numberMatcher = numberPattern.matcher(fName);
-			specialCharacterMatcher = specialCharacterPattern.matcher(fName);
+			nameMatcher = namePattern.matcher(fName);
 		
-			if(numberMatcher.find() || specialCharacterMatcher.find() || (fName.length() > 25) || (fName.length() < 1)) {
+			if(numberMatcher.find() || nameMatcher.find() || (fName.length() > 25) || (fName.length() < 1)) {
 				return false;
 			}
 		}
@@ -90,20 +93,22 @@ public class EditMemberControl {
 			// minimum 1 character
 			// maximum 25 characters
 			// no numbers or special characters
-		if(!lName.strip().isEmpty() && !lName.equals(member.getLastName())) {
+		if(!lName.isBlank() && !lName.equals(member.getLastName())) {
 			numberMatcher = numberPattern.matcher(lName);
-			specialCharacterMatcher = specialCharacterPattern.matcher(lName);
+			nameMatcher = namePattern.matcher(lName);
 		
-			if(numberMatcher.find() || specialCharacterMatcher.find() || (lName.length() > 25) || (lName.length() < 1)) {
+			if(numberMatcher.find() || nameMatcher.find() || (lName.length() > 25) || (lName.length() < 1)) {
 				return false;
 			}
 		}
 		
 		// check description
 			// maximum 280 characters
-			// minimum 0 characters
-		if(desc.length() > 280) {
-			return false;
+			// minimum 1 character
+		if(!desc.isBlank() && !desc.equals(member.getDescription())) {
+			if((desc.length() > 280) || (desc.length() < 1)) {
+				return false;
+			}
 		}
 		
 		return true;	// if this line is reached, input is valid
@@ -112,7 +117,7 @@ public class EditMemberControl {
 	// Jo:	how to tell UI why edit failed?
 	//		UI could check if user is logged in before displaying edit account form and even pass member to Control
 	public boolean updateAccount(String password, String firstName, String lastName, String description) {
-		boolean currentUserIsMember = false;
+		//boolean currentUserIsMember = false;
 		boolean inputIsValid = false;
 		boolean accountUpdated = false;
 		
@@ -130,9 +135,7 @@ public class EditMemberControl {
 		// if input invalid, return false
 		if(!inputIsValid) {
 			accountUpdated = false;
-			System.out.print("Hello!");
-		} 
-		else if(inputIsValid) {		// if input valid, call editAccount from DataManager
+		} else {		// if input valid, call editAccount from DataManager
 			// default values to pass to DataManager in case of null/empty inputs
 			String pWord = null;
 			String fName = member.getFirstName();
@@ -140,17 +143,18 @@ public class EditMemberControl {
 			String desc = member.getDescription();
 			
 			// prepare to pass inputs that aren't null/empty
-			if(password != null && !password.strip().isEmpty()) {
+			if(password != null && !password.isBlank()) {
 				pWord = password.strip();
 			}
-			if(firstName != null && !firstName.strip().isEmpty()) {
+			if(firstName != null && !firstName.isBlank()) {
 				fName = firstName.strip();
 			}
-			if(lastName != null && !lastName.strip().isEmpty()) {
+			if(lastName != null && !lastName.isBlank()) {
 				lName = lastName.strip();
 			}
-			if(description != null) {
+			if(description != null && !description.isBlank()) {
 				desc = description.strip();
+				desc = desc.replace("'", "''");		// double up single quotes for SQL query
 			}
 			
 			accountUpdated = dataManager.editMember(member.getUsername(), pWord, fName, lName, desc);		// DataManager will have to check for null password

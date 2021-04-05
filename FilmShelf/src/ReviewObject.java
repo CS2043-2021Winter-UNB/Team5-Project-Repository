@@ -33,4 +33,12 @@ public class ReviewObject {
 	public int getReviewId() {
 		return reviewId;
 	}
+	
+	// returns string representation of ReviewObject
+	public String toString() {
+		return "reviewId: " + reviewId + "\n" +
+				"movieId: " + movieId + "\n" +
+				"username: " + username + "\n" +
+				"reviewText: " + reviewText + "\n";
+	}
 }

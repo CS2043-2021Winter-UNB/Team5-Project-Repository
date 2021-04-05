@@ -30,12 +30,15 @@ public class AddMovieControl {
 			return false;
 		}
 		
+		// double up single quotes for SQL query
+		title = title.replace("'", "''");
+		
 		// call DataManager to add movie and return add result
 		return dataManager.addMovie(title.strip(), releaseYear, genre.strip(), length);		// addMovie should return true/false for add result
 	}
 	
 	// helper method, should be private but set to public for now for testing
-	public boolean validateFormInput(String title, int releaseYear, String genre, int length) {
+	private boolean validateFormInput(String title, int releaseYear, String genre, int length) {
 		// check that all fields are provided
 		if((title == null) || title.strip().isEmpty()) {
 			return false; 
@@ -50,8 +53,8 @@ public class AddMovieControl {
 			return false;
 		}
 		
-		// check that title isn't longer than 25 characters (length of title in Movie table)
-		if(title.strip().length() > 25) {
+		// check that title isn't longer than 150 characters (length of title in Movie table)
+		if(title.strip().length() > 150) {
 			return false;
 		}
 		

@@ -4,6 +4,12 @@
  * Description:	Displays login form, extracts user input, and displays login confirmation or error.
  ******************************************************************************************************************************/
 
+/******************************************************************************************************************************
+ * LoginUI
+ * @author Sharon
+ * Description:	Displays login form, extracts user input, and displays login confirmation or error.
+ ******************************************************************************************************************************/
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -20,26 +26,28 @@ import java.awt.Insets;
 import javax.swing.JCheckBox;
 
 public class LoginUI extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private LoginControl loginControl;
+	private MainUI mainUI;
 	private JRadioButton radioButtonAdmin;
 	private JRadioButton radioButtonMember;
 	private JButton loginButton;
 	private JLabel labelUsername;
 	private JLabel labelPassword;
-	private JButton buttonEditMember;
 	private boolean member = true;
 	private JTextField textFieldUsername;
 	private JPasswordField passwordField;
 	private JLabel labelLoginStatus;
-	private EditMemberUI editMemberUI;
 	private JCheckBox checkboxPasswordVisibility;
 
 	/**
 	 * Create the panel.
 	 */
-	public LoginUI(LoginControl control, EditMemberUI uiEditMember) {
+	public LoginUI(LoginControl control) {
 		loginControl = control;
-		editMemberUI = uiEditMember;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{50, 96, 91, 7, 65, 57, 59, 1, 0};
 		gridBagLayout.rowHeights = new int[]{23, 0, 0, 0, 0, 0, 0, 28, 0};
@@ -49,7 +57,7 @@ public class LoginUI extends JPanel {
 		
 		
 		//Username label
-		labelUsername = new JLabel("Username");
+		labelUsername = new JLabel("Username: ");
 		labelUsername.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelUsername = new GridBagConstraints();
 		gbc_labelUsername.anchor = GridBagConstraints.EAST;
@@ -70,7 +78,7 @@ public class LoginUI extends JPanel {
 		textFieldUsername.setColumns(10);
 		
 		//Password label
-		labelPassword = new JLabel("Password");
+		labelPassword = new JLabel("Password: ");
 		labelPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelPassword = new GridBagConstraints();
 		gbc_labelPassword.anchor = GridBagConstraints.EAST;
@@ -144,9 +152,6 @@ public class LoginUI extends JPanel {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				extractLoginCredentials();
-				if(loginControl.getCurrentMember()!=null){
-		   			buttonEditMember.setVisible(true);
-		   		 }
 			}
 		});
 		GridBagConstraints gbc_loginButton = new GridBagConstraints();
@@ -167,30 +172,14 @@ public class LoginUI extends JPanel {
 		add(labelLoginStatus, gbc_labelLoginStatus);
 		
 		setVisible(false);
-		
-		 //edit member
-	     buttonEditMember = new JButton("Edit Account");
-	     buttonEditMember.addActionListener(new ActionListener() {
-		     	public void actionPerformed(ActionEvent e) {
-		     		editMemberUI.displayEditAccountForm();
-		     		setVisible(false);
-		     	}
-		     });
-	     
-	     GridBagConstraints gbc_buttonEditMember = new GridBagConstraints();
-	     gbc_buttonEditMember.anchor = GridBagConstraints.EAST;
-	     gbc_buttonEditMember.insets = new Insets(0, 0, 5, 5);
-	     gbc_buttonEditMember.gridx = 4;
-	     gbc_buttonEditMember.gridy = 1;
-	     add(buttonEditMember, gbc_buttonEditMember);
-	     buttonEditMember.setVisible(false);
-
+	}
+	
+	public void setMain(MainUI mainUI) {
+		this.mainUI = mainUI;
 	}
 	
 	public void displayLoginForm() {
 		//clear login fields/radio button before redisplaying
-		labelUsername.setText("User Name: ");
-		labelPassword.setText("Password: ");
 		checkboxPasswordVisibility.setSelected(false);
 		radioButtonMember.setSelected(true);
 		labelLoginStatus.setText("");
@@ -199,31 +188,31 @@ public class LoginUI extends JPanel {
 		setVisible(true);
 	}
 	
-	public boolean extractLoginCredentials() {
+	public void extractLoginCredentials() {
 		String username = textFieldUsername.getText();
 		String password = new String(passwordField.getPassword());
-		boolean loginStatus;
-		if (member){
-			displayLoginErrorMessage();
-			loginStatus = loginControl.processMemberLogin(username, password);
-		}
-		else{
-			loginStatus = loginControl.processAdminLogin(username, password);
-		}
-		if(loginStatus) {
-			displayLoginConfirmation();
-			return true;
 		
-		} else {
-			displayLoginErrorMessage();
-			return false;
-		
+		//check if fields are blank
+		if (username.trim().isEmpty() || password.trim().isEmpty()) {
+			labelLoginStatus.setText("Fields must non-blank to login");
 		}
-	}
-	
-	public void displayLoginConfirmation() {
-		labelLoginStatus.setText("Login was successful!!");
-		
+		else {
+			boolean loginStatus;
+			if (member){
+				displayLoginErrorMessage();
+				loginStatus = loginControl.processMemberLogin(username, password);
+			}
+			else{
+				loginStatus = loginControl.processAdminLogin(username, password);
+			}
+			if(loginStatus) {
+				mainUI.changeCreateAndLoginButtons();
+				setVisible(false);
+			
+			} else {
+				displayLoginErrorMessage();
+			}
+		}
 	}
 	
 	private void displayLoginErrorMessage() {
@@ -244,4 +233,5 @@ public class LoginUI extends JPanel {
 			passwordField.setEchoChar('*');
 		}
 	}
+
 }

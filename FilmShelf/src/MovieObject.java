@@ -34,7 +34,6 @@ public class MovieObject {
 		return genre;
 	}
 	
-	
 	public int getLength() {
 		return length;
 	}
@@ -46,4 +45,5 @@ public class MovieObject {
 	public int getMovieId() {
 		return movieId;
 	}
+	
 }
