@@ -168,7 +168,7 @@ public class DataManager {
 	}
 
 
-	//NOT DONE!!!
+
 	//getMember for View Member Case
 	public MemberObject getMember(String username){
 
@@ -286,16 +286,17 @@ public class DataManager {
 
 
 
-	//NOT DONE!!!
 	//Courtney 
-	/** 
 	public ArrayList<MovieObject> getMoviesbyKeywords(ArrayList<String> title, int  minReleaseYear, int maxReleaseYear, String genre, int minLength, int maxLength) {
 
 		//Creating MovieArrayList to return to user
 		ArrayList<MovieObject> movieList = new ArrayList<MovieObject>();
 
+		//Create ArrayList of Integers to Store Movie IDs 
+		ArrayList<Integer> movieIdList = new ArrayList<Integer>();
+
 		//SQL String Query 
-		String sqlQuery = "select from Movie where";
+		String sqlQuery = "select movieID from Movie where";
 
 		//Add Desired title to Query (does not need to be exact)
 		for (int i=0; i<title.size(); i++) {
@@ -312,10 +313,10 @@ public class DataManager {
 		//Add Desired Release Year to Query
 		if(minReleaseYear != null && maxReleaseYear != null){
 			if(minReleaseYear == maxReleaseYear){
-				sqlQuery = sqlQuery + " and releaseYear = '" + releaseYear + "'"; 
+				sqlQuery = sqlQuery + " and releaseYear = " + releaseYear ; 
  			}
 			else{
-				sqlQuery = sqlQuery + " and releasYear between '" + minReleaseYear + "' and '" + maxReleaseYear = "'";
+				sqlQuery = sqlQuery + " and releaseYear between " + minReleaseYear + " and " + maxReleaseYear ;
 			}
 		
 		} 
@@ -325,10 +326,10 @@ public class DataManager {
 		//Add Desired Length to Query  
 		if(minLength != null && maxLength != null){
 			if(minLength == maxLength){
-				sqlQuery = sqlQuery + " and releaseYear = '" + minLength + "'"; 
+				sqlQuery = sqlQuery + " and releaseYear = " + minLength + ""; 
  			}
 			else{
-				sqlQuery = sqlQuery + " and releasYear between '" + minLength + "' and '" + maxLength = "'";
+				sqlQuery = sqlQuery + " and releasYear between " + minLength + " and " + maxLength ;
 			}
 		
 		} 
@@ -349,14 +350,12 @@ public class DataManager {
 			//Create Movie Objects and Add to Movie List
 			while (rs.next()) {
 
-				MovieObject movie = new MovieObject();
-				movie.title = rs.getString(1);
-				movie.releaseYear = rs.getInt(2);
-				movie.genre = rs.getString(3);
-				movie.length = rs.getInt(4);
-				movie.averageRating = rs.getDouble(6);
-				movieList.add(movie);
+				movieIdList.add(rs.getInt(1));
 
+			}
+
+			for(int index = 0; index < movieIdList.size(); index++){
+				movieList.add(this.getMovie(movieIdList.get(index)));
 			}
 
 		}
@@ -369,7 +368,6 @@ public class DataManager {
 		return movieList;
 
 	}
-	*/
 
 	//Courtney 
 	//For View Movie (and getTopMovies)
@@ -449,8 +447,12 @@ public class DataManager {
 
 
 	//Courtney 
-	/**
 	public int getMovieRatingByMember(String username, int movieID) {
+
+		//Initilaize Parameters for Constructor
+		int ratingScore;
+		Sring uName = " ";
+		int movieId;
 
 		//Create Rating Object
 		RatingObject rating = new RatingObject();
@@ -464,9 +466,15 @@ public class DataManager {
 
 			//ResultSet 
 			ResultSet rs = stmt.executeQuery(stmt);
-			rating.ratingScore = rs.get
-			rating.username = rs.get
-			rating.mvoieID = rs.get
+			
+			//Movie Cursor to first Row
+			rs.next();
+
+			ratingScore = rs.getInt(1);
+			uName = rs.getString(2);
+			movieId = rs.getInt(3);
+
+
 
 		}
 
@@ -475,10 +483,11 @@ public class DataManager {
 		}
 
 
-		return rating;
+		return new RatingObject(ratingScore, uName, movieId);
+
+
 		// end-user-code
 	}
-	*/
 
 
 	//Jessie-Anne
@@ -500,14 +509,13 @@ public class DataManager {
 
 
 
-	//Courtney
-	/**  
+	//Courtney 
 	public ArrayList<ReviewObject> getMovieReviews(int movieID) {
 
-		//Initialize Cariables to be passed into Constructor 
+		//Initialize Parameters for Constructor 
+		String uName = " ";
 		int movID;
-		String uName;
-		String revText;
+		String revText " ";
 		int revID;
 
 		// Create ArrayList of ReviewObjects
@@ -527,10 +535,10 @@ public class DataManager {
 			//Add ReviewObjects to reviewList
 			while(rs.next()){
 
-				movID = rs.
-				uName = rs.
-				revText = rs.
-				revID = rs.
+				uName = rs.getString(1);
+				movID = rs.getInt(2)
+				revText = rs.getString(3);
+				revID = rs.getInt(4);
 
 				ReviewObject review = new ReviewObject(movID, uName, revText, revID);
 				reviewList.add(review);
@@ -543,12 +551,8 @@ public class DataManager {
 
 		return reviewlist;
 		
-
-		return null;
-		// end-user-code
 	}
 
-	*/
 
 	//Courtney
 	//Helper method for getMember method. 
