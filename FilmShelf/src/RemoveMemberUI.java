@@ -24,8 +24,11 @@ public class RemoveMemberUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private RemoveMemberControl removeMemberControl;
 	private JLabel labelAccountStatus;
+
+		
 	
-	public RemoveMemberUI() {
+	public RemoveMemberUI(RemoveMemberControl controlRemoveAcc) {
+		removeMemberControl = controlRemoveAcc;
 		labelAccountStatus = new JLabel("");
 		labelAccountStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelAccountStatus = new GridBagConstraints();

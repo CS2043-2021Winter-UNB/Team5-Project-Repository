@@ -1,5 +1,5 @@
 
-public class RemoveRatingUI {
+public class RemoveRatingUI  {
 
 	private RemoveRatingControl removeRatingControl;
 

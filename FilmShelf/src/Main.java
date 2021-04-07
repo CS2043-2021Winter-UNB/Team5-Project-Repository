@@ -19,7 +19,7 @@ public class Main {
 		EditMemberUI editMemberUI = new EditMemberUI(editMemberControl);
 		
 		RemoveMemberControl removeMemberControl = new RemoveMemberControl(dm, loginControl);
-		RemoveMemberUI removeMemberUI = new RemoveMemberUI();
+		RemoveMemberUI removeMemberUI = new RemoveMemberUI(removeMemberControl);
 		
 		ViewMemberControl viewMemberControl = new ViewMemberControl(dm);
 		ViewMemberUI viewMemberUI = new ViewMemberUI(viewMemberControl, loginControl,editMemberUI, removeMemberUI);
@@ -30,10 +30,10 @@ public class Main {
 		RemoveMovieControl removeMovieControl = new RemoveMovieControl(dm, loginControl);
 		RemoveMovieUI removeMovieUI = new RemoveMovieUI();
 		
-		LoginUI loginUI = new LoginUI(loginControl);
-		
 		ViewMovieControl viewMovieControl = new ViewMovieControl(dm);
-		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI);
+		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI,loginControl);
+		
+		LoginUI loginUI = new LoginUI(loginControl);
 		
 		SearchMovieControl searchMovieControl = new SearchMovieControl(dm);
 		SearchMovieUI searchMovieUI = new SearchMovieUI(searchMovieControl);
@@ -41,7 +41,7 @@ public class Main {
 		AddMovieControl addMovieControl = new AddMovieControl(dm, loginControl);
 		AddMovieUI addMovieUI = new AddMovieUI(addMovieControl);
     
-		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI,addMovieUI);
+		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI,addMovieUI,viewMovieUI);
 		mainUI.setVisible(true);
 		loginUI.setMain(mainUI);
 	}

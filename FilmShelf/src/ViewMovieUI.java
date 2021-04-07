@@ -17,18 +17,21 @@ public class ViewMovieUI extends JPanel {
 
 	private ViewMovieControl viewMovieControl;
 	private RemoveMovieUI removeMovieUI;
+	private SearchMovieUI searchMovieUI;
 	private JLabel labelShowTitle;
 	private JLabel labelShowReleaseYear;
 	private JLabel labelShowGenre;
 	private JLabel labelShowLength;
 	private JButton buttonRemoveMovie;
-	
+	private LoginControl loginControl;
+	int movieID;
 	/**
 	 * Create the panel.
 	 */
-	public ViewMovieUI(ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie) {
+	public ViewMovieUI(ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie, LoginControl controlLogin) {
 		viewMovieControl = controlViewMovie;
 		removeMovieUI = uiRemoveMovie;
+		loginControl = controlLogin;
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 141, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -41,7 +44,7 @@ public class ViewMovieUI extends JPanel {
 		buttonRemoveMovie = new JButton("Remove Movie");
 		buttonRemoveMovie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				removeMovieUI.displayRemovalMovieWarning(movieId);
+				removeMovieUI.displayRemovalMovieWarning(movieID);
 			}
 		});
 		
@@ -121,10 +124,15 @@ public class ViewMovieUI extends JPanel {
 	
 	
 	public void displayMovie(MovieObject movie) {
+		this.movieID=movie.getMovieId();
 		labelShowTitle.setText(movie.getTitle());
 		labelShowReleaseYear.setText(""+movie.getYear());
 		labelShowGenre.setText(movie.getGenre());
 		labelShowLength.setText(""+movie.getLength());
 		
+		if ((loginControl.getCurrentAdmin() != null)){
+			buttonRemoveMovie.setVisible(true);
+		}
+		setVisible(true);
 	}
 }

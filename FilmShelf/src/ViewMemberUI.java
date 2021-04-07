@@ -34,6 +34,7 @@ public class ViewMemberUI extends JPanel {
 	private JLabel[] labelMovies = new JLabel[5];
 	private JButton buttonRemoveAccount;
 	private JButton buttonEditMember;
+	private String username;
 	
 	/**
 	 * Create the panel.
@@ -43,6 +44,7 @@ public class ViewMemberUI extends JPanel {
 		loginControl = controlLogin;
 		editMemberUI = uiEditMember;
 		removeMemberUI = uiRemoveMember;
+		setVisible(false);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 141, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -56,6 +58,7 @@ public class ViewMemberUI extends JPanel {
 		buttonRemoveAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				removeMemberUI.displayRemovalMemberWarning(username);
+				setVisible(false);
 			}
 		});
 		
@@ -63,6 +66,7 @@ public class ViewMemberUI extends JPanel {
 		buttonEditMember.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				editMemberUI.displayEditAccountForm();
+				setVisible(false);
 			}
 		});
 		GridBagConstraints gbc_buttonEditMember = new GridBagConstraints();
@@ -214,7 +218,9 @@ public class ViewMemberUI extends JPanel {
 	
 	
 	public void displayViewMemberAccount(String username)
-	{
+	{	
+		setVisible(true);
+		this.username=username;
 		MemberObject member = viewMemberControl.getMemberAccount(username);
 		labelShowUsername.setText(username);
 		labelShowFirstName.setText(member.getFirstName());
@@ -248,10 +254,7 @@ public class ViewMemberUI extends JPanel {
 		{
 			buttonRemoveAccount.setVisible(false);
 		}
+		
 	}
 	
-	//public void hide()
-	//{
-	//	setVisible(false);
-	//}
 }

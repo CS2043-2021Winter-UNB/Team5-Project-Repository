@@ -33,14 +33,16 @@ public class MainUI extends JFrame {
 	private SearchMemberUI searchMemberUI;
 	private ViewMemberUI viewMemberUI;
 	private AddMovieUI addMovieUI;
+	private ViewMovieUI viewMovieUI;
 	private JButton buttonLogin;
 	private JButton buttonCreateAccount;
 	private JButton buttonSearchAccount;
+	private JButton buttonSearchMovie;
 	
 	/**
 	 * Create the frame.
 	 */
-	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount, SearchMemberUI uiSearch,AddMovieUI uiAddMovie) {
+	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount, SearchMemberUI uiSearch,AddMovieUI uiAddMovie,ViewMovieUI uiViewMovie) {
 		loginUI = uiLog;
 		loginControl = controlLog;
 		createMemberUI = uiCreate;
@@ -48,6 +50,7 @@ public class MainUI extends JFrame {
 		searchMemberUI =uiSearch;
 		viewMemberUI = uiViewAccount;
 		addMovieUI = uiAddMovie;
+		viewMovieUI = uiViewMovie;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -80,27 +83,33 @@ public class MainUI extends JFrame {
         mainPane.add(searchMemberUI,gbc_Panel);
         mainPane.add(editMemberUI,gbc_Panel);
         mainPane.add(addMovieUI,gbc_Panel);
+        mainPane.add(viewMemberUI,gbc_Panel);
             
             	     
-            	     //Extra buttons
-            	     JButton btnNewButton_2 = new JButton("back");
-            	     GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-            	     gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
-            	     gbc_btnNewButton_2.gridx = 1;
-            	     gbc_btnNewButton_2.gridy = 0;
-            	     mainPane.add(btnNewButton_2, gbc_btnNewButton_2);
+	     //Extra buttons
+	     JButton btnNewButton_2 = new JButton("back");
+	     btnNewButton_2.addActionListener(new ActionListener() {
+	     	public void actionPerformed(ActionEvent e) {
+	     		
+	     	}
+	     });
+	     GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+	     gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
+	     gbc_btnNewButton_2.gridx = 0;
+	     gbc_btnNewButton_2.gridy = 0;
+	     mainPane.add(btnNewButton_2, gbc_btnNewButton_2);
         
             
 	     
-            //TITLE
-            JLabel labelFilmShelf = new JLabel("FilmShelf");
-            labelFilmShelf.setFont(new Font("Tahoma", Font.BOLD, 50));
-            GridBagConstraints gbc_labelFilmShelf = new GridBagConstraints();
-            gbc_labelFilmShelf.anchor = GridBagConstraints.WEST;
-            gbc_labelFilmShelf.insets = new Insets(0, 0, 5, 5);
-            gbc_labelFilmShelf.gridx = 3;
-            gbc_labelFilmShelf.gridy = 0;
-            mainPane.add(labelFilmShelf, gbc_labelFilmShelf);
+        //TITLE
+        JLabel labelFilmShelf = new JLabel("FilmShelf");
+        labelFilmShelf.setFont(new Font("Tahoma", Font.BOLD, 50));
+        GridBagConstraints gbc_labelFilmShelf = new GridBagConstraints();
+        gbc_labelFilmShelf.anchor = GridBagConstraints.WEST;
+        gbc_labelFilmShelf.insets = new Insets(0, 0, 5, 5);
+        gbc_labelFilmShelf.gridx = 3;
+        gbc_labelFilmShelf.gridy = 0;
+        mainPane.add(labelFilmShelf, gbc_labelFilmShelf);
 
         //NEW PANEL
         JPanel panelAccountButtons = new JPanel();
@@ -128,6 +137,7 @@ public class MainUI extends JFrame {
 	     		loginUI.setVisible(false);
 	     		editMemberUI.setVisible(false);
 	     		searchMemberUI.setVisible(false);
+	     		viewMemberUI.setVisible(false);
 	     		}
 	     });
 	     
@@ -138,6 +148,7 @@ public class MainUI extends JFrame {
 	     		loginUI.setVisible(false);
 	     		createMemberUI.setVisible(false);
 	      		editMemberUI.setVisible(false);
+	      		viewMemberUI.setVisible(false);
 	     	}
 	     });
 	     GridBagConstraints gbc_buttonSearch = new GridBagConstraints();
@@ -157,6 +168,7 @@ public class MainUI extends JFrame {
 	       		createMemberUI.setVisible(false);
 	       		editMemberUI.setVisible(false);
 	       		searchMemberUI.setVisible(false);
+	       		viewMemberUI.setVisible(false);
 	       	}
 	      });
 	      
@@ -173,6 +185,17 @@ public class MainUI extends JFrame {
 	     gbc_buttonCreateAccount.gridx = 4;
 	     gbc_buttonCreateAccount.gridy = 1;
 	     panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
+	     
+	     buttonSearchMovie = new JButton("Search Movie");
+	     buttonSearchMovie.addActionListener(new ActionListener() {
+	     	public void actionPerformed(ActionEvent e) {
+	     	}
+	     });
+	     GridBagConstraints gbc_buttonSearchMovie = new GridBagConstraints();
+	     gbc_buttonSearchMovie.insets = new Insets(0, 0, 0, 5);
+	     gbc_buttonSearchMovie.gridx = 0;
+	     gbc_buttonSearchMovie.gridy = 2;
+	     panelAccountButtons.add(buttonSearchMovie, gbc_buttonSearchMovie);
 	     
         pack();
       
