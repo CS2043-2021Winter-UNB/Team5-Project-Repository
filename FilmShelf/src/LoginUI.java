@@ -49,8 +49,8 @@ public class LoginUI extends JPanel {
 	public LoginUI(LoginControl control) {
 		loginControl = control;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{63, 86, 0, 254, 0, 117, 144, 0};
-		gridBagLayout.rowHeights = new int[]{ 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{50, 96, 91, 7, 65, 57, 59, 1, 0};
+		gridBagLayout.rowHeights = new int[]{ 23, 0, 0, 0, 0, 0, 0, 28, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);

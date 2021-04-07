@@ -44,6 +44,7 @@ public class ViewMemberUI extends JPanel {
 		loginControl = controlLogin;
 		editMemberUI = uiEditMember;
 		removeMemberUI = uiRemoveMember;
+		
 		setVisible(false);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
