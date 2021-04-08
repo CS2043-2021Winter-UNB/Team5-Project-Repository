@@ -23,6 +23,10 @@ import java.awt.event.ActionEvent;
 
 public class ViewMemberUI extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ViewMemberControl viewMemberControl;
 	private LoginControl loginControl;
 	private EditMemberUI editMemberUI;
@@ -59,7 +63,6 @@ public class ViewMemberUI extends JPanel {
 		buttonRemoveAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				removeMemberUI.displayRemovalMemberWarning(username);
-				setVisible(false);
 			}
 		});
 		
@@ -241,21 +244,31 @@ public class ViewMemberUI extends JPanel {
 		
 		//check if remove member button should be displayed.
 		//It should be displayed if the actor is an administrator or they are viewing their own member account.
-		boolean isMember = (loginControl.getCurrentMember().getUsername() == username);
 		
-		if ((loginControl.getCurrentAdmin() != null) || isMember)
+		MemberObject logInMember = loginControl.getCurrentMember();
+		boolean memberMatch = false;
+		if (logInMember != null)
 		{
+			memberMatch = logInMember.getUsername().equals(username);
+		}
+
+		boolean adminCheck = (loginControl.getCurrentAdmin() != null);
+
+		if ( adminCheck || memberMatch){
+			
 			buttonRemoveAccount.setVisible(true);
-			if (isMember)
-			{
-				buttonEditMember.setVisible(true);
-			}
+			buttonEditMember.setVisible(false);
+
+		}
+		else if (memberMatch) {
+			buttonRemoveAccount.setVisible(true);
+			buttonEditMember.setVisible(true);
 		}
 		else
 		{
 			buttonRemoveAccount.setVisible(false);
+			buttonEditMember.setVisible(false);
 		}
-		
 	}
 	
 }

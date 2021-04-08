@@ -246,9 +246,4 @@ public class MainUI extends JFrame {
 		}
 	}
     
-	public JPanel getPanelInstance() {
-        return mainPane;
-    }
-
-	
 }

@@ -15,7 +15,7 @@ public class ViewMovieControl {
 		this.dataManager = dm;
 	}
 	
-	public MovieObject processViewMovie(String movieId) {
+	public MovieObject processViewMovie(int movieId) {
 		//NB: Need getMovie(String movieId) in dataManager
 		movie = dataManager.getMovie(movieId);
 		

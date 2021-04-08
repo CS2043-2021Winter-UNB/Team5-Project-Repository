@@ -28,7 +28,7 @@ public class Main {
 		SearchMemberUI searchMemberUI = new SearchMemberUI(searchMemberControl,viewMemberUI);
 	
 		RemoveMovieControl removeMovieControl = new RemoveMovieControl(dm, loginControl);
-		RemoveMovieUI removeMovieUI = new RemoveMovieUI();
+		RemoveMovieUI removeMovieUI = new RemoveMovieUI(removeMovieControl);
 		
 		ViewMovieControl viewMovieControl = new ViewMovieControl(dm);
 		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI,loginControl);

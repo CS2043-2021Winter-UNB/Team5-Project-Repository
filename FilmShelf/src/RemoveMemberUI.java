@@ -45,8 +45,8 @@ public class RemoveMemberUI extends JPanel {
 		// TODO Auto-generated method stub
 		int response=JOptionPane.showConfirmDialog(null,"Are you sure you want to delete acccount?","Remove Confirm",JOptionPane.YES_NO_OPTION);
 		if(response==JOptionPane.YES_OPTION) {
-			removeMemberControl.processRemoveAccount(username); 
 			displayMemberRemovedConfirmation();
+			removeMemberControl.processRemoveAccount(username); 
 		}
 		else if(response==JOptionPane.NO_OPTION){
 		}

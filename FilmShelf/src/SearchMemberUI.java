@@ -69,7 +69,9 @@ public class SearchMemberUI extends JPanel {
 		ViewAccountbutton = new JButton("view");
 		ViewAccountbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//viewMemberUI.displayViewMemberAccount(username);
+				viewMemberUI.displayViewMemberAccount(username);
+				setVisible(false);
+				
 			}
 		});
 		GridBagConstraints gbc_ViewAccountbutton = new GridBagConstraints();
