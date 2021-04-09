@@ -165,10 +165,13 @@ public class CreateMemberUI extends JPanel {
 		//clear text fields before displaying
 		textFieldUsername.setText("");
 		passwordField.setText("");
-		checkboxPasswordVisibility.setSelected(false);
 		textFieldFirstName.setText("");
 		textFieldLastName.setText("");
 		labelCreateAccountStatus.setText("");
+		
+		//make the password not visible when typing
+		checkboxPasswordVisibility.setSelected(false);
+		changePasswordVisibility();
 		
 		//display the create account panel
 		setVisible(true);

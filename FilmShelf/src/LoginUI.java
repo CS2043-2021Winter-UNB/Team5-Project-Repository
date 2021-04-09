@@ -225,10 +225,12 @@ public class LoginUI extends JPanel {
 			labelLoginStatus.setText("Login was unsuccessful. Login credentials did not match any existing administrator accounts.");
 		}
 
+		//make the password hide again
 		passwordField.setText("");
 		if (checkboxPasswordVisibility.isSelected())
 		{
 			passwordField.setEchoChar('*');
+			checkboxPasswordVisibility.setSelected(false);
 		}
 	}
 	
