@@ -38,11 +38,13 @@ public class MainUI extends JFrame {
 	private JButton buttonCreateAccount;
 	private JButton buttonSearchAccount;
 	private JButton buttonSearchMovie;
+	private ActionListener listenerCreateAccount;
 	
 	/**
 	 * Create the frame.
 	 */
 	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount, SearchMemberUI uiSearch,AddMovieUI uiAddMovie,ViewMovieUI uiViewMovie) {
+		//save the UI classes
 		loginUI = uiLog;
 		loginControl = controlLog;
 		createMemberUI = uiCreate;
@@ -117,7 +119,7 @@ public class MainUI extends JFrame {
         gbc_labelFilmShelf.gridy = 0;
         mainPane.add(labelFilmShelf, gbc_labelFilmShelf);
 	     
-         //NEW PANEL
+         //Panel for account buttons
          JPanel panelAccountButtons = new JPanel();
          
          GridBagConstraints gbc_panel2 = new GridBagConstraints();
@@ -135,17 +137,18 @@ public class MainUI extends JFrame {
          gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
          panelAccountButtons.setLayout(gbl_panel);
          
-//create account
+         //create account button
          buttonCreateAccount = new JButton("Create Account");
-         buttonCreateAccount.addActionListener(new ActionListener() {
-         	public void actionPerformed(ActionEvent e) {
+         listenerCreateAccount = new ActionListener() {
+          	public void actionPerformed(ActionEvent e) {
          		createMemberUI.displayCreateAccountForm();
          		loginUI.setVisible(false);
          		editMemberUI.setVisible(false);
          		searchMemberUI.setVisible(false);
          		viewMemberUI.setVisible(false);
-         		}
-         });
+         	}
+         };
+         buttonCreateAccount.addActionListener(listenerCreateAccount );
          
          buttonSearchAccount = new JButton("Search Account");
          buttonSearchAccount.addActionListener(new ActionListener() {
@@ -208,27 +211,29 @@ public class MainUI extends JFrame {
 	}
 	
 	
-	public void changeCreateAndLoginButtons(){
+	public void changeAccountButtons(){
+		
+		//if a member is logged in
 		if (loginControl.getCurrentMember() != null) { 
 			
-			//change login button to view member (shows username of member)
+			//hide the login button
+			buttonLogin.setVisible(false);
+	        
+	        //change the create account button to view member (shows username of member)
 			String username = loginControl.getCurrentMember().getUsername();
-			buttonLogin.setText(username); 
-			ActionListener[] al1 = buttonLogin.getActionListeners();
-			buttonLogin.removeActionListener(al1[0]);
-	        buttonLogin.addActionListener(new ActionListener() {
+			buttonCreateAccount.setText(username); 
+			ActionListener[] al1 = buttonCreateAccount.getActionListeners();
+			buttonCreateAccount.removeActionListener(al1[0]);
+	        buttonCreateAccount.addActionListener(new ActionListener() {
 	        	public void actionPerformed(ActionEvent e) {
 	        		viewMemberUI.displayViewMemberAccount(username);
-	        			searchMemberUI.setVisible(false);
-		        		editMemberUI.setVisible(false);
+	        		searchMemberUI.setVisible(false);
+		        	editMemberUI.setVisible(false);
 	        	}
 	        });
-	        
-	        //get rid of create account button
-			buttonCreateAccount.setVisible(false);
-			ActionListener[] al2 = buttonCreateAccount.getActionListeners();
-			buttonCreateAccount.removeActionListener(al2[0]);
+			
 		}
+		//if an admin is logged in
 		else if (loginControl.getCurrentAdmin() != null) {
 			
 			//hide the login button
@@ -245,21 +250,21 @@ public class MainUI extends JFrame {
 	        	}
 	        });
 		}
-		//set it back to normal - try 1
+		//if member is logged out, set the buttons back to default
 		else if (loginControl.getCurrentAdmin() == null) {
-			buttonCreateAccount.setVisible(true);
-			buttonLogin.setText("Login");
-			ActionListener[] al3 = buttonLogin.getActionListeners();
-			buttonLogin.removeActionListener(al3[0]);
-			buttonLogin.addActionListener(new ActionListener() {
-	        	  	public void actionPerformed(ActionEvent e) {
-	        	  		loginUI.displayLoginForm();
-		           		createMemberUI.setVisible(false);
-		           		editMemberUI.setVisible(false);
-		           		searchMemberUI.setVisible(false);
-		           		viewMemberUI.setVisible(false);
-	           	}
-	          });
+			
+			//make the login button visible again
+			buttonLogin.setVisible(true);
+			
+			//set the create account button back to "create account"
+			buttonCreateAccount.setText("CreateAccount");
+			ActionListener[] al = buttonCreateAccount.getActionListeners();
+			buttonCreateAccount.removeActionListener(al[0]); //remove the previous button listener
+	        buttonCreateAccount.addActionListener(listenerCreateAccount); //add the create account listener back
+			buttonCreateAccount.setVisible(true); //make it visible
+			
+			//viewMemberUI was used to remove and log the user out, change viewMemberUI to not visible
+			viewMemberUI.setVisible(false);
 		}
 	}
     

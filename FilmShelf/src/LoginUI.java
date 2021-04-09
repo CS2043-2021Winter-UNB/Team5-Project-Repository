@@ -180,6 +180,8 @@ public class LoginUI extends JPanel {
 	
 	public void displayLoginForm() {
 		//clear login fields/radio button before redisplaying
+		textFieldUsername.setText("");
+		passwordField.setText("");
 		checkboxPasswordVisibility.setSelected(false);
 		radioButtonMember.setSelected(true);
 		labelLoginStatus.setText("");
@@ -206,7 +208,7 @@ public class LoginUI extends JPanel {
 				loginStatus = loginControl.processAdminLogin(username, password);
 			}
 			if(loginStatus) {
-				mainUI.changeCreateAndLoginButtons();
+				mainUI.changeAccountButtons();
 				setVisible(false);
 			
 			} else {
@@ -216,11 +218,19 @@ public class LoginUI extends JPanel {
 	}
 	
 	private void displayLoginErrorMessage() {
-		labelLoginStatus.setText("Login was unsuccessful. Login credentials did not match any existing accounts");
+		if (member) {
+			labelLoginStatus.setText("Login was unsuccessful. Login credentials did not match any existing member accounts.");
+		}
+		else {
+			labelLoginStatus.setText("Login was unsuccessful. Login credentials did not match any existing administrator accounts.");
+		}
+
+		//make the password hide again
 		passwordField.setText("");
 		if (checkboxPasswordVisibility.isSelected())
 		{
 			passwordField.setEchoChar('*');
+			checkboxPasswordVisibility.setSelected(false);
 		}
 	}
 	
