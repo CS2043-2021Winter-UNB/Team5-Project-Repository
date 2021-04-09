@@ -22,7 +22,7 @@ public class ViewReviewUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ViewReviewUI(ViewReviewControl controlViewReview, LoginControl loginControl) {
+	public ViewReviewUI(ViewReviewControl controlViewReview, LoginControl controlLogin) {
 		viewReviewControl = controlViewReview;
 		loginControl = controlLogin;
 		
