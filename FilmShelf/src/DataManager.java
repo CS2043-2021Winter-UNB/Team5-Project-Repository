@@ -470,7 +470,7 @@ public class DataManager {
 
 	//Courtney 
 	public RatingObject getMovieRatingByMember(String username, int movieID) {
-		//Initilaize Parameters for Constructor
+		//Initialize Parameters for Constructor
 		int ratingScore;
 		String uName = "";
 		int movieId;
@@ -635,7 +635,7 @@ public class DataManager {
 	}
 
 	private double getAverageRating(int movieID) {
-		//Initilaze return Varaiable
+		//Initialize return Variable
 		double averageRating = -1; 
 
 		//SQL String Query 
