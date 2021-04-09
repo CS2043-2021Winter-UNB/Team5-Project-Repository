@@ -348,6 +348,8 @@ public class SearchMovieUI extends JPanel {
 		gbc_scrollPane.gridx = 1;
 		gbc_scrollPane.gridy = 6;
 		add(scrollPane, gbc_scrollPane);
+		revalidate();
+		repaint();
 		//scrollPane.setVisible(false);
 		
 		//scrollPane.setViewportView(scrollList);
