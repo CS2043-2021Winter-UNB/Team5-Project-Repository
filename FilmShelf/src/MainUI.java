@@ -220,6 +220,7 @@ public class MainUI extends JFrame {
 	        	public void actionPerformed(ActionEvent e) {
 	        		viewMemberUI.displayViewMemberAccount(username);
 	        		searchMemberUI.setVisible(false);
+	        		editMemberUI.setVisible(false);
 	        	}
 	        });
 	        

@@ -62,7 +62,13 @@ public class ViewMemberUI extends JPanel {
 		buttonRemoveAccount = new JButton("Remove Account");
 		buttonRemoveAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				removeMemberUI.displayRemovalMemberWarning(username);
+				if(!removeMemberUI.status()){
+					removeMemberUI.displayRemovalMemberWarning(username);
+				}
+				else {
+					setVisible(true);
+					removeMemberUI.displayRemovalMemberWarning(username);
+				}
 			}
 		});
 		
@@ -255,9 +261,8 @@ public class ViewMemberUI extends JPanel {
 		boolean adminCheck = (loginControl.getCurrentAdmin() != null);
 
 		if ( adminCheck || memberMatch){
-			
 			buttonRemoveAccount.setVisible(true);
-			buttonEditMember.setVisible(false);
+			buttonEditMember.setVisible(true);
 
 		}
 		else if (memberMatch) {

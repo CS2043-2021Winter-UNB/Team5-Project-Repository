@@ -30,8 +30,11 @@ public class Main {
 		RemoveMovieControl removeMovieControl = new RemoveMovieControl(dm, loginControl);
 		RemoveMovieUI removeMovieUI = new RemoveMovieUI(removeMovieControl);
 		
+		AddReviewControl addReviewControl = new AddReviewControl(dm, loginControl);
+		AddReviewUI addReviewUI = new AddReviewUI(addReviewControl);
+		
 		ViewMovieControl viewMovieControl = new ViewMovieControl(dm);
-		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI,loginControl);
+		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI,loginControl,addReviewUI);
 		
 		LoginUI loginUI = new LoginUI(loginControl);
 		

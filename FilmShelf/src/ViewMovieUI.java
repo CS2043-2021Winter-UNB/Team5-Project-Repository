@@ -5,8 +5,6 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.util.ArrayList;
-
 import javax.swing.JLayeredPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -15,16 +13,20 @@ import java.awt.event.ActionEvent;
 
 public class ViewMovieUI extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ViewMovieControl viewMovieControl;
 	private RemoveMovieUI removeMovieUI;
 	private SearchMovieUI searchMovieUI;
+	private AddReviewUI addReviewUI;
 	private JLabel labelShowTitle;
 	private JLabel labelShowReleaseYear;
 	private JLabel labelShowGenre;
 	private JLabel labelShowLength;
 	private JButton buttonRemoveMovie;
 	private LoginControl loginControl;
-	int movieID;
 	private JButton reviewButton;
 	private JLayeredPane layeredPane;
 	private JLabel labelTopReviews;
@@ -33,13 +35,15 @@ public class ViewMovieUI extends JPanel {
 	private JLabel labelReview3;
 	private JLabel labelReview4;
 	private JLabel labelReview5;
+	int movieID;
 	/**
 	 * Create the panel.
 	 */
-	public ViewMovieUI(ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie, LoginControl controlLogin) {
+	public ViewMovieUI(ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie, LoginControl controlLogin, AddReviewUI uiAddReview) {
 		viewMovieControl = controlViewMovie;
 		removeMovieUI = uiRemoveMovie;
 		loginControl = controlLogin;
+		addReviewUI = uiAddReview;
 		
 		setVisible(false);
 		
@@ -84,6 +88,11 @@ public class ViewMovieUI extends JPanel {
 		add(labelShowTitle, gbc_labelShowTitle);
 		
 		reviewButton = new JButton("Review Movie");
+		reviewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			addReviewUI.displayLeaveReviewForm(movieID);
+			}
+		});
 		GridBagConstraints gbc_reviewButton = new GridBagConstraints();
 		gbc_reviewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_reviewButton.gridx = 9;
