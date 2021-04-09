@@ -36,11 +36,12 @@ public class MainUI extends JFrame {
 	private JButton buttonLogin;
 	private JButton buttonCreateAccount;
 	private JButton buttonSearchAccount;
+	private RateMovieUI	rateMovieUI;
 	
 	/**
 	 * Create the frame.
 	 */
-	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount, SearchMemberUI uiSearch,AddMovieUI uiAddMovie) {
+	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount, SearchMemberUI uiSearch,AddMovieUI uiAddMovie, RateMovieUI uiRateMovie) {
 		loginUI = uiLog;
 		loginControl = controlLog;
 		createMemberUI = uiCreate;
@@ -48,6 +49,7 @@ public class MainUI extends JFrame {
 		searchMemberUI =uiSearch;
 		viewMemberUI = uiViewAccount;
 		addMovieUI = uiAddMovie;
+		rateMovieUI = uiRateMovie;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -80,6 +82,7 @@ public class MainUI extends JFrame {
         mainPane.add(searchMemberUI,gbc_Panel);
         mainPane.add(editMemberUI,gbc_Panel);
         mainPane.add(addMovieUI,gbc_Panel);
+        mainPane.add(rateMovieUI,gbc_Panel);
             
             	     
             	     //Extra buttons

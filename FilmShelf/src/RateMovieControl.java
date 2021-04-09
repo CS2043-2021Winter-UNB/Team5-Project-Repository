@@ -32,4 +32,22 @@ public class RateMovieControl {
 		//NOTE TO FRONT-END: UI needs to call processViewMovie() in Control to update ratings
 	}
 	
+
+	public int getMemberRating(int movieID, MemberObject member) {
+		int rating = 0;
+		
+		RatingObject ratingObject = dataManager.getMovieRatingByMember(member.getUsername(), movieID);
+			
+		if (ratingObject == null)
+			{return rating;} //no rating = 0
+		
+		rating = ratingObject.getRatingScore();
+			{return rating;}//rating of 1-5
+
+	}
+	
+	
+		public double getAverageRating(int movieID) {
+			return dataManager.getAverageRating(movieID);
+		}
 }
