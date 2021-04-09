@@ -3,6 +3,10 @@ import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
+import javax.swing.JPanel;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -45,7 +49,6 @@ import javax.swing.JScrollPane;
 public class SearchMovieUI extends JPanel {
 
 	private SearchMovieControl searchMovieControl;
-	private JFrame frame;
 	private JTextField titleSearchField;
 	private JLabel labelSearchMovieStatus;
 	private JLabel genreLabel;
@@ -97,7 +100,7 @@ public class SearchMovieUI extends JPanel {
 		
 		titleSearchField = new JTextField();
 		GridBagConstraints gbc_textFieldSearch = new GridBagConstraints();
-		gbc_textFieldSearch.gridwidth = 3;
+		gbc_textFieldSearch.gridwidth = 5;
 		gbc_textFieldSearch.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldSearch.gridx = 2;
@@ -241,11 +244,15 @@ public class SearchMovieUI extends JPanel {
 		gbc_labelSearchMovieStatus.gridx = 1;
 		gbc_labelSearchMovieStatus.gridy = 9;
 		add(labelSearchMovieStatus, gbc_labelSearchMovieStatus);
+		
+		setVisible(false);
 	}
 	
 	public void displaySearchForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+		// clear fields before displaying
+		titleSearchField.setText("");
+		
+		// display the form
 		setVisible(true);
 	}
 	
@@ -360,16 +367,6 @@ public class SearchMovieUI extends JPanel {
 	}
 
 	public void displayFailedSearchMessage() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		labelSearchMovieStatus.setText("Movie search was unsuccessful. Information was invalid.");
-		// end-user-code
-	}
-
-	public void enterMovieSearchCriteria() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
 	}
 }

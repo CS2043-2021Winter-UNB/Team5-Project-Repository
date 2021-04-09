@@ -40,8 +40,8 @@ public class Main {
 		
 		AddMovieControl addMovieControl = new AddMovieControl(dm, loginControl);
 		AddMovieUI addMovieUI = new AddMovieUI(addMovieControl);
-    
-		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI,addMovieUI);
+		
+		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI, addMovieUI,searchMovieUI);
 		mainUI.setVisible(true);
 		loginUI.setMain(mainUI);
 	}
