@@ -180,6 +180,8 @@ public class LoginUI extends JPanel {
 	
 	public void displayLoginForm() {
 		//clear login fields/radio button before redisplaying
+		textFieldUsername.setText("");
+		passwordField.setText("");
 		checkboxPasswordVisibility.setSelected(false);
 		radioButtonMember.setSelected(true);
 		labelLoginStatus.setText("");
@@ -206,7 +208,7 @@ public class LoginUI extends JPanel {
 				loginStatus = loginControl.processAdminLogin(username, password);
 			}
 			if(loginStatus) {
-				mainUI.changeCreateAndLoginButtons();
+				mainUI.changeAccountButtons();
 				setVisible(false);
 			
 			} else {
