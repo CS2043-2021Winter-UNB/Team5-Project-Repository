@@ -11,7 +11,8 @@ public class RemoveMovieUI extends JPanel {
 	private RemoveMovieControl removeMovieControl;
 	private JLabel labelMovieStatus;
 	
-	public RemoveMovieUI() {
+	public RemoveMovieUI(RemoveMovieControl controlRemoveMov) {
+		removeMovieControl = controlRemoveMov;
 		labelMovieStatus = new JLabel("");
 		labelMovieStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelMovieStatus = new GridBagConstraints();

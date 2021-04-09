@@ -28,10 +28,13 @@ public class SearchMemberUI extends JPanel {
 	private JTextField textFieldSearch;
 	private JLabel labelSearchAccountStatus;
 	private JButton ViewAccountbutton;
+	private ViewMemberUI viewMemberUI;
+	private String username;
 	
-	public SearchMemberUI(SearchMemberControl control) {
+	public SearchMemberUI(SearchMemberControl control,ViewMemberUI uiViewAccount) {
 		setVisible(false);
 		searchMemberControl = control;
+		viewMemberUI = uiViewAccount;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
@@ -66,6 +69,8 @@ public class SearchMemberUI extends JPanel {
 		ViewAccountbutton = new JButton("view");
 		ViewAccountbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				viewMemberUI.displayViewMemberAccount(username);
+				setVisible(false);
 				
 			}
 		});
@@ -92,6 +97,7 @@ public class SearchMemberUI extends JPanel {
 
 	public void displaySearchResult(MemberObject member) {
 		labelSearchAccountStatus.setText(member.getUsername()+" - "+member.getFirstName()+" "+member.getLastName());
+		username= member.getUsername();
 		ViewAccountbutton.setVisible(true);
 	}
 
@@ -102,6 +108,7 @@ public class SearchMemberUI extends JPanel {
 
 	public void enterMemberAccountName() {
 		MemberObject member=searchMemberControl.processSearchAccount(textFieldSearch.getText());
+		
 		if (member==null) {
 			displayFailedSearchMessage();
 		}
