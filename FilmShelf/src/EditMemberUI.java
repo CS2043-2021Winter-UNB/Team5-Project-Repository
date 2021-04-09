@@ -170,7 +170,7 @@ public class EditMemberUI extends JPanel {
 		String firstName = textFieldFirstName.getText();
 		String lastName = textFieldLastName.getText();
 		String description = textFieldDescription.getText();
-		System.out.println(password+"  "+firstName+"  "+lastName+"  "+description);
+		//System.out.println(password+"  "+firstName+"  "+lastName+"  "+description);
 		if (editMemberControl.updateAccount(password,firstName,lastName,description)) {
 			displayEditAccountConfirmation();
 		}
