@@ -216,7 +216,13 @@ public class LoginUI extends JPanel {
 	}
 	
 	private void displayLoginErrorMessage() {
-		labelLoginStatus.setText("Login was unsuccessful. Login credentials did not match any existing accounts");
+		if (member) {
+			labelLoginStatus.setText("Login was unsuccessful. Login credentials did not match any existing member accounts.");
+		}
+		else {
+			labelLoginStatus.setText("Login was unsuccessful. Login credentials did not match any existing administrator accounts.");
+		}
+
 		passwordField.setText("");
 		if (checkboxPasswordVisibility.isSelected())
 		{
