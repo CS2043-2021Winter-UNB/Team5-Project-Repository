@@ -113,6 +113,7 @@ public class RateMovieUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "Two Stars Rating!");
 		}
 		public void actionPerformed(ActionEvent e) {
+			
 		}
 	}
 	private class SwingAction_2 extends AbstractAction {

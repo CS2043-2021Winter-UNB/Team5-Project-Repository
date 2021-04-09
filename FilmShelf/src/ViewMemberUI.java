@@ -223,8 +223,6 @@ public class ViewMemberUI extends JPanel {
 	
 	public void displayViewMemberAccount(String username)
 	{	
-		MemberObject logInMember = loginControl.getCurrentMember();
-		if(logInMember != null) {
 			setVisible(true);
 			this.username=username;
 			MemberObject member = viewMemberControl.getMemberAccount(username);
@@ -241,12 +239,11 @@ public class ViewMemberUI extends JPanel {
 				}
 				else {                          
 					labelMovies[i].setText(""); //clear any unused movie labels to make sure previous results are gone
-				}
-			}	
-			
+				}	
+			}
 			//check if remove member button should be displayed.
 			//It should be displayed if the actor is an administrator or they are viewing their own member account.
-			
+			MemberObject logInMember = loginControl.getCurrentMember();
 			boolean memberMatch = false;
 			if (logInMember != null)
 			{
@@ -269,10 +266,5 @@ public class ViewMemberUI extends JPanel {
 				buttonRemoveAccount.setVisible(false);
 				buttonEditMember.setVisible(false);
 			}
-		}
-		else {
-			setVisible(false);
-		}
-	}
-	
+		}	
 }
