@@ -34,15 +34,17 @@ public class MainUI extends JFrame {
 	private ViewMemberUI viewMemberUI;
 	private AddMovieUI addMovieUI;
 	private ViewMovieUI viewMovieUI;
+	private ViewReviewUI viewReviewUI;
 	private JButton buttonLogin;
 	private JButton buttonCreateAccount;
 	private JButton buttonSearchAccount;
 	private JButton buttonSearchMovie;
+	private JButton buttonViewReviews;
 	
 	/**
 	 * Create the frame.
 	 */
-	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount, SearchMemberUI uiSearch,AddMovieUI uiAddMovie,ViewMovieUI uiViewMovie) {
+	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount, SearchMemberUI uiSearch,AddMovieUI uiAddMovie,ViewMovieUI uiViewMovie, ViewReviewUI uiViewReview) {
 		loginUI = uiLog;
 		loginControl = controlLog;
 		createMemberUI = uiCreate;
@@ -51,6 +53,7 @@ public class MainUI extends JFrame {
 		viewMemberUI = uiViewAccount;
 		addMovieUI = uiAddMovie;
 		viewMovieUI = uiViewMovie;
+		viewReviewUI = uiViewReview;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -78,12 +81,13 @@ public class MainUI extends JFrame {
         gbc_Panel.gridx = 0;
         gbc_Panel.gridy = 1;
        
-        mainPane.add(loginUI, gbc_Panel);
-        mainPane.add(createMemberUI, gbc_Panel);
+        mainPane.add(loginUI,gbc_Panel);
+        mainPane.add(createMemberUI,gbc_Panel);
         mainPane.add(searchMemberUI,gbc_Panel);
         mainPane.add(editMemberUI,gbc_Panel);
         mainPane.add(addMovieUI,gbc_Panel);
         mainPane.add(viewMemberUI,gbc_Panel);
+        mainPane.add(viewReviewUI,gbc_Panel);
             
             	     
 	     //Extra button
@@ -135,7 +139,7 @@ public class MainUI extends JFrame {
          gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
          panelAccountButtons.setLayout(gbl_panel);
          
-//create account
+         //create account button
          buttonCreateAccount = new JButton("Create Account");
          buttonCreateAccount.addActionListener(new ActionListener() {
          	public void actionPerformed(ActionEvent e) {
@@ -147,6 +151,7 @@ public class MainUI extends JFrame {
          		}
          });
          
+         //search account button
          buttonSearchAccount = new JButton("Search Account");
          buttonSearchAccount.addActionListener(new ActionListener() {
          	public void actionPerformed(ActionEvent e) {
@@ -164,14 +169,14 @@ public class MainUI extends JFrame {
          panelAccountButtons.add(buttonSearchAccount, gbc_buttonSearch);
          
           
-//login 
-          buttonLogin = new JButton("Login");
-          buttonLogin.setHorizontalAlignment(SwingConstants.RIGHT);
+         //loginButton
+         buttonLogin = new JButton("Login");
+         buttonLogin.setHorizontalAlignment(SwingConstants.RIGHT);
   
-          buttonLogin.addActionListener(new ActionListener() {
-        	  	public void actionPerformed(ActionEvent e) {
-        	  		loginUI.displayLoginForm();
-	           		createMemberUI.setVisible(false);
+         buttonLogin.addActionListener(new ActionListener() {
+       	  	public void actionPerformed(ActionEvent e) {
+       	  		loginUI.displayLoginForm();
+	         		createMemberUI.setVisible(false);
 	           		editMemberUI.setVisible(false);
 	           		searchMemberUI.setVisible(false);
 	           		viewMemberUI.setVisible(false);
@@ -202,6 +207,19 @@ public class MainUI extends JFrame {
           gbc_buttonSearchMovie.gridx = 0;
           gbc_buttonSearchMovie.gridy = 2;
           panelAccountButtons.add(buttonSearchMovie, gbc_buttonSearchMovie);
+          
+          buttonViewReviews = new JButton("View Reviews");
+          buttonViewReviews.addActionListener(new ActionListener() {
+          	public void actionPerformed(ActionEvent e) {
+          		viewReviewUI.displayReview("Minari",7);
+          	}
+          });
+
+          GridBagConstraints gbc_buttonViewReviews = new GridBagConstraints();
+          gbc_buttonViewReviews.insets = new Insets(0, 0, 0, 5);
+          gbc_buttonViewReviews.gridx = 5;
+          gbc_buttonViewReviews.gridy = 1;
+          mainPane.add(buttonViewReviews, gbc_buttonViewReviews);
 	     
         pack();
       

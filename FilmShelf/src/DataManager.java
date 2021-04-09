@@ -561,7 +561,7 @@ public class DataManager {
 		ArrayList<ReviewObject> reviewList = new ArrayList<ReviewObject>();
 
 		//SQL String Query 
-		String sqlQuery = "select * from Reviews where movieID = " + movieID + ";";
+		String sqlQuery = "select * from Review where movieID = " + movieID + ";";
 
 		try{
 			//Create Statement 

@@ -1,5 +1,7 @@
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -18,6 +20,7 @@ public class ViewReviewUI extends JPanel {
 	private JLabel labelMovieName;
 	private ArrayList<ReviewObject> reviews;
 	private JList<String> displayList;
+	private DefaultListModel<String> model;
 	
 	/**
 	 * Create the panel.
@@ -33,7 +36,7 @@ public class ViewReviewUI extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel labelMovieName = new JLabel("");
+		labelMovieName = new JLabel("");
 		GridBagConstraints gbc_labelMovieName = new GridBagConstraints();
 		gbc_labelMovieName.insets = new Insets(0, 0, 5, 5);
 		gbc_labelMovieName.gridx = 2;
@@ -55,11 +58,14 @@ public class ViewReviewUI extends JPanel {
 		gbc_scrollPane.gridx = 1;
 		gbc_scrollPane.gridy = 2;
 		add(scrollPane, gbc_scrollPane);
-		
-		displayList = new JList<String>();
+
+		model = new DefaultListModel<String>();
+		displayList = new JList<>(model);
 		//make it so you can only select one list at a time
 		displayList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		scrollPane.setViewportView(displayList);
+		
+		setVisible(false);
 	}
 	
 	//displays the reviews for that movie 
@@ -74,11 +80,15 @@ public class ViewReviewUI extends JPanel {
 			String reviewText;
 			for (ReviewObject review : reviews)
 			{
-				reviewText = review.getUsername() + "\n" + review.getReviewText();
-				displayList.add(reviewText);
+				reviewText = review.getUsername() + " " + review.getReviewText();
+				System.out.println(reviewText);
+				model.addElement(reviewText);
 			}
 		}
-
+		else {
+			System.out.println("null");
+		}
+		setVisible(true);
 	}
 
 }
