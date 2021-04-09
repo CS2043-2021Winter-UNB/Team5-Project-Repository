@@ -1,6 +1,8 @@
 import java.awt.EventQueue;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -8,6 +10,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
@@ -22,13 +25,17 @@ import javax.swing.SwingUtilities;
 import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 
 import javax.swing.JLayeredPane;
+import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.SpinnerNumberModel;
@@ -55,13 +62,14 @@ public class SearchMovieUI extends JPanel {
 	private JLabel searchMovieLabel;
 	private JButton searchButton;
 	private JScrollPane scrollPane;
-	private JPanel scrollPanel;
+	private JList scrollList;
+	private Pattern nonNumberPattern;
+	private Matcher nonNumberMatcher;
 	
-	public SearchMovieUI(SearchMovieControl control) {
-		frame = new JFrame();
-		searchMovieControl = control;
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public SearchMovieUI(SearchMovieControl controlSearch) {
+		nonNumberPattern = Pattern.compile("[^0-9]");		// matches characters that are not numbers
+		
+		searchMovieControl = controlSearch;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 44, 60, 0, 60, 76, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 31, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -118,7 +126,7 @@ public class SearchMovieUI extends JPanel {
 		//Initialize valid years (1910 to the current year)
 		ArrayList<String> years = new ArrayList<String>();
 		years.add("Year");
-		for (int year = Calendar.getInstance().get(Calendar.YEAR); year >= 1910; year--)
+		for (int year = Calendar.getInstance().get(Calendar.YEAR); year >= 1900; year--)
 		{
 			years.add(String.valueOf(year));
 		}
@@ -201,11 +209,6 @@ public class SearchMovieUI extends JPanel {
 		add(lengthMinLabel, gbc_lengthMinLabel);
 		
 		searchButton = new JButton("Search");
-		searchButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				extractSearchInput();
-			}
-		});
 		GridBagConstraints gbc_searchButton = new GridBagConstraints();
 		gbc_searchButton.anchor = GridBagConstraints.WEST;
 		gbc_searchButton.gridwidth = 2;
@@ -213,6 +216,11 @@ public class SearchMovieUI extends JPanel {
 		gbc_searchButton.gridx = 2;
 		gbc_searchButton.gridy = 5;
 		add(searchButton, gbc_searchButton);
+		searchButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				extractSearchInput();
+			}
+		});
 		
 		scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -247,9 +255,29 @@ public class SearchMovieUI extends JPanel {
 		
 		int lowerYear = 0;
 		int upperYear = 0;
+		String lowerYearStr = comboBoxLowerYear.getSelectedItem().toString();
+		String upperYearStr = comboBoxUpperYear.getSelectedItem().toString();
+		
 		try {
-			lowerYear = Integer.parseInt(comboBoxLowerYear.getSelectedItem().toString());
-			upperYear = Integer.parseInt(comboBoxUpperYear.getSelectedItem().toString());
+			nonNumberMatcher = nonNumberPattern.matcher(lowerYearStr);
+			
+			// read lower limit of year range
+			if(!nonNumberMatcher.find()) {
+				lowerYear = Integer.parseInt(comboBoxLowerYear.getSelectedItem().toString());
+			} else {
+				lowerYear = 0;		// set limit to lowest possible year if non-number in dropdown
+			}
+			
+			nonNumberMatcher = nonNumberPattern.matcher(upperYearStr);
+			
+			// read upper limit of year range
+			if(!nonNumberMatcher.find()) {
+				upperYear = Integer.parseInt(comboBoxUpperYear.getSelectedItem().toString());
+			} else {
+				// set limit to current year if non-number in dropdown
+				Calendar currentDate = Calendar.getInstance();
+				upperYear = currentDate.get(Calendar.YEAR);
+			}
 		} catch(NumberFormatException nfe) {
 			System.err.println("Year range input error: " + nfe.getMessage());
 		}
@@ -258,11 +286,12 @@ public class SearchMovieUI extends JPanel {
 			spinnerLengthLowerLimit.commitEdit();
 			spinnerLengthUpperLimit.commitEdit();
 		} catch(java.text.ParseException e) {
-			System.err.println("Lower length spinner input error: " + e.getMessage());
+			System.err.println("Spinner input error: " + e.getMessage());
 		}
 		int lowerLength = (Integer)spinnerLengthLowerLimit.getValue();
 		int upperLength = (Integer)spinnerLengthUpperLimit.getValue();
 		
+		// TEMP
 		System.out.println("Title: " + title);
 		System.out.println("Genre: " + genre);
 		System.out.println("Year range: " + lowerYear + " to " + upperYear);
@@ -273,10 +302,10 @@ public class SearchMovieUI extends JPanel {
 		
 		// TEMP: Delete when SearchMovie is implemented in DataManager, and uncomment above line
 		ArrayList<MovieObject> movies = new ArrayList<MovieObject>();
-		movies.add(new MovieObject("Ferris Bueller's Day Off",1986,"Comedy",103,5,1));
-		movies.add(new MovieObject("12 Angry Men",1957,"Drama",97,5,2));
-		movies.add(new MovieObject("My Life as a Zucchini",2016,"Animation",66,4,3));
-		movies.add(new MovieObject("Train to Busan",2016,"Thriller",118,4,4));
+		movies.add(new MovieObject("Ferris Bueller's Day Off",1986,"Comedy",103,5.0,1));
+		movies.add(new MovieObject("12 Angry Men",1957,"Drama",97,5.0,2));
+		movies.add(new MovieObject("My Life as a Zucchini",2016,"Animation",66,4.0,3));
+		movies.add(new MovieObject("Train to Busan",2016,"Thriller",118,4.0,4));
 		
 		if(movies == null) {
 			displayFailedSearchMessage();
@@ -289,14 +318,32 @@ public class SearchMovieUI extends JPanel {
 		// TODO
 		System.out.println("Here's where we display search results");
 		
-		scrollPanel = new JPanel();
+		ArrayList<String> movieList = new ArrayList<String>();
 		
 		for(MovieObject movie : movies) {
-			JLabel movieInfo = new JLabel(movie.getTitle() + " (" + movie.getYear() + ")");
-			
-			scrollPanel.add(movieInfo);
+			movieList.add(movie.getTitle() + " (" + movie.getYear() + ")");
+			System.out.println(movie.toString());
 		}
-		scrollPane.setViewportView(scrollPanel);
+		
+		// JList setup
+		scrollList = new JList<>(movieList.toArray());
+		scrollList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollList.setLayoutOrientation(JList.VERTICAL);
+		scrollList.setVisibleRowCount(-1);
+		
+		scrollPane = new JScrollPane(scrollList);
+		scrollPane.setPreferredSize(new Dimension(250, 80));
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridheight = 3;
+		gbc_scrollPane.gridwidth = 6;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 1;
+		gbc_scrollPane.gridy = 6;
+		add(scrollPane, gbc_scrollPane);
+		//scrollPane.setVisible(false);
+		
+		//scrollPane.setViewportView(scrollList);
 		
 		/*
 		this.addMouseListener(new MouseAdapter() {
