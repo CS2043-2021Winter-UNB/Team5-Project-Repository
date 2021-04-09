@@ -1,8 +1,3 @@
-/******************************************************************************************************************************
- * RateMovieUI
- * @author Rachel
- * Description:	Handles input from user and communicates with RateMovieControl and loginControl.
- ******************************************************************************************************************************/
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,6 +11,9 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 
 public class RateMovieUI extends JPanel {
@@ -23,144 +21,134 @@ public class RateMovieUI extends JPanel {
 	private LoginControl loginControl;
 	private RateMovieControl rateMovieControl;
 	private ViewMovieControl viewMovieControl;
-	private MainUI mainUI;
-	private JComboBox<String> comboBoxRating; //dropdown
-	//private JLabel labelRateMovieStatus;
+	private final Action action1 = new SwingAction();
+	private final Action action2 = new SwingAction_1();
+	private final Action action3 = new SwingAction_2();
+	private final Action action4 = new SwingAction_3();
+	private final Action action5 = new SwingAction_4();
+
 
 
 	public RateMovieUI(RateMovieControl rmControl, LoginControl lControl, ViewMovieControl vControl) {
-		
 		rateMovieControl = rmControl;
 		loginControl = lControl;
 		viewMovieControl = vControl;
 		
-		//get current member
-		MemberObject member = loginControl.getCurrentMember();
-			
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{27, 0, 2, 25, 50, 40, 0, 26, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 15, 32, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{38, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		//Get MovieID from ViewMovieControl
-		MovieObject movie = viewMovieControl.getCurrentMovie();
-		int movieID = movie.getMovieId();
+		JLabel rateMovieLabel = new JLabel("Rate Movie:");
+		GridBagConstraints gbc_rateMovieLabel = new GridBagConstraints();
+		gbc_rateMovieLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_rateMovieLabel.gridx = 1;
+		gbc_rateMovieLabel.gridy = 3;
+		add(rateMovieLabel, gbc_rateMovieLabel);
 		
+		JRadioButton oneStarButton = new JRadioButton("✰");
+		oneStarButton.setAction(action1);
+		GridBagConstraints gbc_oneStarButton = new GridBagConstraints();
+		gbc_oneStarButton.insets = new Insets(0, 0, 5, 5);
+		gbc_oneStarButton.gridx = 1;
+		gbc_oneStarButton.gridy = 5;
+		add(oneStarButton, gbc_oneStarButton);
 		
-		//Ask Control if member has a rating for THIS movie, and THIS member
-		if (rateMovieControl.getMemberRating(movieID, member) == 0) //no rating yet
-			{	
-			
-			//-Text: "Rate Movie"
-			//	-display dropdown
-			//-Text: "Average Rating"
-			//	-display average rating 
-			
-			//Member Rating label
-			JLabel labelRating = new JLabel("Rate Movie: ");
-			GridBagConstraints gbc_labelRating = new GridBagConstraints();
-			gbc_labelRating.insets = new Insets(0, 0, 5, 5);
-			gbc_labelRating.gridx = 1;
-			gbc_labelRating.gridy = 0;
-			add(labelRating, gbc_labelRating);
-					
-			//Initializing available ratings
-			String[] ratingList = {"Select a rating","1", "2","3","4","5"};
-			
-			//Rating drop down menu
-			comboBoxRating = new JComboBox<String>(ratingList);
-			
-				//Detect selection of rating
-				comboBoxRating.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) { 
-						String sRating = (String) comboBoxRating.getSelectedItem();
-					
-						int iRating = Integer.parseInt(sRating);
-						boolean success = rateMovieControl.processRating(movieID, iRating);
-			    
-					//IF success is false display error?
-					}
-				});
-			
-			
-			// display dropdown: "Select a rating","1" to "5") 
-			GridBagConstraints gbc_comboBoxRating = new GridBagConstraints();
-			gbc_comboBoxRating.insets = new Insets(0, 0, 5, 5);
-			gbc_comboBoxRating.fill = GridBagConstraints.HORIZONTAL;
-			gbc_comboBoxRating.gridx = 2;
-			gbc_comboBoxRating.gridy = 0;
-			add(comboBoxRating, gbc_comboBoxRating);
-			
-			}
-		else //if member has rating 
-			{JLabel labelRating = new JLabel("Your Rating: ");
-			GridBagConstraints gbc_labelRating = new GridBagConstraints();
-			gbc_labelRating.insets = new Insets(0, 0, 5, 5);
-			gbc_labelRating.gridx = 1;
-			gbc_labelRating.gridy = 0;
-			add(labelRating, gbc_labelRating);
-				
-			//Initializing available ratings
-			String[] ratingList = {"1", "2","3","4","5"};
+		JRadioButton twoStarsButton = new JRadioButton("✰✰");
+		twoStarsButton.setAction(action2);
+		GridBagConstraints gbc_twoStarsButton = new GridBagConstraints();
+		gbc_twoStarsButton.insets = new Insets(0, 0, 5, 5);
+		gbc_twoStarsButton.gridx = 2;
+		gbc_twoStarsButton.gridy = 5;
+		add(twoStarsButton, gbc_twoStarsButton);
 		
-			//Rating drop down menu
-			comboBoxRating = new JComboBox<String>(ratingList);
-			GridBagConstraints gbc_comboBoxRating = new GridBagConstraints();
-			gbc_comboBoxRating.insets = new Insets(0, 0, 5, 5);
-			gbc_comboBoxRating.fill = GridBagConstraints.HORIZONTAL;
-			gbc_comboBoxRating.gridx = 2;
-			gbc_comboBoxRating.gridy = 0;
-			
-			//figure out index... index starts at 0, so int 1 = index 0 in list.
-			int rIndex = rateMovieControl.getMemberRating(movieID, member) -1;
-			comboBoxRating.setSelectedIndex(rIndex);
-			
-			//Detect selection of rating
-			comboBoxRating.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) { 
-					String sRating = (String) comboBoxRating.getSelectedItem();
-				
-					int iRating = Integer.parseInt(sRating);
-					boolean success = rateMovieControl.processRating(movieID,iRating);
-		    
-				//IF success is false display error?
-				}
-			});
-			
-			}
+		JRadioButton threeStarsButton = new JRadioButton("✰✰✰");
+		threeStarsButton.setAction(action3);
+		GridBagConstraints gbc_threeStarsButton = new GridBagConstraints();
+		gbc_threeStarsButton.insets = new Insets(0, 0, 5, 5);
+		gbc_threeStarsButton.gridx = 3;
+		gbc_threeStarsButton.gridy = 5;
+		add(threeStarsButton, gbc_threeStarsButton);
 		
-			//Average Movie Rating label
-			JLabel labelAverageMovieRating = new JLabel("Average Rating: ");
-			GridBagConstraints gbc_labelAverageMovieRating = new GridBagConstraints();
-			gbc_labelAverageMovieRating.insets = new Insets(0, 0, 5, 5);
-			gbc_labelAverageMovieRating.gridx = 1;
-			gbc_labelAverageMovieRating.gridy = 1;
-			add(labelAverageMovieRating, gbc_labelAverageMovieRating);
-			
-			
-			//Collect average movie rating
-			double averageRating = rateMovieControl.getAverageRating(movieID);
-			
-			String averageRatingString = String.valueOf(averageRating);
-			
-			JLabel labelAverageMovieRating_Value = new JLabel(averageRatingString);
-			//TEST: JLabel labelAverageMovieRating_Value = new JLabel("5.0");
-			GridBagConstraints gbc_labelAverageMovieRating_Value = new GridBagConstraints();
-			gbc_labelAverageMovieRating_Value.insets = new Insets(0, 0, 5, 5);
-			gbc_labelAverageMovieRating_Value.gridx = 2;
-			gbc_labelAverageMovieRating_Value.gridy = 1;
-			add(labelAverageMovieRating_Value, gbc_labelAverageMovieRating_Value);
+		JRadioButton fourStarsButton = new JRadioButton("✰✰✰✰");
+		fourStarsButton.setAction(action4);
+		GridBagConstraints gbc_fourStarsButton = new GridBagConstraints();
+		gbc_fourStarsButton.insets = new Insets(0, 0, 5, 5);
+		gbc_fourStarsButton.gridx = 4;
+		gbc_fourStarsButton.gridy = 5;
+		add(fourStarsButton, gbc_fourStarsButton);
+		
+		JRadioButton fiveStarsButton = new JRadioButton("✰✰✰✰✰");
+		fiveStarsButton.setAction(action5);
+		GridBagConstraints gbc_fiveStarsButton = new GridBagConstraints();
+		gbc_fiveStarsButton.insets = new Insets(0, 0, 5, 5);
+		gbc_fiveStarsButton.gridx = 5;
+		gbc_fiveStarsButton.gridy = 5;
+		add(fiveStarsButton, gbc_fiveStarsButton);
+		
 		
 	}
-
-
-	public void displayRatingForm(MovieObject movie, MemberObject member) {
-		labelAverageMovieRating_Value.setText(movie.getTitle());
+	public void displayRatingForm() {
+		setVisible(true);
 	}
 	
-	public void extractRatingDetails() {
-		String memberRating = comboBoxRating.getSelectedItem().toString();
+	private class SwingAction extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction() {
+			putValue(NAME, "✰");
+			putValue(SHORT_DESCRIPTION, "One Star Rating!");
+		}
+		public void actionPerformed(ActionEvent e) {
+			
+		}
+	}
+	private class SwingAction_1 extends AbstractAction {
+		public SwingAction_1() {
+			putValue(NAME, "✰✰");
+			putValue(SHORT_DESCRIPTION, "Two Stars Rating!");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
+	private class SwingAction_2 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_2() {
+			putValue(NAME, "✰✰✰");
+			putValue(SHORT_DESCRIPTION, "Three Stars Rating!");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
+	private class SwingAction_3 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_3() {
+			putValue(NAME, "✰✰✰✰");
+			putValue(SHORT_DESCRIPTION, "Four Stars Rating");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
+	private class SwingAction_4 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_4() {
+			putValue(NAME, "✰✰✰✰✰");
+			putValue(SHORT_DESCRIPTION, "Five Stars Rating");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
 	}
 }

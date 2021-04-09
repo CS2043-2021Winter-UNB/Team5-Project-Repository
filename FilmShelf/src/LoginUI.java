@@ -49,9 +49,9 @@ public class LoginUI extends JPanel {
 	public LoginUI(LoginControl control) {
 		loginControl = control;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{50, 96, 91, 7, 65, 57, 59, 1, 0};
+		gridBagLayout.columnWidths = new int[]{50, 96, 19, 88, 0, 0, 0, 65, 57, 59, 1, 0};
 		gridBagLayout.rowHeights = new int[]{ 23, 0, 0, 0, 0, 0, 0, 28, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -69,7 +69,7 @@ public class LoginUI extends JPanel {
 		//Username text field
 		textFieldUsername = new JTextField();
 		GridBagConstraints gbc_textFieldUsername = new GridBagConstraints();
-		gbc_textFieldUsername.gridwidth = 3;
+		gbc_textFieldUsername.gridwidth = 6;
 		gbc_textFieldUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldUsername.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldUsername.gridx = 2;
@@ -90,7 +90,7 @@ public class LoginUI extends JPanel {
 		//Password field
 		passwordField = new JPasswordField();
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
-		gbc_passwordField.gridwidth = 3;
+		gbc_passwordField.gridwidth = 6;
 		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_passwordField.gridx = 2;
@@ -106,7 +106,7 @@ public class LoginUI extends JPanel {
 		});
 		GridBagConstraints gbc_checkboxPasswordVisibility = new GridBagConstraints();
 		gbc_checkboxPasswordVisibility.insets = new Insets(0, 0, 5, 5);
-		gbc_checkboxPasswordVisibility.gridx = 5;
+		gbc_checkboxPasswordVisibility.gridx = 8;
 		gbc_checkboxPasswordVisibility.gridy = 4;
 		add(checkboxPasswordVisibility, gbc_checkboxPasswordVisibility);
 		
@@ -138,7 +138,7 @@ public class LoginUI extends JPanel {
 		GridBagConstraints gbc_radioButtonAdmin = new GridBagConstraints();
 		gbc_radioButtonAdmin.anchor = GridBagConstraints.NORTHWEST;
 		gbc_radioButtonAdmin.insets = new Insets(0, 0, 5, 5);
-		gbc_radioButtonAdmin.gridx = 4;
+		gbc_radioButtonAdmin.gridx = 7;
 		gbc_radioButtonAdmin.gridy = 5;
 		add(radioButtonAdmin, gbc_radioButtonAdmin);
 		
@@ -157,7 +157,7 @@ public class LoginUI extends JPanel {
 		GridBagConstraints gbc_loginButton = new GridBagConstraints();
 		gbc_loginButton.anchor = GridBagConstraints.NORTHWEST;
 		gbc_loginButton.insets = new Insets(0, 0, 5, 5);
-		gbc_loginButton.gridx = 3;
+		gbc_loginButton.gridx = 5;
 		gbc_loginButton.gridy = 6;
 		add(loginButton, gbc_loginButton);
 		
@@ -165,7 +165,7 @@ public class LoginUI extends JPanel {
 		labelLoginStatus = new JLabel("");
 		labelLoginStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelLoginStatus = new GridBagConstraints();
-		gbc_labelLoginStatus.gridwidth = 5;
+		gbc_labelLoginStatus.gridwidth = 8;
 		gbc_labelLoginStatus.insets = new Insets(0, 0, 0, 5);
 		gbc_labelLoginStatus.gridx = 1;
 		gbc_labelLoginStatus.gridy = 7;

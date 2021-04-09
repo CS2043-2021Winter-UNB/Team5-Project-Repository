@@ -117,91 +117,91 @@ public class MainUI extends JFrame {
         gbc_labelFilmShelf.gridy = 0;
         mainPane.add(labelFilmShelf, gbc_labelFilmShelf);
 	     
-	             //NEW PANEL
-	             JPanel panelAccountButtons = new JPanel();
-	             
-	             GridBagConstraints gbc_panel2 = new GridBagConstraints();
-	             gbc_panel2.gridwidth = 2;
-	             gbc_panel2.insets = new Insets(0, 0, 5, 5);
-	             gbc_panel2.fill = GridBagConstraints.BOTH;
-	             gbc_panel2.gridx = 4;
-	             gbc_panel2.gridy = 0;
-	             mainPane.add(panelAccountButtons, gbc_panel2);
-	             
-	             GridBagLayout gbl_panel = new GridBagLayout();
-	             gbl_panel.columnWidths = new int[]{0, 7};
-	             gbl_panel.rowHeights = new int[]{14, 0, 0, 0};
-	             gbl_panel.columnWeights = new double[]{0.0, 0.0};
-	             gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-	             panelAccountButtons.setLayout(gbl_panel);
-	             
-        //create account
-	             buttonCreateAccount = new JButton("Create Account");
-	             buttonCreateAccount.addActionListener(new ActionListener() {
-	             	public void actionPerformed(ActionEvent e) {
-	             		createMemberUI.displayCreateAccountForm();
-	             		loginUI.setVisible(false);
-	             		editMemberUI.setVisible(false);
-	             		searchMemberUI.setVisible(false);
-	             		viewMemberUI.setVisible(false);
-	             		}
-	             });
-	             
-	             buttonSearchAccount = new JButton("Search Account");
-	             buttonSearchAccount.addActionListener(new ActionListener() {
-	             	public void actionPerformed(ActionEvent e) {
-	             		searchMemberUI.displaySearchForm();
-	             		loginUI.setVisible(false);
-	             		createMemberUI.setVisible(false);
-	              		editMemberUI.setVisible(false);
-	              		viewMemberUI.setVisible(false);
-	             	}
-	             });
-	             GridBagConstraints gbc_buttonSearch = new GridBagConstraints();
-	             gbc_buttonSearch.insets = new Insets(0, 0, 5, 5);
-	             gbc_buttonSearch.gridx = 0;
-	             gbc_buttonSearch.gridy = 1;
-	             panelAccountButtons.add(buttonSearchAccount, gbc_buttonSearch);
-	             
-	              
-        //login 
-	              buttonLogin = new JButton("Login");
-	              buttonLogin.setHorizontalAlignment(SwingConstants.RIGHT);
-	              
-	              buttonLogin.addActionListener(new ActionListener() {
-	    	 public void actionPerformed(ActionEvent e) {
-	    		loginUI.displayLoginForm();
-	               		createMemberUI.setVisible(false);
-	               		editMemberUI.setVisible(false);
-	               		searchMemberUI.setVisible(false);
-	               		viewMemberUI.setVisible(false);
-	               	}
-	              });
-	              
+         //NEW PANEL
+         JPanel panelAccountButtons = new JPanel();
+         
+         GridBagConstraints gbc_panel2 = new GridBagConstraints();
+         gbc_panel2.gridwidth = 2;
+         gbc_panel2.insets = new Insets(0, 0, 5, 5);
+         gbc_panel2.fill = GridBagConstraints.BOTH;
+         gbc_panel2.gridx = 4;
+         gbc_panel2.gridy = 0;
+         mainPane.add(panelAccountButtons, gbc_panel2);
+         
+         GridBagLayout gbl_panel = new GridBagLayout();
+         gbl_panel.columnWidths = new int[]{0, 7};
+         gbl_panel.rowHeights = new int[]{14, 0, 0, 0};
+         gbl_panel.columnWeights = new double[]{0.0, 0.0};
+         gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+         panelAccountButtons.setLayout(gbl_panel);
+         
+//create account
+         buttonCreateAccount = new JButton("Create Account");
+         buttonCreateAccount.addActionListener(new ActionListener() {
+         	public void actionPerformed(ActionEvent e) {
+         		createMemberUI.displayCreateAccountForm();
+         		loginUI.setVisible(false);
+         		editMemberUI.setVisible(false);
+         		searchMemberUI.setVisible(false);
+         		viewMemberUI.setVisible(false);
+         		}
+         });
+         
+         buttonSearchAccount = new JButton("Search Account");
+         buttonSearchAccount.addActionListener(new ActionListener() {
+         	public void actionPerformed(ActionEvent e) {
+         		searchMemberUI.displaySearchForm();
+         		loginUI.setVisible(false);
+         		createMemberUI.setVisible(false);
+          		editMemberUI.setVisible(false);
+          		viewMemberUI.setVisible(false);
+         	}
+         });
+         GridBagConstraints gbc_buttonSearch = new GridBagConstraints();
+         gbc_buttonSearch.insets = new Insets(0, 0, 5, 5);
+         gbc_buttonSearch.gridx = 0;
+         gbc_buttonSearch.gridy = 1;
+         panelAccountButtons.add(buttonSearchAccount, gbc_buttonSearch);
+         
+          
+//login 
+          buttonLogin = new JButton("Login");
+          buttonLogin.setHorizontalAlignment(SwingConstants.RIGHT);
+  
+          buttonLogin.addActionListener(new ActionListener() {
+        	  	public void actionPerformed(ActionEvent e) {
+        	  		loginUI.displayLoginForm();
+	           		createMemberUI.setVisible(false);
+	           		editMemberUI.setVisible(false);
+	           		searchMemberUI.setVisible(false);
+	           		viewMemberUI.setVisible(false);
+           	}
+          });
+          
 
-	              GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
-	              gbc_buttonLogin.insets = new Insets(0, 0, 5, 5);
-	              gbc_buttonLogin.gridx = 2;
-	              gbc_buttonLogin.gridy = 1;
-	              panelAccountButtons.add(buttonLogin, gbc_buttonLogin);
-	              
-	              GridBagConstraints gbc_buttonCreateAccount = new GridBagConstraints();
-	              gbc_buttonCreateAccount.insets = new Insets(0, 0, 5, 0);
-	              gbc_buttonCreateAccount.anchor = GridBagConstraints.WEST;
-	              gbc_buttonCreateAccount.gridx = 4;
-	              gbc_buttonCreateAccount.gridy = 1;
-	              panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
-	              
-	              buttonSearchMovie = new JButton("Search Movie");
-	              buttonSearchMovie.addActionListener(new ActionListener() {
-	              	public void actionPerformed(ActionEvent e) {
-	              	}
-	              });
-	              GridBagConstraints gbc_buttonSearchMovie = new GridBagConstraints();
-	              gbc_buttonSearchMovie.insets = new Insets(0, 0, 0, 5);
-	              gbc_buttonSearchMovie.gridx = 0;
-	              gbc_buttonSearchMovie.gridy = 2;
-	              panelAccountButtons.add(buttonSearchMovie, gbc_buttonSearchMovie);
+          GridBagConstraints gbc_buttonLogin = new GridBagConstraints();
+          gbc_buttonLogin.insets = new Insets(0, 0, 5, 5);
+          gbc_buttonLogin.gridx = 2;
+          gbc_buttonLogin.gridy = 1;
+          panelAccountButtons.add(buttonLogin, gbc_buttonLogin);
+          
+          GridBagConstraints gbc_buttonCreateAccount = new GridBagConstraints();
+          gbc_buttonCreateAccount.insets = new Insets(0, 0, 5, 0);
+          gbc_buttonCreateAccount.anchor = GridBagConstraints.WEST;
+          gbc_buttonCreateAccount.gridx = 4;
+          gbc_buttonCreateAccount.gridy = 1;
+          panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
+          
+          buttonSearchMovie = new JButton("Search Movie");
+          buttonSearchMovie.addActionListener(new ActionListener() {
+          	public void actionPerformed(ActionEvent e) {
+          	}
+          });
+          GridBagConstraints gbc_buttonSearchMovie = new GridBagConstraints();
+          gbc_buttonSearchMovie.insets = new Insets(0, 0, 0, 5);
+          gbc_buttonSearchMovie.gridx = 0;
+          gbc_buttonSearchMovie.gridy = 2;
+          panelAccountButtons.add(buttonSearchMovie, gbc_buttonSearchMovie);
 	     
         pack();
       
@@ -219,8 +219,8 @@ public class MainUI extends JFrame {
 	        buttonLogin.addActionListener(new ActionListener() {
 	        	public void actionPerformed(ActionEvent e) {
 	        		viewMemberUI.displayViewMemberAccount(username);
-	        		searchMemberUI.setVisible(false);
-	        		editMemberUI.setVisible(false);
+	        			searchMemberUI.setVisible(false);
+		        		editMemberUI.setVisible(false);
 	        	}
 	        });
 	        
@@ -244,6 +244,22 @@ public class MainUI extends JFrame {
 	        		searchMemberUI.setVisible(false);
 	        	}
 	        });
+		}
+		//set it back to normal - try 1
+		else if (loginControl.getCurrentAdmin() == null) {
+			buttonCreateAccount.setVisible(true);
+			buttonLogin.setText("Login");
+			ActionListener[] al3 = buttonLogin.getActionListeners();
+			buttonLogin.removeActionListener(al3[0]);
+			buttonLogin.addActionListener(new ActionListener() {
+	        	  	public void actionPerformed(ActionEvent e) {
+	        	  		loginUI.displayLoginForm();
+		           		createMemberUI.setVisible(false);
+		           		editMemberUI.setVisible(false);
+		           		searchMemberUI.setVisible(false);
+		           		viewMemberUI.setVisible(false);
+	           	}
+	          });
 		}
 	}
     

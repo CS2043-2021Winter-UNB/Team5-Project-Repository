@@ -62,13 +62,7 @@ public class ViewMemberUI extends JPanel {
 		buttonRemoveAccount = new JButton("Remove Account");
 		buttonRemoveAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!removeMemberUI.status()){
-					removeMemberUI.displayRemovalMemberWarning(username);
-				}
-				else {
-					setVisible(true);
-					removeMemberUI.displayRemovalMemberWarning(username);
-				}
+				removeMemberUI.displayRemovalMemberWarning(username);
 			}
 		});
 		
@@ -229,50 +223,55 @@ public class ViewMemberUI extends JPanel {
 	
 	public void displayViewMemberAccount(String username)
 	{	
-		setVisible(true);
-		this.username=username;
-		MemberObject member = viewMemberControl.getMemberAccount(username);
-		labelShowUsername.setText(username);
-		labelShowFirstName.setText(member.getFirstName());
-		labelShowLastName.setText(member.getLastName());
-		labelShowDescription.setText(member.getDescription());
-		
-		ArrayList<MovieObject> topMovies = member.getTopMovies();
-		int i;
-		for (i = 0; i < 5; i++) {
-			if (i < topMovies.size()) {
-				labelMovies[i].setText(topMovies.get(i).getTitle()); // add movie name			
-			}
-			else {                          
-				labelMovies[i].setText(""); //clear any unused movie labels to make sure previous results are gone
-			}
-		}	
-		
-		//check if remove member button should be displayed.
-		//It should be displayed if the actor is an administrator or they are viewing their own member account.
-		
 		MemberObject logInMember = loginControl.getCurrentMember();
-		boolean memberMatch = false;
-		if (logInMember != null)
-		{
-			memberMatch = logInMember.getUsername().equals(username);
+		if(logInMember != null) {
+			setVisible(true);
+			this.username=username;
+			MemberObject member = viewMemberControl.getMemberAccount(username);
+			labelShowUsername.setText(username);
+			labelShowFirstName.setText(member.getFirstName());
+			labelShowLastName.setText(member.getLastName());
+			labelShowDescription.setText(member.getDescription());
+			
+			ArrayList<MovieObject> topMovies = member.getTopMovies();
+			int i;
+			for (i = 0; i < 5; i++) {
+				if (i < topMovies.size()) {
+					labelMovies[i].setText(topMovies.get(i).getTitle()); // add movie name			
+				}
+				else {                          
+					labelMovies[i].setText(""); //clear any unused movie labels to make sure previous results are gone
+				}
+			}	
+			
+			//check if remove member button should be displayed.
+			//It should be displayed if the actor is an administrator or they are viewing their own member account.
+			
+			boolean memberMatch = false;
+			if (logInMember != null)
+			{
+				memberMatch = logInMember.getUsername().equals(username);
+			}
+	
+			boolean adminCheck = (loginControl.getCurrentAdmin() != null);
+	
+			if ( adminCheck || memberMatch){
+				buttonRemoveAccount.setVisible(true);
+				buttonEditMember.setVisible(true);
+	
+			}
+			else if (memberMatch) {
+				buttonRemoveAccount.setVisible(true);
+				buttonEditMember.setVisible(true);
+			}
+			else
+			{
+				buttonRemoveAccount.setVisible(false);
+				buttonEditMember.setVisible(false);
+			}
 		}
-
-		boolean adminCheck = (loginControl.getCurrentAdmin() != null);
-
-		if ( adminCheck || memberMatch){
-			buttonRemoveAccount.setVisible(true);
-			buttonEditMember.setVisible(true);
-
-		}
-		else if (memberMatch) {
-			buttonRemoveAccount.setVisible(true);
-			buttonEditMember.setVisible(true);
-		}
-		else
-		{
-			buttonRemoveAccount.setVisible(false);
-			buttonEditMember.setVisible(false);
+		else {
+			setVisible(false);
 		}
 	}
 	
