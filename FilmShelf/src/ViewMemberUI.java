@@ -252,8 +252,8 @@ public class ViewMemberUI extends JPanel {
 	
 			boolean adminCheck = (loginControl.getCurrentAdmin() != null);
 	
-			if ( adminCheck || memberMatch){
-				buttonRemoveAccount.setVisible(true);
+			if ( adminCheck){
+				buttonRemoveAccount.setVisible(false);
 				buttonEditMember.setVisible(true);
 	
 			}
