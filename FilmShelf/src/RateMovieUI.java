@@ -26,6 +26,7 @@ public class RateMovieUI extends JPanel {
 	private final Action action3 = new SwingAction_2();
 	private final Action action4 = new SwingAction_3();
 	private final Action action5 = new SwingAction_4();
+	private int movieiD;
 
 
 
@@ -90,7 +91,8 @@ public class RateMovieUI extends JPanel {
 		
 		
 	}
-	public void displayRatingForm() {
+	public void displayRatingForm(int movieID) {
+		this.movieiD =movieID;
 		setVisible(true);
 	}
 	
@@ -104,16 +106,20 @@ public class RateMovieUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "One Star Rating!");
 		}
 		public void actionPerformed(ActionEvent e) {
-			
+			rateMovieControl.processRating(movieiD, 1);
 		}
 	}
 	private class SwingAction_1 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		public SwingAction_1() {
 			putValue(NAME, "✰✰");
 			putValue(SHORT_DESCRIPTION, "Two Stars Rating!");
 		}
 		public void actionPerformed(ActionEvent e) {
-			
+			rateMovieControl.processRating(movieiD, 2);
 		}
 	}
 	private class SwingAction_2 extends AbstractAction {
@@ -126,6 +132,7 @@ public class RateMovieUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "Three Stars Rating!");
 		}
 		public void actionPerformed(ActionEvent e) {
+			rateMovieControl.processRating(movieiD, 3);
 		}
 	}
 	private class SwingAction_3 extends AbstractAction {
@@ -138,6 +145,7 @@ public class RateMovieUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "Four Stars Rating");
 		}
 		public void actionPerformed(ActionEvent e) {
+			rateMovieControl.processRating(movieiD, 4);
 		}
 	}
 	private class SwingAction_4 extends AbstractAction {
@@ -150,6 +158,7 @@ public class RateMovieUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "Five Stars Rating");
 		}
 		public void actionPerformed(ActionEvent e) {
+			rateMovieControl.processRating(movieiD, 5);
 		}
 	}
 }

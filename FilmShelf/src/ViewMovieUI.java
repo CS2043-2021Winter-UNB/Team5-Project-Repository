@@ -99,7 +99,7 @@ public class ViewMovieUI extends JPanel {
 		rateButton = new JButton("Rate Movie");
 		rateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				rateMovie.displayRatingForm();
+				rateMovie.displayRatingForm(movieID);
 			}
 		});
 		GridBagConstraints gbc_rateButton = new GridBagConstraints();
