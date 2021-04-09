@@ -1,11 +1,9 @@
+
 /******************************************************************************************************************************
  * ViewMovieControl
  * @author Rachel
  * Description:	Handles input from ViewMovieUI class and initiates searching of the Movie table.
  ******************************************************************************************************************************/
-
-import java.util.ArrayList;
-
 public class ViewMovieControl {
 
 	private DataManager dataManager;
