@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /******************************************************************************************************************************
  * SearchMovieControl
@@ -19,14 +20,25 @@ public class SearchMovieControl {
 		
 		// check that search input is valid
 		if(validateSearchInput(title, lowerYear, upperYear, genre, lengthLowerLimit, lengthUpperLimit)) {
-			movies = dataManager.getMoviesByKeywords(title, lowerYear, upperYear, genre, lengthLowerLimit, lengthUpperLimit);
+			// handle genre not specified
+			if(genre.equals("Select a genre")) {
+				genre = null;
+			}
+			
+			// handle year limits not specified
+			if(lowerYear == -1 && upperYear != -1) {
+				lowerYear = 0;
+			} else if(lowerYear != -1 && upperYear == -1) {
+				// set limit to current year if non-number in dropdown
+				upperYear = Calendar.getInstance().get(Calendar.YEAR);
+			}
+			
+			movies = dataManager.getMoviesbyKeywords(title, lowerYear, upperYear, genre, lengthLowerLimit, lengthUpperLimit);
 		}
 		
 		return movies;
 	}
 	
-	// helper method, should be private but set to public for now for testing
-	// SQL query with all null values or all empty values should return nothing as expected, no need to prevent empty/null search 
 	public boolean validateSearchInput(String title, int lowerYear, int upperYear, String genre, int lengthLowerLimit, int lengthUpperLimit) {
 		// check that title isn't longer than 25 characters (length of title in Movie table)
 		if((title != null) && (title.strip().length() > 25)) {
@@ -35,12 +47,13 @@ public class SearchMovieControl {
 		
 		// check that lowerYear and upperYear are positive and lowerYear is not greater than upperYear
 		// the earliest surviving video footage is the Roundhay Garden scene from 1888
-		if((lowerYear <= 0) || (upperYear <= 0) || (lowerYear > upperYear)) {
+		if((lowerYear < -1) || (upperYear < -1) || ((lowerYear > upperYear) && ((lowerYear != -1) && (upperYear != -1)))) {
 			return false;
 		}
 		
 		// create list of possible genres (based on genres used by Letterboxd)
 		ArrayList<String> genreList = new ArrayList<String>();
+		genreList.add("Select a genre");
 		genreList.add("Action");
 		genreList.add("Adventure");
 		genreList.add("Animation");

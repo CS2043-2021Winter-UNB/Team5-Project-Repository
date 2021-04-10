@@ -36,7 +36,7 @@ public class Main {
 		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI);
 		
 		SearchMovieControl searchMovieControl = new SearchMovieControl(dm);
-		SearchMovieUI searchMovieUI = new SearchMovieUI(searchMovieControl);
+		SearchMovieUI searchMovieUI = new SearchMovieUI(searchMovieControl, viewMovieUI);
 		
 		AddMovieControl addMovieControl = new AddMovieControl(dm, loginControl);
 		AddMovieUI addMovieUI = new AddMovieUI(addMovieControl);
