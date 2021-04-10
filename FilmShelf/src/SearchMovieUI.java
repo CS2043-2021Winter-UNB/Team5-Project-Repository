@@ -65,9 +65,9 @@ public class SearchMovieUI extends JPanel {
 		searchMovieControl = controlSearch;
 		this.viewMovieUI = viewMovieUI;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 44, 60, 0, 60, 76, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{15, 44, 60, 0, 60, 76, 0, 15, 0};
 		gridBagLayout.rowHeights = new int[]{0, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 		setLayout(gridBagLayout);
 		
@@ -246,6 +246,7 @@ public class SearchMovieUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int selectedIndex = scrollList.getSelectedIndex();
 				if(selectedIndex != -1) {
+					setVisible(false);
 					viewMovieUI.displayMovie(movies.get(selectedIndex));
 				}
 			}
