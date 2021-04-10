@@ -46,6 +46,7 @@ public class MovieObject {
 		return movieId;
 	}
 	
+	@Override
 	public String toString() {
 		return "Title: " + title + "\n" +
 				"Year: " + year + "\n" +
@@ -53,5 +54,43 @@ public class MovieObject {
 				"Length: " + length + "\n" +
 				"Average rating: " + averageRating + "\n" +
 				"movieId: " + movieId;
+	}
+	
+	@Override
+	public boolean equals(Object object) {
+		if(this == object) {
+			return true;
+		}
+		if(object == null || getClass() != object.getClass()) {
+			return false;
+		}
+		
+		MovieObject movie = (MovieObject) object;
+		
+		if(!this.getTitle().equals(movie.getTitle())) {
+			return false;
+		}
+		
+		if(this.getYear() != movie.getYear()) {
+			return false;
+		}
+		
+		if(!this.getGenre().equalsIgnoreCase(movie.getGenre())) {
+			return false;
+		}
+		
+		if(this.getLength() != movie.getLength()) {
+			return false;
+		}
+		
+		if(this.getAverageRating() != movie.getAverageRating()) {
+			return false;
+		}
+		
+		if(this.getMovieId() != movie.getMovieId()) {
+			return false;
+		}
+		
+		return true;
 	}
 }

@@ -15,7 +15,6 @@ public class SearchMovieControl {
 		this.dataManager = dataManager;
 	}
 
-
 	public ArrayList<MovieObject> processSearchMovie(String title, int lowerYear, int upperYear, String genre, int lengthLowerLimit, int lengthUpperLimit) {
 		ArrayList<MovieObject> movies = null;
 		
@@ -25,10 +24,12 @@ public class SearchMovieControl {
 		}
 		
 		// double up single quotes for SQL query
-		title = title.replace("'", "''");
+		if(title != null) {
+			title = title.replace("'", "''");
+		}
 		
 		// handle genre not specified
-		if(genre.equals("Select a genre")) {
+		if((genre != null) && (genre.equals("Select a genre") || genre.isBlank())) {
 			genre = null;
 		}
 		
