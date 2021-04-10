@@ -15,6 +15,7 @@ public class SearchMovieControl {
 		this.dataManager = dataManager;
 	}
 
+
 	public ArrayList<MovieObject> processSearchMovie(String title, int lowerYear, int upperYear, String genre, int lengthLowerLimit, int lengthUpperLimit) {
 		ArrayList<MovieObject> movies = null;
 		

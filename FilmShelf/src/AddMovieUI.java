@@ -27,6 +27,10 @@ import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
 
 public class AddMovieUI extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private AddMovieControl addMovieControl;
 	private JTextField textFieldTitle;
 	private JComboBox<String> comboBoxYear;
