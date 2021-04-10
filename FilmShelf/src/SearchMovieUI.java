@@ -61,7 +61,6 @@ public class SearchMovieUI extends JPanel {
 	
 	public SearchMovieUI(SearchMovieControl controlSearch, ViewMovieUI viewMovieUI) {
 		nonNumberPattern = Pattern.compile("[^0-9]");		// matches characters that are not numbers
-		
 		searchMovieControl = controlSearch;
 		this.viewMovieUI = viewMovieUI;
 		GridBagLayout gridBagLayout = new GridBagLayout();

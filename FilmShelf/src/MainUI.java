@@ -240,7 +240,7 @@ public class MainUI extends JFrame {
         gbc_buttonSearchMovie.gridy = 2;
         panelAccountButtons.add(buttonSearchMovie, gbc_buttonSearchMovie);
     
-        searchMovieUI.setVisible(true);
+        //searchMovieUI.setVisible(true);
         pack();
 	}
 	

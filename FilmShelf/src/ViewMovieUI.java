@@ -1,5 +1,4 @@
 
-
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -266,17 +265,6 @@ public class ViewMovieUI extends JPanel {
 		labelShowGenre.setText(movie.getGenre());
 		labelShowLength.setText(""+movie.getLength());
 		
-		/*ArrayList<ReviewObject> topReviews = movie.getTopMovies();
-		int i;
-		for (i = 0; i < 5; i++) {
-			if (i < topMovies.size()) {
-				labelMovies[i].setText(topMovies.get(i).getTitle()); // add movie name			
-			}
-			else {                          
-				labelMovies[i].setText(""); //clear any unused movie labels to make sure previous results are gone
-			}
-		}
-		*/
 		if ((loginControl.getCurrentAdmin() != null)){
 			buttonRemoveMovie.setVisible(true);
 		}
