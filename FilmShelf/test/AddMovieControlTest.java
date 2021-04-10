@@ -71,10 +71,10 @@ public class AddMovieControlTest {
 	
 		@After
 		public void tearDown() throws Exception {
-			//ArrayList<MovieObject> movie = dataManager.getMoviesbyKeywords(title, releaseYear, genre, length, length);
-			//dataManager.removeMovie(movie.get(0).getMovieId());
+			ArrayList<MovieObject> movie = dataManager.getMoviesByKeywords(title, releaseYear, releaseYear, genre, length, length);
+			dataManager.removeMovie(movie.get(0).getMovieId());
 			// TEMP: change once getMoviesByKeywords() is finished
-			dataManager.removeMovie(1);
+			//dataManager.removeMovie(1);
 		}
 	
 		@Test
@@ -91,7 +91,7 @@ public class AddMovieControlTest {
 	}
 	// END OF TEST ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// test Admin adding a new movie //////////////////////////////////////////////////////////////////////////////////////////
+	// test Member adding a new movie //////////////////////////////////////////////////////////////////////////////////////////
 	@RunWith(Parameterized.class)
 	public static class MemberAddMovieControlTest {
 		
@@ -139,11 +139,11 @@ public class AddMovieControlTest {
 	
 		@After
 		public void tearDown() throws Exception {
-			//ArrayList<MovieObject> movie = dataManager.getMoviesbyKeywords(title, releaseYear, genre, length, length);
-			//dataManager.removeMovie(movie.get(0).getMovieId());
-			// TEMP: change once getMoviesByKeywords() is finished
-			dataManager.removeMovie(1);
 			dataManager.removeMember(DUMMY_USERNAME);
+			ArrayList<MovieObject> movie = dataManager.getMoviesByKeywords(title, releaseYear, releaseYear, genre, length, length);
+			dataManager.removeMovie(movie.get(0).getMovieId());
+			// TEMP: change once getMoviesByKeywords() is finished
+			//dataManager.removeMovie(1);
 		}
 		
 		@Test

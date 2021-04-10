@@ -20,22 +20,27 @@ public class SearchMovieControl {
 		ArrayList<MovieObject> movies = null;
 		
 		// check that search input is valid
-		if(validateSearchInput(title, lowerYear, upperYear, genre, lengthLowerLimit, lengthUpperLimit)) {
-			// handle genre not specified
-			if(genre.equals("Select a genre")) {
-				genre = null;
-			}
-			
-			// handle year limits not specified
-			if(lowerYear == -1 && upperYear != -1) {
-				lowerYear = 0;
-			} else if(lowerYear != -1 && upperYear == -1) {
-				// set limit to current year if non-number in dropdown
-				upperYear = Calendar.getInstance().get(Calendar.YEAR);
-			}
-			
-			movies = dataManager.getMoviesbyKeywords(title, lowerYear, upperYear, genre, lengthLowerLimit, lengthUpperLimit);
+		if(!validateSearchInput(title, lowerYear, upperYear, genre, lengthLowerLimit, lengthUpperLimit)) {
+			return null;
 		}
+		
+		// double up single quotes for SQL query
+		title = title.replace("'", "''");
+		
+		// handle genre not specified
+		if(genre.equals("Select a genre")) {
+			genre = null;
+		}
+		
+		// handle year limits not specified
+		if(lowerYear == -1 && upperYear != -1) {
+			lowerYear = 0;
+		} else if(lowerYear != -1 && upperYear == -1) {
+			// set limit to current year if non-number in dropdown
+			upperYear = Calendar.getInstance().get(Calendar.YEAR);
+		}
+		
+		movies = dataManager.getMoviesByKeywords(title, lowerYear, upperYear, genre, lengthLowerLimit, lengthUpperLimit);
 		
 		return movies;
 	}
