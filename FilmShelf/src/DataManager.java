@@ -286,7 +286,7 @@ public class DataManager {
 		ArrayList<Integer> movieIdList = new ArrayList<Integer>();
 
 		//SQL String Query 
-		String sqlQuery = "select movieID from Movie where";
+		String sqlQuery = "select movieID from Movie where ";
 
 		//Add Desired title to Query (does not need to be exact)
 		if(title != null) {
