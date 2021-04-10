@@ -38,7 +38,10 @@ public class Main {
 		RateMovieControl rateMovieControl = new RateMovieControl(dm,loginControl);
 		RateMovieUI addRatingUI= new RateMovieUI(rateMovieControl,loginControl,viewMovieControl);
 		
-		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI,loginControl,addReviewUI,addRatingUI);
+		EditRatingControl editRatingControl = new EditRatingControl(dm, loginControl);
+		EditRatingUI addEditRatingUI = new EditRatingUI(editRatingControl, loginControl, viewMovieControl);
+		
+		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI,loginControl,addReviewUI,addRatingUI, addEditRatingUI);
 		
 		LoginUI loginUI = new LoginUI(loginControl);
 		

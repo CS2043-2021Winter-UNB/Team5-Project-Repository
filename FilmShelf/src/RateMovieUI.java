@@ -29,7 +29,6 @@ public class RateMovieUI extends JPanel {
 	private int movieiD;
 
 
-
 	public RateMovieUI(RateMovieControl rmControl, LoginControl lControl, ViewMovieControl vControl) {
 		rateMovieControl = rmControl;
 		loginControl = lControl;
@@ -88,9 +87,9 @@ public class RateMovieUI extends JPanel {
 		gbc_fiveStarsButton.gridx = 5;
 		gbc_fiveStarsButton.gridy = 5;
 		add(fiveStarsButton, gbc_fiveStarsButton);
-		
-		
+			
 	}
+	
 	public void displayRatingForm(int movieID) {
 		this.movieiD =movieID;
 		setVisible(true);
@@ -116,7 +115,7 @@ public class RateMovieUI extends JPanel {
 		private static final long serialVersionUID = 1L;
 		public SwingAction_1() {
 			putValue(NAME, "✰✰");
-			putValue(SHORT_DESCRIPTION, "Two Stars Rating!");
+			putValue(SHORT_DESCRIPTION, "Two Star Rating!");
 		}
 		public void actionPerformed(ActionEvent e) {
 			rateMovieControl.processRating(movieiD, 2);
@@ -129,7 +128,7 @@ public class RateMovieUI extends JPanel {
 		private static final long serialVersionUID = 1L;
 		public SwingAction_2() {
 			putValue(NAME, "✰✰✰");
-			putValue(SHORT_DESCRIPTION, "Three Stars Rating!");
+			putValue(SHORT_DESCRIPTION, "Three Star Rating!");
 		}
 		public void actionPerformed(ActionEvent e) {
 			rateMovieControl.processRating(movieiD, 3);
@@ -142,7 +141,7 @@ public class RateMovieUI extends JPanel {
 		private static final long serialVersionUID = 1L;
 		public SwingAction_3() {
 			putValue(NAME, "✰✰✰✰");
-			putValue(SHORT_DESCRIPTION, "Four Stars Rating");
+			putValue(SHORT_DESCRIPTION, "Four Star Rating");
 		}
 		public void actionPerformed(ActionEvent e) {
 			rateMovieControl.processRating(movieiD, 4);
@@ -155,7 +154,7 @@ public class RateMovieUI extends JPanel {
 		private static final long serialVersionUID = 1L;
 		public SwingAction_4() {
 			putValue(NAME, "✰✰✰✰✰");
-			putValue(SHORT_DESCRIPTION, "Five Stars Rating");
+			putValue(SHORT_DESCRIPTION, "Five Star Rating");
 		}
 		public void actionPerformed(ActionEvent e) {
 			rateMovieControl.processRating(movieiD, 5);
