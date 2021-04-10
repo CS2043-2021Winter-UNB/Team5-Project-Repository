@@ -69,18 +69,12 @@ public class AddMovieControlTest {
 			loginControl.processAdminLogin(ADMIN_USERNAME, ADMIN_PASSWORD);
 		}
 	
-		@After
-		public void tearDown() throws Exception {
-			ArrayList<MovieObject> movie = dataManager.getMoviesByKeywords(title, releaseYear, releaseYear, genre, length, length);
-			dataManager.removeMovie(movie.get(0).getMovieId());
-			// TEMP: change once getMoviesByKeywords() is finished
-			//dataManager.removeMovie(1);
-		}
-	
 		@Test
 		public void testValidInput() {
 			Assume.assumeTrue(type == Type.VALID);
 			assertTrue(addMovieControl.processAddMovie(title, releaseYear, genre, length));
+			ArrayList<MovieObject> movie = dataManager.getMoviesByKeywords(title.replace("'", "''"), releaseYear, releaseYear, genre, length, length);
+			dataManager.removeMovie(movie.get(0).getMovieId());
 		}
 		
 		@Test
@@ -135,15 +129,6 @@ public class AddMovieControlTest {
 		public void setUp() throws Exception {
 			createMemberControl.createMemberAccount(DUMMY_USERNAME, DUMMY_PASSWORD, DUMMY_FIRSTNAME, DUMMY_LASTNAME);
 			loginControl.processMemberLogin(DUMMY_USERNAME, DUMMY_PASSWORD);
-		}
-	
-		@After
-		public void tearDown() throws Exception {
-			dataManager.removeMember(DUMMY_USERNAME);
-			ArrayList<MovieObject> movie = dataManager.getMoviesByKeywords(title, releaseYear, releaseYear, genre, length, length);
-			dataManager.removeMovie(movie.get(0).getMovieId());
-			// TEMP: change once getMoviesByKeywords() is finished
-			//dataManager.removeMovie(1);
 		}
 		
 		@Test
