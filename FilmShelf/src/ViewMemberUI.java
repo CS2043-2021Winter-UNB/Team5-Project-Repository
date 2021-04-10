@@ -22,10 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ViewMemberUI extends JPanel {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private ViewMemberControl viewMemberControl;
 	private LoginControl loginControl;

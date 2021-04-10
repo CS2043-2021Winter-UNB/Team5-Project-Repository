@@ -45,7 +45,7 @@ public class Main {
 		RemoveReviewUI removeReviewUI = new RemoveReviewUI(removeReviewControl);
 		
 		ViewReviewControl viewReviewControl = new ViewReviewControl(dm);
-		ViewReviewUI viewReviewUI = new ViewReviewUI(viewReviewControl, removeReviewUI, loginControl);
+		ViewReviewUI viewReviewUI = new ViewReviewUI(viewReviewControl, removeReviewUI, viewMemberUI,loginControl);
 		
 		SearchMovieControl searchMovieControl = new SearchMovieControl(dm);
 		SearchMovieUI searchMovieUI = new SearchMovieUI(searchMovieControl);

@@ -13,18 +13,19 @@ public class RemoveReviewUI extends JPanel {
 	}
 
 
-	public void displayRemoveReviewWarning(String username, int reviewId) {
+	public boolean displayRemoveReviewWarning(String username, int reviewId) {
 		int response=JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this review?","Remove Confirm",JOptionPane.YES_NO_OPTION);
+		boolean removed = false;
 		if(response==JOptionPane.YES_OPTION) {
-			removeReviewControl.processRemoveReview(username,reviewId);
-			displayRemoveReviewConfirmation();
+			removed = removeReviewControl.processRemoveReview(username,reviewId);	
 		}
 		else if(response==JOptionPane.NO_OPTION){
 			
 		}
+		return removed;
 	}
 
 	public void displayRemoveReviewConfirmation() {
-		JOptionPane.showMessageDialog(null,"Account Removed.");
+		JOptionPane.showMessageDialog(null,"Review Removed.");
 	}
 }

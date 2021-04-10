@@ -36,7 +36,7 @@ public class ViewMovieUI extends JPanel {
 	private JLabel labelReview3;
 	private JLabel labelReview4;
 	private JLabel labelReview5;
-	int movieID;
+	private int movieID;
 	private JButton rateButton;
 	private RateMovieUI rateMovie;
 	private MemberObject member;
