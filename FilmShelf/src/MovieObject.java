@@ -46,4 +46,12 @@ public class MovieObject {
 		return movieId;
 	}
 	
+	public String toString() {
+		return "Title: " + title + "\n" +
+				"Year: " + year + "\n" +
+				"Genre: " + genre + "\n" +
+				"Length: " + length + "\n" +
+				"Average rating: " + averageRating + "\n" +
+				"movieId: " + movieId;
+	}
 }
