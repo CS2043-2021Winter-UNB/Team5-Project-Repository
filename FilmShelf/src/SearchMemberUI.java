@@ -51,6 +51,7 @@ public class SearchMemberUI extends JPanel {
 		add(lblNewLabel, gbc_lblNewLabel);
 		
 		textFieldSearch = new JTextField();
+		textFieldSearch.setDocument(new LengthRestrictedDocument(25));
 		textFieldSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				enterMemberAccountName();
