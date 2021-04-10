@@ -90,6 +90,7 @@ public class SearchMovieUI extends JPanel {
 		add(titleLabel, gbc_titleLabel);
 		
 		titleSearchField = new JTextField();
+		titleSearchField.setDocument(new LengthRestrictedDocument(150));
 		GridBagConstraints gbc_textFieldSearch = new GridBagConstraints();
 		gbc_textFieldSearch.gridwidth = 5;
 		gbc_textFieldSearch.insets = new Insets(0, 0, 5, 5);

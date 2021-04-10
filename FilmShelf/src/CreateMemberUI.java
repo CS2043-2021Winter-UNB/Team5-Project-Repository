@@ -50,6 +50,7 @@ public class CreateMemberUI extends JPanel {
 		
 		//Username textfield
 		textFieldUsername = new JTextField();
+		textFieldUsername.setDocument(new LengthRestrictedDocument(25));
 		//tooltip to show username requirements
 		textFieldUsername.setToolTipText("6-25 characters, no special symbols");
 		GridBagConstraints gbc_textFieldUsername = new GridBagConstraints();
@@ -72,6 +73,7 @@ public class CreateMemberUI extends JPanel {
 		
 		//Password field
 		passwordField = new JPasswordField();
+		passwordField.setDocument(new LengthRestrictedDocument(25));
 		passwordField.setToolTipText("8 characters minimum, contain uppercase letter, lowercase letter, number, special character");
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.gridwidth = 3;
@@ -106,6 +108,7 @@ public class CreateMemberUI extends JPanel {
 		
 		//First name textfield
 		textFieldFirstName = new JTextField();
+		textFieldFirstName.setDocument(new LengthRestrictedDocument(25));
 		GridBagConstraints gbc_textFieldFirstName = new GridBagConstraints();
 		gbc_textFieldFirstName.gridwidth = 3;
 		gbc_textFieldFirstName.insets = new Insets(0, 0, 5, 5);
@@ -125,6 +128,7 @@ public class CreateMemberUI extends JPanel {
 		
 		//Last name textfield
 		textFieldLastName = new JTextField();
+		textFieldLastName.setDocument(new LengthRestrictedDocument(25));
 		GridBagConstraints gbc_textFieldLastName = new GridBagConstraints();
 		gbc_textFieldLastName.gridwidth = 3;
 		gbc_textFieldLastName.insets = new Insets(0, 0, 5, 5);

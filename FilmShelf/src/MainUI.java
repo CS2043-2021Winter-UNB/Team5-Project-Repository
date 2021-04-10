@@ -1,4 +1,9 @@
 
+/******************************************************************************************************************************
+ * MainUI
+ * @author Sharon, Alejandra, Jo
+ * Description:	This class is the main JFrame that hosts the use case JPanels. 
+ ******************************************************************************************************************************/
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;

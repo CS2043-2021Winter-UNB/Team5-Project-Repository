@@ -68,6 +68,7 @@ public class LoginUI extends JPanel {
 		
 		//Username text field
 		textFieldUsername = new JTextField();
+		textFieldUsername.setDocument(new LengthRestrictedDocument(25));
 		GridBagConstraints gbc_textFieldUsername = new GridBagConstraints();
 		gbc_textFieldUsername.gridwidth = 6;
 		gbc_textFieldUsername.insets = new Insets(0, 0, 5, 5);
@@ -89,6 +90,7 @@ public class LoginUI extends JPanel {
 		
 		//Password field
 		passwordField = new JPasswordField();
+		passwordField.setDocument(new LengthRestrictedDocument(25));
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.gridwidth = 6;
 		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
