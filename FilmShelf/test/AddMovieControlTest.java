@@ -131,6 +131,11 @@ public class AddMovieControlTest {
 			loginControl.processMemberLogin(DUMMY_USERNAME, DUMMY_PASSWORD);
 		}
 		
+		@After
+		public void tearDown() throws Exception {
+			dataManager.removeMember(DUMMY_USERNAME);
+		}
+		
 		@Test
 		public void testInvalidInput() {
 			Assume.assumeTrue(type == Type.INVALID);
