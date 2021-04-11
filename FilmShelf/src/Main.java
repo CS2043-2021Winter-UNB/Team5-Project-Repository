@@ -41,12 +41,11 @@ public class Main {
 		
 		RemoveReviewControl removeReviewControl = new RemoveReviewControl(dm, loginControl);
 		RemoveReviewUI removeReviewUI = new RemoveReviewUI(removeReviewControl);
-    
-		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI,loginControl,addReviewUI,rateMovieUI,viewReviewUI);
-
 		
 		ViewReviewControl viewReviewControl = new ViewReviewControl(dm);
 		ViewReviewUI viewReviewUI = new ViewReviewUI(viewReviewControl, removeReviewUI, viewMemberUI,loginControl);
+    
+		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI,loginControl,addReviewUI,rateMovieUI,viewReviewUI);
 		
 		SearchMovieControl searchMovieControl = new SearchMovieControl(dm);
 		SearchMovieUI searchMovieUI = new SearchMovieUI(searchMovieControl, viewMovieUI);

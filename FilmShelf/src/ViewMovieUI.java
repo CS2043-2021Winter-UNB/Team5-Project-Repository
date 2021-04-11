@@ -200,7 +200,7 @@ public class ViewMovieUI extends JPanel {
 		viewReviewButton = new JButton("View Reviews");
 		viewReviewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			//viewReviewUI.displayLeaveReviewForm(movieID);
+				viewReviewUI.displayReview(title,movieID);
 			}
 		});
 		GridBagConstraints gbc_viewReviewButton = new GridBagConstraints();

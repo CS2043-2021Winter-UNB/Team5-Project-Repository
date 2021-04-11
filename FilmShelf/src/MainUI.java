@@ -79,6 +79,7 @@ public class MainUI extends JFrame {
 		uiPanelList.add(searchMovieUI);
 		uiPanelList.add(addReviewUI);
 		uiPanelList.add(viewMovieUI);
+		uiPanelList.add(uiViewReview);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
