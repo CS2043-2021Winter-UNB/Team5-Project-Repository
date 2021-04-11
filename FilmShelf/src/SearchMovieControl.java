@@ -81,7 +81,7 @@ public class SearchMovieControl {
 			return false;
 		}
 		
-		if((lengthLowerLimit > lengthUpperLimit) || (lengthLowerLimit < 0) || (lengthUpperLimit < 0)) {
+		if((lengthLowerLimit > lengthUpperLimit) || (lengthLowerLimit < -1) || (lengthUpperLimit < -1)) {
 			return false;
 		}
 		

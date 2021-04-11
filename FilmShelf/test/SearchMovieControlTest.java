@@ -44,23 +44,23 @@ public class SearchMovieControlTest {
 			{Type.VALID, "", 1986, 1986, "Select a genre", -1, -1},								// test expected valid input with only year
 			{Type.VALID, "", -1, -1, "Comedy", -1, -1},											// test expected valid input with only genre
 			{Type.VALID, "", -1, -1, "Select a genre", 103, 103},								// test expected valid input with only length
-			{Type.INVALID, "Die Hard", 1986, 1986, "Comedy", 103, 103},					// test invalid input with wrong title
+			{Type.INVALID, "Die Hard", 1986, 1986, "Comedy", 103, 103},						// test invalid input with wrong title
 			{Type.INVALID, "Ferris Bueller's Day OffFerris Bueller's Day OffFerris Bueller's Day OffFerris Bueller's Day OffFerris Bueller's Day OffFerris Bueller's Day OffFerris Bueller's Day Off",
-				1986, 1986, "Comedy", 103, 103},										// test invalid input with title > 150 characters
-			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1986, "Action", 103, 103},	// test invalid input with wrong genre
-			{Type.INVALID, "Ferris Bueller's Day Off", -100, -100, "Comedy", 103, 103},	// test invalid input with invalid year
-			{Type.INVALID, "Ferris Bueller's Day Off", 2020, 1980, "Comedy", 103, 103},	// test invalid input with year range: high, low
-			{Type.INVALID, "Ferris Bueller's Day Off", 1967, 1980, "Comedy", 103, 103},	// test invalid input with year range: low, low
-			{Type.INVALID, "Ferris Bueller's Day Off", 2000, 2021, "Comedy", 103, 103},	// test invalid input with year range: high, high
-			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1980, "Comedy", 103, 103},	// test invalid input with year range: exact, low
-			{Type.INVALID, "Ferris Bueller's Day Off", 2020, 1986, "Comedy", 103, 103},	// test invalid input with year range: high, exact
-			{Type.INVALID, "Ferris Bueller's Day Off", 2020, -1, "Comedy", 103, 103},	// test invalid input with year range: high, -1
-			{Type.INVALID, "Ferris Bueller's Day Off", -1, 1980, "Comedy", 103, 103},	// test invalid input with year range: -1, low
-			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1986, "Comedy", 120, 30},	// test invalid input with length range: high, low
-			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1986, "Comedy", 30, 30},	// test invalid input with length range: low, low
-			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1986, "Comedy", 120, 120},	// test invalid input with length range: high, high
-			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1986, "Comedy", 103, 30},	// test invalid input with length range: exact, low
-			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1986, "Comedy", 120, 103}	// test invalid input with length range: high, exact			
+				1986, 1986, "Comedy", 103, 103},											// test invalid input with title > 150 characters
+			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1986, "Action", 103, 103},		// test invalid input with wrong genre
+			{Type.INVALID, "Ferris Bueller's Day Off", -100, -100, "Comedy", 103, 103},		// test invalid input with invalid year
+			{Type.INVALID, "Ferris Bueller's Day Off", 2020, 1980, "Comedy", 103, 103},		// test invalid input with year range: high, low
+			{Type.INVALID, "Ferris Bueller's Day Off", 1967, 1980, "Comedy", 103, 103},		// test invalid input with year range: low, low
+			{Type.INVALID, "Ferris Bueller's Day Off", 2000, 2021, "Comedy", 103, 103},		// test invalid input with year range: high, high
+			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1980, "Comedy", 103, 103},		// test invalid input with year range: exact, low
+			{Type.INVALID, "Ferris Bueller's Day Off", 2020, 1986, "Comedy", 103, 103},		// test invalid input with year range: high, exact
+			{Type.INVALID, "Ferris Bueller's Day Off", 2020, -1, "Comedy", 103, 103},		// test invalid input with year range: high, -1
+			{Type.INVALID, "Ferris Bueller's Day Off", -1, 1980, "Comedy", 103, 103},		// test invalid input with year range: -1, low
+			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1986, "Comedy", 120, 30},		// test invalid input with length range: high, low
+			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1986, "Comedy", 30, 30},		// test invalid input with length range: low, low
+			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1986, "Comedy", 120, 120},		// test invalid input with length range: high, high
+			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1986, "Comedy", 103, 30},		// test invalid input with length range: exact, low
+			{Type.INVALID, "Ferris Bueller's Day Off", 1986, 1986, "Comedy", 120, 103}		// test invalid input with length range: high, exact			
 		});
 	}
 	
@@ -112,7 +112,6 @@ public class SearchMovieControlTest {
 		MovieObject testMovie = null;
 		
 		for(MovieObject movie : movieList) {
-			System.out.println(movie.toString());
 			if(movie.equals(expectedMovie)) {
 				testMovie = movie;
 			}
@@ -138,7 +137,6 @@ public class SearchMovieControlTest {
 			MovieObject testMovie = null;
 			
 			for(MovieObject movie : movieList) {
-				System.out.println(movie.toString());
 				if(movie.equals(expectedMovie)) {
 					testMovie = movie;
 				}
