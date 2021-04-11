@@ -29,36 +29,33 @@ public class ViewMovieUI extends JPanel {
 	private JButton buttonRemoveMovie;
 	private LoginControl loginControl;
 	private JButton reviewButton;
-	private JLayeredPane layeredPane;
-	private JLabel labelTopReviews;
-	private JLabel labelReview1;
-	private JLabel labelReview2;
-	private JLabel labelReview3;
-	private JLabel labelReview4;
-	private JLabel labelReview5;
 	private int movieID;
+
 	private JButton rateButton;
 	private RateMovieUI rateMovie;
 	private MemberObject member;
-	private MovieObject movie;
 	private JLayeredPane layeredPane_1;
+	double rating;
+	private JButton viewReviewButton;
+	private String title;
+	private ViewReviewUI viewReviewUI;
 	
 	/**
 	 * Create the panel.
 	 */
-	public ViewMovieUI(ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie, LoginControl controlLogin, AddReviewUI uiAddReview,RateMovieUI uiRateMovie) {
+	public ViewMovieUI(ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie, LoginControl controlLogin, AddReviewUI uiAddReview,RateMovieUI uiRateMovie, ViewReviewUI uiViewReview) {
 		viewMovieControl = controlViewMovie;
 		removeMovieUI = uiRemoveMovie;
 		loginControl = controlLogin;
 		addReviewUI = uiAddReview;
 		rateMovie=uiRateMovie;
-		
+		viewReviewUI=uiViewReview;
 		setVisible(false);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 190, 0, 0, 0, 0, 0, 0, 113, 0, 0};
+		gridBagLayout.columnWidths = new int[]{0, 44, 190, 0, 0, 0, 0, 0, 0, 0, 113, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 133, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -74,7 +71,7 @@ public class ViewMovieUI extends JPanel {
 		
 		buttonRemoveMovie.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_buttonRemoveMovie = new GridBagConstraints();
-		gbc_buttonRemoveMovie.gridwidth = 2;
+		gbc_buttonRemoveMovie.gridwidth = 3;
 		gbc_buttonRemoveMovie.insets = new Insets(0, 0, 5, 5);
 		gbc_buttonRemoveMovie.gridx = 8;
 		gbc_buttonRemoveMovie.gridy = 1;
@@ -103,7 +100,7 @@ public class ViewMovieUI extends JPanel {
 			}
 		});
 		GridBagConstraints gbc_rateButton = new GridBagConstraints();
-		gbc_rateButton.gridwidth = 2;
+		gbc_rateButton.gridwidth = 3;
 		gbc_rateButton.insets = new Insets(0, 0, 5, 5);
 		gbc_rateButton.gridx = 8;
 		gbc_rateButton.gridy = 2;
@@ -128,11 +125,12 @@ public class ViewMovieUI extends JPanel {
 		reviewButton = new JButton("Review Movie");
 		reviewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			addReviewUI.displayLeaveReviewForm(movieID);
+			addReviewUI.displayLeaveReviewForm(movieID,title);
+			setVisible(false);
 			}
 		});
 		GridBagConstraints gbc_reviewButton = new GridBagConstraints();
-		gbc_reviewButton.gridwidth = 2;
+		gbc_reviewButton.gridwidth = 3;
 		gbc_reviewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_reviewButton.gridx = 8;
 		gbc_reviewButton.gridy = 3;
@@ -170,73 +168,16 @@ public class ViewMovieUI extends JPanel {
 		gbc_labelShowLength.gridy = 5;
 		add(labelShowLength, gbc_labelShowLength);
 		
-		layeredPane = new JLayeredPane();
-		GridBagConstraints gbc_layeredPane = new GridBagConstraints();
-		gbc_layeredPane.gridwidth = 7;
-		gbc_layeredPane.insets = new Insets(0, 0, 5, 5);
-		gbc_layeredPane.fill = GridBagConstraints.BOTH;
-		gbc_layeredPane.gridx = 2;
-		gbc_layeredPane.gridy = 7;
-		add(layeredPane, gbc_layeredPane);
-		GridBagLayout gbl_layeredPane = new GridBagLayout();
-		gbl_layeredPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 148, 0};
-		gbl_layeredPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_layeredPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_layeredPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		layeredPane.setLayout(gbl_layeredPane);
-		
-		labelTopReviews = new JLabel("Top Reviews");
-		GridBagConstraints gbc_labelTopReviews = new GridBagConstraints();
-		gbc_labelTopReviews.gridwidth = 2;
-		gbc_labelTopReviews.insets = new Insets(0, 0, 5, 5);
-		gbc_labelTopReviews.gridx = 4;
-		gbc_labelTopReviews.gridy = 0;
-		layeredPane.add(labelTopReviews, gbc_labelTopReviews);
-		
-		labelReview1 = new JLabel("");
-		GridBagConstraints gbc_labelReview1 = new GridBagConstraints();
-		gbc_labelReview1.insets = new Insets(0, 0, 5, 0);
-		gbc_labelReview1.gridx = 6;
-		gbc_labelReview1.gridy = 1;
-		layeredPane.add(labelReview1, gbc_labelReview1);
-		
-		labelReview2 = new JLabel("");
-		GridBagConstraints gbc_labelReview2 = new GridBagConstraints();
-		gbc_labelReview2.insets = new Insets(0, 0, 5, 0);
-		gbc_labelReview2.gridx = 6;
-		gbc_labelReview2.gridy = 2;
-		layeredPane.add(labelReview2, gbc_labelReview2);
-		
-		labelReview3 = new JLabel("");
-		GridBagConstraints gbc_labelReview3 = new GridBagConstraints();
-		gbc_labelReview3.insets = new Insets(0, 0, 5, 0);
-		gbc_labelReview3.gridx = 6;
-		gbc_labelReview3.gridy = 3;
-		layeredPane.add(labelReview3, gbc_labelReview3);
-		
-		labelReview4 = new JLabel("");
-		GridBagConstraints gbc_labelReview4 = new GridBagConstraints();
-		gbc_labelReview4.insets = new Insets(0, 0, 5, 0);
-		gbc_labelReview4.gridx = 6;
-		gbc_labelReview4.gridy = 4;
-		layeredPane.add(labelReview4, gbc_labelReview4);
-		
-		labelReview5 = new JLabel("");
-		GridBagConstraints gbc_labelReview5 = new GridBagConstraints();
-		gbc_labelReview5.gridx = 6;
-		gbc_labelReview5.gridy = 5;
-		layeredPane.add(labelReview5, gbc_labelReview5);
-		
 		layeredPane_1 = new JLayeredPane();
 		GridBagConstraints gbc_layeredPane_1 = new GridBagConstraints();
 		gbc_layeredPane_1.insets = new Insets(0, 0, 5, 5);
 		gbc_layeredPane_1.fill = GridBagConstraints.BOTH;
-		gbc_layeredPane_1.gridx = 9;
+		gbc_layeredPane_1.gridx = 2;
 		gbc_layeredPane_1.gridy = 7;
 		add(layeredPane_1, gbc_layeredPane_1);
 		GridBagLayout gbl_layeredPane_1 = new GridBagLayout();
 		gbl_layeredPane_1.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_layeredPane_1.rowHeights = new int[]{0, 0, 0};
+		gbl_layeredPane_1.rowHeights = new int[]{0, 54, 0};
 		gbl_layeredPane_1.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_layeredPane_1.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		layeredPane_1.setLayout(gbl_layeredPane_1);
@@ -248,38 +189,68 @@ public class ViewMovieUI extends JPanel {
 		gbc_movieRateLabel.gridy = 0;
 		layeredPane_1.add(movieRateLabel, gbc_movieRateLabel);
 		
-		//JLabel rateLabelnum = new JLabel(""+movie.getAverageRating());
-		JLabel rateLabelnum = new JLabel("");
+		//JLabel rateLabelnum = new JLabel(""+movie.getRatingScore());
+		JLabel rateLabelnum = new JLabel(""+rating);
 		GridBagConstraints gbc_rateLabelnum = new GridBagConstraints();
 		gbc_rateLabelnum.insets = new Insets(0, 0, 0, 5);
 		gbc_rateLabelnum.gridx = 1;
 		gbc_rateLabelnum.gridy = 1;
 		layeredPane_1.add(rateLabelnum, gbc_rateLabelnum);
+		
+		viewReviewButton = new JButton("View Reviews");
+		viewReviewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			//viewReviewUI.displayLeaveReviewForm(movieID);
+			}
+		});
+		GridBagConstraints gbc_viewReviewButton = new GridBagConstraints();
+		gbc_viewReviewButton.insets = new Insets(0, 0, 5, 5);
+		gbc_viewReviewButton.gridx = 9;
+		gbc_viewReviewButton.gridy = 7;
+		add(viewReviewButton, gbc_viewReviewButton);
+
 	}
 	
 	
 	public void displayMovie(MovieObject movie) {
 		this.movieID=movie.getMovieId();
 		this.member=loginControl.getCurrentMember();
+		this.rating=movie.getAverageRating();
+		this.title=movie.getTitle();
 		labelShowTitle.setText(movie.getTitle());
 		labelShowReleaseYear.setText(""+movie.getYear());
 		labelShowGenre.setText(movie.getGenre());
 		labelShowLength.setText(""+movie.getLength());
-		
-		/*ArrayList<ReviewObject> topReviews = movie.getTopMovies();
-		int i;
-		for (i = 0; i < 5; i++) {
-			if (i < topMovies.size()) {
-				labelMovies[i].setText(topMovies.get(i).getTitle()); // add movie name			
-			}
-			else {                          
-				labelMovies[i].setText(""); //clear any unused movie labels to make sure previous results are gone
-			}
+	
+		//check if remove member button should be displayed.
+		//It should be displayed if the actor is an administrator or they are viewing their own member account.
+		MemberObject logInMember = loginControl.getCurrentMember();
+		boolean memberMatch = false;
+		if (logInMember != null)
+		{
+			memberMatch = logInMember.getUsername().equals(member.getUsername());
 		}
-		*/
-		if ((loginControl.getCurrentAdmin() != null)){
+
+		boolean adminCheck = (loginControl.getCurrentAdmin() != null);
+
+		if (adminCheck){
 			buttonRemoveMovie.setVisible(true);
+			reviewButton.setVisible(true);
+			rateButton.setVisible(true);
+
 		}
+		else if (memberMatch) {
+			buttonRemoveMovie.setVisible(false);
+			reviewButton.setVisible(true);
+			rateButton.setVisible(true);
+		}
+		else
+		{
+			buttonRemoveMovie.setVisible(false);
+			reviewButton.setVisible(false);
+			rateButton.setVisible(false);
+		}
+		
 		setVisible(true);
 	}
 }

@@ -61,6 +61,7 @@ public class AddMovieUI extends JPanel {
 		
 		//Title textfield
 		textFieldTitle = new JTextField();
+		textFieldTitle.setDocument(new LengthRestrictedDocument(150));
 		GridBagConstraints gbc_textFieldTitle = new GridBagConstraints();
 		gbc_textFieldTitle.gridwidth = 4;
 		gbc_textFieldTitle.insets = new Insets(0, 0, 5, 5);
