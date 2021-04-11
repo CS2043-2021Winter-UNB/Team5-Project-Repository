@@ -255,19 +255,6 @@ public class MainUI extends JFrame {
           gbc_buttonSearchMovie.gridx = 0;
           gbc_buttonSearchMovie.gridy = 2;
           panelAccountButtons.add(buttonSearchMovie, gbc_buttonSearchMovie);
-          
-          buttonViewReviews = new JButton("View Reviews");
-          buttonViewReviews.addActionListener(new ActionListener() {
-          	public void actionPerformed(ActionEvent e) {
-          		viewReviewUI.displayReview("Minari",7);
-          	}
-          });
-
-          GridBagConstraints gbc_buttonViewReviews = new GridBagConstraints();
-          gbc_buttonViewReviews.insets = new Insets(0, 0, 0, 5);
-          gbc_buttonViewReviews.gridx = 5;
-          gbc_buttonViewReviews.gridy = 1;
-          mainPane.add(buttonViewReviews, gbc_buttonViewReviews);
         
         panel_1 = new JPanel();
         GridBagConstraints gbc_panel_1 = new GridBagConstraints();
