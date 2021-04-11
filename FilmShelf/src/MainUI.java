@@ -43,6 +43,12 @@ public class MainUI extends JFrame {
 	private JButton buttonSearchMovie;
 	private ActionListener listenerCreateAccount;
 	private List<JPanel> uiPanelList;
+	private JPanel panel_1;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_4;
 
 	// Create the frame.
 	public MainUI(LoginUI uiLog, LoginControl controlLog, 
@@ -83,9 +89,9 @@ public class MainUI extends JFrame {
 		//int width = 60;
         GridBagLayout gbl_mainPane = new GridBagLayout();
         gbl_mainPane.columnWidths = new int[]{148, 18, 0, 14, 0, 117, 11, 0};
-        gbl_mainPane.rowHeights = new int[]{79, 357, 0};
-        gbl_mainPane.columnWeights = new double[]{5.0, 5.0, 0.0, 1.0, 0.0, 6.0, 6.0, Double.MIN_VALUE};
-        gbl_mainPane.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+        gbl_mainPane.rowHeights = new int[]{79, 0, 0, 0, 357, 0};
+        gbl_mainPane.columnWeights = new double[]{5.0, 5.0, 1.0, 1.0, 0.0, 6.0, 6.0, Double.MIN_VALUE};
+        gbl_mainPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
         mainPane.setLayout(gbl_mainPane);
         
         //adding UI into panel to the main window
@@ -243,6 +249,60 @@ public class MainUI extends JFrame {
         gbc_buttonSearchMovie.gridx = 0;
         gbc_buttonSearchMovie.gridy = 2;
         panelAccountButtons.add(buttonSearchMovie, gbc_buttonSearchMovie);
+        
+        panel_1 = new JPanel();
+        GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+        gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+        gbc_panel_1.fill = GridBagConstraints.BOTH;
+        gbc_panel_1.gridx = 2;
+        gbc_panel_1.gridy = 1;
+        mainPane.add(panel_1, gbc_panel_1);
+        GridBagLayout gbl_panel_1 = new GridBagLayout();
+        gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
+        gbl_panel_1.rowHeights = new int[]{0, 0};
+        gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+        panel_1.setLayout(gbl_panel_1);
+        
+        lblNewLabel = new JLabel("✭ ");
+        lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+        gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
+        gbc_lblNewLabel.gridx = 0;
+        gbc_lblNewLabel.gridy = 0;
+        panel_1.add(lblNewLabel, gbc_lblNewLabel);
+        
+        lblNewLabel_2 = new JLabel("✭ ");
+        lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+        gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
+        gbc_lblNewLabel_2.gridx = 1;
+        gbc_lblNewLabel_2.gridy = 0;
+        panel_1.add(lblNewLabel_2, gbc_lblNewLabel_2);
+        
+        lblNewLabel_1 = new JLabel("✭ ");
+        lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+        gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 5);
+        gbc_lblNewLabel_1.gridx = 2;
+        gbc_lblNewLabel_1.gridy = 0;
+        panel_1.add(lblNewLabel_1, gbc_lblNewLabel_1);
+        
+        lblNewLabel_4 = new JLabel("✭ ");
+        lblNewLabel_4.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
+        gbc_lblNewLabel_4.insets = new Insets(0, 0, 0, 5);
+        gbc_lblNewLabel_4.gridx = 3;
+        gbc_lblNewLabel_4.gridy = 0;
+        panel_1.add(lblNewLabel_4, gbc_lblNewLabel_4);
+        
+        lblNewLabel_3 = new JLabel("✭ ");
+        lblNewLabel_3.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+        gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
+        gbc_lblNewLabel_3.gridx = 4;
+        gbc_lblNewLabel_3.gridy = 0;
+        panel_1.add(lblNewLabel_3, gbc_lblNewLabel_3);
     
         //searchMovieUI.setVisible(true);
         pack();
@@ -282,6 +342,8 @@ public class MainUI extends JFrame {
 	        	public void actionPerformed(ActionEvent e) {
 	        		addMovieUI.displayAddMovieForm();
 	        		searchMemberUI.setVisible(false);
+	        		searchMovieUI.setVisible(false);
+	        		viewMovieUI.setVisible(false);
 	        	}
 	        });
 		}
@@ -301,6 +363,11 @@ public class MainUI extends JFrame {
 			//viewMemberUI was used to remove and log the user out, change viewMemberUI to not visible
 			viewMemberUI.setVisible(false);
 		}
+	}
+	
+	public void changeMovieButtons() {
+		//
+		viewMovieUI.setVisible(false);
 	}
 	
 	private void setAllPanelVisibilityFalse() {
