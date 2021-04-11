@@ -19,7 +19,7 @@ public class AddReviewUI extends JPanel {
 		private AddReviewControl leaveReviewControl;
 		private JLabel labelAddReview;
 		int movieId;
-		private MovieObject movie;
+		String movieTitle;
 		/**
 		 * Create the panel.
 		 */
@@ -35,10 +35,10 @@ public class AddReviewUI extends JPanel {
 			
 			//Title label
 			
-			JLabel labelReview = new JLabel("Add review for the movie below:");
+			JLabel labelReview = new JLabel("Add review for [ "+movieTitle+" ] below:");
 			labelReview.setHorizontalAlignment(SwingConstants.LEFT);
 			GridBagConstraints gbc_labelReview = new GridBagConstraints();
-			gbc_labelReview.gridwidth = 5;
+			gbc_labelReview.gridwidth = 2;
 			gbc_labelReview.insets = new Insets(0, 0, 5, 5);
 			gbc_labelReview.gridx = 1;
 			gbc_labelReview.gridy = 1;
@@ -59,7 +59,13 @@ public class AddReviewUI extends JPanel {
 			JButton buttonAddReview = new JButton("Add Review");
 			buttonAddReview.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
-					leaveReviewControl.processAddReview(movieId,textArea.getText());
+					if(leaveReviewControl.processAddReview(movieId,textArea.getText())==true) {
+						displayLeaveReviewConfirmation();
+						leaveReviewControl.processAddReview(movieId,textArea.getText());
+					}
+					else {
+						displayErrorMessage();
+					}
 				}
 			});
 			GridBagConstraints gbc_buttonAddReview = new GridBagConstraints();
@@ -78,13 +84,13 @@ public class AddReviewUI extends JPanel {
 			
 			setVisible(false);
 		}
-	public void displayLeaveReviewForm(int movieID) {
+	public void displayLeaveReviewForm(int movieID,String titleIn) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		//display the form
-		movieId=movieID;
+		this.movieTitle=titleIn;
+		this.movieId=movieID;
 		setVisible(true);
-		// end-user-code
 	}
 
 	public void displayLeaveReviewConfirmation() {

@@ -32,6 +32,7 @@ public class MainUI extends JFrame {
 	private CreateMemberUI createMemberUI;
 	private EditMemberUI editMemberUI;
 	private SearchMemberUI searchMemberUI;
+	private AddReviewUI addReviewUI;
 	private ViewMemberUI viewMemberUI;
 	private AddMovieUI addMovieUI;
 	private SearchMovieUI searchMovieUI;
@@ -46,7 +47,7 @@ public class MainUI extends JFrame {
 	// Create the frame.
 	public MainUI(LoginUI uiLog, LoginControl controlLog, 
                 CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount, SearchMemberUI uiSearch,
-                AddMovieUI uiAddMovie, SearchMovieUI uiSearchMovie, ViewMovieUI uiViewMovie) {
+                AddMovieUI uiAddMovie, SearchMovieUI uiSearchMovie, AddReviewUI uiAddReview, ViewMovieUI uiViewMovie) {
 		//save the UI classes
 		loginUI = uiLog;
 		loginControl = controlLog;
@@ -56,6 +57,7 @@ public class MainUI extends JFrame {
 		viewMemberUI = uiViewAccount;
 		addMovieUI = uiAddMovie;
 		searchMovieUI = uiSearchMovie;
+		addReviewUI = uiAddReview;
 		viewMovieUI = uiViewMovie;
 		
 		uiPanelList = new ArrayList<JPanel>();
@@ -66,6 +68,7 @@ public class MainUI extends JFrame {
 		uiPanelList.add(viewMemberUI);
 		uiPanelList.add(addMovieUI);
 		uiPanelList.add(searchMovieUI);
+		uiPanelList.add(addReviewUI);
 		uiPanelList.add(viewMovieUI);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,6 +104,7 @@ public class MainUI extends JFrame {
         mainPane.add(addMovieUI, gbc_Panel);
         mainPane.add(searchMovieUI, gbc_Panel);
         mainPane.add(viewMovieUI, gbc_Panel);
+        mainPane.add(addReviewUI, gbc_Panel);
  	     
 	    //Extra button
         JButton btnNewButton_2 = new JButton("back to FilmShelf");
@@ -240,7 +244,7 @@ public class MainUI extends JFrame {
         gbc_buttonSearchMovie.gridy = 2;
         panelAccountButtons.add(buttonSearchMovie, gbc_buttonSearchMovie);
     
-        searchMovieUI.setVisible(true);
+        //searchMovieUI.setVisible(true);
         pack();
 	}
 	
