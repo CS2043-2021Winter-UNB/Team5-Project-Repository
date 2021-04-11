@@ -56,5 +56,7 @@ public class Main {
 		mainUI.setVisible(true);
 		loginUI.setMain(mainUI);
 		removeMemberUI.setMain(mainUI);
+		removeMovieUI.setMain(mainUI);
+		
 	}
 }
