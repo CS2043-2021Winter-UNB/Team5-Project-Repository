@@ -7,17 +7,25 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Toolkit;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Graphics;
+
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 /******************************************************************************************************************************
  * MainUI
@@ -50,7 +58,10 @@ public class MainUI extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
-
+	private JLabel labelBackground;
+    private Image img = Toolkit.getDefaultToolkit().getImage("C:\\Users\\wonde\\Downloads\\dLB5ai0-blue-gradient-wallpaper.jpg");
+    private Color lightOrange = new Color(247,216,91);
+    
 	// Create the frame.
 	public MainUI(LoginUI uiLog, LoginControl controlLog, 
                 CreateMemberUI uiCreate, EditMemberUI uiMember, ViewMemberUI uiViewAccount, SearchMemberUI uiSearch,
@@ -86,10 +97,17 @@ public class MainUI extends JFrame {
 	    setSize(751, 521);
 		
 	    //MAIN PANE
-	    mainPane = new JPanel();
-	    
+	    mainPane = new JPanel(){
+	         @Override
+	         public void paintComponent(Graphics g) {
+	            super.paintComponent(g);
+	            g.drawImage(img, 0, 0, null);
+	         }
+	      };   
 		mainPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(mainPane);
+		
+		
 		//int width = 60;
         GridBagLayout gbl_mainPane = new GridBagLayout();
         gbl_mainPane.columnWidths = new int[]{148, 18, 0, 14, 0, 117, 11, 0};
@@ -101,10 +119,11 @@ public class MainUI extends JFrame {
         //adding UI into panel to the main window
         GridBagConstraints gbc_Panel = new GridBagConstraints();
         gbc_Panel.gridwidth = 6;
-        gbc_Panel.gridheight = 4;
+        gbc_Panel.gridheight = 3;
         gbc_Panel.insets = new Insets(0, 0, 5, 5);
         gbc_Panel.gridx = 0;
-        gbc_Panel.gridy = 1;
+        gbc_Panel.gridy = 2;
+        
       
         mainPane.add(loginUI, gbc_Panel);
         mainPane.add(createMemberUI, gbc_Panel);
@@ -119,6 +138,7 @@ public class MainUI extends JFrame {
  	     
 	    //Extra button
         JButton btnNewButton_2 = new JButton("back to FilmShelf");
+        btnNewButton_2.setBackground(lightOrange);
 	    btnNewButton_2.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		setAllPanelVisibilityFalse();
@@ -142,6 +162,7 @@ public class MainUI extends JFrame {
         //TITLE
         JLabel labelFilmShelf = new JLabel("FilmShelf");
         labelFilmShelf.setFont(new Font("Tahoma", Font.BOLD, 50));
+        labelFilmShelf.setForeground(Color.WHITE);
         GridBagConstraints gbc_labelFilmShelf = new GridBagConstraints();
         gbc_labelFilmShelf.anchor = GridBagConstraints.WEST;
         gbc_labelFilmShelf.insets = new Insets(0, 0, 5, 5);
@@ -151,6 +172,7 @@ public class MainUI extends JFrame {
 	     
         //Panel for account buttons
         JPanel panelAccountButtons = new JPanel();
+        panelAccountButtons.setOpaque(false);
          
         GridBagConstraints gbc_panel2 = new GridBagConstraints();
         gbc_panel2.gridwidth = 2;
@@ -169,6 +191,7 @@ public class MainUI extends JFrame {
          
         //create account button
         buttonCreateAccount = new JButton("Create Account");
+        buttonCreateAccount.setBackground(lightOrange);
         listenerCreateAccount = new ActionListener() {
          	public void actionPerformed(ActionEvent e) {
         		/*loginUI.setVisible(false);
@@ -186,6 +209,7 @@ public class MainUI extends JFrame {
          
          //search account button
          buttonSearchAccount = new JButton("Search Account");
+         buttonSearchAccount.setBackground(lightOrange);
          buttonSearchAccount.addActionListener(new ActionListener() {
          	public void actionPerformed(ActionEvent e) {
          		/*loginUI.setVisible(false);
@@ -208,6 +232,7 @@ public class MainUI extends JFrame {
           
          //loginButton
          buttonLogin = new JButton("Login");
+         buttonLogin.setBackground(lightOrange);
          buttonLogin.setHorizontalAlignment(SwingConstants.RIGHT);
   
         buttonLogin.addActionListener(new ActionListener() {
@@ -238,6 +263,7 @@ public class MainUI extends JFrame {
         panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
           
         buttonSearchMovie = new JButton("Search Movie");
+        buttonSearchMovie.setBackground(lightOrange);
         buttonSearchMovie.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		/*loginUI.setVisible(false);
@@ -258,6 +284,7 @@ public class MainUI extends JFrame {
           panelAccountButtons.add(buttonSearchMovie, gbc_buttonSearchMovie);
         
         panel_1 = new JPanel();
+        panel_1.setOpaque(false);
         GridBagConstraints gbc_panel_1 = new GridBagConstraints();
         gbc_panel_1.insets = new Insets(0, 0, 5, 5);
         gbc_panel_1.fill = GridBagConstraints.BOTH;
@@ -273,6 +300,7 @@ public class MainUI extends JFrame {
         
         lblNewLabel = new JLabel("✭ ");
         lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        lblNewLabel.setForeground(Color.WHITE);
         GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
         gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
         gbc_lblNewLabel.gridx = 0;
@@ -281,6 +309,7 @@ public class MainUI extends JFrame {
         
         lblNewLabel_2 = new JLabel("✭ ");
         lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        lblNewLabel_2.setForeground(Color.WHITE);
         GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
         gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
         gbc_lblNewLabel_2.gridx = 1;
@@ -289,6 +318,7 @@ public class MainUI extends JFrame {
         
         lblNewLabel_1 = new JLabel("✭ ");
         lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        lblNewLabel_1.setForeground(Color.WHITE);
         GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
         gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 5);
         gbc_lblNewLabel_1.gridx = 2;
@@ -297,6 +327,7 @@ public class MainUI extends JFrame {
         
         lblNewLabel_4 = new JLabel("✭ ");
         lblNewLabel_4.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        lblNewLabel_4.setForeground(Color.WHITE);
         GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
         gbc_lblNewLabel_4.insets = new Insets(0, 0, 0, 5);
         gbc_lblNewLabel_4.gridx = 3;
@@ -305,11 +336,13 @@ public class MainUI extends JFrame {
         
         lblNewLabel_3 = new JLabel("✭ ");
         lblNewLabel_3.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        lblNewLabel_3.setForeground(Color.WHITE);
         GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
         gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
         gbc_lblNewLabel_3.gridx = 4;
         gbc_lblNewLabel_3.gridy = 0;
         panel_1.add(lblNewLabel_3, gbc_lblNewLabel_3);
+       
     
         //searchMovieUI.setVisible(true);
         pack();

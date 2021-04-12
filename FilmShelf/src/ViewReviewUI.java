@@ -111,16 +111,8 @@ public class ViewReviewUI extends JPanel {
 		
 		model = new DefaultListModel<String>();
 		list = new JList<String>(model);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-		ListSelectionListener listSelectionListener = new ListSelectionListener() {
-		    public void valueChanged(ListSelectionEvent listSelectionEvent) {
-		        int temp = list.getSelectedIndex();
-		        if (temp != selectedIndex) {
-		        	
-		        }
-		    }};
-		list.addListSelectionListener(listSelectionListener);
 		
 		//change the look of certain rows 
 		list.setCellRenderer(new DefaultListCellRenderer() {
@@ -137,22 +129,19 @@ public class ViewReviewUI extends JPanel {
 	            	  setFont(new Font ("Serif", Font.PLAIN, 12));
 	              }
 	              
-	              check++;
-	              System.out.println(check);
-	              
 	              //set username and review field to light blue if selected
-	              if (selectedIndex == index) {
+	              if (isSelected) {
 	                  setBackground(lightblue);   
 	                  //System.out.println("here1 " + getText());
 	              } 
-	              else if ((selectedIndex%2 == 0) && (index-selectedIndex) == 1) {
+	              /*else if ((selectedIndex%2 == 0) && (index-selectedIndex) == 1) {
 	            	  setBackground(lightblue);   
 	            	  //System.out.println("here2 " + getText());
 	              }
 	              else if ((selectedIndex%2 != 0) && (selectedIndex-index) ==1) {
 	            	  setBackground(lightblue);
 	            	  //System.out.println("here3 " + getText());
-	              }
+	              }*/
 	              else {
 	                   setBackground(Color.WHITE);
 	              }
@@ -203,6 +192,7 @@ public class ViewReviewUI extends JPanel {
 		        	//if username in the review Jlist has been double-clicked, call viewMemberUI for that username.
 			        if (mouseEvent.getClickCount() == 2) {
 			          if (checkUsername) {    	
+			        	setVisible(false);
 			            viewMemberUI.displayViewMemberAccount(reviewUsername);
 			          }
 			        }
