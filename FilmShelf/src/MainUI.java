@@ -124,13 +124,10 @@ public class MainUI extends JFrame {
         //Causes the account related buttons in the top right to hide or show depending on if a panel is visible
         ComponentListener accountListener = new ComponentAdapter() {
     	      public void componentShown(ComponentEvent evt) {
-    	        Component c = (Component) evt.getSource();
     	        buttonCreateAccount.setVisible(false);
-    	        
     	      }
 
     	      public void componentHidden(ComponentEvent evt) {
-    	        Component c = (Component) evt.getSource();
     	        buttonCreateAccount.setVisible(true);
     	      }
         };
@@ -140,33 +137,30 @@ public class MainUI extends JFrame {
         //Causes the account related buttons in the top right to hide or show depending on if a panel is visible
         ComponentListener loginListener = new ComponentAdapter() {
     	      public void componentShown(ComponentEvent evt) {
-    	        Component c = (Component) evt.getSource();
     	        buttonCreateAccount.setVisible(false);
     	        buttonLogin.setVisible(false);
     	      }
 
     	      public void componentHidden(ComponentEvent evt) {
-    	        Component c = (Component) evt.getSource();
     	        changeAccountButtons();
     	      }
         };
         loginUI.addComponentListener(loginListener);
         
-        //Causes the account related buttons in the top right to hide or show depending on if a panel is visible
+        //Causes the account related buttons in the top right to hide or show depending on if createMemberUI is visible
         ComponentListener createListener = new ComponentAdapter() {
     	      public void componentShown(ComponentEvent evt) {
-    	        Component c = (Component) evt.getSource();
     	        buttonCreateAccount.setVisible(false);
     	        buttonLogin.setVisible(false);
     	      }
 
     	      public void componentHidden(ComponentEvent evt) {
-    	        Component c = (Component) evt.getSource();
     	        buttonCreateAccount.setVisible(true);
     	        buttonLogin.setVisible(true);
     	      }
         };
         createMemberUI.addComponentListener(createListener);
+        
         
 	    //Extra button
         JButton btnNewButton_2 = new JButton("back to FilmShelf");
