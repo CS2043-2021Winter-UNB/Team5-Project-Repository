@@ -59,7 +59,7 @@ public class MainUI extends JFrame {
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
     private Color lightOrange = new Color(247,216,91);
-    private Image img = Toolkit.getDefaultToolkit().getImage("C:\\Users\\wonde\\Downloads\\dLB5ai0-blue-gradient-wallpaper.jpg");
+    private Image img = Toolkit.getDefaultToolkit().getImage("Images\\dLB5ai0-blue-gradient-wallpaper.jpg");
 
     
 	// Create the frame.
