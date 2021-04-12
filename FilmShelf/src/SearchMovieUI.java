@@ -71,6 +71,7 @@ public class SearchMovieUI extends JPanel {
 		setLayout(gridBagLayout);
 		
 		searchMovieLabel = new JLabel("Search Movie");
+		searchMovieLabel.setForeground(Color.WHITE);
 		searchMovieLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_searchMovieLabel = new GridBagConstraints();
 		gbc_searchMovieLabel.anchor = GridBagConstraints.NORTH;
@@ -81,6 +82,7 @@ public class SearchMovieUI extends JPanel {
 		add(searchMovieLabel, gbc_searchMovieLabel);
 		
 		JLabel titleLabel = new JLabel("Title:");
+		titleLabel.setForeground(Color.WHITE);
 		GridBagConstraints gbc_titleLabel = new GridBagConstraints();
 		gbc_titleLabel.anchor = GridBagConstraints.EAST;
 		gbc_titleLabel.insets = new Insets(0, 0, 5, 5);
@@ -100,6 +102,7 @@ public class SearchMovieUI extends JPanel {
 		titleSearchField.setColumns(10);
 		
 		genreLabel = new JLabel("Genre:");
+		genreLabel.setForeground(Color.WHITE);
 		GridBagConstraints gbc_genreLabel = new GridBagConstraints();
 		gbc_genreLabel.anchor = GridBagConstraints.EAST;
 		gbc_genreLabel.insets = new Insets(0, 0, 5, 5);
@@ -126,6 +129,7 @@ public class SearchMovieUI extends JPanel {
 		}
 		
 		yearLabel = new JLabel("Year:");
+		yearLabel.setForeground(Color.WHITE);
 		yearLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_yearLabel = new GridBagConstraints();
 		gbc_yearLabel.anchor = GridBagConstraints.EAST;
@@ -145,6 +149,7 @@ public class SearchMovieUI extends JPanel {
 		add(comboBoxLowerYear, gbc_comboBoxLowerYear);
 		
 		yearToLabel = new JLabel("to");
+		yearToLabel.setForeground(Color.WHITE);
 		GridBagConstraints gbc_yearToLabel = new GridBagConstraints();
 		gbc_yearToLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_yearToLabel.gridx = 3;
@@ -162,6 +167,7 @@ public class SearchMovieUI extends JPanel {
 		add(comboBoxUpperYear, gbc_comboBoxUpperYear);
 		
 		lengthLabel = new JLabel("Length:");
+		lengthLabel.setForeground(Color.WHITE);
 		GridBagConstraints gbc_lengthLabel = new GridBagConstraints();
 		gbc_lengthLabel.anchor = GridBagConstraints.EAST;
 		gbc_lengthLabel.insets = new Insets(0, 0, 5, 5);
@@ -182,6 +188,7 @@ public class SearchMovieUI extends JPanel {
 		add(spinnerLengthLowerLimit, gbc_spinnerLengthLowerLimit);
 		
 		lengthMinToLabel = new JLabel("min. to");
+		lengthMinToLabel.setForeground(Color.WHITE);
 		GridBagConstraints gbc_lengthMinToLabel = new GridBagConstraints();
 		gbc_lengthMinToLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lengthMinToLabel.gridx = 3;
@@ -201,6 +208,7 @@ public class SearchMovieUI extends JPanel {
 		add(spinnerLengthUpperLimit, gbc_spinnerLengthUpperLimit);
 		
 		lengthMinLabel = new JLabel("min.");
+		lengthMinLabel.setForeground(Color.WHITE);
 		GridBagConstraints gbc_lengthMinLabel = new GridBagConstraints();
 		gbc_lengthMinLabel.anchor = GridBagConstraints.WEST;
 		gbc_lengthMinLabel.insets = new Insets(0, 0, 5, 5);
@@ -261,6 +269,7 @@ public class SearchMovieUI extends JPanel {
 		viewMovieButton.setVisible(false);
 		
 		labelSearchMovieStatus = new JLabel("");
+		labelSearchMovieStatus.setForeground(Color.WHITE);
 		labelSearchMovieStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelSearchMovieStatus = new GridBagConstraints();
 		gbc_labelSearchMovieStatus.gridwidth = 6;
@@ -269,6 +278,7 @@ public class SearchMovieUI extends JPanel {
 		gbc_labelSearchMovieStatus.gridy = 10;
 		add(labelSearchMovieStatus, gbc_labelSearchMovieStatus);
 		
+		setOpaque(false);
 		setVisible(false);
 	}
 	

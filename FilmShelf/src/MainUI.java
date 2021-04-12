@@ -58,9 +58,9 @@ public class MainUI extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
-	private JLabel labelBackground;
-    private Image img = Toolkit.getDefaultToolkit().getImage("C:\\Users\\wonde\\Downloads\\dLB5ai0-blue-gradient-wallpaper.jpg");
     private Color lightOrange = new Color(247,216,91);
+    private Image img = Toolkit.getDefaultToolkit().getImage("C:\\Users\\wonde\\Downloads\\dLB5ai0-blue-gradient-wallpaper.jpg");
+
     
 	// Create the frame.
 	public MainUI(LoginUI uiLog, LoginControl controlLog, 
@@ -96,6 +96,7 @@ public class MainUI extends JFrame {
 		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    setSize(751, 521);
 		
+	    
 	    //MAIN PANE
 	    mainPane = new JPanel(){
 	         @Override
@@ -107,7 +108,7 @@ public class MainUI extends JFrame {
 		mainPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(mainPane);
 		
-		
+
 		//int width = 60;
         GridBagLayout gbl_mainPane = new GridBagLayout();
         gbl_mainPane.columnWidths = new int[]{148, 18, 0, 14, 0, 117, 11, 0};
@@ -161,7 +162,7 @@ public class MainUI extends JFrame {
         
         //TITLE
         JLabel labelFilmShelf = new JLabel("FilmShelf");
-        labelFilmShelf.setFont(new Font("Tahoma", Font.BOLD, 50));
+        labelFilmShelf.setFont(new Font("Century", Font.BOLD, 50));
         labelFilmShelf.setForeground(Color.WHITE);
         GridBagConstraints gbc_labelFilmShelf = new GridBagConstraints();
         gbc_labelFilmShelf.anchor = GridBagConstraints.WEST;
@@ -237,13 +238,6 @@ public class MainUI extends JFrame {
   
         buttonLogin.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		/*createMemberUI.setVisible(false);
-	           	editMemberUI.setVisible(false);
-	           	searchMemberUI.setVisible(false);
-	           	viewMemberUI.setVisible(false);
-	           	addMovieUI.setVisible(false);
-                searchMovieUI.setVisible(false);
-                viewMovieUI.setVisible(false);*/
         	  	setAllPanelVisibilityFalse();
         	  	loginUI.displayLoginForm();
            	}

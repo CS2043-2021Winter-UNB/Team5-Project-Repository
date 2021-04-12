@@ -4,7 +4,9 @@
 	import javax.swing.JPanel;
 	import java.awt.GridBagLayout;
 	import javax.swing.JLabel;
-	import java.awt.GridBagConstraints;
+
+import java.awt.Color;
+import java.awt.GridBagConstraints;
 	import java.awt.Insets;
 	import javax.swing.JTextField;
 	//import javax.swing.JPasswordField;
@@ -20,9 +22,6 @@ import javax.swing.JButton;
 	//import javax.swing.JLayeredPane;
 public class SearchMemberUI extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private SearchMemberControl searchMemberControl;
 	private JTextField textFieldSearch;
@@ -43,6 +42,7 @@ public class SearchMemberUI extends JPanel {
 		setLayout(gridBagLayout);
 		
 		JLabel lblNewLabel = new JLabel("Search Account:");
+		lblNewLabel.setForeground(Color.WHITE);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -84,12 +84,15 @@ public class SearchMemberUI extends JPanel {
 		ViewAccountbutton.setVisible(false);
 		
 		labelSearchAccountStatus = new JLabel("");
+		labelSearchAccountStatus.setForeground(Color.WHITE);
 		labelSearchAccountStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelSearchAccountStatus = new GridBagConstraints();
 		gbc_labelSearchAccountStatus.gridwidth = 6;
 		gbc_labelSearchAccountStatus.gridx = 1;
 		gbc_labelSearchAccountStatus.gridy = 7;
 		add(labelSearchAccountStatus, gbc_labelSearchAccountStatus);
+		
+		setOpaque(false);
 	}
 
 	public void displaySearchForm() {

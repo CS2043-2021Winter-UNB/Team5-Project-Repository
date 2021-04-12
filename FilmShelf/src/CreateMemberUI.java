@@ -9,6 +9,8 @@
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
@@ -40,7 +42,7 @@ public class CreateMemberUI extends JPanel {
 		setLayout(gridBagLayout);
 		
 		JLabel labelUsername = new JLabel("Username: ");
-
+		labelUsername.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelUsername = new GridBagConstraints();
 		gbc_labelUsername.anchor = GridBagConstraints.EAST;
 		gbc_labelUsername.insets = new Insets(0, 0, 5, 5);
@@ -64,6 +66,7 @@ public class CreateMemberUI extends JPanel {
 		
 
 		JLabel labelPassword = new JLabel("Password: ");
+		labelPassword.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelPassword = new GridBagConstraints();
 		gbc_labelPassword.anchor = GridBagConstraints.EAST;
 		gbc_labelPassword.insets = new Insets(0, 0, 5, 5);
@@ -86,6 +89,8 @@ public class CreateMemberUI extends JPanel {
 		
 		//Password visibility checkbox
 		checkboxPasswordVisibility = new JCheckBox("Show password");
+		checkboxPasswordVisibility.setOpaque(false);
+		checkboxPasswordVisibility.setForeground(Color.WHITE);
 		checkboxPasswordVisibility.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changePasswordVisibility();
@@ -98,6 +103,7 @@ public class CreateMemberUI extends JPanel {
 		add(checkboxPasswordVisibility, gbc_checkboxPasswordVisibility);
 		
 		JLabel labelFirstName = new JLabel("First Name: ");
+		labelFirstName.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelFirstName = new GridBagConstraints();
 		gbc_labelFirstName.anchor = GridBagConstraints.EAST;
 		gbc_labelFirstName.fill = GridBagConstraints.VERTICAL;
@@ -119,6 +125,7 @@ public class CreateMemberUI extends JPanel {
 		textFieldFirstName.setColumns(10);
 		
 		JLabel labelLastName = new JLabel("Last Name: ");
+		labelLastName.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelLastName = new GridBagConstraints();
 		gbc_labelLastName.anchor = GridBagConstraints.EAST;
 		gbc_labelLastName.insets = new Insets(0, 0, 5, 5);
@@ -161,7 +168,7 @@ public class CreateMemberUI extends JPanel {
 		gbc_labelCreateAccountStatus.gridx = 1;
 		gbc_labelCreateAccountStatus.gridy = 7;
 		add(labelCreateAccountStatus, gbc_labelCreateAccountStatus);
-
+		setOpaque(false);
 	}
 
 	
