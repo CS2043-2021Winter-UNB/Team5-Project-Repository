@@ -234,7 +234,7 @@ public class DataManager {
 		String sqlQuery = "insert into Movie(title, releaseYear, genre, length) values('" +	title + "'," + releaseYear + ", '" + genre + "', " + length + ");";
 
 		//Check for ducplicate Movie
-		String sqlCheck = "select * from title = '" + title + "' and year = '" + year + "';";
+		String sqlCheck = "select * from Movie where title = '" + title + "' and year = '" + year + "';";
 
 		//ResultSet
 		try {
