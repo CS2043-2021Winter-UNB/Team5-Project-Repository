@@ -231,7 +231,7 @@ public class DataManager {
 	public boolean addMovie(String title, int releaseYear, String genre, int length) {
 		//SQL query String 
 		String sqlQuery = "insert into Movie(title, releaseYear, genre, length) values('" +	title + "'," + releaseYear + ", '" + genre + "', " + length + ");";
-
+		
 		//ResultSet
 		try {
 			//Create statement 
@@ -277,7 +277,7 @@ public class DataManager {
 	}
 
 	//Courtney 
-	public ArrayList<MovieObject> getMoviesbyKeywords(String title, int  minReleaseYear, int maxReleaseYear, String genre, int minLength, int maxLength) {
+	public ArrayList<MovieObject> getMoviesByKeywords(String title, int  minReleaseYear, int maxReleaseYear, String genre, int minLength, int maxLength) {
 
 		//Creating MovieArrayList to return to user
 		ArrayList<MovieObject> movieList = new ArrayList<MovieObject>();
@@ -286,7 +286,7 @@ public class DataManager {
 		ArrayList<Integer> movieIdList = new ArrayList<Integer>();
 
 		//SQL String Query 
-		String sqlQuery = "select movieID from Movie where";
+		String sqlQuery = "select movieID from Movie where ";
 
 		//Add Desired title to Query (does not need to be exact)
 		if(title != null) {
@@ -319,7 +319,7 @@ public class DataManager {
 		
 		//Add semi-colon to end statement (must be done at end since end may vary)
 		sqlQuery = sqlQuery + ";";
-
+		
 		try{
 			//Create Statement
 			Statement stmt = connection.createStatement();

@@ -1,7 +1,7 @@
 
 /******************************************************************************************************************************
  * Main
- * @author Sharon
+ * @author Sharon, Alejandra, Jo
  * Description:	Creates the initial control/UI objects and makes the main window (MainUI) visible
  ******************************************************************************************************************************/
 
@@ -35,24 +35,31 @@ public class Main {
 		
 		ViewMovieControl viewMovieControl = new ViewMovieControl(dm);
 		
+		ViewReviewControl viewReviewControl= new ViewReviewControl(dm);
+		ViewReviewUI viewReviewUI = new ViewReviewUI();
+		
 		RateMovieControl rateMovieControl = new RateMovieControl(dm,loginControl);
 		RateMovieUI addRatingUI= new RateMovieUI(rateMovieControl,loginControl,viewMovieControl);
 		
 		EditRatingControl editRatingControl = new EditRatingControl(dm, loginControl);
 		EditRatingUI editRatingUI = new EditRatingUI(editRatingControl, loginControl, viewMovieControl);
 		
-		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI, loginControl, addReviewUI, addRatingUI, editRatingUI);
+		ViewMovieUI viewMovieUI = new ViewMovieUI(loginControl, viewMovieControl, removeMovieUI, addReviewUI, viewReviewUI, addRatingUI, editRatingUI);
 		
 		LoginUI loginUI = new LoginUI(loginControl);
 		
 		SearchMovieControl searchMovieControl = new SearchMovieControl(dm);
-		SearchMovieUI searchMovieUI = new SearchMovieUI(searchMovieControl);
+		SearchMovieUI searchMovieUI = new SearchMovieUI(searchMovieControl, viewMovieUI);
 		
 		AddMovieControl addMovieControl = new AddMovieControl(dm, loginControl);
 		AddMovieUI addMovieUI = new AddMovieUI(addMovieControl);
     
-		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI, addMovieUI, viewMovieUI);
+		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI, addMovieUI, searchMovieUI, addReviewUI, viewMovieUI);
+
 		mainUI.setVisible(true);
 		loginUI.setMain(mainUI);
+		removeMemberUI.setMain(mainUI);
+		removeMovieUI.setMain(mainUI);
+		
 	}
 }

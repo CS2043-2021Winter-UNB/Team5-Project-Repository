@@ -22,7 +22,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ViewMemberUI extends JPanel {
-
 	/**
 	 * 
 	 */
@@ -252,17 +251,15 @@ public class ViewMemberUI extends JPanel {
 	
 			boolean adminCheck = (loginControl.getCurrentAdmin() != null);
 	
-			if ( adminCheck || memberMatch){
+			if (adminCheck){
+				buttonRemoveAccount.setVisible(true);
+				buttonEditMember.setVisible(false);
+			}
+			else if (memberMatch){
 				buttonRemoveAccount.setVisible(true);
 				buttonEditMember.setVisible(true);
-	
 			}
-			else if (memberMatch) {
-				buttonRemoveAccount.setVisible(true);
-				buttonEditMember.setVisible(true);
-			}
-			else
-			{
+			else{
 				buttonRemoveAccount.setVisible(false);
 				buttonEditMember.setVisible(false);
 			}

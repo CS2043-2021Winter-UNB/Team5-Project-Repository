@@ -23,31 +23,32 @@ public class RemoveMemberUI extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private RemoveMemberControl removeMemberControl;
+	private MainUI mainUI;
 	
 	public RemoveMemberUI(RemoveMemberControl controlRemoveAcc) {
 		removeMemberControl = controlRemoveAcc;
 	}
 	
+	public void setMain(MainUI mainUI) {
+		this.mainUI = mainUI;
+	}
+	
 
 	public void displayRemovalMemberWarning(String username) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		int response=JOptionPane.showConfirmDialog(null,"Are you sure you want to delete acccount?","Remove Confirm",JOptionPane.YES_NO_OPTION);
 		if(response==JOptionPane.YES_OPTION) {
+			
+			removeMemberControl.processRemoveAccount(username);
+			mainUI.changeAccountButtons();
 			displayMemberRemovedConfirmation(username); 
 		}
 		else if(response==JOptionPane.NO_OPTION){
 			
 		}
-		// end-user-code
 	}
 
 	public void displayMemberRemovedConfirmation(String username) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		JOptionPane.showMessageDialog(null,"Account Removed.");
-		removeMemberControl.processRemoveAccount(username);
-		// end-user-code
 	}
 	
 }

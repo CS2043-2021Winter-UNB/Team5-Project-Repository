@@ -9,25 +9,23 @@ import javax.swing.SwingConstants;
 public class RemoveMovieUI extends JPanel {
 
 	private RemoveMovieControl removeMovieControl;
-	private JLabel labelMovieStatus;
+	private MainUI mainUI;
 	
 	public RemoveMovieUI(RemoveMovieControl controlRemoveMov) {
 		removeMovieControl = controlRemoveMov;
-		labelMovieStatus = new JLabel("");
-		labelMovieStatus.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_labelMovieStatus = new GridBagConstraints();
-		gbc_labelMovieStatus.gridwidth = 6;
-		gbc_labelMovieStatus.insets = new Insets(0, 0, 5, 5);
-		gbc_labelMovieStatus.gridx = 1;
-		gbc_labelMovieStatus.gridy = 7;
-		add(labelMovieStatus, gbc_labelMovieStatus);
 	}
+	
+	public void setMain(MainUI mainUI) {
+		this.mainUI = mainUI;
+	}
+	
 	public void displayRemovalMovieWarning(int movie) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		int response=JOptionPane.showConfirmDialog(null,"Are you sure you want to delete Movie?","Remove Confirm",JOptionPane.YES_NO_OPTION);
 		if(response==JOptionPane.YES_OPTION) {
 			removeMovieControl.processRemoveMovie(movie); 
+			mainUI.changeMovieButtons();
 			displayMovieRemovedConfimation();
 		}
 		else if(response==JOptionPane.NO_OPTION){
@@ -39,7 +37,7 @@ public class RemoveMovieUI extends JPanel {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		//labelEditAccountStatus.setText("Account updated successfully.");
-		labelMovieStatus.setText("Movie Removed.");
+		JOptionPane.showMessageDialog(null,"Movie Removed.");
 		// end-user-code
 	}
 }
