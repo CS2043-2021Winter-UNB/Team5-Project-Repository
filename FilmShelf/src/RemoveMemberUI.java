@@ -14,25 +14,38 @@ import javax.swing.SwingConstants;
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 
 
 public class RemoveMemberUI extends JPanel {
-	public RemoveMemberUI() {
-	}
+	private static final long serialVersionUID = 1L;
 	private RemoveMemberControl removeMemberControl;
-
+	private MainUI mainUI;
 	
-	public void displayRemovalMemberWarning() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+	public RemoveMemberUI(RemoveMemberControl controlRemoveAcc) {
+		removeMemberControl = controlRemoveAcc;
+	}
+	
+	public void setMain(MainUI mainUI) {
+		this.mainUI = mainUI;
+	}
+	
 
-		// end-user-code
+	public void displayRemovalMemberWarning(String username) {
+		int response=JOptionPane.showConfirmDialog(null,"Are you sure you want to delete acccount?","Remove Confirm",JOptionPane.YES_NO_OPTION);
+		if(response==JOptionPane.YES_OPTION) {
+			
+			removeMemberControl.processRemoveAccount(username);
+			mainUI.changeAccountButtons();
+			displayMemberRemovedConfirmation(username); 
+		}
+		else if(response==JOptionPane.NO_OPTION){
+			
+		}
 	}
 
-	public void displayMemberRemovedConfirmation() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void displayMemberRemovedConfirmation(String username) {
+		JOptionPane.showMessageDialog(null,"Account Removed.");
 	}
+	
 }

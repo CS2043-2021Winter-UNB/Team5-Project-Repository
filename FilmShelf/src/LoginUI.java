@@ -31,7 +31,6 @@ public class LoginUI extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private LoginControl loginControl;
-	private MainUI mainUI;
 	private JRadioButton radioButtonAdmin;
 	private JRadioButton radioButtonMember;
 	private JButton loginButton;
@@ -49,9 +48,9 @@ public class LoginUI extends JPanel {
 	public LoginUI(LoginControl control) {
 		loginControl = control;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{50, 96, 91, 7, 65, 57, 59, 1, 0};
-		gridBagLayout.rowHeights = new int[]{23, 0, 0, 0, 0, 0, 0, 28, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{50, 96, 19, 88, 0, 0, 0, 65, 57, 59, 1, 0};
+		gridBagLayout.rowHeights = new int[]{ 23, 0, 0, 0, 0, 0, 0, 28, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -68,8 +67,9 @@ public class LoginUI extends JPanel {
 		
 		//Username text field
 		textFieldUsername = new JTextField();
+		textFieldUsername.setDocument(new LengthRestrictedDocument(25));
 		GridBagConstraints gbc_textFieldUsername = new GridBagConstraints();
-		gbc_textFieldUsername.gridwidth = 3;
+		gbc_textFieldUsername.gridwidth = 6;
 		gbc_textFieldUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldUsername.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldUsername.gridx = 2;
@@ -89,8 +89,9 @@ public class LoginUI extends JPanel {
 		
 		//Password field
 		passwordField = new JPasswordField();
+		passwordField.setDocument(new LengthRestrictedDocument(25));
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
-		gbc_passwordField.gridwidth = 3;
+		gbc_passwordField.gridwidth = 6;
 		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_passwordField.gridx = 2;
@@ -106,7 +107,7 @@ public class LoginUI extends JPanel {
 		});
 		GridBagConstraints gbc_checkboxPasswordVisibility = new GridBagConstraints();
 		gbc_checkboxPasswordVisibility.insets = new Insets(0, 0, 5, 5);
-		gbc_checkboxPasswordVisibility.gridx = 5;
+		gbc_checkboxPasswordVisibility.gridx = 8;
 		gbc_checkboxPasswordVisibility.gridy = 4;
 		add(checkboxPasswordVisibility, gbc_checkboxPasswordVisibility);
 		
@@ -138,7 +139,7 @@ public class LoginUI extends JPanel {
 		GridBagConstraints gbc_radioButtonAdmin = new GridBagConstraints();
 		gbc_radioButtonAdmin.anchor = GridBagConstraints.NORTHWEST;
 		gbc_radioButtonAdmin.insets = new Insets(0, 0, 5, 5);
-		gbc_radioButtonAdmin.gridx = 4;
+		gbc_radioButtonAdmin.gridx = 7;
 		gbc_radioButtonAdmin.gridy = 5;
 		add(radioButtonAdmin, gbc_radioButtonAdmin);
 		
@@ -157,7 +158,7 @@ public class LoginUI extends JPanel {
 		GridBagConstraints gbc_loginButton = new GridBagConstraints();
 		gbc_loginButton.anchor = GridBagConstraints.NORTHWEST;
 		gbc_loginButton.insets = new Insets(0, 0, 5, 5);
-		gbc_loginButton.gridx = 3;
+		gbc_loginButton.gridx = 5;
 		gbc_loginButton.gridy = 6;
 		add(loginButton, gbc_loginButton);
 		
@@ -165,7 +166,7 @@ public class LoginUI extends JPanel {
 		labelLoginStatus = new JLabel("");
 		labelLoginStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelLoginStatus = new GridBagConstraints();
-		gbc_labelLoginStatus.gridwidth = 5;
+		gbc_labelLoginStatus.gridwidth = 8;
 		gbc_labelLoginStatus.insets = new Insets(0, 0, 0, 5);
 		gbc_labelLoginStatus.gridx = 1;
 		gbc_labelLoginStatus.gridy = 7;
@@ -174,12 +175,10 @@ public class LoginUI extends JPanel {
 		setVisible(false);
 	}
 	
-	public void setMain(MainUI mainUI) {
-		this.mainUI = mainUI;
-	}
-	
 	public void displayLoginForm() {
 		//clear login fields/radio button before redisplaying
+		textFieldUsername.setText("");
+		passwordField.setText("");
 		checkboxPasswordVisibility.setSelected(false);
 		radioButtonMember.setSelected(true);
 		labelLoginStatus.setText("");
@@ -206,7 +205,6 @@ public class LoginUI extends JPanel {
 				loginStatus = loginControl.processAdminLogin(username, password);
 			}
 			if(loginStatus) {
-				mainUI.changeCreateAndLoginButtons();
 				setVisible(false);
 			
 			} else {
@@ -216,11 +214,19 @@ public class LoginUI extends JPanel {
 	}
 	
 	private void displayLoginErrorMessage() {
-		labelLoginStatus.setText("Login was unsuccessful. Login credentials did not match any existing accounts");
+		if (member) {
+			labelLoginStatus.setText("Login was unsuccessful. Login credentials did not match any existing member accounts.");
+		}
+		else {
+			labelLoginStatus.setText("Login was unsuccessful. Login credentials did not match any existing administrator accounts.");
+		}
+
+		//make the password hide again
 		passwordField.setText("");
 		if (checkboxPasswordVisibility.isSelected())
 		{
 			passwordField.setEchoChar('*');
+			checkboxPasswordVisibility.setSelected(false);
 		}
 	}
 	

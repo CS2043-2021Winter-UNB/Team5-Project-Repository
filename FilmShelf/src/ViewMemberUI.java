@@ -22,7 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ViewMemberUI extends JPanel {
-
+	private static final long serialVersionUID = 1L;
 	private ViewMemberControl viewMemberControl;
 	private LoginControl loginControl;
 	private EditMemberUI editMemberUI;
@@ -34,6 +34,7 @@ public class ViewMemberUI extends JPanel {
 	private JLabel[] labelMovies = new JLabel[5];
 	private JButton buttonRemoveAccount;
 	private JButton buttonEditMember;
+	private String username;
 	
 	/**
 	 * Create the panel.
@@ -43,6 +44,8 @@ public class ViewMemberUI extends JPanel {
 		loginControl = controlLogin;
 		editMemberUI = uiEditMember;
 		removeMemberUI = uiRemoveMember;
+		
+		setVisible(false);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 141, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -55,7 +58,7 @@ public class ViewMemberUI extends JPanel {
 		buttonRemoveAccount = new JButton("Remove Account");
 		buttonRemoveAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				removeAccount.displayRemovalMemberWarning();
+				removeMemberUI.displayRemovalMemberWarning(username);
 			}
 		});
 		
@@ -63,6 +66,7 @@ public class ViewMemberUI extends JPanel {
 		buttonEditMember.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				editMemberUI.displayEditAccountForm();
+				setVisible(false);
 			}
 		});
 		GridBagConstraints gbc_buttonEditMember = new GridBagConstraints();
@@ -214,44 +218,47 @@ public class ViewMemberUI extends JPanel {
 	
 	
 	public void displayViewMemberAccount(String username)
-	{
-		MemberObject member = viewMemberControl.getMemberAccount(username);
-		labelShowUsername.setText(username);
-		labelShowFirstName.setText(member.getFirstName());
-		labelShowLastName.setText(member.getLastName());
-		labelShowDescription.setText(member.getDescription());
-		
-		ArrayList<MovieObject> topMovies = member.getTopMovies();
-		int i;
-		for (i = 0; i < 5; i++) {
-			if (i < topMovies.size()) {
-				labelMovies[i].setText(topMovies.get(i).getTitle()); // add movie name			
+	{	
+			setVisible(true);
+			this.username=username;
+			MemberObject member = viewMemberControl.getMemberAccount(username);
+			labelShowUsername.setText(username);
+			labelShowFirstName.setText(member.getFirstName());
+			labelShowLastName.setText(member.getLastName());
+			labelShowDescription.setText(member.getDescription());
+			
+			ArrayList<MovieObject> topMovies = member.getTopMovies();
+			int i;
+			for (i = 0; i < 5; i++) {
+				if (i < topMovies.size()) {
+					labelMovies[i].setText(topMovies.get(i).getTitle()); // add movie name			
+				}
+				else {                          
+					labelMovies[i].setText(""); //clear any unused movie labels to make sure previous results are gone
+				}	
 			}
-			else {                          
-				labelMovies[i].setText(""); //clear any unused movie labels to make sure previous results are gone
-			}
-		}	
-		
-		//check if remove member button should be displayed.
-		//It should be displayed if the actor is an administrator or they are viewing their own member account.
-		boolean isMember = (loginControl.getCurrentMember().getUsername() == username);
-		
-		if ((loginControl.getCurrentAdmin() != null) || isMember)
-		{
-			buttonRemoveAccount.setVisible(true);
-			if (isMember)
+			//check if remove member button should be displayed.
+			//It should be displayed if the actor is an administrator or they are viewing their own member account.
+			MemberObject logInMember = loginControl.getCurrentMember();
+			boolean memberMatch = false;
+			if (logInMember != null)
 			{
+				memberMatch = logInMember.getUsername().equals(username);
+			}
+	
+			boolean adminCheck = (loginControl.getCurrentAdmin() != null);
+	
+			if (adminCheck){
+				buttonRemoveAccount.setVisible(true);
+				buttonEditMember.setVisible(false);
+			}
+			else if (memberMatch){
+				buttonRemoveAccount.setVisible(true);
 				buttonEditMember.setVisible(true);
 			}
-		}
-		else
-		{
-			buttonRemoveAccount.setVisible(false);
-		}
-	}
-	
-	public void hide()
-	{
-		setVisible(false);
-	}
+			else{
+				buttonRemoveAccount.setVisible(false);
+				buttonEditMember.setVisible(false);
+			}
+		}	
 }

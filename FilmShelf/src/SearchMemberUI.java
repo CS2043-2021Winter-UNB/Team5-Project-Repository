@@ -14,6 +14,7 @@
 	import java.awt.event.ActionListener;
 	import java.awt.event.ActionEvent;
 	import javax.swing.SwingConstants;
+import javax.swing.JButton;
 	//import javax.swing.JFrame;
 	//import java.awt.Color;
 	//import javax.swing.JLayeredPane;
@@ -26,10 +27,14 @@ public class SearchMemberUI extends JPanel {
 	private SearchMemberControl searchMemberControl;
 	private JTextField textFieldSearch;
 	private JLabel labelSearchAccountStatus;
+	private JButton ViewAccountbutton;
+	private ViewMemberUI viewMemberUI;
+	private String username;
 	
-	public SearchMemberUI(SearchMemberControl control) {
+	public SearchMemberUI(SearchMemberControl control,ViewMemberUI uiViewAccount) {
 		setVisible(false);
 		searchMemberControl = control;
+		viewMemberUI = uiViewAccount;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
@@ -46,6 +51,7 @@ public class SearchMemberUI extends JPanel {
 		add(lblNewLabel, gbc_lblNewLabel);
 		
 		textFieldSearch = new JTextField();
+		textFieldSearch.setDocument(new LengthRestrictedDocument(25));
 		textFieldSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				enterMemberAccountName();
@@ -61,11 +67,26 @@ public class SearchMemberUI extends JPanel {
 		add(textFieldSearch, gbc_textFieldSearch);
 		textFieldSearch.setColumns(10);
 		
+		ViewAccountbutton = new JButton("view");
+		ViewAccountbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				viewMemberUI.displayViewMemberAccount(username);
+				setVisible(false);
+				
+			}
+		});
+		GridBagConstraints gbc_ViewAccountbutton = new GridBagConstraints();
+		gbc_ViewAccountbutton.anchor = GridBagConstraints.EAST;
+		gbc_ViewAccountbutton.insets = new Insets(0, 0, 5, 5);
+		gbc_ViewAccountbutton.gridx = 5;
+		gbc_ViewAccountbutton.gridy = 7;
+		add(ViewAccountbutton, gbc_ViewAccountbutton);
+		ViewAccountbutton.setVisible(false);
+		
 		labelSearchAccountStatus = new JLabel("");
 		labelSearchAccountStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelSearchAccountStatus = new GridBagConstraints();
 		gbc_labelSearchAccountStatus.gridwidth = 6;
-		gbc_labelSearchAccountStatus.insets = new Insets(0, 0, 5, 5);
 		gbc_labelSearchAccountStatus.gridx = 1;
 		gbc_labelSearchAccountStatus.gridy = 7;
 		add(labelSearchAccountStatus, gbc_labelSearchAccountStatus);
@@ -77,14 +98,18 @@ public class SearchMemberUI extends JPanel {
 
 	public void displaySearchResult(MemberObject member) {
 		labelSearchAccountStatus.setText(member.getUsername()+" - "+member.getFirstName()+" "+member.getLastName());
+		username= member.getUsername();
+		ViewAccountbutton.setVisible(true);
 	}
 
 	public void displayFailedSearchMessage() {
+		ViewAccountbutton.setVisible(false);
 		labelSearchAccountStatus.setText("Account search was unsuccessful. Information was invalid.");
 	}
 
 	public void enterMemberAccountName() {
 		MemberObject member=searchMemberControl.processSearchAccount(textFieldSearch.getText());
+		
 		if (member==null) {
 			displayFailedSearchMessage();
 		}

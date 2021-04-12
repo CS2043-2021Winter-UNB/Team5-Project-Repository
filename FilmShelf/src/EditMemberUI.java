@@ -43,15 +43,6 @@ public class EditMemberUI extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel labelUsername = new JLabel("Username");
-		labelUsername.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_labelUsername = new GridBagConstraints();
-		gbc_labelUsername.anchor = GridBagConstraints.EAST;
-		gbc_labelUsername.insets = new Insets(0, 0, 5, 5);
-		gbc_labelUsername.gridx = 1;
-		gbc_labelUsername.gridy = 1;
-		add(labelUsername, gbc_labelUsername);
-		
 		JLabel labelPassword = new JLabel("New Password");
 		GridBagConstraints gbc_labelPassword = new GridBagConstraints();
 		gbc_labelPassword.anchor = GridBagConstraints.EAST;
@@ -61,6 +52,7 @@ public class EditMemberUI extends JPanel {
 		add(labelPassword, gbc_labelPassword);
 		
 		passwordField = new JPasswordField();
+		passwordField.setDocument(new LengthRestrictedDocument(25));
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.gridwidth = 4;
 		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
@@ -91,6 +83,7 @@ public class EditMemberUI extends JPanel {
 		add(labelFirstName, gbc_labelFirstName);
 		
 		textFieldFirstName = new JTextField();
+		textFieldFirstName.setDocument(new LengthRestrictedDocument(25));
 		GridBagConstraints gbc_textFieldFirstName = new GridBagConstraints();
 		gbc_textFieldFirstName.gridwidth = 4;
 		gbc_textFieldFirstName.insets = new Insets(0, 0, 5, 5);
@@ -109,6 +102,7 @@ public class EditMemberUI extends JPanel {
 		add(labelLastName, gbc_labelLastName);
 		
 		textFieldLastName = new JTextField();
+		textFieldLastName.setDocument(new LengthRestrictedDocument(25));
 		GridBagConstraints gbc_textFieldLastName = new GridBagConstraints();
 		gbc_textFieldLastName.gridwidth = 4;
 		gbc_textFieldLastName.insets = new Insets(0, 0, 5, 5);
@@ -127,6 +121,7 @@ public class EditMemberUI extends JPanel {
 		add(labelDescription, gbc_labelDescription);
 		
 		textFieldDescription = new JTextField();
+		textFieldDescription.setDocument(new LengthRestrictedDocument(2000));
 		GridBagConstraints gbc_textFieldDescription = new GridBagConstraints();
 		gbc_textFieldDescription.gridwidth = 4;
 		gbc_textFieldDescription.insets = new Insets(0, 0, 5, 5);
@@ -170,7 +165,7 @@ public class EditMemberUI extends JPanel {
 		String firstName = textFieldFirstName.getText();
 		String lastName = textFieldLastName.getText();
 		String description = textFieldDescription.getText();
-		System.out.println(password+"  "+firstName+"  "+lastName+"  "+description);
+		//System.out.println(password+"  "+firstName+"  "+lastName+"  "+description);
 		if (editMemberControl.updateAccount(password,firstName,lastName,description)) {
 			displayEditAccountConfirmation();
 		}
