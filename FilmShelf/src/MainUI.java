@@ -14,9 +14,13 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.Component;
 import java.awt.Font;
 
 /******************************************************************************************************************************
@@ -116,20 +120,53 @@ public class MainUI extends JFrame {
         mainPane.add(viewMovieUI, gbc_Panel);
         mainPane.add(addReviewUI, gbc_Panel);
         mainPane.add(viewReviewUI,gbc_Panel);
- 	     
+        
+        //Causes the account related buttons in the top right to hide or show depending on if a panel is visible
+        ComponentListener accountListener = new ComponentAdapter() {
+    	      public void componentShown(ComponentEvent evt) {
+    	        buttonCreateAccount.setVisible(false);
+    	      }
+
+    	      public void componentHidden(ComponentEvent evt) {
+    	        buttonCreateAccount.setVisible(true);
+    	      }
+        };
+        addMovieUI.addComponentListener(accountListener);
+        viewMemberUI.addComponentListener(accountListener);
+        
+        //Causes the account related buttons in the top right to hide or show depending on if a panel is visible
+        ComponentListener loginListener = new ComponentAdapter() {
+    	      public void componentShown(ComponentEvent evt) {
+    	        buttonCreateAccount.setVisible(false);
+    	        buttonLogin.setVisible(false);
+    	      }
+
+    	      public void componentHidden(ComponentEvent evt) {
+    	        changeAccountButtons();
+    	      }
+        };
+        loginUI.addComponentListener(loginListener);
+        
+        //Causes the account related buttons in the top right to hide or show depending on if createMemberUI is visible
+        ComponentListener createListener = new ComponentAdapter() {
+    	      public void componentShown(ComponentEvent evt) {
+    	        buttonCreateAccount.setVisible(false);
+    	        buttonLogin.setVisible(false);
+    	      }
+
+    	      public void componentHidden(ComponentEvent evt) {
+    	        buttonCreateAccount.setVisible(true);
+    	        buttonLogin.setVisible(true);
+    	      }
+        };
+        createMemberUI.addComponentListener(createListener);
+        
+        
 	    //Extra button
         JButton btnNewButton_2 = new JButton("back to FilmShelf");
 	    btnNewButton_2.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		setAllPanelVisibilityFalse();
-	    		/*loginUI.setVisible(false);
-	     		createMemberUI.setVisible(false);
-	     		editMemberUI.setVisible(false);
-	     		searchMemberUI.setVisible(false);
-	     		viewMemberUI.setVisible(false);
-	     		addMovieUI.setVisible(false);
-	     		searchMovieUI.setVisible(false);
-	     		viewMovieUI.setVisible(false);*/
 	     	}
 	    });
 	     		
@@ -309,10 +346,11 @@ public class MainUI extends JFrame {
         gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
         gbc_lblNewLabel_3.gridx = 4;
         gbc_lblNewLabel_3.gridy = 0;
-        panel_1.add(lblNewLabel_3, gbc_lblNewLabel_3);
-    
+        panel_1.add(lblNewLabel_3, gbc_lblNewLabel_3);      
+
+        
         //searchMovieUI.setVisible(true);
-        pack();
+       pack();
 	}
 	
 	public void changeAccountButtons() {
@@ -325,6 +363,7 @@ public class MainUI extends JFrame {
 	        //change the create account button to view member (shows username of member)
 			String username = loginControl.getCurrentMember().getUsername();
 			buttonCreateAccount.setText(username); 
+			buttonCreateAccount.setVisible(true);
 			ActionListener[] al1 = buttonCreateAccount.getActionListeners();
 			buttonCreateAccount.removeActionListener(al1[0]);
 	        buttonCreateAccount.addActionListener(new ActionListener() {
@@ -342,6 +381,7 @@ public class MainUI extends JFrame {
 			buttonLogin.setVisible(false);
 			
 			//change the create account button to the add movie button
+			buttonCreateAccount.setVisible(true);
 			buttonCreateAccount.setText("Add Movie");
 			ActionListener[] al = buttonCreateAccount.getActionListeners();
 			buttonCreateAccount.removeActionListener(al[0]);
