@@ -54,6 +54,7 @@ public class MemberObject {
 	}
 	
 	// provides a string representation of a MemberObject
+	@Override
 	public String toString() {
 		String result = "Member Username: "+username+"\n"+
 						"First name: "+firstName+"\n"+
@@ -67,5 +68,38 @@ public class MemberObject {
 		
 		return result;
 	}
-
+	
+	@Override
+	public boolean equals(Object object) {
+		if(this == object) {
+			return true;
+		}
+		if(object == null || getClass() != object.getClass()) {
+			return false;
+		}
+		
+		MemberObject member = (MemberObject) object;
+		
+		if(!this.getUsername().equals(member.getUsername())) {
+			return false;
+		}
+		
+		if(!this.getFirstName().equals(member.getFirstName())) {
+			return false;
+		}
+		
+		if(!this.getLastName().equals(member.getLastName())) {
+			return false;
+		}
+		
+		if(!this.getDescription().equals(member.getDescription())) {
+			return false;
+		}
+		
+		if(!this.getTopMovies().equals(member.getTopMovies())) {
+			return false;
+		}
+		
+		return true;
+	}
 }

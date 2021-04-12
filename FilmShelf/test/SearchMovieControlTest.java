@@ -104,7 +104,6 @@ public class SearchMovieControlTest {
 	@Test
 	public void testValidInput() {
 		Assume.assumeTrue(type == Type.VALID);
-		System.out.println();
 		ArrayList<MovieObject> expectedList = dataManager.getMoviesByKeywords(MOVIE_TITLE, MOVIE_YEAR, MOVIE_YEAR, MOVIE_GENRE, MOVIE_LENGTH, MOVIE_LENGTH);
 		MovieObject expectedMovie = expectedList.get(0);
 		
@@ -122,7 +121,6 @@ public class SearchMovieControlTest {
 	@Test
 	public void testInvalidInput() {
 		Assume.assumeTrue(type == Type.INVALID);
-		System.out.println();
 		boolean isInvalid = false;
 		ArrayList<MovieObject> expectedList = dataManager.getMoviesByKeywords(MOVIE_TITLE, MOVIE_YEAR, MOVIE_YEAR, MOVIE_GENRE, MOVIE_LENGTH, MOVIE_LENGTH);
 		MovieObject expectedMovie = expectedList.get(0);
