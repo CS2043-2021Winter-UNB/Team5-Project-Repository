@@ -13,24 +13,29 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JButton;
 
 public class EditRatingUI extends JPanel {
 	
 	private LoginControl loginControl;
 	private EditRatingControl editRatingControl;
 	private ViewMovieControl viewMovieControl;
+	private RemoveRatingUI removeRatingUI;
+	private JButton removeRatingButton;
+
 	private final Action action1 = new SwingAction();
 	private final Action action2 = new SwingAction_1();
 	private final Action action3 = new SwingAction_2();
 	private final Action action4 = new SwingAction_3();
 	private final Action action5 = new SwingAction_4();
-	private int movieId;
+	private int movieID;
 
 
-	public EditRatingUI(EditRatingControl erControl, LoginControl lControl, ViewMovieControl vControl) {
+	public EditRatingUI(EditRatingControl erControl, LoginControl lControl, ViewMovieControl vControl, RemoveRatingUI uiRemoveRating) {
 		editRatingControl = erControl;
 		loginControl = lControl;
 		viewMovieControl = vControl;
+		removeRatingUI = uiRemoveRating;
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{38, 0, 0, 0, 0, 0, 0, 0};
@@ -85,12 +90,38 @@ public class EditRatingUI extends JPanel {
 		gbc_fiveStarsButton.gridx = 5;
 		gbc_fiveStarsButton.gridy = 5;
 		add(fiveStarsButton, gbc_fiveStarsButton);
-		setVisible(false);
+		
+		removeRatingButton = new JButton("Remove Rating");
+		removeRatingButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				removeRatingUI.displayRemoveRatingForm(movieID);
+			}
+		});
+		
+		GridBagConstraints gbc_removeRatingButton = new GridBagConstraints();
+		gbc_removeRatingButton.gridwidth = 3;
+		gbc_removeRatingButton.insets = new Insets(0, 0, 5, 5);
+		gbc_removeRatingButton.gridx = 8;
+		gbc_removeRatingButton.gridy = 2;
+		add(removeRatingButton, gbc_removeRatingButton);
+			
 	}
 	
-	public void displayEditRatingForm(int movieId) {
-		this.movieId = movieId;
+	public void displayEditRatingForm(int movieID) {
+		this.movieID =movieID;
 		setVisible(true);
+		
+		//check if remove movie button should be displayed.	
+		//It should be displayed if the member has a rating already for the movie.
+		RatingObject ratingObject = editRatingControl.getRating(movieID);
+		boolean check = (ratingObject != null);
+		
+		if (check) {
+			removeRatingButton.setVisible(true);
+		}
+		else {
+			removeRatingButton.setVisible(false);
+		}
 	}
 	
 	private class SwingAction extends AbstractAction {
@@ -103,7 +134,7 @@ public class EditRatingUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "One Star Rating!");
 		}
 		public void actionPerformed(ActionEvent e) {
-			editRatingControl.processEditRating(movieId, 1);
+			editRatingControl.processEditRating(movieID, 1);
 		}
 	}
 	private class SwingAction_1 extends AbstractAction {
@@ -116,7 +147,7 @@ public class EditRatingUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "Two Star Rating!");
 		}
 		public void actionPerformed(ActionEvent e) {
-			editRatingControl.processEditRating(movieId, 2);
+			editRatingControl.processEditRating(movieID, 2);
 		}
 	}
 	private class SwingAction_2 extends AbstractAction {
@@ -129,7 +160,7 @@ public class EditRatingUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "Three Star Rating!");
 		}
 		public void actionPerformed(ActionEvent e) {
-			editRatingControl.processEditRating(movieId, 3);
+			editRatingControl.processEditRating(movieID, 3);
 		}
 	}
 	private class SwingAction_3 extends AbstractAction {
@@ -142,7 +173,7 @@ public class EditRatingUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "Four Star Rating");
 		}
 		public void actionPerformed(ActionEvent e) {
-			editRatingControl.processEditRating(movieId, 4);
+			editRatingControl.processEditRating(movieID, 4);
 		}
 	}
 	private class SwingAction_4 extends AbstractAction {
@@ -155,10 +186,8 @@ public class EditRatingUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "Five Star Rating");
 		}
 		public void actionPerformed(ActionEvent e) {
-			editRatingControl.processEditRating(movieId, 5);
+
+			editRatingControl.processEditRating(movieID, 5);
 		}
 	}
 }
-
-
-
