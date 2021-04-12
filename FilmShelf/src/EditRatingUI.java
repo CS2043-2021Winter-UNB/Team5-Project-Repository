@@ -24,7 +24,7 @@ public class EditRatingUI extends JPanel {
 	private final Action action3 = new SwingAction_2();
 	private final Action action4 = new SwingAction_3();
 	private final Action action5 = new SwingAction_4();
-	private int movieiD;
+	private int movieId;
 
 
 	public EditRatingUI(EditRatingControl erControl, LoginControl lControl, ViewMovieControl vControl) {
@@ -85,11 +85,11 @@ public class EditRatingUI extends JPanel {
 		gbc_fiveStarsButton.gridx = 5;
 		gbc_fiveStarsButton.gridy = 5;
 		add(fiveStarsButton, gbc_fiveStarsButton);
-			
+		setVisible(false);
 	}
 	
-	public void displayEditRatingForm(int movieID) {
-		this.movieiD =movieID;
+	public void displayEditRatingForm(int movieId) {
+		this.movieId = movieId;
 		setVisible(true);
 	}
 	
@@ -103,7 +103,7 @@ public class EditRatingUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "One Star Rating!");
 		}
 		public void actionPerformed(ActionEvent e) {
-			editRatingControl.processEditRating(movieiD, 1);
+			editRatingControl.processEditRating(movieId, 1);
 		}
 	}
 	private class SwingAction_1 extends AbstractAction {
@@ -116,7 +116,7 @@ public class EditRatingUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "Two Star Rating!");
 		}
 		public void actionPerformed(ActionEvent e) {
-			editRatingControl.processEditRating(movieiD, 2);
+			editRatingControl.processEditRating(movieId, 2);
 		}
 	}
 	private class SwingAction_2 extends AbstractAction {
@@ -129,7 +129,7 @@ public class EditRatingUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "Three Star Rating!");
 		}
 		public void actionPerformed(ActionEvent e) {
-			editRatingControl.processEditRating(movieiD, 3);
+			editRatingControl.processEditRating(movieId, 3);
 		}
 	}
 	private class SwingAction_3 extends AbstractAction {
@@ -142,7 +142,7 @@ public class EditRatingUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "Four Star Rating");
 		}
 		public void actionPerformed(ActionEvent e) {
-			editRatingControl.processEditRating(movieiD, 4);
+			editRatingControl.processEditRating(movieId, 4);
 		}
 	}
 	private class SwingAction_4 extends AbstractAction {
@@ -155,7 +155,7 @@ public class EditRatingUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "Five Star Rating");
 		}
 		public void actionPerformed(ActionEvent e) {
-			editRatingControl.processEditRating(movieiD, 5);
+			editRatingControl.processEditRating(movieId, 5);
 		}
 	}
 }

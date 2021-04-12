@@ -39,8 +39,8 @@ public class ViewMovieUI extends JPanel {
 	int movieID;
 	private JButton rateButton;
 	private JButton editRatingButton;
-	private RateMovieUI rateMovie;
-	private EditRatingUI editRating;
+	private RateMovieUI rateMovieUI;
+	private EditRatingUI editRatingUI;
 	private MemberObject member;
 	private MovieObject movie;
 	private JLayeredPane layeredPane_1;
@@ -53,8 +53,8 @@ public class ViewMovieUI extends JPanel {
 		removeMovieUI = uiRemoveMovie;
 		loginControl = controlLogin;
 		addReviewUI = uiAddReview;
-		rateMovie=uiRateMovie;
-		editRating=uiEditRating;
+		rateMovieUI = uiRateMovie;
+		editRatingUI = uiEditRating;
 		
 		setVisible(false);
 		
@@ -102,7 +102,7 @@ public class ViewMovieUI extends JPanel {
 		rateButton = new JButton("Rate Movie");
 		rateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				rateMovie.displayRatingForm(movieID);
+				rateMovieUI.displayRatingForm(movieID);
 			}
 		});
 		GridBagConstraints gbc_rateButton = new GridBagConstraints();
@@ -115,7 +115,8 @@ public class ViewMovieUI extends JPanel {
 		editRatingButton = new JButton("Edit Rating");
 		editRatingButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				editRating.displayEditRatingForm(movieID);
+				editRatingUI.displayEditRatingForm(movieID);
+				setVisible(false);
 			}
 		});
 		GridBagConstraints gbc_editRatingButton = new GridBagConstraints();
@@ -144,7 +145,8 @@ public class ViewMovieUI extends JPanel {
 		reviewButton = new JButton("Review Movie");
 		reviewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			addReviewUI.displayLeaveReviewForm(movieID);
+				addReviewUI.displayLeaveReviewForm(movieID);
+				setVisible(false);
 			}
 		});
 		GridBagConstraints gbc_reviewButton = new GridBagConstraints();
@@ -275,8 +277,8 @@ public class ViewMovieUI extends JPanel {
 	
 	
 	public void displayMovie(MovieObject movie) {
-		this.movieID=movie.getMovieId();
-		this.member=loginControl.getCurrentMember();
+		this.movieID = movie.getMovieId();
+		this.member = loginControl.getCurrentMember();
 		labelShowTitle.setText(movie.getTitle());
 		labelShowReleaseYear.setText(""+movie.getYear());
 		labelShowGenre.setText(movie.getGenre());

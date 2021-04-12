@@ -39,9 +39,9 @@ public class Main {
 		RateMovieUI addRatingUI= new RateMovieUI(rateMovieControl,loginControl,viewMovieControl);
 		
 		EditRatingControl editRatingControl = new EditRatingControl(dm, loginControl);
-		EditRatingUI addEditRatingUI = new EditRatingUI(editRatingControl, loginControl, viewMovieControl);
+		EditRatingUI editRatingUI = new EditRatingUI(editRatingControl, loginControl, viewMovieControl);
 		
-		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI,loginControl,addReviewUI,addRatingUI, addEditRatingUI);
+		ViewMovieUI viewMovieUI = new ViewMovieUI(viewMovieControl, removeMovieUI, loginControl, addReviewUI, addRatingUI, editRatingUI);
 		
 		LoginUI loginUI = new LoginUI(loginControl);
 		
@@ -51,7 +51,7 @@ public class Main {
 		AddMovieControl addMovieControl = new AddMovieControl(dm, loginControl);
 		AddMovieUI addMovieUI = new AddMovieUI(addMovieControl);
     
-		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI,addMovieUI,viewMovieUI);
+		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI, addMovieUI, viewMovieUI);
 		mainUI.setVisible(true);
 		loginUI.setMain(mainUI);
 	}
