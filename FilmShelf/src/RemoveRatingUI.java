@@ -15,20 +15,12 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 public class RemoveRatingUI extends JPanel {
-
-	private LoginControl loginControl;
-	private EditRatingControl editRatingControl;
-	private ViewMovieControl viewMovieControl;
 	private RemoveRatingControl removeRatingControl;
 	private final Action action1 = new SwingAction();
-	private int movieiD;
+	private int movieId;	
 	
-	
-	public RemoveRatingUI(RemoveRatingControl rrControl, EditRatingControl erControl, LoginControl lControl, ViewMovieControl vControl) {
+	public RemoveRatingUI(RemoveRatingControl rrControl) {
 		removeRatingControl = rrControl;
-		editRatingControl = erControl;
-		loginControl = lControl;
-		viewMovieControl = vControl;
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{38, 0, 0, 0, 0, 0, 0, 0};
@@ -51,23 +43,21 @@ public class RemoveRatingUI extends JPanel {
 		gbc_removeRatingButton.gridx = 1;
 		gbc_removeRatingButton.gridy = 5;
 		add(removeRatingButton, gbc_removeRatingButton);
-		
 	}
 			
-		public void	displayRemoveRatingForm(int movieID) {
-		this.movieiD = movieID;
+	public void	displayRemoveRatingForm(int movieId) {
+		this.movieId = movieId;
 		setVisible(true);
 	}
 		
-		private class SwingAction extends AbstractAction{
-			private static final long serialVersionUID = 1L;
-			public SwingAction() {
-				putValue(NAME, "");
-				putValue(SHORT_DESCRIPTION, "Remove Rating!");
-			}
-			public void actionPerformed(ActionEvent e) {
-				removeRatingControl.processRemoveRating(movieiD);
-			}
+	private class SwingAction extends AbstractAction{
+		private static final long serialVersionUID = 1L;
+		public SwingAction() {
+			putValue(NAME, "");
+			putValue(SHORT_DESCRIPTION, "Remove Rating!");
 		}
-		
+		public void actionPerformed(ActionEvent e) {
+			removeRatingControl.processRemoveRating(movieId);
+		}
+	}
 }
