@@ -11,6 +11,8 @@
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.util.ArrayList;
@@ -83,6 +85,7 @@ public class ViewMemberUI extends JPanel {
 		
 		//Username label
 		JLabel labelUsername = new JLabel("Username:");
+		labelUsername.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelUsername = new GridBagConstraints();
 		gbc_labelUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_labelUsername.gridx = 2;
@@ -91,6 +94,7 @@ public class ViewMemberUI extends JPanel {
 		
 		//Label that displays the username of the member
 		labelShowUsername = new JLabel("");
+		labelShowUsername.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelShowUsername = new GridBagConstraints();
 		gbc_labelShowUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_labelShowUsername.gridx = 4;
@@ -99,6 +103,7 @@ public class ViewMemberUI extends JPanel {
 		
 		//First name label
 		JLabel labelFirstName = new JLabel("First Name:");
+		labelFirstName.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelFirstName = new GridBagConstraints();
 		gbc_labelFirstName.insets = new Insets(0, 0, 5, 5);
 		gbc_labelFirstName.gridx = 2;
@@ -107,6 +112,7 @@ public class ViewMemberUI extends JPanel {
 		
 		//Label that displays the first name of the member
 		labelShowFirstName = new JLabel("");
+		labelShowFirstName.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelShowFirstName = new GridBagConstraints();
 		gbc_labelShowFirstName.insets = new Insets(0, 0, 5, 5);
 		gbc_labelShowFirstName.gridx = 4;
@@ -115,6 +121,7 @@ public class ViewMemberUI extends JPanel {
 		
 		//Last name label
 		JLabel labelLastName = new JLabel("Last Name:");
+		labelLastName.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelLastName = new GridBagConstraints();
 		gbc_labelLastName.insets = new Insets(0, 0, 5, 5);
 		gbc_labelLastName.gridx = 2;
@@ -123,6 +130,7 @@ public class ViewMemberUI extends JPanel {
 		
 		//Label that displays the last name of the member
 		labelShowLastName = new JLabel("");
+		labelShowLastName.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelShowLastName = new GridBagConstraints();
 		gbc_labelShowLastName.insets = new Insets(0, 0, 5, 5);
 		gbc_labelShowLastName.gridx = 4;
@@ -130,15 +138,17 @@ public class ViewMemberUI extends JPanel {
 		add(labelShowLastName, gbc_labelShowLastName);
 		
 		//Description label
-		JLabel LabelDescription = new JLabel("Description:");
-		GridBagConstraints gbc_LabelDescription = new GridBagConstraints();
-		gbc_LabelDescription.insets = new Insets(0, 0, 5, 5);
-		gbc_LabelDescription.gridx = 2;
-		gbc_LabelDescription.gridy = 5;
-		add(LabelDescription, gbc_LabelDescription);
+		JLabel labelDescription = new JLabel("Description:");
+		labelDescription.setForeground(Color.WHITE);
+		GridBagConstraints gbc_labelDescription = new GridBagConstraints();
+		gbc_labelDescription.insets = new Insets(0, 0, 5, 5);
+		gbc_labelDescription.gridx = 2;
+		gbc_labelDescription.gridy = 5;
+		add(labelDescription, gbc_labelDescription);
 		
 		//Label that displays the description of the member
 		labelShowDescription = new JLabel("");
+		labelShowDescription.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelShowDescription = new GridBagConstraints();
 		gbc_labelShowDescription.insets = new Insets(0, 0, 5, 5);
 		gbc_labelShowDescription.gridx = 4;
@@ -162,6 +172,7 @@ public class ViewMemberUI extends JPanel {
 		
 		//Top movies label
 		JLabel labelTopMovies = new JLabel("Top Movies");
+		labelTopMovies.setForeground(Color.WHITE);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.gridwidth = 2;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
@@ -171,6 +182,7 @@ public class ViewMemberUI extends JPanel {
 		
 		//Label that displays the member's first top movie
 		JLabel labelMovie1 = new JLabel("");
+		labelMovie1.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelMovie1 = new GridBagConstraints();
 		gbc_labelMovie1.insets = new Insets(0, 0, 5, 0);
 		gbc_labelMovie1.gridx = 3;
@@ -179,6 +191,7 @@ public class ViewMemberUI extends JPanel {
 		
 		//Label that displays the member's second top movie
 		JLabel labelMovie2 = new JLabel("");
+		labelMovie2.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelMovie2 = new GridBagConstraints();
 		gbc_labelMovie2.insets = new Insets(0, 0, 5, 0);
 		gbc_labelMovie2.gridx = 3;
@@ -187,6 +200,7 @@ public class ViewMemberUI extends JPanel {
 		
 		//Label that displays the member's third top movie
 		JLabel labelMovie3 = new JLabel("");
+		labelMovie3.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelMovie3 = new GridBagConstraints();
 		gbc_labelMovie3.insets = new Insets(0, 0, 5, 0);
 		gbc_labelMovie3.gridx = 3;
@@ -195,6 +209,7 @@ public class ViewMemberUI extends JPanel {
 		
 		//Label that displays the member's fourth top movie
 		JLabel labelMovie4 = new JLabel("");
+		labelMovie4.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelMovie4 = new GridBagConstraints();
 		gbc_labelMovie4.insets = new Insets(0, 0, 5, 0);
 		gbc_labelMovie4.gridx = 3;
@@ -203,6 +218,7 @@ public class ViewMemberUI extends JPanel {
 		
 		//Label that displays the member's fifth top movie
 		JLabel labelMovie5 = new JLabel("");
+		labelMovie5.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelMovie5 = new GridBagConstraints();
 		gbc_labelMovie5.gridx = 3;
 		gbc_labelMovie5.gridy = 5;
@@ -214,6 +230,8 @@ public class ViewMemberUI extends JPanel {
 		labelMovies[2] = labelMovie3;
 		labelMovies[3] = labelMovie4;
 		labelMovies[4] = labelMovie5;
+		
+		setOpaque(false);
 	}
 	
 	

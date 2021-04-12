@@ -8,6 +8,8 @@
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
@@ -53,6 +55,7 @@ public class AddMovieUI extends JPanel {
 		
 		//Title label
 		JLabel labelTitle = new JLabel("Title: ");
+		labelTitle.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelTitle = new GridBagConstraints();
 		gbc_labelTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_labelTitle.gridx = 1;
@@ -73,6 +76,7 @@ public class AddMovieUI extends JPanel {
 		
 		//Year label
 		JLabel labelYear = new JLabel("Release Year: ");
+		labelYear.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelYear = new GridBagConstraints();
 		gbc_labelYear.insets = new Insets(0, 0, 5, 5);
 		gbc_labelYear.gridx = 1;
@@ -99,6 +103,7 @@ public class AddMovieUI extends JPanel {
 		
 		//Genre label
 		JLabel labelGenre = new JLabel("Genre: ");
+		labelGenre.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelGenre = new GridBagConstraints();
 		gbc_labelGenre.insets = new Insets(0, 0, 5, 5);
 		gbc_labelGenre.gridx = 1;
@@ -121,6 +126,7 @@ public class AddMovieUI extends JPanel {
 		
 		//Length label
 		JLabel labelLength = new JLabel("Length: ");
+		labelLength.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelLength = new GridBagConstraints();
 		gbc_labelLength.insets = new Insets(0, 0, 5, 5);
 		gbc_labelLength.gridx = 1;
@@ -142,6 +148,7 @@ public class AddMovieUI extends JPanel {
 		add(spinnerLength, gbc_spinnerLength);
 		
 		JLabel lblNewLabel = new JLabel("mins");
+		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -151,6 +158,7 @@ public class AddMovieUI extends JPanel {
 		
 		//Another panel for the add movie button and success/error label so they will be centered properly
 		JPanel panel = new JPanel();
+		panel.setOpaque(false);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.gridwidth = 6;
 		gbc_panel.insets = new Insets(0, 0, 5, 5);
@@ -180,11 +188,13 @@ public class AddMovieUI extends JPanel {
 		
 		//Movie addition success/error label
 		labelAddMovieStatus = new JLabel("");
+		labelAddMovieStatus.setForeground(Color.WHITE);
 		GridBagConstraints gbc_labelAddMovieStatus = new GridBagConstraints();
 		gbc_labelAddMovieStatus.gridx = 0;
 		gbc_labelAddMovieStatus.gridy = 1;
 		panel.add(labelAddMovieStatus, gbc_labelAddMovieStatus);
 		
+		setOpaque(false);
 		setVisible(false);
 	}
 	

@@ -337,7 +337,7 @@ public class MainUI extends JFrame {
         gbc_lblNewLabel_3.gridy = 0;
         panel_1.add(lblNewLabel_3, gbc_lblNewLabel_3);
        
-    
+        mainPane.setOpaque(false);
         //searchMovieUI.setVisible(true);
         pack();
 	}
