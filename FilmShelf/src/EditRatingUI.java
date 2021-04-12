@@ -22,6 +22,7 @@ public class EditRatingUI extends JPanel {
 	private ViewMovieControl viewMovieControl;
 	private RemoveRatingUI removeRatingUI;
 	private JButton removeRatingButton;
+
 	private final Action action1 = new SwingAction();
 	private final Action action2 = new SwingAction_1();
 	private final Action action3 = new SwingAction_2();
@@ -121,7 +122,6 @@ public class EditRatingUI extends JPanel {
 		else {
 			removeRatingButton.setVisible(false);
 		}
-		
 	}
 	
 	private class SwingAction extends AbstractAction {
@@ -186,6 +186,7 @@ public class EditRatingUI extends JPanel {
 			putValue(SHORT_DESCRIPTION, "Five Star Rating");
 		}
 		public void actionPerformed(ActionEvent e) {
+
 			editRatingControl.processEditRating(movieID, 5);
 		}
 	}

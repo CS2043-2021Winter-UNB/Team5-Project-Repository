@@ -2,19 +2,12 @@
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.Calendar;
-
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-
 
 public class RateMovieUI extends JPanel {
 
@@ -27,8 +20,6 @@ public class RateMovieUI extends JPanel {
 	private final Action action4 = new SwingAction_3();
 	private final Action action5 = new SwingAction_4();
 	private int movieiD;
-
-
 
 	public RateMovieUI(RateMovieControl rmControl, LoginControl lControl, ViewMovieControl vControl) {
 		rateMovieControl = rmControl;
@@ -88,9 +79,8 @@ public class RateMovieUI extends JPanel {
 		gbc_fiveStarsButton.gridx = 5;
 		gbc_fiveStarsButton.gridy = 5;
 		add(fiveStarsButton, gbc_fiveStarsButton);
-		
-		
 	}
+	
 	public void displayRatingForm(int movieID) {
 		this.movieiD =movieID;
 		setVisible(true);

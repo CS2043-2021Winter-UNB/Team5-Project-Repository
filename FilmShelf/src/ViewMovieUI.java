@@ -29,9 +29,12 @@ public class ViewMovieUI extends JPanel {
 	private JButton buttonRemoveMovie;
 	private LoginControl loginControl;
 	private JButton reviewButton;
-	int movieID;
+	private int movieID;
+
 	private JButton rateButton;
-	private RateMovieUI rateMovie;
+	private JButton editRatingButton;
+	private RateMovieUI rateMovieUI;
+	private EditRatingUI editRatingUI;
 	private MemberObject member;
 	private JLayeredPane layeredPane_1;
 	double rating;
@@ -42,13 +45,14 @@ public class ViewMovieUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ViewMovieUI(ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie, LoginControl controlLogin, AddReviewUI uiAddReview,RateMovieUI uiRateMovie, ViewReviewUI uiViewReview) {
-		viewMovieControl = controlViewMovie;
-		removeMovieUI = uiRemoveMovie;
+	public ViewMovieUI(LoginControl controlLogin, ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie,  AddReviewUI uiAddReview, ViewReviewUI uiViewReview, RateMovieUI uiRateMovie, EditRatingUI uiEditRating) {
 		loginControl = controlLogin;
+    viewMovieControl = controlViewMovie;
+		removeMovieUI = uiRemoveMovie;
 		addReviewUI = uiAddReview;
-		rateMovie=uiRateMovie;
-		viewReviewUI=uiViewReview;
+    viewReviewUI=uiViewReview;
+		rateMovieUI = uiRateMovie;
+		editRatingUI = uiEditRating;
 		setVisible(false);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -95,7 +99,7 @@ public class ViewMovieUI extends JPanel {
 		rateButton = new JButton("Rate Movie");
 		rateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				rateMovie.displayRatingForm(movieID);
+				rateMovieUI.displayRatingForm(movieID);
 			}
 		});
 		GridBagConstraints gbc_rateButton = new GridBagConstraints();
@@ -104,6 +108,20 @@ public class ViewMovieUI extends JPanel {
 		gbc_rateButton.gridx = 8;
 		gbc_rateButton.gridy = 2;
 		add(rateButton, gbc_rateButton);
+		
+		editRatingButton = new JButton("Edit Rating");
+		editRatingButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editRatingUI.displayEditRatingForm(movieID);
+				setVisible(false);
+			}
+		});
+		GridBagConstraints gbc_editRatingButton = new GridBagConstraints();
+		gbc_editRatingButton.gridwidth = 2;
+		gbc_editRatingButton.insets = new Insets(0, 0, 5, 5);
+		gbc_editRatingButton.gridx = 8;
+		gbc_editRatingButton.gridy = 4;
+		add(editRatingButton, gbc_editRatingButton);
 		
 		//Release year label
 		JLabel labelReleaseYear = new JLabel("Release year:");
@@ -199,7 +217,7 @@ public class ViewMovieUI extends JPanel {
 		viewReviewButton = new JButton("View Reviews");
 		viewReviewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			//viewReviewUI.displayLeaveReviewForm(movieID);
+				viewReviewUI.displayReview(title,movieID);
 			}
 		});
 		GridBagConstraints gbc_viewReviewButton = new GridBagConstraints();
@@ -210,12 +228,11 @@ public class ViewMovieUI extends JPanel {
 
 	}
 	
-	
 	public void displayMovie(MovieObject movie) {
-		this.movieID=movie.getMovieId();
-		this.member=loginControl.getCurrentMember();
-		this.rating=movie.getAverageRating();
-		this.title=movie.getTitle();
+		this.movieID = movie.getMovieId();
+		this.member = loginControl.getCurrentMember();
+		this.rating = movie.getAverageRating();
+		this.title = movie.getTitle();
 		labelShowTitle.setText(movie.getTitle());
 		labelShowReleaseYear.setText(""+movie.getYear());
 		labelShowGenre.setText(movie.getGenre());
