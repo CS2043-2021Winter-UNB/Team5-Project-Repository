@@ -18,9 +18,6 @@ import javax.swing.JOptionPane;
 
 
 public class RemoveMemberUI extends JPanel {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private RemoveMemberControl removeMemberControl;
 	private MainUI mainUI;
