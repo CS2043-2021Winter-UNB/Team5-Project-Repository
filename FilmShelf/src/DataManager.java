@@ -229,16 +229,29 @@ public class DataManager {
 
 	//Jessie-Anne 
 	public boolean addMovie(String title, int releaseYear, String genre, int length) {
+
 		//SQL query String 
-		String sqlQuery = "insert into Movie(title, releaseYear, genre, length) values('" +	title + "'," + releaseYear + ", '" + genre + "', " + length + ");";
-		
+		String sqlQuery = "insert into Movie(title, releaseYear, genre, length) values('" +	title + "'," + releaseYear + ", '" + genre + "', " + length + ");"
+
+		//Check for ducplicate Movie
+		String sqlCheck = "select * from Movie where title = '" + title + "' and releaseYear = " + releaseYear + ";";
+
 		//ResultSet
 		try {
+			
 			//Create statement 
 			Statement stmt = connection.createStatement();
 
+			//If there is a duplicate movie return false
+			ResultSet rs = stmt.executeQuery(sqlCheck);
+
+			if(rs.next()){
+				return false;
+			}
+
 			//ResultSet
 			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			
 			
 			// return false if no movie was added
 			if(rowsUpdated == 0) {
