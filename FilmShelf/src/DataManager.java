@@ -234,7 +234,7 @@ public class DataManager {
 		String sqlQuery = "insert into Movie(title, releaseYear, genre, length) values('" +	title + "'," + releaseYear + ", '" + genre + "', " + length + ");";
 
 		//Check for ducplicate Movie
-		String sqlCheck = "select * from Movie where title = '" + title + "' and year = '" + year + "';";
+		String sqlCheck = "select * from Movie where title = '" + title + "' and releaseYear = " + releaseYear + ";";
 
 		//ResultSet
 		try {
@@ -245,7 +245,7 @@ public class DataManager {
 			//If there is a duplicate movie return false
 			ResultSet rs = stmt.executeQuery(sqlCheck);
 
-			if(!rs.next()){
+			if(rs.next()){
 				return false;
 			}
 
