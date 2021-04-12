@@ -1,11 +1,13 @@
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.util.ArrayList;
@@ -118,6 +120,35 @@ public class ViewReviewUI extends JPanel {
 		    }};
 		list.addListSelectionListener(listSelectionListener);
 		
+		//change the look of certain rows 
+		list.setCellRenderer(new DefaultListCellRenderer() {
+			@Override
+            public Component getListCellRendererComponent(JList list, Object value, int index,
+                      boolean isSelected, boolean cellHasFocus) {
+                 Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+	              String text = String.valueOf(value);
+	              if (index%2 == 0) {
+	            	  setFont(new Font ("Serif", Font.BOLD, 12));
+	              }
+	              else {
+	            	  setFont(new Font ("Serif", Font.PLAIN, 12));
+	              }
+	              
+	              
+	              if (isSelected) {
+	            	   Color lightblue = new Color(225,246,255);
+	                   setBackground(lightblue);
+	              } else {
+	                   setBackground(Color.WHITE);
+	              }
+	              if (isSelected) {
+	                   setBackground(getBackground().darker());
+	              }
+                 return c;
+            }
+
+       });
+		
 		
 		scrollPane.setViewportView(list);
 		
@@ -142,8 +173,6 @@ public class ViewReviewUI extends JPanel {
 			        	reviewUsername = model.elementAt(index-1);
 			        	review = model.elementAt(index);
 	        		}
-		            //System.out.println("Username: " + reviewUsername);
-		            //System.out.println("Review: " + review);
 	        		
 	        		MemberObject member = loginControl.getCurrentMember();
 	        		boolean memberCheck = false;

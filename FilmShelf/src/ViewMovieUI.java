@@ -45,7 +45,8 @@ public class ViewMovieUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ViewMovieUI(LoginControl controlLogin, ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie,  AddReviewUI uiAddReview, ViewReviewUI uiViewReview, RateMovieUI uiRateMovie, EditRatingUI uiEditRating) {
+	public ViewMovieUI(LoginControl controlLogin, ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie,
+		AddReviewUI uiAddReview, ViewReviewUI uiViewReview, RateMovieUI uiRateMovie, EditRatingUI uiEditRating) {
 		loginControl = controlLogin;
     viewMovieControl = controlViewMovie;
 		removeMovieUI = uiRemoveMovie;
