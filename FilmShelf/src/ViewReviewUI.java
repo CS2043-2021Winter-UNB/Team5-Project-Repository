@@ -44,10 +44,10 @@ public class ViewReviewUI extends JPanel {
 	private String reviewUsername;
 	private int reviewObjectIndex;
 	private int reviewId;
+	private Color lightblue;
+	int check = 0;
 	
-	/**
-	 * Create the panel.
-	 */
+
 	public ViewReviewUI(ViewReviewControl controlViewReview, RemoveReviewUI uiRemoveReview, ViewMemberUI uiViewMember, LoginControl controlLogin) {
 		viewReviewControl = controlViewReview;
 		loginControl = controlLogin;
@@ -107,6 +107,8 @@ public class ViewReviewUI extends JPanel {
 		gbc_scrollPane.gridy = 1;
 		add(scrollPane, gbc_scrollPane);
 		
+ 	    lightblue = new Color(225,246,255);
+		
 		model = new DefaultListModel<String>();
 		list = new JList<String>(model);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -124,25 +126,35 @@ public class ViewReviewUI extends JPanel {
 		list.setCellRenderer(new DefaultListCellRenderer() {
 			@Override
             public Component getListCellRendererComponent(JList list, Object value, int index,
-                      boolean isSelected, boolean cellHasFocus) {
-                 Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                  boolean isSelected, boolean cellHasFocus) {
+                  Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 	              String text = String.valueOf(value);
-	              if (index%2 == 0) {
+	              boolean usernameCheck = (index%2 == 0);
+	              if (usernameCheck) {
 	            	  setFont(new Font ("Serif", Font.BOLD, 12));
 	              }
 	              else {
 	            	  setFont(new Font ("Serif", Font.PLAIN, 12));
 	              }
 	              
+	              check++;
+	              System.out.println(check);
 	              
-	              if (isSelected) {
-	            	   Color lightblue = new Color(225,246,255);
-	                   setBackground(lightblue);
-	              } else {
-	                   setBackground(Color.WHITE);
+	              //set username and review field to light blue if selected
+	              if (selectedIndex == index) {
+	                  setBackground(lightblue);   
+	                  //System.out.println("here1 " + getText());
+	              } 
+	              else if ((selectedIndex%2 == 0) && (index-selectedIndex) == 1) {
+	            	  setBackground(lightblue);   
+	            	  //System.out.println("here2 " + getText());
 	              }
-	              if (isSelected) {
-	                   setBackground(getBackground().darker());
+	              else if ((selectedIndex%2 != 0) && (selectedIndex-index) ==1) {
+	            	  setBackground(lightblue);
+	            	  //System.out.println("here3 " + getText());
+	              }
+	              else {
+	                   setBackground(Color.WHITE);
 	              }
                  return c;
             }
@@ -160,6 +172,7 @@ public class ViewReviewUI extends JPanel {
 		        int index = list.locationToIndex(mouseEvent.getPoint());
 	        	//if click was within Jlist rows
 	        	if (index >= 0) {
+	        		selectedIndex = index;
 	        		reviewObjectIndex = index/2;
 	        		boolean checkUsername = (index%2 == 0);
 	        		String reviewUsername;

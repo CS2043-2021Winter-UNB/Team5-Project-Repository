@@ -218,6 +218,7 @@ public class ViewMovieUI extends JPanel {
 		viewReviewButton = new JButton("View Reviews");
 		viewReviewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				viewReviewUI.displayReview(title,movieID);
 			}
 		});
