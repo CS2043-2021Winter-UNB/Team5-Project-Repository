@@ -45,10 +45,11 @@ public class Main {
 		EditRatingControl editRatingControl = new EditRatingControl(dm, loginControl);
 		EditRatingUI editRatingUI = new EditRatingUI(editRatingControl, loginControl, viewMovieControl);
 		
-		ViewMovieUI viewMovieUI = new ViewMovieUI(loginControl, viewMovieControl, removeMovieUI, addReviewUI, viewReviewUI, addRatingUI, editRatingUI);
-
 		ViewReviewControl viewReviewControl = new ViewReviewControl(dm);
 		ViewReviewUI viewReviewUI = new ViewReviewUI(viewReviewControl, removeReviewUI, viewMemberUI,loginControl);
+		
+		ViewMovieUI viewMovieUI = new ViewMovieUI(loginControl, viewMovieControl, removeMovieUI, addReviewUI, viewReviewUI, rateMovieUI, editRatingUI);
+
 		
 		SearchMovieControl searchMovieControl = new SearchMovieControl(dm);
 		SearchMovieUI searchMovieUI = new SearchMovieUI(searchMovieControl, viewMovieUI);
