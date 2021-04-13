@@ -56,31 +56,22 @@ public class ViewReviewUI extends JPanel {
 		viewMemberUI = uiViewMember;
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{200, 20, 0, 200, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{10, 200, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{30, 100, 100, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		Color fontColor = UISettings.getFontColor();
 		
-		labelMovieName = new JLabel("");
-		labelMovieName.setHorizontalAlignment(SwingConstants.RIGHT);
-		labelMovieName.setForeground(fontColor);
+	    labelMovieName = new JLabel();
+	    labelMovieName.setHorizontalAlignment(SwingConstants.LEFT);
+	    labelMovieName.setForeground(fontColor);
 		GridBagConstraints gbc_labelMovieName = new GridBagConstraints();
 		gbc_labelMovieName.insets = new Insets(0, 0, 5, 5);
-		gbc_labelMovieName.gridx = 2;
+		gbc_labelMovieName.gridx = 1;
 		gbc_labelMovieName.gridy = 0;
 		add(labelMovieName, gbc_labelMovieName);
-		
-		JLabel labelReviewTitle = new JLabel("Reviews");
-		labelReviewTitle.setHorizontalAlignment(SwingConstants.LEFT);
-		labelReviewTitle.setForeground(fontColor);
-		GridBagConstraints gbc_labelReviewTitle = new GridBagConstraints();
-		gbc_labelReviewTitle.insets = new Insets(0, 0, 5, 5);
-		gbc_labelReviewTitle.gridx = 3;
-		gbc_labelReviewTitle.gridy = 0;
-		add(labelReviewTitle, gbc_labelReviewTitle);
 		
 		buttonRemoveReview = new JButton("Remove Review");
 		buttonRemoveReview.addActionListener(new ActionListener() {
@@ -100,15 +91,14 @@ public class ViewReviewUI extends JPanel {
 		});
 		GridBagConstraints gbc_buttonRemoveReview = new GridBagConstraints();
 		gbc_buttonRemoveReview.insets = new Insets(0, 0, 5, 0);
-		gbc_buttonRemoveReview.gridx = 5;
+		gbc_buttonRemoveReview.gridx = 3;
 		gbc_buttonRemoveReview.gridy = 0;
 		add(buttonRemoveReview, gbc_buttonRemoveReview);
 		
 		scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridheight = 2;
-		gbc_scrollPane.gridwidth = 6;
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.gridwidth = 4;
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 1;
@@ -216,7 +206,7 @@ public class ViewReviewUI extends JPanel {
 	//displays the reviews for that movie 
 	public void displayReview(String movieName, int movieId) {
 		//Make the title label display the name of the movie 
-		labelMovieName.setText(movieName);
+		labelMovieName.setText(movieName + " Reviews");
 		this.movieId = movieId;
 		
 		//if there are reviews in the model from the last time it was displayed, clear them
