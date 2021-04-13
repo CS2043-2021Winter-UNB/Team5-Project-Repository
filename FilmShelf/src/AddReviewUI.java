@@ -1,13 +1,13 @@
 
 import javax.swing.JPanel;
-	import java.awt.GridBagLayout;
-	import javax.swing.JLabel;
-	import java.awt.GridBagConstraints;
-	import java.awt.Insets;
-	import javax.swing.JButton;
-	import java.awt.event.ActionListener;
-	import java.awt.event.ActionEvent;
-	import javax.swing.JTextArea;
+import java.awt.GridBagLayout;
+import javax.swing.JLabel;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 public class AddReviewUI extends JPanel {
@@ -34,7 +34,6 @@ public class AddReviewUI extends JPanel {
 			setLayout(gridBagLayout);
 			
 			//Title label
-			
 			JLabel labelReview = new JLabel("Add review for the movie below:");
 			labelReview.setHorizontalAlignment(SwingConstants.LEFT);
 			GridBagConstraints gbc_labelReview = new GridBagConstraints();
@@ -59,9 +58,8 @@ public class AddReviewUI extends JPanel {
 			JButton buttonAddReview = new JButton("Add Review");
 			buttonAddReview.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
-					if(leaveReviewControl.processAddReview(movieId,textArea.getText())==true) {
+					if(leaveReviewControl.processAddReview(movieId,textArea.getText())) {
 						displayLeaveReviewConfirmation();
-						leaveReviewControl.processAddReview(movieId,textArea.getText());
 					}
 					else {
 						displayErrorMessage();
@@ -85,25 +83,16 @@ public class AddReviewUI extends JPanel {
 			setVisible(false);
 		}
 	public void displayLeaveReviewForm(int movieID,String titleIn) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		//display the form
 		this.movieTitle=titleIn;
 		this.movieId=movieID;
 		setVisible(true);
 	}
 
 	public void displayLeaveReviewConfirmation() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		labelAddReview.setText("Review added successfully.");
-		// end-user-code
 	}
 
 	public void displayErrorMessage() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		labelAddReview.setText("Account edit was unsuccessful. Account information was invalid.");
-		// end-user-code
 	}
 }
