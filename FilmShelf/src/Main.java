@@ -52,7 +52,6 @@ public class Main {
 		ViewReviewUI viewReviewUI = new ViewReviewUI(viewReviewControl, removeReviewUI, viewMemberUI,loginControl);
 		
 		ViewMovieUI viewMovieUI = new ViewMovieUI(loginControl, viewMovieControl, removeMovieUI, addReviewUI, viewReviewUI, rateMovieUI, editRatingUI);
-
 		
 		SearchMovieControl searchMovieControl = new SearchMovieControl(dm);
 		SearchMovieUI searchMovieUI = new SearchMovieUI(searchMovieControl, viewMovieUI);

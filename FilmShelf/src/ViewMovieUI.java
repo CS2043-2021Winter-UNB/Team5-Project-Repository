@@ -3,6 +3,8 @@
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLayeredPane;
@@ -45,12 +47,13 @@ public class ViewMovieUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ViewMovieUI(LoginControl controlLogin, ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie,  AddReviewUI uiAddReview, ViewReviewUI uiViewReview, RateMovieUI uiRateMovie, EditRatingUI uiEditRating) {
+	public ViewMovieUI(LoginControl controlLogin, ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie,
+		AddReviewUI uiAddReview, ViewReviewUI uiViewReview, RateMovieUI uiRateMovie, EditRatingUI uiEditRating) {
 		loginControl = controlLogin;
-    viewMovieControl = controlViewMovie;
+		viewMovieControl = controlViewMovie;
 		removeMovieUI = uiRemoveMovie;
 		addReviewUI = uiAddReview;
-    viewReviewUI=uiViewReview;
+		viewReviewUI=uiViewReview;
 		rateMovieUI = uiRateMovie;
 		editRatingUI = uiEditRating;
 		setVisible(false);
@@ -61,6 +64,8 @@ public class ViewMovieUI extends JPanel {
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
+		
+		Color fontColor = UISettings.getFontColor();
 		
 		//Remove account button
 		buttonRemoveMovie = new JButton("Remove Movie");
@@ -82,6 +87,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//title label
 		JLabel labelTitle = new JLabel("Title:");
+		labelTitle.setForeground(fontColor);
 		GridBagConstraints gbc_labelTitle = new GridBagConstraints();
 		gbc_labelTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_labelTitle.gridx = 2;
@@ -90,6 +96,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Label that displays the title of the movie
 		labelShowTitle = new JLabel("");
+		labelShowTitle.setForeground(fontColor);
 		GridBagConstraints gbc_labelShowTitle= new GridBagConstraints();
 		gbc_labelShowTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_labelShowTitle.gridx = 4;
@@ -125,6 +132,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Release year label
 		JLabel labelReleaseYear = new JLabel("Release year:");
+		labelReleaseYear.setForeground(fontColor);
 		GridBagConstraints gbc_labelReleaseYear = new GridBagConstraints();
 		gbc_labelReleaseYear.insets = new Insets(0, 0, 5, 5);
 		gbc_labelReleaseYear.gridx = 2;
@@ -133,6 +141,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Label that displays the release year of the movie
 		labelShowReleaseYear = new JLabel("");
+		labelShowReleaseYear.setForeground(fontColor);
 		GridBagConstraints gbc_labelShowReleaseYear = new GridBagConstraints();
 		gbc_labelShowReleaseYear.insets = new Insets(0, 0, 5, 5);
 		gbc_labelShowReleaseYear.gridx = 4;
@@ -155,6 +164,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Genre label
 		JLabel labelGenre = new JLabel("Genre:");
+		labelGenre.setForeground(fontColor);
 		GridBagConstraints gbc_labelGenre = new GridBagConstraints();
 		gbc_labelGenre.insets = new Insets(0, 0, 5, 5);
 		gbc_labelGenre.gridx = 2;
@@ -163,6 +173,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Label that displays the genre of the movie
 		labelShowGenre = new JLabel("");
+		labelShowGenre.setForeground(fontColor);
 		GridBagConstraints gbc_labelShowGenre = new GridBagConstraints();
 		gbc_labelShowGenre.insets = new Insets(0, 0, 5, 5);
 		gbc_labelShowGenre.gridx = 4;
@@ -171,6 +182,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Length label
 		JLabel LabelLength = new JLabel("Length:");
+		LabelLength.setForeground(fontColor);
 		GridBagConstraints gbc_LabelLength = new GridBagConstraints();
 		gbc_LabelLength.insets = new Insets(0, 0, 5, 5);
 		gbc_LabelLength.gridx = 2;
@@ -179,6 +191,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Label that displays the Length of the movie
 		labelShowLength = new JLabel("");
+		labelShowLength.setForeground(fontColor);
 		GridBagConstraints gbc_labelShowLength = new GridBagConstraints();
 		gbc_labelShowLength.insets = new Insets(0, 0, 5, 5);
 		gbc_labelShowLength.gridx = 4;
@@ -200,6 +213,7 @@ public class ViewMovieUI extends JPanel {
 		layeredPane_1.setLayout(gbl_layeredPane_1);
 		
 		JLabel movieRateLabel = new JLabel("Movie Rate:");
+		movieRateLabel.setForeground(fontColor);
 		GridBagConstraints gbc_movieRateLabel = new GridBagConstraints();
 		gbc_movieRateLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_movieRateLabel.gridx = 1;
@@ -208,6 +222,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//JLabel rateLabelnum = new JLabel(""+movie.getRatingScore());
 		JLabel rateLabelnum = new JLabel(""+rating);
+		rateLabelnum.setForeground(fontColor);
 		GridBagConstraints gbc_rateLabelnum = new GridBagConstraints();
 		gbc_rateLabelnum.insets = new Insets(0, 0, 0, 5);
 		gbc_rateLabelnum.gridx = 1;
@@ -217,6 +232,7 @@ public class ViewMovieUI extends JPanel {
 		viewReviewButton = new JButton("View Reviews");
 		viewReviewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				viewReviewUI.displayReview(title,movieID);
 			}
 		});
@@ -225,7 +241,8 @@ public class ViewMovieUI extends JPanel {
 		gbc_viewReviewButton.gridx = 9;
 		gbc_viewReviewButton.gridy = 7;
 		add(viewReviewButton, gbc_viewReviewButton);
-
+		
+		setOpaque(false);
 	}
 	
 	public void displayMovie(MovieObject movie) {
