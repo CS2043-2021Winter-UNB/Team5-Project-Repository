@@ -30,4 +30,9 @@ public class EditRatingControl {
 		return dataManager.editMovieRating(member.getUsername(), movieId, rating);
 		//NOTE TO FRONT-END: UI needs to call processViewMovie() in Control to update ratings
 	}
+	
+	public RatingObject getRating(int movieID) {
+		MemberObject member = loginControl.getCurrentMember();
+		return dataManager.getMovieRatingByMember(member.getUsername(), movieID);
+	}
 }

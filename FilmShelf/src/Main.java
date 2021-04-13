@@ -41,9 +41,12 @@ public class Main {
 
 		RemoveReviewControl removeReviewControl = new RemoveReviewControl(dm, loginControl);
 		RemoveReviewUI removeReviewUI = new RemoveReviewUI(removeReviewControl);
+		
+		RemoveRatingControl removeRatingControl = new RemoveRatingControl(dm, loginControl);
+		RemoveRatingUI removeRatingUI = new RemoveRatingUI(removeRatingControl);
 
 		EditRatingControl editRatingControl = new EditRatingControl(dm, loginControl);
-		EditRatingUI editRatingUI = new EditRatingUI(editRatingControl, loginControl, viewMovieControl);
+		EditRatingUI editRatingUI = new EditRatingUI(editRatingControl, loginControl, viewMovieControl, removeRatingUI);
 		
 		ViewReviewControl viewReviewControl = new ViewReviewControl(dm);
 		ViewReviewUI viewReviewUI = new ViewReviewUI(viewReviewControl, removeReviewUI, viewMemberUI,loginControl);
@@ -59,7 +62,6 @@ public class Main {
 		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI, addMovieUI, searchMovieUI, addReviewUI, viewMovieUI, viewReviewUI);
 
 		mainUI.setVisible(true);
-		loginUI.setMain(mainUI);
 		removeMemberUI.setMain(mainUI);
 		removeMovieUI.setMain(mainUI);
 	}

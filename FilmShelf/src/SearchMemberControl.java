@@ -39,7 +39,7 @@ public class SearchMemberControl {
 	}
 
 	// invalid input includes null and strings containing special characters
-	public boolean validateSearchInput(String username) {
+	private boolean validateSearchInput(String username) {
 		// null input is invalid
 		if(username == null) {
 			return false;

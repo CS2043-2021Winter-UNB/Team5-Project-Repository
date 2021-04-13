@@ -229,16 +229,29 @@ public class DataManager {
 
 	//Jessie-Anne 
 	public boolean addMovie(String title, int releaseYear, String genre, int length) {
+
 		//SQL query String 
 		String sqlQuery = "insert into Movie(title, releaseYear, genre, length) values('" +	title + "'," + releaseYear + ", '" + genre + "', " + length + ");";
-		
+
+		//Check for ducplicate Movie
+		String sqlCheck = "select * from Movie where title = '" + title + "' and releaseYear = " + releaseYear + ";";
+
 		//ResultSet
 		try {
+			
 			//Create statement 
 			Statement stmt = connection.createStatement();
 
+			//If there is a duplicate movie return false
+			ResultSet rs = stmt.executeQuery(sqlCheck);
+
+			if(rs.next()){
+				return false;
+			}
+
 			//ResultSet
 			int rowsUpdated = stmt.executeUpdate(sqlQuery);
+			
 			
 			// return false if no movie was added
 			if(rowsUpdated == 0) {
@@ -284,6 +297,9 @@ public class DataManager {
 
 		//Create ArrayList of Integers to Store Movie IDs 
 		ArrayList<Integer> movieIdList = new ArrayList<Integer>();
+		
+		// Flag to signal if the select criteria is the first in the where clause or not
+		boolean firstSQLCondition = true;
 
 		//SQL String Query 
 		String sqlQuery = "select movieID from Movie where ";
@@ -291,29 +307,51 @@ public class DataManager {
 		//Add Desired title to Query (does not need to be exact)
 		if(title != null) {
 			sqlQuery = sqlQuery + "title like '%" + title + "%'";
+			firstSQLCondition = false;
 		}
 
 		//Add Desired Genre to Query 
 		if(genre != null){
-			sqlQuery = sqlQuery + " and genre = '" + genre + "'"; 
+			// append " and " if genre is not first condition in where clause
+			if(!firstSQLCondition) {
+				sqlQuery = sqlQuery + " and ";
+			} else {
+				firstSQLCondition = false;
+			}
+			
+			sqlQuery = sqlQuery + "genre = '" + genre + "'"; 
 		}
 		
 		//Add Desired Release Year to Query
 		if(minReleaseYear != -1 && maxReleaseYear != -1) {
+			// append " and " if year is not first condition in where clause
+			if(!firstSQLCondition) {
+				sqlQuery = sqlQuery + " and ";
+			} else {
+				firstSQLCondition = false;
+			}
+			
 			if(minReleaseYear == maxReleaseYear) {
-				sqlQuery = sqlQuery + " and releaseYear = " + minReleaseYear; 
+				sqlQuery = sqlQuery + "releaseYear = " + minReleaseYear; 
  			} else {
-				sqlQuery = sqlQuery + " and releaseYear between " + minReleaseYear + " and " + maxReleaseYear;
+				sqlQuery = sqlQuery + "releaseYear between " + minReleaseYear + " and " + maxReleaseYear;
 			}
 		} 
 		
 		//Add Desired Length to Query  
 		if(minLength != -1 && maxLength != -1) {
+			// append " and " if length is not first condition in where clause
+			if(!firstSQLCondition) {
+				sqlQuery = sqlQuery + " and ";
+			} else {
+				firstSQLCondition = false;
+			}
+			
 			if(minLength == maxLength) {
-				sqlQuery = sqlQuery + " and length = " + minLength; 
+				sqlQuery = sqlQuery + "length = " + minLength; 
  			}
 			else{
-				sqlQuery = sqlQuery + " and length between " + minLength + " and " + maxLength;
+				sqlQuery = sqlQuery + "length between " + minLength + " and " + maxLength;
 			}
 		} 
 		

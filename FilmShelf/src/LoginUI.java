@@ -32,7 +32,6 @@ public class LoginUI extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private LoginControl loginControl;
-	private MainUI mainUI;
 	private JRadioButton radioButtonAdmin;
 	private JRadioButton radioButtonMember;
 	private JButton loginButton;
@@ -190,10 +189,6 @@ public class LoginUI extends JPanel {
 		setVisible(false);
 	}
 	
-	public void setMain(MainUI mainUI) {
-		this.mainUI = mainUI;
-	}
-	
 	public void displayLoginForm() {
 		//clear login fields/radio button before redisplaying
 		textFieldUsername.setText("");
@@ -224,7 +219,6 @@ public class LoginUI extends JPanel {
 				loginStatus = loginControl.processAdminLogin(username, password);
 			}
 			if(loginStatus) {
-				mainUI.changeAccountButtons();
 				setVisible(false);
 			
 			} else {

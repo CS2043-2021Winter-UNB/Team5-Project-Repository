@@ -32,4 +32,9 @@ public class RateMovieControl {
 		//NOTE TO FRONT-END: UI needs to call processViewMovie() in Control to update ratings
 	}
 	
+	public RatingObject getRating(int movieID) {
+		MemberObject member = loginControl.getCurrentMember();
+		return dataManager.getMovieRatingByMember(member.getUsername(), movieID);
+	}
+	
 }
