@@ -2,7 +2,9 @@
 import javax.swing.JPanel;
 	import java.awt.GridBagLayout;
 	import javax.swing.JLabel;
-	import java.awt.GridBagConstraints;
+
+import java.awt.Color;
+import java.awt.GridBagConstraints;
 	import java.awt.Insets;
 	import javax.swing.JButton;
 	import java.awt.event.ActionListener;
@@ -33,9 +35,11 @@ public class AddReviewUI extends JPanel {
 			gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			setLayout(gridBagLayout);
 			
-			//Title label
+			Color fontColor = UISettings.getFontColor();
 			
+			//Title label
 			JLabel labelReview = new JLabel("Add review for the movie below:");
+			labelReview.setForeground(fontColor);
 			labelReview.setHorizontalAlignment(SwingConstants.LEFT);
 			GridBagConstraints gbc_labelReview = new GridBagConstraints();
 			gbc_labelReview.gridwidth = 3;
@@ -43,8 +47,6 @@ public class AddReviewUI extends JPanel {
 			gbc_labelReview.gridx = 2;
 			gbc_labelReview.gridy = 1;
 			add(labelReview, gbc_labelReview);
-
-			
 			
 			JTextArea textArea = new JTextArea();
 			GridBagConstraints gbc_textArea = new GridBagConstraints();
@@ -76,12 +78,14 @@ public class AddReviewUI extends JPanel {
 			
 			
 			labelAddReview = new JLabel("");
+			labelAddReview.setForeground(fontColor);
 			GridBagConstraints gbc_labelAddReview = new GridBagConstraints();
 			gbc_labelAddReview.insets = new Insets(0, 0, 5, 5);
 			gbc_labelAddReview.gridx = 4;
 			gbc_labelAddReview.gridy = 5;
 			add(labelAddReview, gbc_labelAddReview);
 			
+			setOpaque(false);
 			setVisible(false);
 		}
 	public void displayLeaveReviewForm(int movieID,String titleIn) {
