@@ -231,7 +231,7 @@ public class DataManager {
 	public boolean addMovie(String title, int releaseYear, String genre, int length) {
 
 		//SQL query String 
-		String sqlQuery = "insert into Movie(title, releaseYear, genre, length) values('" +	title + "'," + releaseYear + ", '" + genre + "', " + length + ");"
+		String sqlQuery = "insert into Movie(title, releaseYear, genre, length) values('" +	title + "'," + releaseYear + ", '" + genre + "', " + length + ");";
 
 		//Check for ducplicate Movie
 		String sqlCheck = "select * from Movie where title = '" + title + "' and releaseYear = " + releaseYear + ";";
