@@ -121,9 +121,9 @@ public class MainUI extends JFrame {
 		
 		//int width = 60;
         GridBagLayout gbl_mainPane = new GridBagLayout();
-        gbl_mainPane.columnWidths = new int[]{148, 18, 0, 14, 0, 117, 11, 0};
+        gbl_mainPane.columnWidths = new int[]{3, 148, 18, 0, 20, 117, 3, 0};
         gbl_mainPane.rowHeights = new int[]{79, 25, 0, 0, 357, 0};
-        gbl_mainPane.columnWeights = new double[]{5.0, 5.0, 1.0, 1.0, 0.0, 6.0, 6.0, Double.MIN_VALUE};
+        gbl_mainPane.columnWeights = new double[]{0.0, 5.0, 100.0, 1.0, 100.0, 6.0, 0.0, Double.MIN_VALUE};
         gbl_mainPane.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
         mainPane.setLayout(gbl_mainPane);
         
@@ -190,6 +190,7 @@ public class MainUI extends JFrame {
         
 	    //Extra button
         JButton btnNewButton_2 = new JButton("back to FilmShelf");
+        btnNewButton_2.setHorizontalAlignment(SwingConstants.LEFT);
         btnNewButton_2.setBackground(buttonColor);
 	    btnNewButton_2.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
@@ -199,7 +200,7 @@ public class MainUI extends JFrame {
 	     		
 	    GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
 	    gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
-	    gbc_btnNewButton_2.gridx = 0;
+	    gbc_btnNewButton_2.gridx = 1;
 	    gbc_btnNewButton_2.gridy = 0;
 	    mainPane.add(btnNewButton_2, gbc_btnNewButton_2);
         
@@ -210,7 +211,7 @@ public class MainUI extends JFrame {
         GridBagConstraints gbc_labelFilmShelf = new GridBagConstraints();
         gbc_labelFilmShelf.anchor = GridBagConstraints.WEST;
         gbc_labelFilmShelf.insets = new Insets(0, 0, 5, 5);
-        gbc_labelFilmShelf.gridx = 2;
+        gbc_labelFilmShelf.gridx = 3;
         gbc_labelFilmShelf.gridy = 0;
         mainPane.add(labelFilmShelf, gbc_labelFilmShelf);
 	     
@@ -219,10 +220,9 @@ public class MainUI extends JFrame {
         panelAccountButtons.setOpaque(false);
          
         GridBagConstraints gbc_panel2 = new GridBagConstraints();
-        gbc_panel2.gridwidth = 2;
         gbc_panel2.insets = new Insets(0, 0, 5, 5);
         gbc_panel2.fill = GridBagConstraints.BOTH;
-        gbc_panel2.gridx = 4;
+        gbc_panel2.gridx = 5;
         gbc_panel2.gridy = 0;
         mainPane.add(panelAccountButtons, gbc_panel2);
          
@@ -235,6 +235,7 @@ public class MainUI extends JFrame {
          
         //create account button
         buttonCreateAccount = new JButton("Create Account");
+        buttonCreateAccount.setHorizontalAlignment(SwingConstants.RIGHT);
         buttonCreateAccount.setBackground(buttonColor);
         listenerCreateAccount = new ActionListener() {
          	public void actionPerformed(ActionEvent e) {
@@ -253,6 +254,7 @@ public class MainUI extends JFrame {
          
          //search account button
          buttonSearchAccount = new JButton("Search Account");
+         buttonSearchAccount.setHorizontalAlignment(SwingConstants.RIGHT);
          buttonSearchAccount.setBackground(buttonColor);
          buttonSearchAccount.addActionListener(new ActionListener() {
          	public void actionPerformed(ActionEvent e) {
@@ -268,6 +270,7 @@ public class MainUI extends JFrame {
          	}
          });
          GridBagConstraints gbc_buttonSearch = new GridBagConstraints();
+         gbc_buttonSearch.anchor = GridBagConstraints.EAST;
          gbc_buttonSearch.insets = new Insets(0, 0, 5, 5);
          gbc_buttonSearch.gridx = 0;
          gbc_buttonSearch.gridy = 1;
@@ -277,7 +280,6 @@ public class MainUI extends JFrame {
          //loginButton
          buttonLogin = new JButton("Login");
          buttonLogin.setBackground(buttonColor);
-         buttonLogin.setHorizontalAlignment(SwingConstants.RIGHT);
   
         buttonLogin.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -300,6 +302,7 @@ public class MainUI extends JFrame {
         panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
           
         buttonSearchMovie = new JButton("Search Movie");
+        buttonSearchMovie.setHorizontalAlignment(SwingConstants.RIGHT);
         buttonSearchMovie.setBackground(buttonColor);
         buttonSearchMovie.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -315,6 +318,7 @@ public class MainUI extends JFrame {
           	}
           });
           GridBagConstraints gbc_buttonSearchMovie = new GridBagConstraints();
+          gbc_buttonSearchMovie.anchor = GridBagConstraints.EAST;
           gbc_buttonSearchMovie.insets = new Insets(0, 0, 0, 5);
           gbc_buttonSearchMovie.gridx = 0;
           gbc_buttonSearchMovie.gridy = 2;
@@ -324,7 +328,7 @@ public class MainUI extends JFrame {
           GridBagConstraints gbc_panel_1 = new GridBagConstraints();
           gbc_panel_1.insets = new Insets(0, 0, 5, 5);
           gbc_panel_1.fill = GridBagConstraints.BOTH;
-          gbc_panel_1.gridx = 2;
+          gbc_panel_1.gridx = 3;
           gbc_panel_1.gridy = 1;
           mainPane.add(panel_1, gbc_panel_1);
           GridBagLayout gbl_panel_1 = new GridBagLayout();
