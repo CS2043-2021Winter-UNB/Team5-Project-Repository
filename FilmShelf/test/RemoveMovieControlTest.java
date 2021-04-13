@@ -7,7 +7,6 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,9 +15,9 @@ import java.util.Collection;
  * RemoveMemberControlTest
  * @author Jo
  * Description:
- * 		Tests processRemoveAccount() in RemoveMemberControl for the cases where:
- * 			1. a Member removes their own account
- * 			2. an Admin removes a Member
+ * 		Tests processRemoveMovie() in RemoveMovieControl for the cases where:
+ * 			1. a Member attempts to remove a Movie
+ * 			2. an Admin removes a Movie
  ******************************************************************************************************************************/
 @RunWith(Enclosed.class)
 public class RemoveMovieControlTest {
