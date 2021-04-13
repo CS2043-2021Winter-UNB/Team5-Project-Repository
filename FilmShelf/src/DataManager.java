@@ -419,7 +419,7 @@ public class DataManager {
 			genre = rs.getString(3);
 			length = rs.getInt(4);
 			movieId = rs.getInt(5);
-			averageRating = (getAverageRating(movieId));
+			averageRating = getAverageRating(movieId);
 		} catch(SQLException e) {
 			System.out.println("Get Movie Error: " + e.getMessage());
 			return null;
@@ -442,7 +442,7 @@ public class DataManager {
 			ResultSet rs = stmt.executeQuery(sqlQuery1);
 			
 			//if this happens the user has already rated that movie
-			if(rs != null) {
+			if(rs.isBeforeFirst() || (rs.getRow() != 0)) {
 				//Question for the team: should it return some kind of message re rating already exists?
 				return false;
 			}

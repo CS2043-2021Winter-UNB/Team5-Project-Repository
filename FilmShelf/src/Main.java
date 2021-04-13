@@ -34,25 +34,19 @@ public class Main {
 		AddReviewControl addReviewControl = new AddReviewControl(dm, loginControl);
 		AddReviewUI addReviewUI = new AddReviewUI(addReviewControl);
 
-		ViewMovieControl viewMovieControl = new ViewMovieControl(dm);
-
-		RateMovieControl rateMovieControl = new RateMovieControl(dm,loginControl);
-		RateMovieUI rateMovieUI= new RateMovieUI(rateMovieControl,loginControl,viewMovieControl);
-
 		RemoveReviewControl removeReviewControl = new RemoveReviewControl(dm, loginControl);
 		RemoveReviewUI removeReviewUI = new RemoveReviewUI(removeReviewControl);
 		
 		RemoveRatingControl removeRatingControl = new RemoveRatingControl(dm, loginControl);
-		RemoveRatingUI removeRatingUI = new RemoveRatingUI(removeRatingControl);
-
-		EditRatingControl editRatingControl = new EditRatingControl(dm, loginControl);
-		EditRatingUI editRatingUI = new EditRatingUI(editRatingControl, loginControl, viewMovieControl, removeRatingUI);
+		
+		RateMovieControl rateMovieControl = new RateMovieControl(dm,loginControl);
+		RateMovieUI rateMovieUI= new RateMovieUI(rateMovieControl, removeRatingControl);
 		
 		ViewReviewControl viewReviewControl = new ViewReviewControl(dm);
 		ViewReviewUI viewReviewUI = new ViewReviewUI(viewReviewControl, removeReviewUI, viewMemberUI,loginControl);
 		
-		ViewMovieUI viewMovieUI = new ViewMovieUI(loginControl, viewMovieControl, removeMovieUI, addReviewUI, viewReviewUI, rateMovieUI, editRatingUI);
-
+		ViewMovieControl viewMovieControl = new ViewMovieControl(dm);
+		ViewMovieUI viewMovieUI = new ViewMovieUI(loginControl, viewMovieControl, removeMovieUI, addReviewUI, viewReviewUI, rateMovieUI, rateMovieControl);
 		
 		SearchMovieControl searchMovieControl = new SearchMovieControl(dm);
 		SearchMovieUI searchMovieUI = new SearchMovieUI(searchMovieControl, viewMovieUI);
@@ -60,7 +54,7 @@ public class Main {
 		AddMovieControl addMovieControl = new AddMovieControl(dm, loginControl);
 		AddMovieUI addMovieUI = new AddMovieUI(addMovieControl);
     
-		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI, addMovieUI, searchMovieUI, addReviewUI, viewMovieUI, viewReviewUI);
+		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI, addMovieUI, searchMovieUI, addReviewUI, viewMovieUI, viewReviewUI, rateMovieUI);
 
 		mainUI.setVisible(true);
 		removeMemberUI.setMain(mainUI);
