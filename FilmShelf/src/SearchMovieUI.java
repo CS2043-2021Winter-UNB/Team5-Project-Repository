@@ -252,10 +252,10 @@ public class SearchMovieUI extends JPanel {
 			}
 		});
 		GridBagConstraints gbc_viewMovieButton = new GridBagConstraints();
-		gbc_viewMovieButton.anchor = GridBagConstraints.WEST;
 		gbc_viewMovieButton.gridwidth = 2;
-		gbc_viewMovieButton.insets = new Insets(0, 0, 0, 5);
-		gbc_viewMovieButton.gridx = 1;
+		gbc_viewMovieButton.anchor = GridBagConstraints.EAST;
+		gbc_viewMovieButton.insets = new Insets(0, 0, 5, 5);
+		gbc_viewMovieButton.gridx = 5;
 		gbc_viewMovieButton.gridy = 9;
 		add(viewMovieButton, gbc_viewMovieButton);
 		viewMovieButton.setVisible(false);
@@ -264,7 +264,7 @@ public class SearchMovieUI extends JPanel {
 		labelSearchMovieStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelSearchMovieStatus = new GridBagConstraints();
 		gbc_labelSearchMovieStatus.gridwidth = 6;
-		gbc_labelSearchMovieStatus.insets = new Insets(0, 0, 5, 5);
+		gbc_labelSearchMovieStatus.insets = new Insets(0, 0, 0, 5);
 		gbc_labelSearchMovieStatus.gridx = 1;
 		gbc_labelSearchMovieStatus.gridy = 10;
 		add(labelSearchMovieStatus, gbc_labelSearchMovieStatus);
