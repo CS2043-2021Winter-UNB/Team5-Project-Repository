@@ -21,13 +21,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 
@@ -58,8 +63,8 @@ public class MainUI extends JFrame {
 	private List<JPanel> uiPanelList;
 	private JPanel panel_1;
 	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 
@@ -117,9 +122,9 @@ public class MainUI extends JFrame {
 		//int width = 60;
         GridBagLayout gbl_mainPane = new GridBagLayout();
         gbl_mainPane.columnWidths = new int[]{148, 18, 0, 14, 0, 117, 11, 0};
-        gbl_mainPane.rowHeights = new int[]{79, 0, 0, 0, 357, 0};
+        gbl_mainPane.rowHeights = new int[]{79, 25, 0, 0, 357, 0};
         gbl_mainPane.columnWeights = new double[]{5.0, 5.0, 1.0, 1.0, 0.0, 6.0, 6.0, Double.MIN_VALUE};
-        gbl_mainPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+        gbl_mainPane.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
         mainPane.setLayout(gbl_mainPane);
         
         //adding UI into panel to the main window
@@ -315,70 +320,90 @@ public class MainUI extends JFrame {
           gbc_buttonSearchMovie.gridy = 2;
           panelAccountButtons.add(buttonSearchMovie, gbc_buttonSearchMovie);
         
-        panel_1 = new JPanel();
-        panel_1.setOpaque(false);
-        GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-        gbc_panel_1.insets = new Insets(0, 0, 5, 5);
-        gbc_panel_1.fill = GridBagConstraints.BOTH;
-        gbc_panel_1.gridx = 2;
-        gbc_panel_1.gridy = 1;
-        mainPane.add(panel_1, gbc_panel_1);
-        GridBagLayout gbl_panel_1 = new GridBagLayout();
-        gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
-        gbl_panel_1.rowHeights = new int[]{0, 0};
-        gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-        gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-        panel_1.setLayout(gbl_panel_1);
+          panel_1 = new JPanel();
+          GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+          gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+          gbc_panel_1.fill = GridBagConstraints.BOTH;
+          gbc_panel_1.gridx = 2;
+          gbc_panel_1.gridy = 1;
+          mainPane.add(panel_1, gbc_panel_1);
+          GridBagLayout gbl_panel_1 = new GridBagLayout();
+          gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
+          gbl_panel_1.rowHeights = new int[]{0, 0};
+          gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+          gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+          panel_1.setLayout(gbl_panel_1);
+          panel_1.setOpaque(false);
+          
+        Image star = UISettings.getStarImage();
+        star = star.getScaledInstance(10, 10, DO_NOTHING_ON_CLOSE);
+        ImageIcon starIcon = new ImageIcon(star);
+       
+        /*BufferedImage result = new BufferedImage(
+                10, 10, //work these out
+                BufferedImage.TYPE_INT_RGB);
+        Graphics g = result.getGraphics();*/
+        /*
+        BufferedImage buffStar;
+		try {
+			buffStar = ImageIO.read(new File("Images\\846480.png"));
+			//g.drawImage(buffStar, 0, 0, null);
+			
+	        lblNewLabel = new JLabel();
+	        lblNewLabel.setIcon(new ImageIcon(buffStar));
+	        GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+	        gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
+	        gbc_lblNewLabel.gridx = 0;
+	        gbc_lblNewLabel.gridy = 0;
+	        panel_1.add(lblNewLabel, gbc_lblNewLabel);
+
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}*/
+        //Graphics2D g2 = buffStar.createGraphics();
+        //g2.drawImage( buffStar, null, 0, 0);
+        //int offset = 5;
+        //g2.drawImage(buffStar, null, buffStar.getWidth() + offset, 0);
+        //g2.dispose();
         
-        lblNewLabel = new JLabel("✭ ");
-        lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        lblNewLabel.setForeground(fontColor);
-        GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-        gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
-        gbc_lblNewLabel.gridx = 0;
-        gbc_lblNewLabel.gridy = 0;
-        panel_1.add(lblNewLabel, gbc_lblNewLabel);
         
-        lblNewLabel_2 = new JLabel("✭ ");
-        lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        lblNewLabel_2.setForeground(fontColor);
-        GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-        gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
-        gbc_lblNewLabel_2.gridx = 1;
-        gbc_lblNewLabel_2.gridy = 0;
-        panel_1.add(lblNewLabel_2, gbc_lblNewLabel_2);
-        
-        lblNewLabel_1 = new JLabel("✭ ");
-        lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        lblNewLabel_1.setForeground(fontColor);
+        lblNewLabel_1 = new JLabel();
+        lblNewLabel_1.setIcon(starIcon);
         GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
         gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 5);
-        gbc_lblNewLabel_1.gridx = 2;
+        gbc_lblNewLabel_1.gridx = 1;
         gbc_lblNewLabel_1.gridy = 0;
         panel_1.add(lblNewLabel_1, gbc_lblNewLabel_1);
         
-        lblNewLabel_4 = new JLabel("✭ ");
-        lblNewLabel_4.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        lblNewLabel_4.setForeground(fontColor);
-        GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-        gbc_lblNewLabel_4.insets = new Insets(0, 0, 0, 5);
-        gbc_lblNewLabel_4.gridx = 3;
-        gbc_lblNewLabel_4.gridy = 0;
-        panel_1.add(lblNewLabel_4, gbc_lblNewLabel_4);
+        lblNewLabel_2 = new JLabel();
+        lblNewLabel_2.setIcon(starIcon);
+        GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+        gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
+        gbc_lblNewLabel_2.gridx = 2;
+        gbc_lblNewLabel_2.gridy = 0;
+        panel_1.add(lblNewLabel_2, gbc_lblNewLabel_2);
         
-        lblNewLabel_3 = new JLabel("✭ ");
-        lblNewLabel_3.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        lblNewLabel_3.setForeground(fontColor);
+        lblNewLabel_3 = new JLabel();
+        lblNewLabel_3.setIcon(starIcon);
         GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
         gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
-        gbc_lblNewLabel_3.gridx = 4;
+        gbc_lblNewLabel_3.gridx = 3;
         gbc_lblNewLabel_3.gridy = 0;
         panel_1.add(lblNewLabel_3, gbc_lblNewLabel_3);
-       
-        mainPane.setOpaque(false);
+        
+        lblNewLabel_4 = new JLabel();
+        lblNewLabel_4.setIcon(starIcon);
+        GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
+        gbc_lblNewLabel_4.gridx = 4;
+        gbc_lblNewLabel_4.gridy = 0;
+        panel_1.add(lblNewLabel_4, gbc_lblNewLabel_4);
     
         //searchMovieUI.setVisible(true);
+        
+       //display the mainUI and make the background image visible
        pack();
+       setVisible(true);
+       repaint();
 	}
 	
 	public void changeAccountButtons() {

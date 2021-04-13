@@ -61,7 +61,6 @@ public class Main {
     
 		MainUI mainUI = new MainUI(loginUI, loginControl, createMemberUI, editMemberUI, viewMemberUI, searchMemberUI, addMovieUI, searchMovieUI, addReviewUI, viewMovieUI, viewReviewUI);
 
-		mainUI.setVisible(true);
 		removeMemberUI.setMain(mainUI);
 		removeMovieUI.setMain(mainUI);
 	}

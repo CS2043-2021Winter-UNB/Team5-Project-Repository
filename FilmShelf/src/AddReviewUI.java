@@ -49,6 +49,7 @@ public class AddReviewUI extends JPanel {
 			add(labelReview, gbc_labelReview);
 			
 			JTextArea textArea = new JTextArea();
+			textArea.setDocument(new LengthRestrictedDocument(2000));
 			GridBagConstraints gbc_textArea = new GridBagConstraints();
 			gbc_textArea.gridheight = 2;
 			gbc_textArea.gridwidth = 7;
