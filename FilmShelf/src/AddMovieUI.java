@@ -53,9 +53,11 @@ public class AddMovieUI extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
+		Color fontColor = UISettings.getFontColor();
+		
 		//Title label
 		JLabel labelTitle = new JLabel("Title: ");
-		labelTitle.setForeground(Color.WHITE);
+		labelTitle.setForeground(fontColor);
 		GridBagConstraints gbc_labelTitle = new GridBagConstraints();
 		gbc_labelTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_labelTitle.gridx = 1;
@@ -76,7 +78,7 @@ public class AddMovieUI extends JPanel {
 		
 		//Year label
 		JLabel labelYear = new JLabel("Release Year: ");
-		labelYear.setForeground(Color.WHITE);
+		labelYear.setForeground(fontColor);
 		GridBagConstraints gbc_labelYear = new GridBagConstraints();
 		gbc_labelYear.insets = new Insets(0, 0, 5, 5);
 		gbc_labelYear.gridx = 1;
@@ -103,7 +105,7 @@ public class AddMovieUI extends JPanel {
 		
 		//Genre label
 		JLabel labelGenre = new JLabel("Genre: ");
-		labelGenre.setForeground(Color.WHITE);
+		labelGenre.setForeground(fontColor);
 		GridBagConstraints gbc_labelGenre = new GridBagConstraints();
 		gbc_labelGenre.insets = new Insets(0, 0, 5, 5);
 		gbc_labelGenre.gridx = 1;
@@ -126,7 +128,7 @@ public class AddMovieUI extends JPanel {
 		
 		//Length label
 		JLabel labelLength = new JLabel("Length: ");
-		labelLength.setForeground(Color.WHITE);
+		labelLength.setForeground(fontColor);
 		GridBagConstraints gbc_labelLength = new GridBagConstraints();
 		gbc_labelLength.insets = new Insets(0, 0, 5, 5);
 		gbc_labelLength.gridx = 1;
@@ -148,7 +150,7 @@ public class AddMovieUI extends JPanel {
 		add(spinnerLength, gbc_spinnerLength);
 		
 		JLabel lblNewLabel = new JLabel("mins");
-		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setForeground(fontColor);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -188,7 +190,7 @@ public class AddMovieUI extends JPanel {
 		
 		//Movie addition success/error label
 		labelAddMovieStatus = new JLabel("");
-		labelAddMovieStatus.setForeground(Color.WHITE);
+		labelAddMovieStatus.setForeground(fontColor);
 		GridBagConstraints gbc_labelAddMovieStatus = new GridBagConstraints();
 		gbc_labelAddMovieStatus.gridx = 0;
 		gbc_labelAddMovieStatus.gridy = 1;

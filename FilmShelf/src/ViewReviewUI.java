@@ -25,6 +25,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JScrollBar;
+import javax.swing.SwingConstants;
 
 public class ViewReviewUI extends JPanel {
 
@@ -55,13 +56,17 @@ public class ViewReviewUI extends JPanel {
 		viewMemberUI = uiViewMember;
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 20, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{30, 40, 0, 0};
+		gridBagLayout.columnWidths = new int[]{200, 20, 0, 200, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{30, 100, 100, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
+		Color fontColor = UISettings.getFontColor();
+		
 		labelMovieName = new JLabel("");
+		labelMovieName.setHorizontalAlignment(SwingConstants.RIGHT);
+		labelMovieName.setForeground(fontColor);
 		GridBagConstraints gbc_labelMovieName = new GridBagConstraints();
 		gbc_labelMovieName.insets = new Insets(0, 0, 5, 5);
 		gbc_labelMovieName.gridx = 2;
@@ -69,6 +74,8 @@ public class ViewReviewUI extends JPanel {
 		add(labelMovieName, gbc_labelMovieName);
 		
 		JLabel labelReviewTitle = new JLabel("Reviews");
+		labelReviewTitle.setHorizontalAlignment(SwingConstants.LEFT);
+		labelReviewTitle.setForeground(fontColor);
 		GridBagConstraints gbc_labelReviewTitle = new GridBagConstraints();
 		gbc_labelReviewTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_labelReviewTitle.gridx = 3;
@@ -202,7 +209,7 @@ public class ViewReviewUI extends JPanel {
 	    };
 	    list.addMouseListener(mouseListener);
 
-		
+		setOpaque(false);
 		setVisible(false);
 	}
 	

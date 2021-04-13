@@ -65,6 +65,8 @@ public class ViewMovieUI extends JPanel {
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
+		Color fontColor = UISettings.getFontColor();
+		
 		//Remove account button
 		buttonRemoveMovie = new JButton("Remove Movie");
 		buttonRemoveMovie.addActionListener(new ActionListener() {
@@ -85,7 +87,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//title label
 		JLabel labelTitle = new JLabel("Title:");
-		labelTitle.setForeground(Color.WHITE);
+		labelTitle.setForeground(fontColor);
 		GridBagConstraints gbc_labelTitle = new GridBagConstraints();
 		gbc_labelTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_labelTitle.gridx = 2;
@@ -94,7 +96,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Label that displays the title of the movie
 		labelShowTitle = new JLabel("");
-		labelShowTitle.setForeground(Color.WHITE);
+		labelShowTitle.setForeground(fontColor);
 		GridBagConstraints gbc_labelShowTitle= new GridBagConstraints();
 		gbc_labelShowTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_labelShowTitle.gridx = 4;
@@ -130,7 +132,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Release year label
 		JLabel labelReleaseYear = new JLabel("Release year:");
-		labelReleaseYear.setForeground(Color.WHITE);
+		labelReleaseYear.setForeground(fontColor);
 		GridBagConstraints gbc_labelReleaseYear = new GridBagConstraints();
 		gbc_labelReleaseYear.insets = new Insets(0, 0, 5, 5);
 		gbc_labelReleaseYear.gridx = 2;
@@ -139,7 +141,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Label that displays the release year of the movie
 		labelShowReleaseYear = new JLabel("");
-		labelShowReleaseYear.setForeground(Color.WHITE);
+		labelShowReleaseYear.setForeground(fontColor);
 		GridBagConstraints gbc_labelShowReleaseYear = new GridBagConstraints();
 		gbc_labelShowReleaseYear.insets = new Insets(0, 0, 5, 5);
 		gbc_labelShowReleaseYear.gridx = 4;
@@ -162,7 +164,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Genre label
 		JLabel labelGenre = new JLabel("Genre:");
-		labelGenre.setForeground(Color.WHITE);
+		labelGenre.setForeground(fontColor);
 		GridBagConstraints gbc_labelGenre = new GridBagConstraints();
 		gbc_labelGenre.insets = new Insets(0, 0, 5, 5);
 		gbc_labelGenre.gridx = 2;
@@ -171,7 +173,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Label that displays the genre of the movie
 		labelShowGenre = new JLabel("");
-		labelShowGenre.setForeground(Color.WHITE);
+		labelShowGenre.setForeground(fontColor);
 		GridBagConstraints gbc_labelShowGenre = new GridBagConstraints();
 		gbc_labelShowGenre.insets = new Insets(0, 0, 5, 5);
 		gbc_labelShowGenre.gridx = 4;
@@ -180,7 +182,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Length label
 		JLabel LabelLength = new JLabel("Length:");
-		LabelLength.setForeground(Color.WHITE);
+		LabelLength.setForeground(fontColor);
 		GridBagConstraints gbc_LabelLength = new GridBagConstraints();
 		gbc_LabelLength.insets = new Insets(0, 0, 5, 5);
 		gbc_LabelLength.gridx = 2;
@@ -189,7 +191,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//Label that displays the Length of the movie
 		labelShowLength = new JLabel("");
-		labelShowLength.setForeground(Color.WHITE);
+		labelShowLength.setForeground(fontColor);
 		GridBagConstraints gbc_labelShowLength = new GridBagConstraints();
 		gbc_labelShowLength.insets = new Insets(0, 0, 5, 5);
 		gbc_labelShowLength.gridx = 4;
@@ -211,7 +213,7 @@ public class ViewMovieUI extends JPanel {
 		layeredPane_1.setLayout(gbl_layeredPane_1);
 		
 		JLabel movieRateLabel = new JLabel("Movie Rate:");
-		movieRateLabel.setForeground(Color.WHITE);
+		movieRateLabel.setForeground(fontColor);
 		GridBagConstraints gbc_movieRateLabel = new GridBagConstraints();
 		gbc_movieRateLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_movieRateLabel.gridx = 1;
@@ -220,7 +222,7 @@ public class ViewMovieUI extends JPanel {
 		
 		//JLabel rateLabelnum = new JLabel(""+movie.getRatingScore());
 		JLabel rateLabelnum = new JLabel(""+rating);
-		rateLabelnum.setForeground(Color.WHITE);
+		rateLabelnum.setForeground(fontColor);
 		GridBagConstraints gbc_rateLabelnum = new GridBagConstraints();
 		gbc_rateLabelnum.insets = new Insets(0, 0, 0, 5);
 		gbc_rateLabelnum.gridx = 1;
