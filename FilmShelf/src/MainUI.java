@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Dimension;
 
 /******************************************************************************************************************************
  * MainUI
@@ -235,6 +236,7 @@ public class MainUI extends JFrame {
 		// search account button
 		buttonSearchAccount = new JButton("Search Account");
 		buttonSearchAccount.setHorizontalAlignment(SwingConstants.RIGHT);
+		buttonSearchAccount.setPreferredSize(new Dimension(125,25));
 		buttonSearchAccount.setBackground(buttonColor);
 		buttonSearchAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -275,6 +277,7 @@ public class MainUI extends JFrame {
 
 		buttonSearchMovie = new JButton("Search Movie");
 		buttonSearchMovie.setHorizontalAlignment(SwingConstants.RIGHT);
+		buttonSearchMovie.setPreferredSize(new Dimension(125,25));
 		buttonSearchMovie.setBackground(buttonColor);
 		buttonSearchMovie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
