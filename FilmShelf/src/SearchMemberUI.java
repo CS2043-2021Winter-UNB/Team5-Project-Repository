@@ -36,9 +36,9 @@ public class SearchMemberUI extends JPanel {
 		viewMemberUI = uiViewAccount;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 120, 0, 150, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 15};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 4.9E-324};
 		setLayout(gridBagLayout);
 		
 		Color fontColor = UISettings.getFontColor();
@@ -79,9 +79,9 @@ public class SearchMemberUI extends JPanel {
 		});
 		GridBagConstraints gbc_ViewAccountbutton = new GridBagConstraints();
 		gbc_ViewAccountbutton.anchor = GridBagConstraints.EAST;
-		gbc_ViewAccountbutton.insets = new Insets(0, 0, 5, 5);
+		gbc_ViewAccountbutton.insets = new Insets(0, 0, 0, 5);
 		gbc_ViewAccountbutton.gridx = 5;
-		gbc_ViewAccountbutton.gridy = 7;
+		gbc_ViewAccountbutton.gridy = 3;
 		add(ViewAccountbutton, gbc_ViewAccountbutton);
 		ViewAccountbutton.setVisible(false);
 		
@@ -91,7 +91,7 @@ public class SearchMemberUI extends JPanel {
 		GridBagConstraints gbc_labelSearchAccountStatus = new GridBagConstraints();
 		gbc_labelSearchAccountStatus.gridwidth = 6;
 		gbc_labelSearchAccountStatus.gridx = 1;
-		gbc_labelSearchAccountStatus.gridy = 7;
+		gbc_labelSearchAccountStatus.gridy = 3;
 		add(labelSearchAccountStatus, gbc_labelSearchAccountStatus);
 		
 		setOpaque(false);
