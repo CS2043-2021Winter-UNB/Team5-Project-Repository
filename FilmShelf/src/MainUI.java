@@ -29,6 +29,7 @@ import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.Dimension;
 
 /******************************************************************************************************************************
  * MainUI
@@ -242,6 +243,7 @@ public class MainUI extends JFrame {
 
 		// search account button
 		buttonSearchAccount = new JButton("Search Account");
+		buttonSearchAccount.setPreferredSize(new Dimension(125,25));
 		buttonSearchAccount.setBackground(buttonColor);
 		buttonSearchAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -280,6 +282,7 @@ public class MainUI extends JFrame {
 		panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
 
 		buttonSearchMovie = new JButton("Search Movie");
+		buttonSearchMovie.setPreferredSize(new Dimension(125,25));
 		buttonSearchMovie.setBackground(buttonColor);
 		buttonSearchMovie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
