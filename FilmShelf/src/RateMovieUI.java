@@ -43,7 +43,7 @@ public class RateMovieUI extends JPanel {
 		gbc_rateMovieLabel.gridy = 3;
 		add(rateMovieLabel, gbc_rateMovieLabel);
 		
-		JRadioButton oneStarButton = new JRadioButton("✰");
+		JRadioButton oneStarButton = new JRadioButton("*");
 		oneStarButton.setForeground(fontColor);
 		oneStarButton.setOpaque(false);
 		oneStarButton.setActionCommand("1");
@@ -53,7 +53,7 @@ public class RateMovieUI extends JPanel {
 		gbc_oneStarButton.gridy = 5;
 		add(oneStarButton, gbc_oneStarButton);
 		
-		JRadioButton twoStarsButton = new JRadioButton("✰✰");
+		JRadioButton twoStarsButton = new JRadioButton("* *");
 		twoStarsButton.setForeground(fontColor);
 		twoStarsButton.setOpaque(false);
 		twoStarsButton.setActionCommand("2");
@@ -63,7 +63,7 @@ public class RateMovieUI extends JPanel {
 		gbc_twoStarsButton.gridy = 5;
 		add(twoStarsButton, gbc_twoStarsButton);
 		
-		JRadioButton threeStarsButton = new JRadioButton("✰✰✰");
+		JRadioButton threeStarsButton = new JRadioButton("* * *");
 		threeStarsButton.setForeground(fontColor);
 		threeStarsButton.setOpaque(false);
 		threeStarsButton.setActionCommand("3");
@@ -73,7 +73,7 @@ public class RateMovieUI extends JPanel {
 		gbc_threeStarsButton.gridy = 5;
 		add(threeStarsButton, gbc_threeStarsButton);
 		
-		JRadioButton fourStarsButton = new JRadioButton("✰✰✰✰");
+		JRadioButton fourStarsButton = new JRadioButton("* * * *");
 		fourStarsButton.setForeground(fontColor);
 		fourStarsButton.setOpaque(false);
 		fourStarsButton.setActionCommand("4");
@@ -83,7 +83,7 @@ public class RateMovieUI extends JPanel {
 		gbc_fourStarsButton.gridy = 5;
 		add(fourStarsButton, gbc_fourStarsButton);
 		
-		JRadioButton fiveStarsButton = new JRadioButton("✰✰✰✰✰");
+		JRadioButton fiveStarsButton = new JRadioButton("* * * * *");
 		fiveStarsButton.setForeground(fontColor);
 		fiveStarsButton.setOpaque(false);
 		fiveStarsButton.setActionCommand("5");
