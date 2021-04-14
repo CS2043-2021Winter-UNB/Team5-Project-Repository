@@ -74,9 +74,8 @@ public class AddReviewUI extends JPanel {
 		JButton buttonAddReview = new JButton("Add Review");
 		buttonAddReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (leaveReviewControl.processAddReview(movieId, textArea.getText()) == true) {
+				if (leaveReviewControl.processAddReview(movieId, textArea.getText())) {
 					displayLeaveReviewConfirmation();
-					leaveReviewControl.processAddReview(movieId, textArea.getText());
 				} else {
 					displayErrorMessage();
 				}

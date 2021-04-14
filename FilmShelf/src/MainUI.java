@@ -199,7 +199,7 @@ public class MainUI extends JFrame {
 		labelFilmShelf.setForeground(fontColor);
 		GridBagConstraints gbc_labelFilmShelf = new GridBagConstraints();
 		gbc_labelFilmShelf.insets = new Insets(0, 0, 5, 5);
-		gbc_labelFilmShelf.gridx = 2;
+		gbc_labelFilmShelf.gridx = 3;
 		gbc_labelFilmShelf.gridy = 0;
 		mainPane.add(labelFilmShelf, gbc_labelFilmShelf);
 
@@ -235,7 +235,6 @@ public class MainUI extends JFrame {
 
 		// search account button
 		buttonSearchAccount = new JButton("Search Account");
-		buttonSearchAccount.setHorizontalAlignment(SwingConstants.RIGHT);
 		buttonSearchAccount.setPreferredSize(new Dimension(125,25));
 		buttonSearchAccount.setBackground(buttonColor);
 		buttonSearchAccount.addActionListener(new ActionListener() {
@@ -276,7 +275,6 @@ public class MainUI extends JFrame {
 		panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
 
 		buttonSearchMovie = new JButton("Search Movie");
-		buttonSearchMovie.setHorizontalAlignment(SwingConstants.RIGHT);
 		buttonSearchMovie.setPreferredSize(new Dimension(125,25));
 		buttonSearchMovie.setBackground(buttonColor);
 		buttonSearchMovie.addActionListener(new ActionListener() {

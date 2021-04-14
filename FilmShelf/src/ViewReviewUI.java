@@ -163,22 +163,23 @@ public class ViewReviewUI extends JPanel {
 	        		selectedIndex = index;
 	        		reviewObjectIndex = index/2;
 	        		boolean checkUsername = (index%2 == 0);
-	        		String reviewUsername;
+	        		String revUsername;
 	        		String review;
 	        		if (checkUsername) {
-			        	reviewUsername = model.elementAt(index);
+			        	revUsername = model.elementAt(index);
 			        	review = model.elementAt(index+1);
 	        		}
 	        		else
 	        		{
-			        	reviewUsername = model.elementAt(index-1);
+			        	revUsername = model.elementAt(index-1);
 			        	review = model.elementAt(index);
 	        		}
 	        		
 	        		MemberObject member = loginControl.getCurrentMember();
 	        		boolean memberCheck = false;
 	        		if (member != null) {
-	        			memberCheck = (reviewUsername.equals(member.getUsername()));
+	        			memberCheck = (revUsername.equals(member.getUsername()));
+	        			reviewUsername = revUsername;
 	        		}
 	        		if (loginControl.getCurrentAdmin() != null || memberCheck) {
 	        			buttonRemoveReview.setVisible(true);
@@ -192,7 +193,7 @@ public class ViewReviewUI extends JPanel {
 			        if (mouseEvent.getClickCount() == 2) {
 			          if (checkUsername) {    	
 			        	setVisible(false);
-			            viewMemberUI.displayViewMemberAccount(reviewUsername);
+			            viewMemberUI.displayViewMemberAccount(revUsername);
 			          }
 			        }
 	        	}
