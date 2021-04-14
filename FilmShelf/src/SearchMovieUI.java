@@ -241,6 +241,8 @@ public class SearchMovieUI extends JPanel {
 		
 		scrollPane = new JScrollPane(scrollList);
 		scrollPane.setPreferredSize(new Dimension(250, 80));
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridheight = 3;
 		gbc_scrollPane.gridwidth = 6;
