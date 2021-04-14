@@ -28,13 +28,21 @@ public class RateMovieControl {
 			return false;
 		}
 		
-		return dataManager.addMovieRating(member.getUsername(), movieId, rating);	
+		if(dataManager.addMovieRating(member.getUsername(), movieId, rating)) {
+			return true;
+		} else {
+			return dataManager.editMovieRating(member.getUsername(), movieId, rating);
+		}
 		//NOTE TO FRONT-END: UI needs to call processViewMovie() in Control to update ratings
 	}
 	
 	public RatingObject getRating(int movieID) {
 		MemberObject member = loginControl.getCurrentMember();
+		
+		if(member == null) {
+			return null;
+		}
+		
 		return dataManager.getMovieRatingByMember(member.getUsername(), movieID);
 	}
-	
 }

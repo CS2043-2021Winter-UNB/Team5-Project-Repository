@@ -45,6 +45,7 @@ public class MainUI extends JFrame {
 	private SearchMovieUI searchMovieUI;
 	private ViewMovieUI viewMovieUI;
 	private ViewReviewUI viewReviewUI;
+	private RateMovieUI rateMovieUI;
 	private JButton buttonLogin;
 	private JButton buttonCreateAccount;
 	private JButton buttonSearchAccount;
@@ -56,7 +57,7 @@ public class MainUI extends JFrame {
 	// Create the frame.
 	public MainUI(LoginUI uiLog, LoginControl controlLog, CreateMemberUI uiCreate, EditMemberUI uiMember,
 			ViewMemberUI uiViewAccount, SearchMemberUI uiSearch, AddMovieUI uiAddMovie, SearchMovieUI uiSearchMovie,
-			AddReviewUI uiAddReview, ViewMovieUI uiViewMovie, ViewReviewUI uiViewReview) {
+			AddReviewUI uiAddReview, ViewMovieUI uiViewMovie, ViewReviewUI uiViewReview, RateMovieUI uiRateMovie) {
 		// save the UI classes
 		loginUI = uiLog;
 		loginControl = controlLog;
@@ -69,6 +70,7 @@ public class MainUI extends JFrame {
 		addReviewUI = uiAddReview;
 		viewMovieUI = uiViewMovie;
 		viewReviewUI = uiViewReview;
+		rateMovieUI = uiRateMovie;
 
 		uiPanelList = new ArrayList<JPanel>();
 		uiPanelList.add(loginUI);
@@ -80,7 +82,8 @@ public class MainUI extends JFrame {
 		uiPanelList.add(searchMovieUI);
 		uiPanelList.add(addReviewUI);
 		uiPanelList.add(viewMovieUI);
-		uiPanelList.add(uiViewReview);
+		uiPanelList.add(viewReviewUI);
+		uiPanelList.add(rateMovieUI);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -96,6 +99,7 @@ public class MainUI extends JFrame {
 				g.drawImage(backgroundImage, 0, 0, null);
 			}
 		};
+
 		mainPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(mainPane);
 
@@ -128,6 +132,7 @@ public class MainUI extends JFrame {
 		mainPane.add(viewMovieUI, gbc_Panel);
 		mainPane.add(addReviewUI, gbc_Panel);
 		mainPane.add(viewReviewUI, gbc_Panel);
+		mainPane.add(rateMovieUI, gbc_Panel);
 
 		// Causes the account related buttons in the top right to hide or show depending
 		// on if a panel is visible
@@ -181,7 +186,6 @@ public class MainUI extends JFrame {
 				setAllPanelVisibilityFalse();
 			}
 		});
-
 		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
 		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton_2.gridx = 1;
@@ -190,19 +194,17 @@ public class MainUI extends JFrame {
 
 		// TITLE
 		JLabel labelFilmShelf = new JLabel("FilmShelf");
-		labelFilmShelf.setFont(new Font("Century", Font.BOLD, 50));
+		labelFilmShelf.setFont(new Font("Ebrima", Font.BOLD, 50));
 		labelFilmShelf.setForeground(fontColor);
 		GridBagConstraints gbc_labelFilmShelf = new GridBagConstraints();
-		gbc_labelFilmShelf.anchor = GridBagConstraints.WEST;
 		gbc_labelFilmShelf.insets = new Insets(0, 0, 5, 5);
-		gbc_labelFilmShelf.gridx = 3;
+		gbc_labelFilmShelf.gridx = 2;
 		gbc_labelFilmShelf.gridy = 0;
 		mainPane.add(labelFilmShelf, gbc_labelFilmShelf);
 
 		// Panel for account buttons
 		JPanel panelAccountButtons = new JPanel();
 		panelAccountButtons.setOpaque(false);
-
 		GridBagConstraints gbc_panel2 = new GridBagConstraints();
 		gbc_panel2.gridheight = 2;
 		gbc_panel2.insets = new Insets(0, 0, 5, 5);
@@ -224,12 +226,6 @@ public class MainUI extends JFrame {
 		buttonCreateAccount.setBackground(buttonColor);
 		listenerCreateAccount = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * loginUI.setVisible(false); editMemberUI.setVisible(false);
-				 * searchMemberUI.setVisible(false); viewMemberUI.setVisible(false);
-				 * addMovieUI.setVisible(false); searchMovieUI.setVisible(false);
-				 * viewMovieUI.setVisible(false);
-				 */
 				setAllPanelVisibilityFalse();
 				createMemberUI.displayCreateAccountForm();
 			}
@@ -242,12 +238,6 @@ public class MainUI extends JFrame {
 		buttonSearchAccount.setBackground(buttonColor);
 		buttonSearchAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * loginUI.setVisible(false); createMemberUI.setVisible(false);
-				 * editMemberUI.setVisible(false); viewMemberUI.setVisible(false);
-				 * addMovieUI.setVisible(false); searchMovieUI.setVisible(false);
-				 * viewMovieUI.setVisible(false);
-				 */
 				setAllPanelVisibilityFalse();
 				searchMemberUI.displaySearchForm();
 			}
@@ -262,7 +252,7 @@ public class MainUI extends JFrame {
 		// loginButton
 		buttonLogin = new JButton("Login");
 		buttonLogin.setBackground(buttonColor);
-
+		buttonLogin.setHorizontalAlignment(SwingConstants.RIGHT);
 		buttonLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setAllPanelVisibilityFalse();
@@ -288,12 +278,6 @@ public class MainUI extends JFrame {
 		buttonSearchMovie.setBackground(buttonColor);
 		buttonSearchMovie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * loginUI.setVisible(false); createMemberUI.setVisible(false);
-				 * editMemberUI.setVisible(false); searchMemberUI.setVisible(false);
-				 * viewMemberUI.setVisible(false); addMovieUI.setVisible(false);
-				 * viewMovieUI.setVisible(false);
-				 */
 				setAllPanelVisibilityFalse();
 				searchMovieUI.displaySearchForm();
 			}
@@ -337,9 +321,8 @@ public class MainUI extends JFrame {
 			buttonCreateAccount.removeActionListener(al1[0]);
 			buttonCreateAccount.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					setAllPanelVisibilityFalse();
 					viewMemberUI.displayViewMemberAccount(username);
-					searchMemberUI.setVisible(false);
-					editMemberUI.setVisible(false);
 				}
 			});
 		}
@@ -356,10 +339,8 @@ public class MainUI extends JFrame {
 			buttonCreateAccount.removeActionListener(al[0]);
 			buttonCreateAccount.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					setAllPanelVisibilityFalse();
 					addMovieUI.displayAddMovieForm();
-					searchMemberUI.setVisible(false);
-					searchMovieUI.setVisible(false);
-					viewMovieUI.setVisible(false);
 				}
 			});
 		}
@@ -383,7 +364,6 @@ public class MainUI extends JFrame {
 	}
 
 	public void changeMovieButtons() {
-		//
 		viewMovieUI.setVisible(false);
 	}
 

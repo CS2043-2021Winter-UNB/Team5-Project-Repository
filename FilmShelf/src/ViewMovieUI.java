@@ -3,7 +3,6 @@
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -16,51 +15,46 @@ import java.awt.event.ActionEvent;
 
 public class ViewMovieUI extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private ViewMovieControl viewMovieControl;
 	private RemoveMovieUI removeMovieUI;
-	private SearchMovieUI searchMovieUI;
 	private AddReviewUI addReviewUI;
 	private JLabel labelShowTitle;
 	private JLabel labelShowReleaseYear;
 	private JLabel labelShowGenre;
 	private JLabel labelShowLength;
+	private JLabel averageRatingLabel;
 	private JButton buttonRemoveMovie;
 	private LoginControl loginControl;
 	private JButton reviewButton;
 	private int movieID;
 
 	private JButton rateButton;
-	private JButton editRatingButton;
 	private RateMovieUI rateMovieUI;
-	private EditRatingUI editRatingUI;
+	private RateMovieControl rateMovieControl;
 	private MemberObject member;
 	private JLayeredPane layeredPane_1;
 	double rating;
 	private JButton viewReviewButton;
 	private String title;
 	private ViewReviewUI viewReviewUI;
-	
-	/**
-	 * Create the panel.
-	 */
-	public ViewMovieUI(LoginControl controlLogin, ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie,
-		AddReviewUI uiAddReview, ViewReviewUI uiViewReview, RateMovieUI uiRateMovie, EditRatingUI uiEditRating) {
+	private JLayeredPane layeredPane;
+	private JLabel userRatingLabel;
+	private JLabel userRatingNumLabel;
+
+	public ViewMovieUI(LoginControl controlLogin, ViewMovieControl controlViewMovie, RemoveMovieUI uiRemoveMovie,  AddReviewUI uiAddReview, ViewReviewUI uiViewReview, RateMovieUI uiRateMovie, RateMovieControl rmControl) {
 		loginControl = controlLogin;
 		viewMovieControl = controlViewMovie;
 		removeMovieUI = uiRemoveMovie;
 		addReviewUI = uiAddReview;
-		viewReviewUI=uiViewReview;
+		viewReviewUI = uiViewReview;
 		rateMovieUI = uiRateMovie;
-		editRatingUI = uiEditRating;
+		rateMovieControl = rmControl;
 		setVisible(false);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 44, 190, 0, 0, 0, 0, 0, 0, 0, 113, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 133, 0, 0};
+		gridBagLayout.columnWidths = new int[]{0, 44, 190, 30, -24, 0, 0, 0, 0, 0, 113, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 41, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
@@ -107,6 +101,7 @@ public class ViewMovieUI extends JPanel {
 		rateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				rateMovieUI.displayRatingForm(movieID);
+				setVisible(false);
 			}
 		});
 		GridBagConstraints gbc_rateButton = new GridBagConstraints();
@@ -115,20 +110,6 @@ public class ViewMovieUI extends JPanel {
 		gbc_rateButton.gridx = 8;
 		gbc_rateButton.gridy = 2;
 		add(rateButton, gbc_rateButton);
-		
-		editRatingButton = new JButton("Edit Rating");
-		editRatingButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				editRatingUI.displayEditRatingForm(movieID);
-				setVisible(false);
-			}
-		});
-		GridBagConstraints gbc_editRatingButton = new GridBagConstraints();
-		gbc_editRatingButton.gridwidth = 2;
-		gbc_editRatingButton.insets = new Insets(0, 0, 5, 5);
-		gbc_editRatingButton.gridx = 8;
-		gbc_editRatingButton.gridy = 4;
-		add(editRatingButton, gbc_editRatingButton);
 		
 		//Release year label
 		JLabel labelReleaseYear = new JLabel("Release year:");
@@ -151,8 +132,8 @@ public class ViewMovieUI extends JPanel {
 		reviewButton = new JButton("Review Movie");
 		reviewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			addReviewUI.displayLeaveReviewForm(movieID,title);
-			setVisible(false);
+				addReviewUI.displayLeaveReviewForm(movieID,title);
+				setVisible(false);
 			}
 		});
 		GridBagConstraints gbc_reviewButton = new GridBagConstraints();
@@ -212,7 +193,7 @@ public class ViewMovieUI extends JPanel {
 		gbl_layeredPane_1.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		layeredPane_1.setLayout(gbl_layeredPane_1);
 		
-		JLabel movieRateLabel = new JLabel("Movie Rate:");
+		JLabel movieRateLabel = new JLabel("Average Rating:");
 		movieRateLabel.setForeground(fontColor);
 		GridBagConstraints gbc_movieRateLabel = new GridBagConstraints();
 		gbc_movieRateLabel.insets = new Insets(0, 0, 5, 5);
@@ -220,32 +201,65 @@ public class ViewMovieUI extends JPanel {
 		gbc_movieRateLabel.gridy = 0;
 		layeredPane_1.add(movieRateLabel, gbc_movieRateLabel);
 		
-		//JLabel rateLabelnum = new JLabel(""+movie.getRatingScore());
-		JLabel rateLabelnum = new JLabel(""+rating);
-		rateLabelnum.setForeground(fontColor);
+		averageRatingLabel = new JLabel(""+rating);
+		averageRatingLabel.setForeground(fontColor);
 		GridBagConstraints gbc_rateLabelnum = new GridBagConstraints();
 		gbc_rateLabelnum.insets = new Insets(0, 0, 0, 5);
 		gbc_rateLabelnum.gridx = 1;
 		gbc_rateLabelnum.gridy = 1;
-		layeredPane_1.add(rateLabelnum, gbc_rateLabelnum);
+		layeredPane_1.add(averageRatingLabel, gbc_rateLabelnum);
 		
 		viewReviewButton = new JButton("View Reviews");
 		viewReviewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				viewReviewUI.displayReview(title,movieID);
+				setVisible(false);
 			}
 		});
+		
+		layeredPane = new JLayeredPane();
+		GridBagConstraints gbc_layeredPane = new GridBagConstraints();
+		gbc_layeredPane.insets = new Insets(0, 0, 5, 5);
+		gbc_layeredPane.fill = GridBagConstraints.BOTH;
+		gbc_layeredPane.gridx = 3;
+		gbc_layeredPane.gridy = 7;
+		add(layeredPane, gbc_layeredPane);
+		GridBagLayout gbl_layeredPane = new GridBagLayout();
+		gbl_layeredPane.columnWidths = new int[]{12, 13, 0, 0};
+		gbl_layeredPane.rowHeights = new int[]{0, 54, 0};
+		gbl_layeredPane.columnWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_layeredPane.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		layeredPane.setLayout(gbl_layeredPane);
+		
+		userRatingLabel = new JLabel("User Rating:");
+		userRatingLabel.setForeground(fontColor);
+		GridBagConstraints gbc_movieRateLabel_1 = new GridBagConstraints();
+		gbc_movieRateLabel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_movieRateLabel_1.gridx = 1;
+		gbc_movieRateLabel_1.gridy = 0;
+		layeredPane.add(userRatingLabel, gbc_movieRateLabel_1);
+		
+		userRatingNumLabel = new JLabel("");
+		userRatingNumLabel.setForeground(fontColor);
+		GridBagConstraints gbc_rateLabelnum_1 = new GridBagConstraints();
+		gbc_rateLabelnum_1.insets = new Insets(0, 0, 0, 5);
+		gbc_rateLabelnum_1.gridx = 1;
+		gbc_rateLabelnum_1.gridy = 1;
+		layeredPane.add(userRatingNumLabel, gbc_rateLabelnum_1);
 		GridBagConstraints gbc_viewReviewButton = new GridBagConstraints();
 		gbc_viewReviewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_viewReviewButton.gridx = 9;
 		gbc_viewReviewButton.gridy = 7;
 		add(viewReviewButton, gbc_viewReviewButton);
-		
+
 		setOpaque(false);
 	}
 	
-	public void displayMovie(MovieObject movie) {
+	public void displayMovie(MovieObject targetMovie) {
+		MovieObject movie = viewMovieControl.processViewMovie(targetMovie.getMovieId());
+		RatingObject rating = rateMovieControl.getRating(targetMovie.getMovieId());
+		
 		this.movieID = movie.getMovieId();
 		this.member = loginControl.getCurrentMember();
 		this.rating = movie.getAverageRating();
@@ -254,6 +268,12 @@ public class ViewMovieUI extends JPanel {
 		labelShowReleaseYear.setText(""+movie.getYear());
 		labelShowGenre.setText(movie.getGenre());
 		labelShowLength.setText(""+movie.getLength());
+		averageRatingLabel.setText(String.valueOf(movie.getAverageRating()));
+		if(rating != null) {
+			userRatingNumLabel.setText(String.valueOf(rating.getRatingScore()));
+		} else {
+			userRatingNumLabel.setText("");
+		}
 	
 		//check if remove member button should be displayed.
 		//It should be displayed if the actor is an administrator or they are viewing their own member account.
@@ -266,22 +286,27 @@ public class ViewMovieUI extends JPanel {
 
 		boolean adminCheck = (loginControl.getCurrentAdmin() != null);
 
-		if (adminCheck){
+		if(adminCheck) {
 			buttonRemoveMovie.setVisible(true);
-			reviewButton.setVisible(true);
-			rateButton.setVisible(true);
-
-		}
-		else if (memberMatch) {
+			reviewButton.setVisible(false);
+			rateButton.setVisible(false);
+			viewReviewButton.setVisible(true);
+			userRatingLabel.setVisible(false);
+			userRatingNumLabel.setVisible(false);
+		} else if (memberMatch) {
 			buttonRemoveMovie.setVisible(false);
 			reviewButton.setVisible(true);
 			rateButton.setVisible(true);
-		}
-		else
-		{
+			viewReviewButton.setVisible(true);
+			userRatingLabel.setVisible(true);
+			userRatingNumLabel.setVisible(true);
+		} else {
 			buttonRemoveMovie.setVisible(false);
 			reviewButton.setVisible(false);
 			rateButton.setVisible(false);
+			viewReviewButton.setVisible(true);
+			userRatingLabel.setVisible(false);
+			userRatingNumLabel.setVisible(false);
 		}
 		
 		setVisible(true);
