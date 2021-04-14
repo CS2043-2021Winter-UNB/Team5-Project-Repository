@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -31,7 +32,11 @@ public class RateMovieUI extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
+		Color fontColor = UISettings.getFontColor();
+		Color buttonColor = UISettings.getButtonColor();
+		
 		JLabel rateMovieLabel = new JLabel("Rate Movie:");
+		rateMovieLabel.setForeground(fontColor);
 		GridBagConstraints gbc_rateMovieLabel = new GridBagConstraints();
 		gbc_rateMovieLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_rateMovieLabel.gridx = 1;
@@ -39,6 +44,8 @@ public class RateMovieUI extends JPanel {
 		add(rateMovieLabel, gbc_rateMovieLabel);
 		
 		JRadioButton oneStarButton = new JRadioButton("✰");
+		oneStarButton.setForeground(fontColor);
+		oneStarButton.setOpaque(false);
 		oneStarButton.setActionCommand("1");
 		GridBagConstraints gbc_oneStarButton = new GridBagConstraints();
 		gbc_oneStarButton.insets = new Insets(0, 0, 5, 5);
@@ -47,6 +54,8 @@ public class RateMovieUI extends JPanel {
 		add(oneStarButton, gbc_oneStarButton);
 		
 		JRadioButton twoStarsButton = new JRadioButton("✰✰");
+		twoStarsButton.setForeground(fontColor);
+		twoStarsButton.setOpaque(false);
 		twoStarsButton.setActionCommand("2");
 		GridBagConstraints gbc_twoStarsButton = new GridBagConstraints();
 		gbc_twoStarsButton.insets = new Insets(0, 0, 5, 5);
@@ -55,6 +64,8 @@ public class RateMovieUI extends JPanel {
 		add(twoStarsButton, gbc_twoStarsButton);
 		
 		JRadioButton threeStarsButton = new JRadioButton("✰✰✰");
+		threeStarsButton.setForeground(fontColor);
+		threeStarsButton.setOpaque(false);
 		threeStarsButton.setActionCommand("3");
 		GridBagConstraints gbc_threeStarsButton = new GridBagConstraints();
 		gbc_threeStarsButton.insets = new Insets(0, 0, 5, 5);
@@ -63,6 +74,8 @@ public class RateMovieUI extends JPanel {
 		add(threeStarsButton, gbc_threeStarsButton);
 		
 		JRadioButton fourStarsButton = new JRadioButton("✰✰✰✰");
+		fourStarsButton.setForeground(fontColor);
+		fourStarsButton.setOpaque(false);
 		fourStarsButton.setActionCommand("4");
 		GridBagConstraints gbc_fourStarsButton = new GridBagConstraints();
 		gbc_fourStarsButton.insets = new Insets(0, 0, 5, 5);
@@ -71,6 +84,8 @@ public class RateMovieUI extends JPanel {
 		add(fourStarsButton, gbc_fourStarsButton);
 		
 		JRadioButton fiveStarsButton = new JRadioButton("✰✰✰✰✰");
+		fiveStarsButton.setForeground(fontColor);
+		fiveStarsButton.setOpaque(false);
 		fiveStarsButton.setActionCommand("5");
 		GridBagConstraints gbc_fiveStarsButton = new GridBagConstraints();
 		gbc_fiveStarsButton.insets = new Insets(0, 0, 5, 5);
@@ -112,6 +127,7 @@ public class RateMovieUI extends JPanel {
 		gbc_removeRatingButton.gridy = 2;
 		add(removeRatingButton, gbc_removeRatingButton);
 		
+		setOpaque(false);
 		setVisible(false);
 	}
 	

@@ -233,6 +233,7 @@ public class ViewMovieUI extends JPanel {
 		layeredPane.setLayout(gbl_layeredPane);
 		
 		userRatingLabel = new JLabel("User Rating:");
+		userRatingLabel.setForeground(fontColor);
 		GridBagConstraints gbc_movieRateLabel_1 = new GridBagConstraints();
 		gbc_movieRateLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_movieRateLabel_1.gridx = 1;
@@ -240,6 +241,7 @@ public class ViewMovieUI extends JPanel {
 		layeredPane.add(userRatingLabel, gbc_movieRateLabel_1);
 		
 		userRatingNumLabel = new JLabel("");
+		userRatingNumLabel.setForeground(fontColor);
 		GridBagConstraints gbc_rateLabelnum_1 = new GridBagConstraints();
 		gbc_rateLabelnum_1.insets = new Insets(0, 0, 0, 5);
 		gbc_rateLabelnum_1.gridx = 1;
