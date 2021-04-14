@@ -235,7 +235,7 @@ public class MainUI extends JFrame {
 
 		// search account button
 		buttonSearchAccount = new JButton("Search Account");
-		buttonSearchAccount.setPreferredSize(new Dimension(125,25));
+		buttonSearchAccount.setPreferredSize(new Dimension(130,25));
 		buttonSearchAccount.setBackground(buttonColor);
 		buttonSearchAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -250,7 +250,7 @@ public class MainUI extends JFrame {
 		gbc_buttonSearch.gridy = 1;
 		panelAccountButtons.add(buttonSearchAccount, gbc_buttonSearch);
 
-		// loginButton
+		// login button
 		buttonLogin = new JButton("Login");
 		buttonLogin.setBackground(buttonColor);
 		buttonLogin.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -274,8 +274,9 @@ public class MainUI extends JFrame {
 		gbc_buttonCreateAccount.gridy = 1;
 		panelAccountButtons.add(buttonCreateAccount, gbc_buttonCreateAccount);
 
+		// search movie button
 		buttonSearchMovie = new JButton("Search Movie");
-		buttonSearchMovie.setPreferredSize(new Dimension(125,25));
+		buttonSearchMovie.setPreferredSize(new Dimension(130,25));
 		buttonSearchMovie.setBackground(buttonColor);
 		buttonSearchMovie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

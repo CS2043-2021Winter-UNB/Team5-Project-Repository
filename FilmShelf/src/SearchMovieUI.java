@@ -65,7 +65,7 @@ public class SearchMovieUI extends JPanel {
 		this.viewMovieUI = viewMovieUI;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{15, 44, 60, 0, 60, 76, 0, 15, 0};
-		gridBagLayout.rowHeights = new int[]{0, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 31, 0, 0, 0, 0, 15, 125, 3, 25, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 		setLayout(gridBagLayout);
@@ -244,12 +244,11 @@ public class SearchMovieUI extends JPanel {
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridheight = 3;
 		gbc_scrollPane.gridwidth = 6;
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 6;
+		gbc_scrollPane.gridy = 7;
 		add(scrollPane, gbc_scrollPane);
 		scrollPane.setVisible(false);
 		
@@ -265,7 +264,7 @@ public class SearchMovieUI extends JPanel {
 		});
 		GridBagConstraints gbc_viewMovieButton = new GridBagConstraints();
 		gbc_viewMovieButton.gridwidth = 2;
-		gbc_viewMovieButton.anchor = GridBagConstraints.EAST;
+		gbc_viewMovieButton.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc_viewMovieButton.insets = new Insets(0, 0, 5, 5);
 		gbc_viewMovieButton.gridx = 5;
 		gbc_viewMovieButton.gridy = 9;
