@@ -112,7 +112,7 @@ public class MainUI extends JFrame {
 		gbl_mainPane.columnWidths = new int[] { 3, 148, 18, 0, 20, 117, 3, 0 };
 		gbl_mainPane.rowHeights = new int[] { 79, 20, 0, 0, 357, 0 };
 		gbl_mainPane.columnWeights = new double[] { 0.0, 5.0, 100.0, 1.0, 100.0, 6.0, 0.0, Double.MIN_VALUE };
-		gbl_mainPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_mainPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE };
 		mainPane.setLayout(gbl_mainPane);
 
 		// adding UI into panel to the main window
