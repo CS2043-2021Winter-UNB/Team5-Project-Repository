@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JCheckBox;
@@ -54,9 +55,12 @@ public class LoginUI extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
+		Color fontColor = UISettings.getFontColor();
 		
 		//Username label
 		labelUsername = new JLabel("Username: ");
+		labelUsername.setOpaque(false);
+		labelUsername.setForeground(fontColor);
 		labelUsername.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelUsername = new GridBagConstraints();
 		gbc_labelUsername.anchor = GridBagConstraints.EAST;
@@ -79,6 +83,8 @@ public class LoginUI extends JPanel {
 		
 		//Password label
 		labelPassword = new JLabel("Password: ");
+		labelPassword.setOpaque(false);
+		labelPassword.setForeground(fontColor);
 		labelPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelPassword = new GridBagConstraints();
 		gbc_labelPassword.anchor = GridBagConstraints.EAST;
@@ -100,6 +106,8 @@ public class LoginUI extends JPanel {
 		
 		//Password visibility checkbox
 		checkboxPasswordVisibility = new JCheckBox("Show Password");
+		checkboxPasswordVisibility.setOpaque(false);
+		checkboxPasswordVisibility.setForeground(fontColor);
 		checkboxPasswordVisibility.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changePasswordVisibility();
@@ -113,6 +121,8 @@ public class LoginUI extends JPanel {
 		
 		//Member radio button
 		radioButtonMember = new JRadioButton("Member");
+		radioButtonMember.setOpaque(false);
+		radioButtonMember.setForeground(fontColor);
 		radioButtonMember.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				member = true;
@@ -130,6 +140,8 @@ public class LoginUI extends JPanel {
 		
 		//Admin radio button
 		radioButtonAdmin = new JRadioButton("Admin");
+		radioButtonAdmin.setOpaque(false);
+		radioButtonAdmin.setForeground(fontColor);
 		radioButtonAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				member = false;
@@ -164,6 +176,7 @@ public class LoginUI extends JPanel {
 		
 		//Login success/error label
 		labelLoginStatus = new JLabel("");
+		labelLoginStatus.setForeground(fontColor);
 		labelLoginStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelLoginStatus = new GridBagConstraints();
 		gbc_labelLoginStatus.gridwidth = 8;
@@ -172,6 +185,7 @@ public class LoginUI extends JPanel {
 		gbc_labelLoginStatus.gridy = 7;
 		add(labelLoginStatus, gbc_labelLoginStatus);
 		
+		setOpaque(false);
 		setVisible(false);
 	}
 	

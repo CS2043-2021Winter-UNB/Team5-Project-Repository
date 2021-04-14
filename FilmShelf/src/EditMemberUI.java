@@ -4,7 +4,9 @@
 	import javax.swing.JPanel;
 	import java.awt.GridBagLayout;
 	import javax.swing.JLabel;
-	import java.awt.GridBagConstraints;
+
+import java.awt.Color;
+import java.awt.GridBagConstraints;
 	import java.awt.Insets;
 	import javax.swing.JTextField;
 	import javax.swing.JPasswordField;
@@ -34,7 +36,6 @@ public class EditMemberUI extends JPanel {
 
 	public EditMemberUI(EditMemberControl control) {
 		setVisible(false);
-		//setBackground(Color.LIGHT_GRAY);
 		editMemberControl = control;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{71, 0, 100, 0, 0, 0, 0, 48, 0};
@@ -43,7 +44,10 @@ public class EditMemberUI extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
+		Color fontColor = UISettings.getFontColor();
+		
 		JLabel labelPassword = new JLabel("New Password");
+		labelPassword.setForeground(fontColor);
 		GridBagConstraints gbc_labelPassword = new GridBagConstraints();
 		gbc_labelPassword.anchor = GridBagConstraints.EAST;
 		gbc_labelPassword.insets = new Insets(0, 0, 5, 5);
@@ -62,6 +66,8 @@ public class EditMemberUI extends JPanel {
 		add(passwordField, gbc_passwordField);
 		
 		checkboxPasswordVisibility = new JCheckBox("Show password");
+		checkboxPasswordVisibility.setForeground(fontColor);
+		checkboxPasswordVisibility.setOpaque(false);
 		checkboxPasswordVisibility.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changePasswordVisibility();
@@ -74,6 +80,7 @@ public class EditMemberUI extends JPanel {
 		add(checkboxPasswordVisibility, gbc_checkboxPasswordVisibility);
 		
 		JLabel labelFirstName = new JLabel("Update First Name");
+		labelFirstName.setForeground(fontColor);
 		GridBagConstraints gbc_labelFirstName = new GridBagConstraints();
 		gbc_labelFirstName.anchor = GridBagConstraints.EAST;
 		gbc_labelFirstName.fill = GridBagConstraints.VERTICAL;
@@ -94,6 +101,7 @@ public class EditMemberUI extends JPanel {
 		textFieldFirstName.setColumns(10);
 		
 		JLabel labelLastName = new JLabel("Update Last Name");
+		labelLastName.setForeground(fontColor);
 		GridBagConstraints gbc_labelLastName = new GridBagConstraints();
 		gbc_labelLastName.anchor = GridBagConstraints.EAST;
 		gbc_labelLastName.insets = new Insets(0, 0, 5, 5);
@@ -113,6 +121,7 @@ public class EditMemberUI extends JPanel {
 		textFieldLastName.setColumns(10);
 		
 		JLabel labelDescription = new JLabel("Description");
+		labelDescription.setForeground(fontColor);
 		GridBagConstraints gbc_labelDescription= new GridBagConstraints();
 		gbc_labelDescription.anchor = GridBagConstraints.EAST;
 		gbc_labelDescription.insets = new Insets(0, 0, 5, 5);
@@ -146,6 +155,7 @@ public class EditMemberUI extends JPanel {
 		textFieldLastName.setColumns(10);
 		
 		labelEditAccountStatus = new JLabel("");
+		labelEditAccountStatus.setForeground(fontColor);
 		labelEditAccountStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelEditAccountStatus = new GridBagConstraints();
 		gbc_labelEditAccountStatus.gridwidth = 6;
@@ -154,6 +164,7 @@ public class EditMemberUI extends JPanel {
 		gbc_labelEditAccountStatus.gridy = 7;
 		add(labelEditAccountStatus, gbc_labelEditAccountStatus);
 
+		setOpaque(false);
 	}
 
 	public void displayEditAccountForm() {

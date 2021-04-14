@@ -4,7 +4,9 @@
 	import javax.swing.JPanel;
 	import java.awt.GridBagLayout;
 	import javax.swing.JLabel;
-	import java.awt.GridBagConstraints;
+
+import java.awt.Color;
+import java.awt.GridBagConstraints;
 	import java.awt.Insets;
 	import javax.swing.JTextField;
 	//import javax.swing.JPasswordField;
@@ -20,9 +22,6 @@ import javax.swing.JButton;
 	//import javax.swing.JLayeredPane;
 public class SearchMemberUI extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private SearchMemberControl searchMemberControl;
 	private JTextField textFieldSearch;
@@ -36,13 +35,16 @@ public class SearchMemberUI extends JPanel {
 		searchMemberControl = control;
 		viewMemberUI = uiViewAccount;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{0, 0, 120, 0, 150, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
+		Color fontColor = UISettings.getFontColor();
+		
 		JLabel lblNewLabel = new JLabel("Search Account:");
+		lblNewLabel.setForeground(fontColor);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -84,12 +86,15 @@ public class SearchMemberUI extends JPanel {
 		ViewAccountbutton.setVisible(false);
 		
 		labelSearchAccountStatus = new JLabel("");
+		labelSearchAccountStatus.setForeground(fontColor);
 		labelSearchAccountStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_labelSearchAccountStatus = new GridBagConstraints();
 		gbc_labelSearchAccountStatus.gridwidth = 6;
 		gbc_labelSearchAccountStatus.gridx = 1;
 		gbc_labelSearchAccountStatus.gridy = 7;
 		add(labelSearchAccountStatus, gbc_labelSearchAccountStatus);
+		
+		setOpaque(false);
 	}
 
 	public void displaySearchForm() {
