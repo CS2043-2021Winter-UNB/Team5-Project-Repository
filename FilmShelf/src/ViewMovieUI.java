@@ -11,6 +11,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
@@ -54,7 +55,7 @@ public class ViewMovieUI extends JPanel {
 		setVisible(false);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 10, 78, 30, 110, 0, 0, 0, 130, 10, 0};
+		gridBagLayout.columnWidths = new int[]{0, 10, 78, 30, 150, 0, 0, 0, 170, 10, 0};
 		gridBagLayout.rowHeights = new int[]{0, 18, 21, 16, 0, 0, 0, 42, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -170,7 +171,7 @@ public class ViewMovieUI extends JPanel {
 		gbc_layeredPane.gridy = 1;
 		add(layeredPane, gbc_layeredPane);
 		GridBagLayout gbl_layeredPane = new GridBagLayout();
-		gbl_layeredPane.columnWidths = new int[]{-1, 80, 32, 0};
+		gbl_layeredPane.columnWidths = new int[]{-1, 120, 32, 0};
 		gbl_layeredPane.rowHeights = new int[]{0, 6, 0};
 		gbl_layeredPane.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
 		gbl_layeredPane.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
@@ -196,23 +197,8 @@ public class ViewMovieUI extends JPanel {
 		gbc_rateLabelnum_1.gridy = 0;
 		layeredPane.add(userRatingNumLabel, gbc_rateLabelnum_1);
 		
-		rateButton = new JButton("Rate Movie");
-		rateButton.setPreferredSize(new Dimension(110,25));
-		rateButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				rateMovieUI.displayRatingForm(movieID);
-				setVisible(false);
-			}
-		});
-		GridBagConstraints gbc_rateButton = new GridBagConstraints();
-		gbc_rateButton.anchor = GridBagConstraints.EAST;
-		gbc_rateButton.gridwidth = 4;
-		gbc_rateButton.insets = new Insets(0, 0, 5, 5);
-		gbc_rateButton.gridx = 5;
-		gbc_rateButton.gridy = 3;
-		add(rateButton, gbc_rateButton);
-		
 		reviewButton = new JButton("Review Movie");
+		reviewButton.setPreferredSize(new Dimension(120,25));
 		reviewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addReviewUI.displayLeaveReviewForm(movieID,title);
@@ -227,9 +213,26 @@ public class ViewMovieUI extends JPanel {
 		gbc_reviewButton.gridy = 4;
 		add(reviewButton, gbc_reviewButton);
 		
+		rateButton = new JButton("Rate Movie");
+		rateButton.setPreferredSize(new Dimension(120,25));
+		rateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rateMovieUI.displayRatingForm(movieID);
+				setVisible(false);
+			}
+		});
+		GridBagConstraints gbc_rateButton = new GridBagConstraints();
+		gbc_rateButton.anchor = GridBagConstraints.EAST;
+		gbc_rateButton.gridwidth = 4;
+		gbc_rateButton.insets = new Insets(0, 0, 5, 5);
+		gbc_rateButton.gridx = 5;
+		gbc_rateButton.gridy = 3;
+		add(rateButton, gbc_rateButton);
+		
 		setOpaque(false);
 		
 		viewReviewButton = new JButton("View Reviews");
+		viewReviewButton.setPreferredSize(new Dimension(120,25));
 		viewReviewButton.setHorizontalAlignment(SwingConstants.RIGHT);
 		viewReviewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -239,6 +242,7 @@ public class ViewMovieUI extends JPanel {
 			}
 		});
 		GridBagConstraints gbc_viewReviewButton = new GridBagConstraints();
+		gbc_viewReviewButton.anchor = GridBagConstraints.EAST;
 		gbc_viewReviewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_viewReviewButton.gridx = 8;
 		gbc_viewReviewButton.gridy = 5;
@@ -258,7 +262,12 @@ public class ViewMovieUI extends JPanel {
 		labelShowReleaseYear.setText(""+movie.getYear());
 		labelShowGenre.setText(movie.getGenre());
 		labelShowLength.setText(movie.getLength()+" mins");
-		averageRatingLabel.setText(String.valueOf(movie.getAverageRating()));
+		
+		DecimalFormat df = new DecimalFormat("0.00");
+		df.setMaximumFractionDigits(2);
+		averageRatingLabel.setText(df.format(movie.getAverageRating()));
+		
+		
 		if(rating != null) {
 			userRatingNumLabel.setText(String.valueOf(rating.getRatingScore()));
 		} else {
