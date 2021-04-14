@@ -11,6 +11,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
@@ -54,9 +55,9 @@ public class ViewMovieUI extends JPanel {
 		setVisible(false);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 44, 78, 30, -24, 0, 0, 0, 0, 0, 113, 0, 0};
+		gridBagLayout.columnWidths = new int[]{0, 10, 78, 30, 150, 0, 0, 0, 170, 10, 0};
 		gridBagLayout.rowHeights = new int[]{0, 18, 21, 16, 0, 0, 0, 42, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -77,7 +78,7 @@ public class ViewMovieUI extends JPanel {
 		gbc_buttonRemoveMovie.anchor = GridBagConstraints.EAST;
 		gbc_buttonRemoveMovie.gridwidth = 4;
 		gbc_buttonRemoveMovie.insets = new Insets(0, 0, 5, 5);
-		gbc_buttonRemoveMovie.gridx = 7;
+		gbc_buttonRemoveMovie.gridx = 5;
 		gbc_buttonRemoveMovie.gridy = 0;
 		add(buttonRemoveMovie, gbc_buttonRemoveMovie);
 		
@@ -130,7 +131,7 @@ public class ViewMovieUI extends JPanel {
 		gbc_layeredPane_1.gridwidth = 4;
 		gbc_layeredPane_1.insets = new Insets(0, 0, 5, 5);
 		gbc_layeredPane_1.fill = GridBagConstraints.VERTICAL;
-		gbc_layeredPane_1.gridx = 7;
+		gbc_layeredPane_1.gridx = 5;
 		gbc_layeredPane_1.gridy = 2;
 		add(layeredPane_1, gbc_layeredPane_1);
 		GridBagLayout gbl_layeredPane_1 = new GridBagLayout();
@@ -149,6 +150,7 @@ public class ViewMovieUI extends JPanel {
 		gbc_movieRateLabel.gridx = 1;
 		gbc_movieRateLabel.gridy = 0;
 		layeredPane_1.add(movieRateLabel, gbc_movieRateLabel);
+
 		
 		averageRatingLabel = new JLabel(""+rating);
 		averageRatingLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
@@ -165,11 +167,11 @@ public class ViewMovieUI extends JPanel {
 		gbc_layeredPane.anchor = GridBagConstraints.NORTHEAST;
 		gbc_layeredPane.gridwidth = 4;
 		gbc_layeredPane.insets = new Insets(0, 0, 5, 5);
-		gbc_layeredPane.gridx = 7;
+		gbc_layeredPane.gridx = 5;
 		gbc_layeredPane.gridy = 1;
 		add(layeredPane, gbc_layeredPane);
 		GridBagLayout gbl_layeredPane = new GridBagLayout();
-		gbl_layeredPane.columnWidths = new int[]{-1, 80, 32, 0};
+		gbl_layeredPane.columnWidths = new int[]{-1, 120, 32, 0};
 		gbl_layeredPane.rowHeights = new int[]{0, 6, 0};
 		gbl_layeredPane.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
 		gbl_layeredPane.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
@@ -195,23 +197,8 @@ public class ViewMovieUI extends JPanel {
 		gbc_rateLabelnum_1.gridy = 0;
 		layeredPane.add(userRatingNumLabel, gbc_rateLabelnum_1);
 		
-		rateButton = new JButton("Rate Movie");
-		rateButton.setPreferredSize(new Dimension(110,25));
-		rateButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				rateMovieUI.displayRatingForm(movieID);
-				setVisible(false);
-			}
-		});
-		GridBagConstraints gbc_rateButton = new GridBagConstraints();
-		gbc_rateButton.anchor = GridBagConstraints.EAST;
-		gbc_rateButton.gridwidth = 4;
-		gbc_rateButton.insets = new Insets(0, 0, 5, 5);
-		gbc_rateButton.gridx = 7;
-		gbc_rateButton.gridy = 3;
-		add(rateButton, gbc_rateButton);
-		
 		reviewButton = new JButton("Review Movie");
+		reviewButton.setPreferredSize(new Dimension(120,25));
 		reviewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addReviewUI.displayLeaveReviewForm(movieID,title);
@@ -222,11 +209,31 @@ public class ViewMovieUI extends JPanel {
 		gbc_reviewButton.anchor = GridBagConstraints.EAST;
 		gbc_reviewButton.gridwidth = 4;
 		gbc_reviewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_reviewButton.gridx = 7;
+		gbc_reviewButton.gridx = 5;
 		gbc_reviewButton.gridy = 4;
 		add(reviewButton, gbc_reviewButton);
 		
+		rateButton = new JButton("Rate Movie");
+		rateButton.setPreferredSize(new Dimension(120,25));
+		rateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rateMovieUI.displayRatingForm(movieID);
+				setVisible(false);
+			}
+		});
+		GridBagConstraints gbc_rateButton = new GridBagConstraints();
+		gbc_rateButton.anchor = GridBagConstraints.EAST;
+		gbc_rateButton.gridwidth = 4;
+		gbc_rateButton.insets = new Insets(0, 0, 5, 5);
+		gbc_rateButton.gridx = 5;
+		gbc_rateButton.gridy = 3;
+		add(rateButton, gbc_rateButton);
+		
+		setOpaque(false);
+		
 		viewReviewButton = new JButton("View Reviews");
+		viewReviewButton.setPreferredSize(new Dimension(120,25));
+		viewReviewButton.setHorizontalAlignment(SwingConstants.RIGHT);
 		viewReviewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -235,12 +242,11 @@ public class ViewMovieUI extends JPanel {
 			}
 		});
 		GridBagConstraints gbc_viewReviewButton = new GridBagConstraints();
+		gbc_viewReviewButton.anchor = GridBagConstraints.EAST;
 		gbc_viewReviewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_viewReviewButton.gridx = 4;
-		gbc_viewReviewButton.gridy = 7;
+		gbc_viewReviewButton.gridx = 8;
+		gbc_viewReviewButton.gridy = 5;
 		add(viewReviewButton, gbc_viewReviewButton);
-		
-		setOpaque(false);
 		setVisible(false);
 	}
 	
@@ -256,7 +262,12 @@ public class ViewMovieUI extends JPanel {
 		labelShowReleaseYear.setText(""+movie.getYear());
 		labelShowGenre.setText(movie.getGenre());
 		labelShowLength.setText(movie.getLength()+" mins");
-		averageRatingLabel.setText(String.valueOf(movie.getAverageRating()));
+		
+		DecimalFormat df = new DecimalFormat("0.00");
+		df.setMaximumFractionDigits(2);
+		averageRatingLabel.setText(df.format(movie.getAverageRating()));
+		
+		
 		if(rating != null) {
 			userRatingNumLabel.setText(String.valueOf(rating.getRatingScore()));
 		} else {
