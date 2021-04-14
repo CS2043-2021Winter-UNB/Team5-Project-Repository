@@ -1,6 +1,8 @@
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 
@@ -26,7 +28,19 @@ public final class UISettings {
 		return starImage;
 	}
 	
-	/*public static ImageIcon getStarIcon(int numStar) {
-		
-	}*/
+	public static ImageIcon getStarsIcon(int numStars, int size, int offset) {
+		Image star = starImage.getScaledInstance(size, size, Image.SCALE_SMOOTH);
+		ImageIcon starIcon = new ImageIcon(star);
+
+		BufferedImage bi = new BufferedImage(size * numStars+(numStars-1)*offset, size * numStars,
+				BufferedImage.TYPE_INT_ARGB);
+		Graphics bg = bi.getGraphics();
+		for (int i = 0; i < numStars; i++)
+		{
+			bg.drawImage(star,i*size+(i)*offset,0,null);
+		}
+		bg.dispose();
+
+		return new ImageIcon(bi);
+	}
 }
