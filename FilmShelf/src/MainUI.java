@@ -34,6 +34,8 @@ import java.awt.Graphics2D;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
+import java.awt.AlphaComposite;
 import java.awt.Color;
 
 /******************************************************************************************************************************
@@ -340,39 +342,21 @@ public class MainUI extends JFrame {
           panel_1.setOpaque(false);
           
         Image star = UISettings.getStarImage();
-        star = star.getScaledInstance(10, 10, DO_NOTHING_ON_CLOSE);
+        star = star.getScaledInstance(15, 15, DO_NOTHING_ON_CLOSE);
         ImageIcon starIcon = new ImageIcon(star);
        
-        /*BufferedImage result = new BufferedImage(
-                10, 10, //work these out
-                BufferedImage.TYPE_INT_RGB);
-        Graphics g = result.getGraphics();*/
-        /*
-        BufferedImage buffStar;
-		try {
-			buffStar = ImageIO.read(new File("Images\\846480.png"));
-			//g.drawImage(buffStar, 0, 0, null);
-			
-	        lblNewLabel = new JLabel();
-	        lblNewLabel.setIcon(new ImageIcon(buffStar));
-	        GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-	        gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
-	        gbc_lblNewLabel.gridx = 0;
-	        gbc_lblNewLabel.gridy = 0;
-	        panel_1.add(lblNewLabel, gbc_lblNewLabel);
-
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}*/
-        //Graphics2D g2 = buffStar.createGraphics();
-        //g2.drawImage( buffStar, null, 0, 0);
-        //int offset = 5;
-        //g2.drawImage(buffStar, null, buffStar.getWidth() + offset, 0);
-        //g2.dispose();
+        BufferedImage bi = new BufferedImage
+                (star.getWidth(null)*2,star.getHeight(null)*2,BufferedImage.TYPE_INT_ARGB);
+             Graphics bg = bi.getGraphics();
+             bg.drawImage(star, 0, 0, null);
+             bg.drawImage(star, star.getWidth(null),0, null);
+             bg.dispose();
+        
+       
         
         
         lblNewLabel_1 = new JLabel();
-        lblNewLabel_1.setIcon(starIcon);
+        lblNewLabel_1.setIcon(new ImageIcon(bi));
         GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
         gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 5);
         gbc_lblNewLabel_1.gridx = 1;
@@ -380,7 +364,7 @@ public class MainUI extends JFrame {
         panel_1.add(lblNewLabel_1, gbc_lblNewLabel_1);
         
         lblNewLabel_2 = new JLabel();
-        lblNewLabel_2.setIcon(starIcon);
+        //lblNewLabel_2.setIcon(starIcon);
         GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
         gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
         gbc_lblNewLabel_2.gridx = 2;
@@ -388,7 +372,7 @@ public class MainUI extends JFrame {
         panel_1.add(lblNewLabel_2, gbc_lblNewLabel_2);
         
         lblNewLabel_3 = new JLabel();
-        lblNewLabel_3.setIcon(starIcon);
+        //lblNewLabel_3.setIcon(starIcon);
         GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
         gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
         gbc_lblNewLabel_3.gridx = 3;
@@ -396,7 +380,7 @@ public class MainUI extends JFrame {
         panel_1.add(lblNewLabel_3, gbc_lblNewLabel_3);
         
         lblNewLabel_4 = new JLabel();
-        lblNewLabel_4.setIcon(starIcon);
+        //lblNewLabel_4.setIcon(starIcon);
         GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
         gbc_lblNewLabel_4.gridx = 4;
         gbc_lblNewLabel_4.gridy = 0;

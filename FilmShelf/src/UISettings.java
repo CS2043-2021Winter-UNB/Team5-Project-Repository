@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
+
 public final class UISettings {
 	private static Color fontColor = Color.WHITE;
     private static Color buttonColor = new Color(247,216,91); //light orange
@@ -23,4 +25,8 @@ public final class UISettings {
 	public static Image getStarImage() {
 		return starImage;
 	}
+	
+	/*public static ImageIcon getStarIcon(int numStar) {
+		
+	}*/
 }
