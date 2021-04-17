@@ -29,9 +29,7 @@ import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
 
 public class AddMovieUI extends JPanel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private AddMovieControl addMovieControl;
 	private JTextField textFieldTitle;
@@ -40,9 +38,7 @@ public class AddMovieUI extends JPanel {
 	private JSpinner spinnerLength; 
 	private JLabel labelAddMovieStatus;
 	
-	/**
-	 * Create the panel.
-	 */
+
 	public AddMovieUI(AddMovieControl controlAdd) {
 		addMovieControl = controlAdd;
 		
@@ -204,6 +200,10 @@ public class AddMovieUI extends JPanel {
 	public void displayAddMovieForm() {
 		//clear fields before redisplaying
 		textFieldTitle.setText("");
+		comboBoxYear.setSelectedIndex(0);
+		comboBoxGenre.setSelectedIndex(0);
+		labelAddMovieStatus.setText("");
+		spinnerLength.setValue(Integer.valueOf(60));
 		
 		//display the form
 		setVisible(true);

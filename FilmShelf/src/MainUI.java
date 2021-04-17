@@ -359,14 +359,16 @@ public class MainUI extends JFrame {
 			buttonCreateAccount.addActionListener(listenerCreateAccount); // add the create account listener back
 			buttonCreateAccount.setVisible(true); // make it visible
 
-			// viewMemberUI was used to remove and log the user out, change viewMemberUI to
-			// not visible
 			viewMemberUI.setVisible(false);
 		}
 	}
 
 	public void changeMovieButtons() {
 		viewMovieUI.setVisible(false);
+	}
+	
+	public void hideViewMemberUI() {
+		viewMemberUI.setVisible(false);
 	}
 
 	private void setAllPanelVisibilityFalse() {

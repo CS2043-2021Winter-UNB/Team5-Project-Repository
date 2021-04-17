@@ -18,6 +18,7 @@ public class RemoveMemberUI {
 		if (response == JOptionPane.YES_OPTION) {
 			removeMemberControl.processRemoveAccount(username);
 			mainUI.changeAccountButtons();
+			mainUI.hideViewMemberUI();
 			displayMemberRemovedConfirmation(username);
 		}
 	}

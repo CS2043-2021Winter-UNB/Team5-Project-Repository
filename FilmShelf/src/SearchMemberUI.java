@@ -98,12 +98,18 @@ public class SearchMemberUI extends JPanel {
 	}
 
 	public void displaySearchForm() {
+		//clear search fields
+		textFieldSearch.setText("");
+		labelSearchAccountStatus.setText("");
+		ViewAccountbutton.setVisible(false);
+		username = "";
+		
 		setVisible(true);
 	}
 
 	public void displaySearchResult(MemberObject member) {
 		labelSearchAccountStatus.setText(member.getUsername()+" - "+member.getFirstName()+" "+member.getLastName());
-		username= member.getUsername();
+		username = member.getUsername();
 		ViewAccountbutton.setVisible(true);
 	}
 
