@@ -290,6 +290,9 @@ public class SearchMovieUI extends JPanel {
 		titleSearchField.setText("");
 		
 		// display the form
+		scrollList.clearSelection();
+		scrollPane.setVisible(false);
+		
 		setVisible(true);
 	}
 	
