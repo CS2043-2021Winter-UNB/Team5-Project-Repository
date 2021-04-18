@@ -13,7 +13,7 @@ public class RemoveMemberUI {
 	}
 
 	public void displayRemovalMemberWarning(String username) {
-		int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete acccount?",
+		int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this account?",
 													"Remove Confirm", JOptionPane.YES_NO_OPTION);
 		if (response == JOptionPane.YES_OPTION) {
 			removeMemberControl.processRemoveAccount(username);
