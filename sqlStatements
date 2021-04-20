@@ -1,0 +1,17 @@
+AdminAccount
+create table AdminAccount(username varchar(25), password varchar(250), primary key(username));
+
+MemberAccount
+create table MemberAccount(username varchar(25), password varchar(250), firstName varchar(25), lastName varchar(25), description varchar (2000), primary key(username));
+
+Movie
+create table Movie(title varchar(150), releaseYear int, genre varchar(25), length int, movieID int auto_increment, primary key(movieID));
+
+Rating
+create table Rating(ratingScore int, username varchar(25), movieID int, foreign key(username) references MemberAccount(username), foreign key(movieID) references Movie(movieID)); 
+
+Review
+create table Review(username varchar(25), movieID int, reviewText varchar(2000), reviewID int auto_increment, primary key (reviewID), foreign key(username) references MemberAccount(username), foreign key(movieID) references Movie(movieID)); 
+
+
+
